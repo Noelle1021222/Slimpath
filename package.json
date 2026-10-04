@@ -1,0 +1,15 @@
+{
+  "name": "slimpath",
+  "version": "1.0.0",
+  "description": "醬汁計劃 90 天生活日誌 — 三階段減脂行事曆、每日檢核與紀錄資料庫",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning server/index.js",
+    "dev": "node --disable-warning=ExperimentalWarning --watch server/index.js",
+    "test": "node --test test/*.test.js"
+  }
+}
