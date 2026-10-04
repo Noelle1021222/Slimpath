@@ -1,9 +1,9 @@
 {
   "name": "Slimpath 醬汁計劃生活日誌",
   "short_name": "Slimpath",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#F2EEE5",
   "theme_color": "#F2EEE5",
-  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+  "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
 }

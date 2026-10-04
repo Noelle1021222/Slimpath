@@ -94,8 +94,8 @@ function mealMarkup(meal, data, photos, { showStarch, isSnack }) {
 
 const photoThumb = (p) => `
   <figure class="photo" data-photo="${p.id}">
-    <button type="button" class="photo-open" data-action="photo-open" data-src="/uploads/${esc(p.filename)}" aria-label="放大照片">
-      <img src="/uploads/${esc(p.filename)}" alt="" loading="lazy" decoding="async" />
+    <button type="button" class="photo-open" data-action="photo-open" data-src="${esc(p.url)}" aria-label="放大照片">
+      <img src="${esc(p.url)}" alt="" loading="lazy" decoding="async" />
     </button>
     <button type="button" class="photo-del" data-action="photo-del" data-id="${p.id}" aria-label="刪除照片">${icon.close(14)}</button>
   </figure>`;
@@ -388,7 +388,7 @@ export async function renderDay(main, state, date) {
     if (action === 'photo-del') {
       if (!confirm('刪除這張照片？')) return;
       try {
-        await api.deletePhoto(btn.dataset.id);
+        await api.deletePhoto(photos.find((p) => String(p.id) === btn.dataset.id));
         photos = photos.filter((p) => String(p.id) !== btn.dataset.id);
         btn.closest('.photo').remove();
         changed();

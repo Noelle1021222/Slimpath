@@ -1,5 +1,5 @@
 // Settings: profile, reschedule, export, reset.
-import { api } from '../api.js';
+import { api, auth } from '../api.js';
 import { $, esc, toast, revealOnScroll } from '../ui.js';
 import { icon } from '../icons.js';
 import { schedule, formatLong } from '../program.js';
@@ -44,12 +44,15 @@ export async function renderSettings(main, state) {
       </form>
 
       <div class="sheet" data-reveal>
-        <header class="block-head"><p class="eyebrow">Database</p><h2 class="h2">資料</h2></header>
-        <p class="muted">所有紀錄都存在伺服器的 SQLite 資料庫（<code>data/slimpath.db</code>），照片存在 <code>data/uploads/</code>。</p>
+        <header class="block-head"><p class="eyebrow">Account</p><h2 class="h2">帳號與資料</h2></header>
+        <p class="account-email">${icon.sparkle(16)}<span>${esc(state.session?.user?.email || '')}</span></p>
+        <p class="muted small">紀錄與照片都存在你的 Supabase 雲端資料庫，只有登入這個帳號才看得到。</p>
         <div class="btn-row">
-          <a class="btn btn-ghost" href="/api/export" download>${icon.download(18)}<span>匯出 JSON</span></a>
-          <button class="btn btn-danger" type="button" id="resetBtn">重設計畫</button>
+          <button class="btn btn-ghost" type="button" id="exportBtn">${icon.download(18)}<span>匯出 JSON</span></button>
+          <button class="btn btn-ghost" type="button" id="signOutBtn">登出</button>
         </div>
+        <hr class="rule" />
+        <button class="btn btn-danger" type="button" id="resetBtn">重設計畫</button>
         <p class="muted small">重設只會清除開始日，已記錄的每日資料仍保留在資料庫中。</p>
       </div>
     </div>
@@ -66,6 +69,12 @@ export async function renderSettings(main, state) {
     } catch (err) {
       toast(err.message, 'error');
     }
+  });
+
+  $('#exportBtn', main).addEventListener('click', () => api.exportAll().catch((err) => toast(err.message, 'error')));
+  $('#signOutBtn', main).addEventListener('click', async () => {
+    await auth.signOut();
+    location.hash = '#/';
   });
 
   $('#resetBtn', main).addEventListener('click', async () => {

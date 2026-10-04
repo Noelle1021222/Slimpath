@@ -1,6 +1,6 @@
 // Progress: weight & body-fat trend, 84-day habit heatmap, averages.
 import { api } from '../api.js';
-import { $$, esc, countUp, revealOnScroll } from '../ui.js';
+import { $, $$, esc, toast, countUp, revealOnScroll } from '../ui.js';
 import { icon, face } from '../icons.js';
 import { PHASES, TOTAL_DAYS, CHECKLIST, MOODS, schedule, locate, addDays, diffDays, todayISO, formatShort } from '../program.js';
 
@@ -195,9 +195,10 @@ export async function renderProgress(main, state) {
   </section>
 
   <section class="wrap export-row" data-reveal>
-    <a class="btn btn-ghost" href="/api/export" download>${icon.download(18)}<span>匯出全部資料（JSON）</span></a>
+    <button class="btn btn-ghost" type="button" id="exportBtn">${icon.download(18)}<span>匯出全部資料（JSON）</span></button>
   </section>`;
 
+  $('#exportBtn', main).addEventListener('click', () => api.exportAll().catch((err) => toast(err.message, 'error')));
   $$('[data-count]', main).forEach((el) => {
     if (el.dataset.count !== '') countUp(el, Number(el.dataset.count), { decimals: Number(el.dataset.dec || 0) });
   });

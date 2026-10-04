@@ -7,15 +7,15 @@
   <meta name="description" content="三階段減脂計畫行事曆：調適期、戒斷期、穩定期。每日飲食、檢核、睡眠、飲水、心情與體重紀錄。" />
   <meta name="theme-color" content="#F2EEE5" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#11141B" media="(prefers-color-scheme: dark)" />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/app.css" />
+  <link rel="stylesheet" href="css/app.css" />
 </head>
 <body>
-  <a class="skip" href="#main">跳到主要內容</a>
+  <a class="skip" href="#main" onclick="event.preventDefault();document.getElementById('main').focus()">跳到主要內容</a>
 
   <header class="topbar" id="topbar">
     <a class="brand" href="#/" aria-label="Slimpath 首頁">
@@ -33,6 +33,7 @@
   <nav class="tabbar" id="tabbar" aria-label="主選單"></nav>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script type="module" src="/js/app.js"></script>
+  <script src="vendor/supabase.js"></script>
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>

@@ -145,6 +145,7 @@ main:focus { outline: none; }
 .brand-word { font: italic 400 26px/1 var(--latin); letter-spacing: 0; }
 .brand-sub { font-size: 12px; color: var(--ink-3); letter-spacing: 0.14em; padding-left: 12px; border-left: 1px solid var(--line); }
 
+.nav:empty { display: none; }
 .nav { display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--line-2); }
 .nav-link {
   display: inline-flex; align-items: center; gap: 8px;
@@ -800,6 +801,34 @@ main:focus { outline: none; }
   .heat-w { font-size: 10px; }
   .big-stat { padding: 18px 12px; }
 }
+
+/* ==========================================================================
+   Auth
+   ========================================================================== */
+.auth-hero { min-height: calc(100dvh - 70px); display: grid; align-items: center; }
+.auth-grid { position: relative; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+.auth-title { font-size: clamp(56px, 9vw, 132px); }
+.auth-card { max-width: 440px; width: 100%; justify-self: end; margin-top: 0; }
+.field-gap { margin-top: 16px; }
+.pw-wrap { position: relative; display: block; }
+.pw-wrap .input { padding-right: 72px; }
+.pw-toggle { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); padding: 6px 10px; border-radius: 8px; font-size: 13px; color: var(--ink-3); }
+.pw-toggle:hover { color: var(--ink); background: var(--line-2); }
+.link-btn { color: var(--pen); font-size: 14px; text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--pen) 40%, transparent); text-underline-offset: 3px; }
+.auth-card > .link-btn { margin-top: 12px; }
+.auth-msg { min-height: 1.4em; margin: 14px 0 10px; font-size: 14px; color: var(--danger); }
+.auth-msg[data-tone='info'] { color: var(--good); }
+.auth-alt { margin: 18px 0 0; text-align: center; font-size: 14px; color: var(--ink-3); }
+@media (max-width: 860px) {
+  .auth-grid { grid-template-columns: 1fr; }
+  .auth-card { justify-self: stretch; max-width: none; }
+  .auth-hero { min-height: 0; padding-top: 28px; }
+  .auth-title { font-size: clamp(44px, 13vw, 64px); }
+  .auth-hero .hero-wave, .auth-hero .hero-lede { display: none; }
+}
+.account-email { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; font-weight: 500; word-break: break-all; }
+.account-email .ico { color: var(--pen); flex-shrink: 0; }
+.rule { border: 0; border-top: 1px solid var(--line-2); margin: 18px 0; }
 
 /* ==========================================================================
    Settings
