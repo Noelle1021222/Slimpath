@@ -1,0 +1,14 @@
+{
+  "name": "slimpath",
+  "version": "1.0.0",
+  "description": "醬汁計劃 90 天生活日誌 — 三階段減脂行事曆、每日檢核，資料存在 Supabase",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node scripts/serve.js",
+    "test": "node --test test/*.test.js"
+  }
+}
