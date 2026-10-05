@@ -571,8 +571,12 @@ main:focus { outline: none; }
 .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
 .photo:hover img { transform: scale(1.06); }
 .photo-del { position: absolute; top: 6px; right: 6px; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: rgba(0, 0, 0, 0.55); color: #fff; opacity: 0; transition: opacity 0.2s; backdrop-filter: blur(6px); }
-.photo:hover .photo-del, .photo:focus-within .photo-del { opacity: 1; }
-@media (hover: none) { .photo-del { opacity: 1; } }
+.photo-dl { position: absolute; bottom: 6px; right: 6px; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: rgba(0, 0, 0, 0.55); color: #fff; opacity: 0; transition: opacity 0.2s; backdrop-filter: blur(6px); }
+.photo:hover .photo-del, .photo:focus-within .photo-del, .photo:hover .photo-dl, .photo:focus-within .photo-dl { opacity: 1; }
+@media (hover: none) { .photo-del, .photo-dl { opacity: 1; } }
+.dl-all { margin-top: 12px; }
+.dl-all[hidden] { display: none; }
+.dl-all:disabled { opacity: 0.5; }
 .photo.is-loading { background: linear-gradient(100deg, var(--card-2) 30%, var(--paper-2) 50%, var(--card-2) 70%); background-size: 300% 100%; animation: shimmer 1.2s linear infinite; }
 @keyframes shimmer { to { background-position: -150% 0; } }
 .photo-add { display: grid; place-content: center; justify-items: center; gap: 4px; border: 1.5px dashed var(--line); color: var(--ink-3); font-size: 12px; cursor: pointer; transition: all 0.3s var(--ease); }
@@ -722,6 +726,34 @@ main:focus { outline: none; }
 .lightbox img { max-height: 86vh; border-radius: var(--r); box-shadow: var(--shadow-lg); }
 .lightbox .icon-btn { position: absolute; top: -14px; right: -14px; }
 .lightbox[open] { animation: pop 0.4s var(--spring); }
+.lightbox .lightbox-dl { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); box-shadow: var(--shadow-lg); }
+
+/* upload composer */
+.composer { width: min(560px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); padding: 0; border: 0; border-radius: var(--r); background: var(--card); color: var(--ink); box-shadow: var(--shadow-lg); }
+.composer::backdrop { background: rgba(10, 12, 18, 0.6); backdrop-filter: blur(6px); }
+.composer[open] { animation: pop 0.4s var(--spring); }
+.composer-card { display: grid; gap: 14px; padding: 20px; }
+.composer-head { display: flex; justify-content: space-between; align-items: start; }
+.composer-head .eyebrow { margin-bottom: 4px; }
+.composer-preview { position: relative; display: grid; place-items: center; min-height: 180px; border-radius: var(--r-sm); overflow: hidden; background: repeating-conic-gradient(var(--card-2) 0 25%, var(--paper-2) 0 50%) 0 0 / 18px 18px; }
+.composer-preview canvas { display: block; max-width: 100%; max-height: 52dvh; width: auto; height: auto; }
+.composer-count { position: absolute; right: 10px; bottom: 10px; padding: 4px 10px; border-radius: 999px; background: rgba(0, 0, 0, 0.55); color: #fff; font-size: 12px; }
+.composer-count:empty { display: none; }
+.composer-text { margin: 0; }
+.composer-text b { color: var(--ink); font-weight: 700; }
+.swatches { display: flex; flex-wrap: wrap; gap: 10px; }
+.swatch-btn { position: relative; width: 40px; height: 40px; border-radius: 50%; background: var(--sw); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18); cursor: pointer; transition: transform 0.3s var(--spring); }
+.swatch-btn:hover { transform: scale(1.08); }
+.swatch-btn[aria-checked='true'], .swatch-custom.is-on { box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18), 0 0 0 3px var(--card), 0 0 0 5px var(--ink); }
+.swatch-custom { background: conic-gradient(#ff6b6b, #ffd54a, #9be28a, #8ec5ff, #c08bff, #ff6b6b); }
+.swatch-custom.is-on { background: var(--sw); }
+.swatch-custom input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
+.composer-actions { display: flex; justify-content: flex-end; gap: 10px; }
+@media (max-width: 420px) {
+  .composer-card { padding: 16px; }
+  .swatches { gap: 8px; }
+  .swatch-btn { width: 34px; height: 34px; }
+}
 
 @media (max-width: 1080px) {
   .day-layout { grid-template-columns: minmax(0, 1fr); }

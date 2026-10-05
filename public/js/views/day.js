@@ -1,5 +1,6 @@
 // Daily journal — a digital twin of the paper 生活日誌 page, autosaved to the database.
-import { api, compressImage } from '../api.js';
+import { api } from '../api.js';
+import { LABEL_COLORS, DEFAULT_LABEL_COLOR, stampText, decodeImage, renderStamped, stampToBlob, saveFiles } from '../stamp.js';
 import { $, $$, esc, toast, ring, debounce, revealOnScroll, wave } from '../ui.js';
 import { icon, art, moon, glass, face } from '../icons.js';
 import {
@@ -98,9 +99,10 @@ function mealMarkup(meal, data, photos, { showStarch, isSnack }) {
 
 const photoThumb = (p) => `
   <figure class="photo" data-photo="${p.id}">
-    <button type="button" class="photo-open" data-action="photo-open" data-src="${esc(p.url)}" aria-label="放大照片">
+    <button type="button" class="photo-open" data-action="photo-open" data-id="${p.id}" data-src="${esc(p.url)}" aria-label="放大照片">
       <img src="${esc(p.url)}" alt="" loading="lazy" decoding="async" />
     </button>
+    <button type="button" class="photo-dl" data-action="photo-dl" data-id="${p.id}" aria-label="下載照片">${icon.download(14)}</button>
     <button type="button" class="photo-del" data-action="photo-del" data-id="${p.id}" aria-label="刪除照片">${icon.close(14)}</button>
   </figure>`;
 
@@ -208,6 +210,7 @@ export async function renderDay(main, state, date) {
           <p class="eyebrow">Meals</p>
           <h2 class="h2" id="mealsTitle">三餐紀錄</h2>
           <p class="kcal-total" id="kcalTotal"></p>
+          <button type="button" class="chip dl-all" id="dlAll" data-action="photo-dl-all" hidden>${icon.download(16)}<span></span></button>
         </header>
         <div class="meals" id="meals">
           ${MEALS.map((m) => mealMarkup(m, entry.meals[m.id], photos, { showStarch: isStable })).join('')}
@@ -290,7 +293,28 @@ export async function renderDay(main, state, date) {
   </div>
 
   <div class="save-pill" id="savePill" data-state="idle"><span class="save-dot"></span><span class="save-text">已同步</span></div>
-  <dialog class="lightbox" id="lightbox"><img alt="餐點照片" /><button type="button" class="icon-btn" data-action="lightbox-close" aria-label="關閉">${icon.close(20)}</button></dialog>`;
+  <dialog class="lightbox" id="lightbox"><img alt="餐點照片" />
+    <button type="button" class="icon-btn" data-action="lightbox-close" aria-label="關閉">${icon.close(20)}</button>
+    <button type="button" class="btn btn-primary lightbox-dl" data-action="photo-dl" data-id="">${icon.download(18)}<span>下載照片</span></button>
+  </dialog>
+  <dialog class="composer" id="composer" aria-labelledby="composerTitle">
+    <div class="composer-card">
+      <header class="composer-head">
+        <div><p class="eyebrow">Photo label</p><h3 class="h3" id="composerTitle">照片標籤</h3></div>
+        <button type="button" class="icon-btn subtle" data-composer="cancel" aria-label="取消">${icon.close(18)}</button>
+      </header>
+      <div class="composer-preview"><canvas id="composerCanvas"></canvas><span class="composer-count" id="composerCount"></span></div>
+      <p class="composer-text muted small">左上角會寫上 <b id="composerLabel"></b>，選一個看得清楚的文字顏色：</p>
+      <div class="swatches" role="radiogroup" aria-label="文字顏色">
+        ${LABEL_COLORS.map((c) => `<button type="button" class="swatch-btn" role="radio" data-color="${c.id}" style="--sw:${c.id}" aria-label="${c.label}" title="${c.label}"></button>`).join('')}
+        <label class="swatch-btn swatch-custom" title="自訂顏色"><input type="color" id="customColor" aria-label="自訂顏色" /></label>
+      </div>
+      <div class="composer-actions">
+        <button type="button" class="btn btn-ghost" data-composer="cancel">取消</button>
+        <button type="button" class="btn btn-primary" data-composer="ok" id="composerOk"></button>
+      </div>
+    </div>
+  </dialog>`;
 
   // ---------- state sync ----------
   const pill = $('#savePill', main);
@@ -376,6 +400,7 @@ export async function renderDay(main, state, date) {
     const ml = entry.water * 250;
     $('#waterRead', main).innerHTML = entry.water ? `${ml.toLocaleString()} ml${ml >= goal ? ' · 達標 ✦' : ` · 還差 ${(goal - ml).toLocaleString()} ml`}` : '點杯子記錄飲水';
     $$('.mood', main).forEach((b) => b.setAttribute('aria-checked', String(entry.mood === b.dataset.value)));
+    paintDownloadAll();
   }
 
   // ---------- events ----------
@@ -458,11 +483,100 @@ export async function renderDay(main, state, date) {
     if (action === 'photo-open') {
       const dlg = $('#lightbox', main);
       $('img', dlg).src = btn.dataset.src;
+      $('.lightbox-dl', dlg).dataset.id = btn.dataset.id;
       dlg.showModal();
       return;
     }
     if (action === 'lightbox-close') $('#lightbox', main).close();
+    if (action === 'photo-dl' || action === 'photo-dl-all') {
+      const list = action === 'photo-dl' ? photos.filter((p) => String(p.id) === btn.dataset.id) : orderedPhotos();
+      if (!list.length) return;
+      btn.disabled = true;
+      try {
+        await saveFiles(await Promise.all(list.map(photoFile)));
+      } catch (err) {
+        toast(err.message || '下載失敗', 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    }
   };
+
+  // ---------- photo download ----------
+  const MEAL_LABEL = Object.fromEntries([...MEALS, SNACK].map((m) => [m.id, m.label]));
+  const orderedPhotos = () => [...MEALS, SNACK].flatMap((m) => photos.filter((p) => p.meal === m.id));
+  async function photoFile(p) {
+    const blob = await api.downloadPhoto(p);
+    const same = photos.filter((q) => q.meal === p.meal);
+    const n = same.length > 1 ? `-${same.indexOf(p) + 1}` : '';
+    const ext = blob.type === 'image/png' ? 'png' : blob.type === 'image/webp' ? 'webp' : 'jpg';
+    // ASCII file names: some browsers replace non-ASCII download names with "download".
+    return new File([blob], `${date}_${p.meal}${n}.${ext}`, { type: blob.type || 'image/jpeg' });
+  }
+  function paintDownloadAll() {
+    const b = $('#dlAll', main);
+    b.hidden = photos.length === 0;
+    $('span', b).textContent = `下載今日照片（${photos.length}）`;
+  }
+
+  // ---------- upload composer: preview the stamped label and pick its colour ----------
+  function compose(meal, files) {
+    const dlg = $('#composer', main);
+    const canvas = $('#composerCanvas', main);
+    const text = stampText(date, MEAL_LABEL[meal]);
+    let color = state.settings.labelColor || DEFAULT_LABEL_COLOR;
+    let bitmap = null;
+    $('#composerLabel', main).textContent = text;
+    $('#composerCount', main).textContent = files.length > 1 ? `共 ${files.length} 張，套用同一個顏色` : '';
+    $('#composerOk', main).textContent = files.length > 1 ? `上傳 ${files.length} 張` : '上傳';
+    const draw = () => {
+      $$('.swatch-btn[data-color]', dlg).forEach((b) => b.setAttribute('aria-checked', String(b.dataset.color.toLowerCase() === color.toLowerCase())));
+      const custom = !LABEL_COLORS.some((c) => c.id.toLowerCase() === color.toLowerCase());
+      $('.swatch-custom', dlg).classList.toggle('is-on', custom);
+      $('.swatch-custom', dlg).style.setProperty('--sw', color);
+      $('#customColor', main).value = color.length === 7 ? color : '#ffffff';
+      if (bitmap) renderStamped(bitmap, text, color, { maxSide: 1000, canvas });
+    };
+    return new Promise((resolve) => {
+      const done = (ok) => {
+        dlg.onclick = null;
+        $('#customColor', main).oninput = null;
+        dlg.oncancel = null;
+        if (dlg.open) dlg.close();
+        bitmap?.close?.();
+        resolve(ok ? color : null);
+      };
+      dlg.onclick = (e) => {
+        const sw = e.target.closest('[data-color]');
+        if (sw) {
+          color = sw.dataset.color;
+          draw();
+        }
+        const act = e.target.closest('[data-composer]')?.dataset.composer;
+        if (act) done(act === 'ok');
+        if (e.target === dlg) done(false);
+      };
+      $('#customColor', main).oninput = (e) => {
+        color = e.target.value;
+        draw();
+      };
+      // Esc key. (Not "close": that event fires asynchronously and would hit the next composer.)
+      dlg.oncancel = (e) => {
+        e.preventDefault();
+        done(false);
+      };
+      canvas.width = canvas.height = 0;
+      draw();
+      dlg.showModal();
+      document.fonts?.load('700 40px "Noto Sans TC"', text).catch(() => {}).then(() => decodeImage(files[0])).then((b) => {
+        bitmap = b;
+        draw();
+      }).catch((err) => {
+        toast(err.message, 'error');
+        done(false);
+      });
+    });
+  }
 
   $('#lightbox', main).addEventListener('click', (e) => {
     if (e.target.id === 'lightbox') e.target.close();
@@ -491,14 +605,24 @@ export async function renderDay(main, state, date) {
       const meal = el.dataset.upload;
       const files = [...el.files];
       el.value = '';
+      if (!files.length) return;
+      const color = await compose(meal, files);
+      if (!color) return;
+      if (color !== state.settings.labelColor) {
+        state.settings.labelColor = color;
+        api.saveSettings({ labelColor: color }).catch(() => {});
+      }
       const box = $(`[data-photos="${meal}"]`, main);
       const add = $('.photo-add', box);
+      const text = stampText(date, MEAL_LABEL[meal]);
       for (const file of files) {
         const ph = document.createElement('figure');
         ph.className = 'photo is-loading';
         box.insertBefore(ph, add);
         try {
-          const blob = await compressImage(file);
+          const bitmap = await decodeImage(file);
+          const blob = await stampToBlob(bitmap, text, color);
+          bitmap.close?.();
           const saved = await api.uploadPhoto(date, meal, blob);
           photos.push(saved);
           ph.outerHTML = photoThumb(saved);

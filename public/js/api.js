@@ -116,6 +116,11 @@ export const api = {
     }
   },
 
+  /** The stored image file of a photo, as a Blob. */
+  async downloadPhoto(photo) {
+    return unwrap(await sb.storage.from(BUCKET).download(photo.path));
+  },
+
   async deletePhoto(photo) {
     unwrap(await sb.from('photos').delete().eq('id', photo.id));
     await sb.storage.from(BUCKET).remove([photo.path]);
@@ -169,27 +174,3 @@ export const auth = {
     await sb.auth.signOut();
   },
 };
-
-/** Downscale a picked image to a sensible size before upload. */
-export async function compressImage(file, maxSide = 1600, quality = 0.86) {
-  if (!file.type.startsWith('image/')) throw new Error('請選擇圖片檔');
-  let bitmap;
-  try {
-    bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
-  } catch {
-    // Formats the browser cannot decode (e.g. HEIC on some browsers) go up as-is if allowed.
-    if (['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) return file;
-    throw new Error('這個圖片格式無法讀取，請改用 JPG 或 PNG');
-  }
-  const scale = Math.min(1, maxSide / Math.max(bitmap.width, bitmap.height));
-  const w = Math.round(bitmap.width * scale);
-  const h = Math.round(bitmap.height * scale);
-  const canvas = document.createElement('canvas');
-  canvas.width = w;
-  canvas.height = h;
-  canvas.getContext('2d').drawImage(bitmap, 0, 0, w, h);
-  bitmap.close?.();
-  return new Promise((resolve, reject) =>
-    canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('圖片處理失敗'))), 'image/jpeg', quality)
-  );
-}
