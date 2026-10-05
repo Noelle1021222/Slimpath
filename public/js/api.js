@@ -30,7 +30,7 @@ async function uid() {
 const num = (v) => (v === '' || v === null || v === undefined || Number.isNaN(Number(v)) ? null : Number(v));
 
 /** Mirror the headline metrics of a journal into queryable columns. */
-function summarise(data) {
+function summarise(data, items) {
   const checklist = data.checklist || {};
   return {
     weight: num(data.weight),
@@ -40,8 +40,8 @@ function summarise(data) {
     mood: data.mood || null,
     exercise_kcal: num(data.exerciseKcal),
     relax_mins: num(data.relaxMins),
-    checklist_done: CHECKLIST.filter((c) => checklist[c.id]).length,
-    checklist_total: CHECKLIST.length,
+    checklist_done: items.filter((c) => checklist[c.id]).length,
+    checklist_total: items.length,
   };
 }
 
@@ -97,9 +97,10 @@ export const api = {
     return { date, data: row?.data ?? null, updatedAt: row?.updated_at ?? null, photos: await withSignedUrls(photos) };
   },
 
-  async saveEntry(date, data) {
+  /** `items` is the checklist that applies to this day (it differs per phase). */
+  async saveEntry(date, data, items = CHECKLIST) {
     const id = await uid();
-    unwrap(await sb.from('entries').upsert({ user_id: id, date, data, ...summarise(data), updated_at: new Date().toISOString() }));
+    unwrap(await sb.from('entries').upsert({ user_id: id, date, data, ...summarise(data, items), updated_at: new Date().toISOString() }));
   },
 
   async uploadPhoto(date, meal, blob) {

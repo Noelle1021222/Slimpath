@@ -109,7 +109,7 @@ export async function renderProgress(main, state) {
   const toGoal = s.goalWeight && lastW !== null ? lastW - s.goalWeight : null;
   const elapsed = Math.max(0, Math.min(TOTAL_DAYS, diffDays(today, start) + 1));
   const avg = (k) => (rows.length ? rows.reduce((n, r) => n + (r[k] || 0), 0) / rows.length : null);
-  const completion = rows.length ? rows.reduce((n, r) => n + r.checklist_done / CHECKLIST.length, 0) / Math.max(elapsed, 1) : 0;
+  const completion = rows.length ? rows.reduce((n, r) => n + r.checklist_done / (r.checklist_total || CHECKLIST.length), 0) / Math.max(elapsed, 1) : 0;
   const moodCounts = Object.fromEntries(MOODS.map((m) => [m.id, rows.filter((r) => r.mood === m.id).length]));
   const moodMax = Math.max(1, ...Object.values(moodCounts));
 
@@ -120,8 +120,8 @@ export async function renderProgress(main, state) {
       const date = addDays(start, w * 7 + d);
       const loc = locate(start, date);
       const e = byDate.get(date);
-      const score = e ? e.checklist_done / CHECKLIST.length : 0;
-      col.push(`<a class="heat-cell ${e ? 'has' : ''} ${date > today ? 'future' : ''} ${date === today ? 'now' : ''}" href="#/day/${date}" style="--c:${loc.phase.color};--s:${score.toFixed(2)}" title="${date} · ${e ? `${e.checklist_done}/${CHECKLIST.length}` : '未紀錄'}"></a>`);
+      const score = e ? e.checklist_done / (e.checklist_total || CHECKLIST.length) : 0;
+      col.push(`<a class="heat-cell ${e ? 'has' : ''} ${date > today ? 'future' : ''} ${date === today ? 'now' : ''}" href="#/day/${date}" style="--c:${loc.phase.color};--s:${score.toFixed(2)}" title="${date} · ${e ? `${e.checklist_done}/${e.checklist_total || CHECKLIST.length}` : '未紀錄'}"></a>`);
     }
     heat.push(`<div class="heat-col"><span class="heat-w">W${w + 1}</span>${col.join('')}</div>`);
   }

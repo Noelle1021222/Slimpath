@@ -3,8 +3,8 @@ import { api, compressImage } from '../api.js';
 import { $, $$, esc, toast, ring, debounce, revealOnScroll, wave } from '../ui.js';
 import { icon, art, moon, glass, face } from '../icons.js';
 import {
-  PHASES, TOTAL_DAYS, CHECKLIST, VEG_COLORS, PROTEINS, OILS, MEALS, SNACK, MOODS,
-  normalizeEntry, derivedChecks, locate, addDays, formatLong, todayISO, checklistScore,
+  TOTAL_DAYS, VEG_COLORS, PROTEINS, OILS, MEALS, SNACK, MOODS, MEAL_KCAL_LIMIT,
+  normalizeEntry, derivedChecks, locate, addDays, formatLong, todayISO, checklistScore, checklistFor, waterGoalMl, parseISO,
 } from '../program.js';
 
 let pendingFlush = null;
@@ -46,6 +46,10 @@ function mealMarkup(meal, data, photos, { showStarch, isSnack }) {
       <label class="meal-time">
         ${icon.clock(16)}<span class="sr">用餐時間</span>
         <input type="time" value="${esc(data.time)}" data-path="meals.${meal.id}.time" aria-label="${meal.label}用餐時間" />
+      </label>
+      <label class="meal-kcal" data-kcal="${meal.id}">
+        <input type="number" inputmode="numeric" min="0" step="10" value="${esc(data.kcal)}" data-path="meals.${meal.id}.kcal" placeholder="—" aria-label="${meal.label}熱量" />
+        <span>kcal</span>
       </label>
       ${isSnack ? `<button type="button" class="icon-btn subtle" data-action="snack-off" aria-label="移除副餐">${icon.close(18)}</button>` : ''}
     </header>
@@ -109,7 +113,6 @@ function guideMarkup(loc, settings) {
     </div>`;
   }
   const p = loc.phase;
-  const kcal = settings.sex === 'male' ? 600 : 500;
   return `
     <div class="guide sheet" style="--c:${p.color}" data-reveal>
       <div class="guide-top">
@@ -118,7 +121,7 @@ function guideMarkup(loc, settings) {
       </div>
       <h3 class="guide-motto">${p.motto}</h3>
       <ul class="guide-list">${p.guide.map((g) => `<li>${g}</li>`).join('')}</ul>
-      ${p.id === 'adapt' ? `<p class="guide-note">${icon.flame(16)} 每餐熱量提醒：${settings.sex === 'male' ? '男生' : '女生'} ${kcal} 大卡以內</p>` : ''}
+      ${p.id === 'adapt' ? `<p class="guide-note">${icon.flame(16)} 每餐 ≤ ${MEAL_KCAL_LIMIT} kcal；20:00 後只喝水</p>` : ''}
       ${p.id === 'detox' && loc.phaseWeek >= 3 ? `<p class="guide-note">${icon.clock(16)} 第 3 週起：穩定三餐，正餐間隔 4 小時以上</p>` : ''}
     </div>
     <div class="lemon sheet" data-reveal>
@@ -126,8 +129,28 @@ function guideMarkup(loc, settings) {
       <div>
         <p class="eyebrow">Morning ritual</p>
         <h3 class="h3">檸檬水配方</h3>
-        <p class="muted">25cc 現榨連皮檸檬原汁 ＋ 300cc 冷水 ＋ 100cc 熱水。喝完記得漱口保護琺瑯質；胃食道逆流者請於早餐後飲用。</p>
+        <p class="muted">20–25cc 無糖現榨連皮檸檬原汁 ＋ 300cc 冷水 ＋ 100cc 熱水，比例不低於 1:20，切勿純喝。起床上完廁所、量完體重後喝。喝完記得漱口；胃食道逆流者請於早餐後飲用。</p>
       </div>
+    </div>`;
+}
+
+/** Saturday card: lowest weight / body fat of the past 7 days (reported to the group). */
+function weeklyMarkup(rows) {
+  const min = (k) => {
+    const vals = rows.map((r) => r[k]).filter((v) => v !== null && v !== undefined);
+    return vals.length ? Math.min(...vals) : null;
+  };
+  const w = min('weight');
+  const f = min('body_fat');
+  return `
+    <div class="weekly sheet" data-reveal>
+      <p class="eyebrow">Saturday report</p>
+      <h3 class="h3">週六回報：本週最低數據</h3>
+      <div class="weekly-nums">
+        <div><span class="stat-label">最低體重</span><b>${w ?? '—'}</b><small>kg</small></div>
+        <div><span class="stat-label">最低體脂</span><b>${f ?? '—'}</b><small>%</small></div>
+      </div>
+      <p class="muted small">取本週日到週六的紀錄。記得回報到群組 ✦</p>
     </div>`;
 }
 
@@ -141,7 +164,15 @@ export async function renderDay(main, state, date) {
   entry.checklistManual ??= {};
   let photos = res.photos || [];
   const isStable = loc?.phase.id === 'stable';
+  const isAdapt = loc?.phase.id === 'adapt';
+  const items = checklistFor(loc?.phase.id);
   const today = todayISO();
+  const isSaturday = parseISO(date).getDay() === 6;
+  const weekRows = isSaturday ? await api.entries(addDays(date, -6), date) : [];
+  const baseWeight = state.settings.startWeight;
+  const waterGoal = () => waterGoalMl(entry.weight !== '' && entry.weight !== null ? entry.weight : baseWeight);
+  const glassCount = () => Math.max(8, Math.ceil(waterGoal() / 250));
+  const glassesMarkup = () => Array.from({ length: glassCount() }, (_, i) => `<button type="button" class="unit" role="radio" data-action="unit" data-field="water" data-value="${i + 1}" aria-label="${i + 1} 杯">${glass(i + 1, 'w')}</button>`).join('');
 
   const metaLine = loc
     ? `<span class="phase-pill" style="--c:${loc.phase.color}">${loc.phase.name}</span>
@@ -176,6 +207,7 @@ export async function renderDay(main, state, date) {
         <header class="block-head" data-reveal>
           <p class="eyebrow">Meals</p>
           <h2 class="h2" id="mealsTitle">三餐紀錄</h2>
+          <p class="kcal-total" id="kcalTotal"></p>
         </header>
         <div class="meals" id="meals">
           ${MEALS.map((m) => mealMarkup(m, entry.meals[m.id], photos, { showStarch: isStable })).join('')}
@@ -193,10 +225,10 @@ export async function renderDay(main, state, date) {
             <span class="check-count" id="checkCount"></span>
           </header>
           <ul class="checklist" id="checklist">
-            ${CHECKLIST.map((c) => `
+            ${items.map((c) => `
               <li><button type="button" class="check" role="checkbox" data-action="check" data-id="${c.id}" aria-checked="${entry.checklist[c.id]}">
                 <span class="check-box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.2 4.2L19 7"/></svg></span>
-                <span class="check-label">${c.label}</span>
+                <span class="check-label">${c.label}${c.hint ? `<small>${c.hint}</small>` : ''}</span>
                 <span class="check-auto" data-auto="${c.id}" title="依今日紀錄自動勾選">auto</span>
               </button></li>`).join('')}
           </ul>
@@ -206,6 +238,9 @@ export async function renderDay(main, state, date) {
       <section class="block trio">
         <div class="sheet meter" data-reveal>
           <header class="meter-head"><h2 class="h3">睡眠時數</h2><span class="meter-unit">( Hours )</span></header>
+          <label class="bedtime">${icon.clock(16)}<span>就寢時間</span>
+            <input type="time" value="${esc(entry.bedtime)}" data-field="bedtime" aria-label="就寢時間" />
+          </label>
           <div class="units moons" role="radiogroup" aria-label="睡眠時數">
             ${Array.from({ length: 8 }, (_, i) => `<button type="button" class="unit" role="radio" data-action="unit" data-field="sleep" data-value="${i + 1}" aria-label="${i + 1} 小時">${moon(i + 1)}</button>`).join('')}
           </div>
@@ -213,9 +248,8 @@ export async function renderDay(main, state, date) {
         </div>
         <div class="sheet meter" data-reveal>
           <header class="meter-head"><h2 class="h3">今日飲水量</h2><span class="meter-unit">250ml / Glass</span></header>
-          <div class="units glasses" role="radiogroup" aria-label="飲水杯數">
-            ${Array.from({ length: 8 }, (_, i) => `<button type="button" class="unit" role="radio" data-action="unit" data-field="water" data-value="${i + 1}" aria-label="${i + 1} 杯">${glass(i + 1, 'w')}</button>`).join('')}
-          </div>
+          <p class="water-goal" id="waterGoal"></p>
+          <div class="units glasses" id="glasses" role="radiogroup" aria-label="飲水杯數" style="--n:${glassCount()}">${glassesMarkup()}</div>
           <p class="meter-read"><b id="waterRead"></b></p>
         </div>
         <div class="sheet meter mood-meter" data-reveal>
@@ -252,7 +286,7 @@ export async function renderDay(main, state, date) {
       </section>
     </div>
 
-    <aside class="day-aside">${guideMarkup(loc, state.settings)}</aside>
+    <aside class="day-aside">${isSaturday ? weeklyMarkup(weekRows) : ''}${guideMarkup(loc, state.settings)}</aside>
   </div>
 
   <div class="save-pill" id="savePill" data-state="idle"><span class="save-dot"></span><span class="save-text">已同步</span></div>
@@ -271,7 +305,7 @@ export async function renderDay(main, state, date) {
     dirty = false;
     setSave('saving', '儲存中…');
     try {
-      await api.saveEntry(date, entry);
+      await api.saveEntry(date, entry, items);
       const t = new Date();
       setSave('saved', `已儲存 ${String(t.getHours()).padStart(2, '0')}:${String(t.getMinutes()).padStart(2, '0')}`);
     } catch (err) {
@@ -292,7 +326,7 @@ export async function renderDay(main, state, date) {
   };
 
   function applyDerived() {
-    const derived = derivedChecks(entry, photos);
+    const derived = derivedChecks(entry, photos, { weight: baseWeight });
     for (const [id, ok] of Object.entries(derived)) {
       if (ok && !entry.checklistManual[id]) entry.checklist[id] = true;
     }
@@ -300,10 +334,33 @@ export async function renderDay(main, state, date) {
   }
 
   function paint() {
-    const score = checklistScore(entry);
-    const done = CHECKLIST.filter((c) => entry.checklist[c.id]).length;
-    $('#dayScore', main).innerHTML = `${ring(score, { size: 96, stroke: 5, cls: 'big' })}<span class="day-score-num"><b>${done}</b><small>/ ${CHECKLIST.length}</small></span><span class="day-score-label">今日完成度</span>`;
-    $('#checkCount', main).textContent = `${done} / ${CHECKLIST.length}`;
+    const score = checklistScore(entry, items);
+    const done = items.filter((c) => entry.checklist[c.id]).length;
+    $('#dayScore', main).innerHTML = `${ring(score, { size: 96, stroke: 5, cls: 'big' })}<span class="day-score-num"><b>${done}</b><small>/ ${items.length}</small></span><span class="day-score-label">今日完成度</span>`;
+    $('#checkCount', main).textContent = `${done} / ${items.length}`;
+    // per-meal and daily calories
+    let kcalSum = 0;
+    let kcalCount = 0;
+    for (const m of [...MEALS, SNACK]) {
+      const v = entry.meals[m.id]?.kcal;
+      const el = $(`[data-kcal="${m.id}"]`, main);
+      const has = v !== '' && v !== null && v !== undefined;
+      if (has && (m.id !== 'snack' || entry.meals.snack.enabled)) {
+        kcalSum += Number(v);
+        kcalCount++;
+      }
+      el?.classList.toggle('over', isAdapt && m.id !== 'snack' && has && Number(v) > MEAL_KCAL_LIMIT);
+    }
+    $('#kcalTotal', main).innerHTML = kcalCount
+      ? `今日熱量 <b>${kcalSum.toLocaleString()}</b> kcal${isAdapt ? `<span class="${kcalSum > 1800 ? 'warn' : ''}"> · 建議 1,000–1,800 · 單餐 ≤ ${MEAL_KCAL_LIMIT}</span>` : ''}`
+      : `在每餐右上角填入熱量，會自動加總${isAdapt ? `（單餐 ≤ ${MEAL_KCAL_LIMIT} kcal）` : ''}`;
+    // water: the number of glasses follows the weight-based goal
+    if ($$('#glasses .unit', main).length !== glassCount()) {
+      $('#glasses', main).innerHTML = glassesMarkup();
+      $('#glasses', main).style.setProperty('--n', glassCount());
+    }
+    const goal = waterGoal();
+    $('#waterGoal', main).textContent = `今日目標 ${goal.toLocaleString()} ml${goal > 2000 ? '（體重 × 30cc）' : ''}`;
     $$('#checklist .check', main).forEach((b) => b.setAttribute('aria-checked', String(Boolean(entry.checklist[b.dataset.id]))));
     $$('.moons .unit', main).forEach((b) => {
       const on = Number(b.dataset.value) <= entry.sleep;
@@ -316,7 +373,8 @@ export async function renderDay(main, state, date) {
       b.setAttribute('aria-checked', String(Number(b.dataset.value) === entry.water));
     });
     $('#sleepRead', main).innerHTML = entry.sleep ? `${entry.sleep} 小時${entry.sleep >= 7 ? ' · 睡飽了 ✦' : ''}` : '點月亮記錄睡眠';
-    $('#waterRead', main).innerHTML = entry.water ? `${(entry.water * 250).toLocaleString()} ml${entry.water >= 8 ? ' · 達標 ✦' : ` · 還差 ${((8 - entry.water) * 250).toLocaleString()} ml`}` : '點杯子記錄飲水';
+    const ml = entry.water * 250;
+    $('#waterRead', main).innerHTML = entry.water ? `${ml.toLocaleString()} ml${ml >= goal ? ' · 達標 ✦' : ` · 還差 ${(goal - ml).toLocaleString()} ml`}` : '點杯子記錄飲水';
     $$('.mood', main).forEach((b) => b.setAttribute('aria-checked', String(entry.mood === b.dataset.value)));
   }
 

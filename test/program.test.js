@@ -1,7 +1,10 @@
 // Unit tests for the programme model (phases, dates, auto-checks).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { TOTAL_DAYS, schedule, locate, addDays, normalizeEntry, derivedChecks, checklistScore } from '../public/js/program.js';
+import {
+  TOTAL_DAYS, schedule, locate, addDays, normalizeEntry, derivedChecks, checklistScore,
+  checklistFor, waterGoalMl, inBedBy23, CHECKLIST, ADAPT_CHECKLIST,
+} from '../public/js/program.js';
 
 test('three phases span 12 weeks back to back', () => {
   const s = schedule('2026-10-05');
@@ -41,12 +44,45 @@ test('normalizeEntry fills missing fields', () => {
 });
 
 test('derived checks follow the journal', () => {
-  const e = normalizeEntry({ water: 8, sleep: 7, weight: '70', bodyFat: '30', relaxMins: '15' });
+  const e = normalizeEntry({ water: 8, sleep: 7, bedtime: '22:30', weight: '70', bodyFat: '30', relaxMins: '15' });
   for (const [i, c] of ['green', 'red', 'yellow', 'purple', 'white'].entries()) e.meals[['breakfast', 'lunch', 'dinner', 'breakfast', 'lunch'][i]].veg[c] = 1;
+  for (const m of ['breakfast', 'lunch', 'dinner']) e.meals[m].kcal = '550';
   const photos = ['breakfast', 'lunch', 'dinner'].map((meal) => ({ meal }));
-  assert.deepEqual(derivedChecks(e, photos), { weigh: true, water: true, sleep7: true, veg5: true, photos: true, relax: true });
+  assert.deepEqual(derivedChecks(e, photos), {
+    weigh: true, water: true, sleep7: true, bed23: true, sleep: true, veg5: true, photos: true, relax: true, kcal: true,
+  });
+  e.meals.lunch.kcal = '650';
+  assert.equal(derivedChecks(e, photos).kcal, false);
   const empty = derivedChecks(normalizeEntry(null), []);
   assert.ok(Object.values(empty).every((v) => !v));
-  e.checklist.lemon = true;
-  assert.equal(checklistScore(e), 1 / 9);
+});
+
+test('water goal scales with weight above 70kg', () => {
+  assert.equal(waterGoalMl(60), 2000);
+  assert.equal(waterGoalMl(70), 2000);
+  assert.equal(waterGoalMl(80), 2400);
+  assert.equal(waterGoalMl('72.5'), 2200); // 2175 rounded up to 50ml
+  const heavy = normalizeEntry({ weight: '80', water: 8 });
+  assert.equal(derivedChecks(heavy, []).water, false);
+  heavy.water = 10;
+  assert.equal(derivedChecks(heavy, []).water, true);
+});
+
+test('bedtime before 23:00', () => {
+  assert.equal(inBedBy23('22:59'), true);
+  assert.equal(inBedBy23('23:00'), false);
+  assert.equal(inBedBy23('00:30'), false);
+  assert.equal(inBedBy23(''), false);
+});
+
+test('checklist depends on phase', () => {
+  assert.equal(checklistFor('adapt'), ADAPT_CHECKLIST);
+  assert.equal(ADAPT_CHECKLIST.length, 12);
+  assert.equal(checklistFor('detox'), CHECKLIST);
+  assert.equal(checklistFor(undefined).length, 9);
+  const e = normalizeEntry(null);
+  e.checklist.podcast = true;
+  e.checklist.chew = true;
+  assert.equal(checklistScore(e, ADAPT_CHECKLIST), 2 / 12);
+  assert.equal(checklistScore(e, CHECKLIST), 0);
 });

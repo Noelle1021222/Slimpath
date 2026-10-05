@@ -45,7 +45,7 @@ function railMarkup(start, today, byDate) {
     const date = addDays(start, i);
     const loc = locate(start, date);
     const e = byDate.get(date);
-    const score = e && e.checklist_total ? e.checklist_done / CHECKLIST.length : 0;
+    const score = e && e.checklist_total ? e.checklist_done / (e.checklist_total || CHECKLIST.length) : 0;
     const cls = ['tick', i < todayIdx ? 'past' : '', i === todayIdx ? 'now' : '', e ? 'logged' : ''].join(' ');
     ticks.push(`<a class="${cls}" href="#/day/${date}" style="--c:${loc.phase.color};--s:${score.toFixed(2)}" title="${date} · ${loc.phase.name} 第 ${loc.day} 天"></a>`);
   }
@@ -72,7 +72,7 @@ function monthGrid(year, month, start, today, byDate) {
     if (!inMonth && i >= 35) break;
     const loc = locate(start, date);
     const e = byDate.get(date);
-    const score = e ? e.checklist_done / CHECKLIST.length : 0;
+    const score = e ? e.checklist_done / (e.checklist_total || CHECKLIST.length) : 0;
     const startsPhase = phaseStarts.get(date);
     const classes = ['day', inMonth ? '' : 'out', loc ? 'in-program' : '', date === today ? 'is-today' : '', date < today ? 'is-past' : '', date > today ? 'is-future' : '', e ? 'has-entry' : ''].join(' ');
     const label = `${d.getMonth() + 1}月${d.getDate()}日${loc ? `，${loc.phase.name}第${loc.day}天` : ''}${e ? `，完成 ${e.checklist_done} 項` : ''}`;
