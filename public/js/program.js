@@ -10,12 +10,13 @@ export const PHASES = [
     motto: '碳水減半，食量不減半',
     summary: '在挑戰開始前，先和身體好好對話。調整作息、建立記錄習慣，把信心存進戶頭。',
     guide: [
-      '碳水化合物（糖與醣）減半，用青菜或肉類補回份量，不節食',
-      '只吃正餐，三餐時間盡量固定',
-      '挑選原型食物，每餐女生約 500 大卡、男生約 600 大卡以內',
-      '不碰油炸物與加工食品',
-      '不使用減重藥物或減脂產品',
-      '吃不到一日五蔬果時，可補充綜合維他命、B 群',
+      '一日三餐（或 168 指定兩餐），20:00 後禁食，不吃宵夜與下午茶',
+      '精緻澱粉與糖減半：白飯麵食量減半，不足的份量用肉類、蔬菜補足',
+      '每餐 ≤ 600 kcal（一日 1000–1800 kcal），用 FatSecret 等 APP 記錄',
+      '一日五蔬果：水果限 1 碗、16:00 前吃完，其餘吃彩虹蔬菜',
+      '喝足 2000cc 純白開水；體重 > 70kg 以「體重 × 30cc」計算，不以咖啡或茶替代',
+      '每口細嚼 20 下；嚴禁油炸、加工食品及減脂藥品',
+      '23:00 前就寢、睡滿 7 小時（23:00–03:00 是生長激素分泌的黃金代謝期）',
     ],
   },
   {
@@ -56,6 +57,8 @@ export const PHASES = [
 
 export const TOTAL_DAYS = PHASES.reduce((n, p) => n + p.weeks * 7, 0); // 84
 
+// Daily self-check items. 調適期 follows the class handout (12 items);
+// the other phases follow the paper journal (9 items).
 export const CHECKLIST = [
   { id: 'lemon', label: '起床一杯檸檬汁' },
   { id: 'weigh', label: '體重 / 體脂紀錄' },
@@ -67,6 +70,32 @@ export const CHECKLIST = [
   { id: 'photos', label: '三餐上傳照片' },
   { id: 'relax', label: '放鬆與排解壓力' },
 ];
+
+export const ADAPT_CHECKLIST = [
+  { id: 'weigh', label: '空腹量體重 / 體脂', hint: '起床上完廁所、喝水前量' },
+  { id: 'lemon', label: '晨起飲用溫檸檬水', hint: '檸檬汁 : 水 ≥ 1 : 20' },
+  { id: 'meals3', label: '一日三餐・澱粉減半・無宵夜下午茶' },
+  { id: 'water', label: '喝足純白開水', hint: '不以咖啡、茶替代' },
+  { id: 'fruit', label: '一日五蔬果', hint: '水果 ≤ 1 碗且 16:00 前吃完' },
+  { id: 'chew', label: '每口食物細嚼慢嚥 20 下' },
+  { id: 'fast20', label: '晚上 20:00 後停止進食', hint: '喝水除外' },
+  { id: 'kcal', label: '用 APP 紀錄三餐熱量', hint: '單餐 ≤ 600 kcal' },
+  { id: 'photos', label: '三餐食物照片上傳群組相簿' },
+  { id: 'podcast', label: '收聽 Spotify「內在微氣候」15 分鐘' },
+  { id: 'sleep', label: '23:00 前就寢，睡滿 7 小時' },
+  { id: 'positive', label: '保持正向心態，鼓勵與支持隊友' },
+];
+
+export const checklistFor = (phaseId) => (phaseId === 'adapt' ? ADAPT_CHECKLIST : CHECKLIST);
+const ALL_CHECK_IDS = [...new Set([...CHECKLIST, ...ADAPT_CHECKLIST].map((c) => c.id))];
+
+export const MEAL_KCAL_LIMIT = 600;
+
+/** Daily water goal: 2000cc, or body weight × 30cc above 70kg. */
+export function waterGoalMl(weight) {
+  const w = Number(weight);
+  return w > 70 ? Math.ceil((w * 30) / 50) * 50 : 2000;
+}
 
 export const VEG_COLORS = [
   { id: 'green', label: '綠色', hex: '#5D9B4A' },
@@ -107,6 +136,7 @@ export function emptyMeal(defaultTime = '') {
     protein: [],
     oils: Object.fromEntries(OILS.map((o) => [o.id, 0])),
     starch: false,
+    kcal: '',
     note: '',
   };
 }
@@ -119,8 +149,9 @@ export function emptyEntry() {
       dinner: emptyMeal(''),
       snack: { ...emptyMeal(''), enabled: false },
     },
-    checklist: Object.fromEntries(CHECKLIST.map((c) => [c.id, false])),
+    checklist: Object.fromEntries(ALL_CHECK_IDS.map((id) => [id, false])),
     sleep: 0,
+    bedtime: '',
     water: 0,
     mood: null,
     relaxMins: '',
@@ -222,26 +253,39 @@ export function locate(startDate, date) {
   return null;
 }
 
-export function checklistScore(entry) {
-  const vals = Object.values(entry?.checklist || {});
-  if (!vals.length) return 0;
-  return vals.filter(Boolean).length / CHECKLIST.length;
+export function checklistScore(entry, items = CHECKLIST) {
+  if (!items.length) return 0;
+  return items.filter((c) => entry?.checklist?.[c.id]).length / items.length;
+}
+
+/** True when a bedtime like "22:40" falls before 23:00 (after-midnight times count as late). */
+export function inBedBy23(bedtime) {
+  if (!/^\d{2}:\d{2}$/.test(bedtime || '')) return false;
+  const [h] = bedtime.split(':').map(Number);
+  return h < 23 && h >= 12;
 }
 
 /** Facts that can tick checklist items automatically. */
-export function derivedChecks(entry, photos) {
+export function derivedChecks(entry, photos, { weight } = {}) {
   const meals = ['breakfast', 'lunch', 'dinner'];
   const colors = new Set();
   for (const k of [...meals, 'snack']) {
     const veg = entry.meals[k]?.veg || {};
     for (const [c, n] of Object.entries(veg)) if (n > 0) colors.add(c);
   }
+  const filled = (v) => v !== '' && v !== null && v !== undefined;
+  const goal = waterGoalMl(filled(entry.weight) ? entry.weight : weight);
+  const kcals = meals.map((m) => entry.meals[m]?.kcal);
+  const bed = inBedBy23(entry.bedtime);
   return {
-    weigh: entry.weight !== '' && entry.weight !== null && entry.bodyFat !== '' && entry.bodyFat !== null,
-    water: entry.water >= 8,
+    weigh: filled(entry.weight) && filled(entry.bodyFat),
+    water: entry.water * 250 >= goal,
     sleep7: entry.sleep >= 7,
+    bed23: bed,
+    sleep: bed && entry.sleep >= 7,
     veg5: colors.size >= 5,
     photos: meals.every((m) => photos.some((p) => p.meal === m)),
     relax: Number(entry.relaxMins) > 0,
+    kcal: kcals.every((k) => filled(k) && Number(k) <= MEAL_KCAL_LIMIT),
   };
 }

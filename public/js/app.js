@@ -10,7 +10,22 @@ import { renderDay } from './views/day.js';
 import { renderProgress } from './views/progress.js';
 import { renderSettings } from './views/settings.js';
 
-export const state = { settings: {}, session: null, recovering: false, ready: false };
+export const state = { settings: {}, session: null, recovering: false, ready: false, authNotice: null };
+
+// Email links that fail (expired, already used, wrong redirect) come back as
+// ?error=…&error_code=… and/or #error=…. Capture that once, then tidy the URL.
+function takeAuthError() {
+  const params = new URLSearchParams(location.search);
+  const hash = new URLSearchParams(location.hash.replace(/^#\/?/, ''));
+  const code = params.get('error_code') || hash.get('error_code');
+  const desc = params.get('error_description') || hash.get('error_description');
+  if (!code && !desc) return null;
+  history.replaceState(null, '', location.pathname);
+  if (code === 'otp_expired') {
+    return '這個信件連結已經失效或已使用過。請先直接登入試試；若顯示「信箱還沒確認」，請重新註冊以取得新的確認信，並用同一個瀏覽器開啟信中的連結。';
+  }
+  return `信件連結無法使用：${desc || code}`;
+}
 
 const NAV = [
   { href: '#/', label: '行事曆', icon: 'calendar', match: (r) => r === '' || r === 'calendar' },
@@ -49,7 +64,11 @@ async function route() {
   let navRoute = '';
   if (!isConfigured) view = () => renderSetup(main);
   else if (state.recovering) view = () => renderAuth(main, 'recover');
-  else if (!state.session) view = () => renderAuth(main, 'signin');
+  else if (!state.session) {
+    const notice = state.authNotice;
+    state.authNotice = null;
+    view = () => renderAuth(main, 'signin', notice);
+  }
   else if (!hasProgram || name === 'start') view = () => renderOnboarding(main, state);
   else {
     navRoute = name;
@@ -100,6 +119,7 @@ async function applySession(session) {
 }
 
 function boot() {
+  state.authNotice = takeAuthError();
   window.addEventListener('hashchange', route);
   if (!isConfigured) {
     state.ready = true;

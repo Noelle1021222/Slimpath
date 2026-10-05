@@ -2,7 +2,7 @@
 import { api } from '../api.js';
 import { $, $$, esc, toast, revealOnScroll, wave } from '../ui.js';
 import { icon } from '../icons.js';
-import { PHASES, TOTAL_DAYS, CHECKLIST, schedule, todayISO, addDays, formatShort, parseISO, weekdayLabel } from '../program.js';
+import { PHASES, TOTAL_DAYS, ADAPT_CHECKLIST, schedule, todayISO, addDays, formatShort, parseISO, weekdayLabel } from '../program.js';
 import { navigate, refreshSettings } from '../app.js';
 
 function nextMonday(from) {
@@ -57,7 +57,7 @@ export async function renderOnboarding(main, state) {
         <dl class="hero-facts" data-reveal>
           <div><dt>天</dt><dd>${TOTAL_DAYS}</dd></div>
           <div><dt>階段</dt><dd>3</dd></div>
-          <div><dt>每日檢核</dt><dd>${CHECKLIST.length}</dd></div>
+          <div><dt>調適期每日檢核</dt><dd>${ADAPT_CHECKLIST.length}</dd></div>
           <div><dt>杯水 / 天</dt><dd>8</dd></div>
         </dl>
       </div>
@@ -78,7 +78,7 @@ export async function renderOnboarding(main, state) {
         </div>
         <div class="field-row">
           <label class="field">
-            <span class="field-label">性別 <small>（決定每餐熱量提示）</small></span>
+            <span class="field-label">性別</span>
             <span class="seg" role="radiogroup">
               <label><input type="radio" name="sex" value="female" ${s.sex !== 'male' ? 'checked' : ''}/><span>女生</span></label>
               <label><input type="radio" name="sex" value="male" ${s.sex === 'male' ? 'checked' : ''}/><span>男生</span></label>

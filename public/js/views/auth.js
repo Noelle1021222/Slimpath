@@ -50,7 +50,7 @@ export function renderSetup(main) {
     </div>`);
 }
 
-export function renderAuth(main, mode = 'signin') {
+export function renderAuth(main, mode = 'signin', notice = null) {
   const c = COPY[mode];
   const needsEmail = mode !== 'recover';
   const needsPassword = mode !== 'reset';
@@ -95,6 +95,7 @@ export function renderAuth(main, mode = 'signin') {
     input.type = show ? 'text' : 'password';
     e.currentTarget.textContent = show ? '隱藏' : '顯示';
   });
+  if (notice) say(notice);
   (form.email || form.password)?.focus();
 
   form.addEventListener('submit', async (e) => {

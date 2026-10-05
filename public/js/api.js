@@ -30,7 +30,7 @@ async function uid() {
 const num = (v) => (v === '' || v === null || v === undefined || Number.isNaN(Number(v)) ? null : Number(v));
 
 /** Mirror the headline metrics of a journal into queryable columns. */
-function summarise(data) {
+function summarise(data, items) {
   const checklist = data.checklist || {};
   return {
     weight: num(data.weight),
@@ -40,8 +40,8 @@ function summarise(data) {
     mood: data.mood || null,
     exercise_kcal: num(data.exerciseKcal),
     relax_mins: num(data.relaxMins),
-    checklist_done: CHECKLIST.filter((c) => checklist[c.id]).length,
-    checklist_total: CHECKLIST.length,
+    checklist_done: items.filter((c) => checklist[c.id]).length,
+    checklist_total: items.length,
   };
 }
 
@@ -97,9 +97,10 @@ export const api = {
     return { date, data: row?.data ?? null, updatedAt: row?.updated_at ?? null, photos: await withSignedUrls(photos) };
   },
 
-  async saveEntry(date, data) {
+  /** `items` is the checklist that applies to this day (it differs per phase). */
+  async saveEntry(date, data, items = CHECKLIST) {
     const id = await uid();
-    unwrap(await sb.from('entries').upsert({ user_id: id, date, data, ...summarise(data), updated_at: new Date().toISOString() }));
+    unwrap(await sb.from('entries').upsert({ user_id: id, date, data, ...summarise(data, items), updated_at: new Date().toISOString() }));
   },
 
   async uploadPhoto(date, meal, blob) {
@@ -113,6 +114,11 @@ export const api = {
       await sb.storage.from(BUCKET).remove([path]);
       throw err;
     }
+  },
+
+  /** The stored image file of a photo, as a Blob. */
+  async downloadPhoto(photo) {
+    return unwrap(await sb.storage.from(BUCKET).download(photo.path));
   },
 
   async deletePhoto(photo) {
@@ -168,27 +174,3 @@ export const auth = {
     await sb.auth.signOut();
   },
 };
-
-/** Downscale a picked image to a sensible size before upload. */
-export async function compressImage(file, maxSide = 1600, quality = 0.86) {
-  if (!file.type.startsWith('image/')) throw new Error('請選擇圖片檔');
-  let bitmap;
-  try {
-    bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
-  } catch {
-    // Formats the browser cannot decode (e.g. HEIC on some browsers) go up as-is if allowed.
-    if (['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) return file;
-    throw new Error('這個圖片格式無法讀取，請改用 JPG 或 PNG');
-  }
-  const scale = Math.min(1, maxSide / Math.max(bitmap.width, bitmap.height));
-  const w = Math.round(bitmap.width * scale);
-  const h = Math.round(bitmap.height * scale);
-  const canvas = document.createElement('canvas');
-  canvas.width = w;
-  canvas.height = h;
-  canvas.getContext('2d').drawImage(bitmap, 0, 0, w, h);
-  bitmap.close?.();
-  return new Promise((resolve, reject) =>
-    canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('圖片處理失敗'))), 'image/jpeg', quality)
-  );
-}

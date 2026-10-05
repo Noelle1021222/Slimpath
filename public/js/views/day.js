@@ -1,10 +1,11 @@
 // Daily journal — a digital twin of the paper 生活日誌 page, autosaved to the database.
-import { api, compressImage } from '../api.js';
+import { api } from '../api.js';
+import { LABEL_COLORS, DEFAULT_LABEL_COLOR, stampText, decodeImage, renderStamped, stampToBlob, saveFiles } from '../stamp.js';
 import { $, $$, esc, toast, ring, debounce, revealOnScroll, wave } from '../ui.js';
 import { icon, art, moon, glass, face } from '../icons.js';
 import {
-  PHASES, TOTAL_DAYS, CHECKLIST, VEG_COLORS, PROTEINS, OILS, MEALS, SNACK, MOODS,
-  normalizeEntry, derivedChecks, locate, addDays, formatLong, todayISO, checklistScore,
+  TOTAL_DAYS, VEG_COLORS, PROTEINS, OILS, MEALS, SNACK, MOODS, MEAL_KCAL_LIMIT,
+  normalizeEntry, derivedChecks, locate, addDays, formatLong, todayISO, checklistScore, checklistFor, waterGoalMl, parseISO,
 } from '../program.js';
 
 let pendingFlush = null;
@@ -46,6 +47,10 @@ function mealMarkup(meal, data, photos, { showStarch, isSnack }) {
       <label class="meal-time">
         ${icon.clock(16)}<span class="sr">用餐時間</span>
         <input type="time" value="${esc(data.time)}" data-path="meals.${meal.id}.time" aria-label="${meal.label}用餐時間" />
+      </label>
+      <label class="meal-kcal" data-kcal="${meal.id}">
+        <input type="number" inputmode="numeric" min="0" step="10" value="${esc(data.kcal)}" data-path="meals.${meal.id}.kcal" placeholder="—" aria-label="${meal.label}熱量" />
+        <span>kcal</span>
       </label>
       ${isSnack ? `<button type="button" class="icon-btn subtle" data-action="snack-off" aria-label="移除副餐">${icon.close(18)}</button>` : ''}
     </header>
@@ -94,9 +99,10 @@ function mealMarkup(meal, data, photos, { showStarch, isSnack }) {
 
 const photoThumb = (p) => `
   <figure class="photo" data-photo="${p.id}">
-    <button type="button" class="photo-open" data-action="photo-open" data-src="${esc(p.url)}" aria-label="放大照片">
+    <button type="button" class="photo-open" data-action="photo-open" data-id="${p.id}" data-src="${esc(p.url)}" aria-label="放大照片">
       <img src="${esc(p.url)}" alt="" loading="lazy" decoding="async" />
     </button>
+    <button type="button" class="photo-dl" data-action="photo-dl" data-id="${p.id}" aria-label="下載照片">${icon.download(14)}</button>
     <button type="button" class="photo-del" data-action="photo-del" data-id="${p.id}" aria-label="刪除照片">${icon.close(14)}</button>
   </figure>`;
 
@@ -109,7 +115,6 @@ function guideMarkup(loc, settings) {
     </div>`;
   }
   const p = loc.phase;
-  const kcal = settings.sex === 'male' ? 600 : 500;
   return `
     <div class="guide sheet" style="--c:${p.color}" data-reveal>
       <div class="guide-top">
@@ -118,7 +123,7 @@ function guideMarkup(loc, settings) {
       </div>
       <h3 class="guide-motto">${p.motto}</h3>
       <ul class="guide-list">${p.guide.map((g) => `<li>${g}</li>`).join('')}</ul>
-      ${p.id === 'adapt' ? `<p class="guide-note">${icon.flame(16)} 每餐熱量提醒：${settings.sex === 'male' ? '男生' : '女生'} ${kcal} 大卡以內</p>` : ''}
+      ${p.id === 'adapt' ? `<p class="guide-note">${icon.flame(16)} 每餐 ≤ ${MEAL_KCAL_LIMIT} kcal；20:00 後只喝水</p>` : ''}
       ${p.id === 'detox' && loc.phaseWeek >= 3 ? `<p class="guide-note">${icon.clock(16)} 第 3 週起：穩定三餐，正餐間隔 4 小時以上</p>` : ''}
     </div>
     <div class="lemon sheet" data-reveal>
@@ -126,8 +131,28 @@ function guideMarkup(loc, settings) {
       <div>
         <p class="eyebrow">Morning ritual</p>
         <h3 class="h3">檸檬水配方</h3>
-        <p class="muted">25cc 現榨連皮檸檬原汁 ＋ 300cc 冷水 ＋ 100cc 熱水。喝完記得漱口保護琺瑯質；胃食道逆流者請於早餐後飲用。</p>
+        <p class="muted">20–25cc 無糖現榨連皮檸檬原汁 ＋ 300cc 冷水 ＋ 100cc 熱水，比例不低於 1:20，切勿純喝。起床上完廁所、量完體重後喝。喝完記得漱口；胃食道逆流者請於早餐後飲用。</p>
       </div>
+    </div>`;
+}
+
+/** Saturday card: lowest weight / body fat of the past 7 days (reported to the group). */
+function weeklyMarkup(rows) {
+  const min = (k) => {
+    const vals = rows.map((r) => r[k]).filter((v) => v !== null && v !== undefined);
+    return vals.length ? Math.min(...vals) : null;
+  };
+  const w = min('weight');
+  const f = min('body_fat');
+  return `
+    <div class="weekly sheet" data-reveal>
+      <p class="eyebrow">Saturday report</p>
+      <h3 class="h3">週六回報：本週最低數據</h3>
+      <div class="weekly-nums">
+        <div><span class="stat-label">最低體重</span><b>${w ?? '—'}</b><small>kg</small></div>
+        <div><span class="stat-label">最低體脂</span><b>${f ?? '—'}</b><small>%</small></div>
+      </div>
+      <p class="muted small">取本週日到週六的紀錄。記得回報到群組 ✦</p>
     </div>`;
 }
 
@@ -141,7 +166,15 @@ export async function renderDay(main, state, date) {
   entry.checklistManual ??= {};
   let photos = res.photos || [];
   const isStable = loc?.phase.id === 'stable';
+  const isAdapt = loc?.phase.id === 'adapt';
+  const items = checklistFor(loc?.phase.id);
   const today = todayISO();
+  const isSaturday = parseISO(date).getDay() === 6;
+  const weekRows = isSaturday ? await api.entries(addDays(date, -6), date) : [];
+  const baseWeight = state.settings.startWeight;
+  const waterGoal = () => waterGoalMl(entry.weight !== '' && entry.weight !== null ? entry.weight : baseWeight);
+  const glassCount = () => Math.max(8, Math.ceil(waterGoal() / 250));
+  const glassesMarkup = () => Array.from({ length: glassCount() }, (_, i) => `<button type="button" class="unit" role="radio" data-action="unit" data-field="water" data-value="${i + 1}" aria-label="${i + 1} 杯">${glass(i + 1, 'w')}</button>`).join('');
 
   const metaLine = loc
     ? `<span class="phase-pill" style="--c:${loc.phase.color}">${loc.phase.name}</span>
@@ -176,6 +209,8 @@ export async function renderDay(main, state, date) {
         <header class="block-head" data-reveal>
           <p class="eyebrow">Meals</p>
           <h2 class="h2" id="mealsTitle">三餐紀錄</h2>
+          <p class="kcal-total" id="kcalTotal"></p>
+          <button type="button" class="chip dl-all" id="dlAll" data-action="photo-dl-all" hidden>${icon.download(16)}<span></span></button>
         </header>
         <div class="meals" id="meals">
           ${MEALS.map((m) => mealMarkup(m, entry.meals[m.id], photos, { showStarch: isStable })).join('')}
@@ -193,10 +228,10 @@ export async function renderDay(main, state, date) {
             <span class="check-count" id="checkCount"></span>
           </header>
           <ul class="checklist" id="checklist">
-            ${CHECKLIST.map((c) => `
+            ${items.map((c) => `
               <li><button type="button" class="check" role="checkbox" data-action="check" data-id="${c.id}" aria-checked="${entry.checklist[c.id]}">
                 <span class="check-box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.2 4.2L19 7"/></svg></span>
-                <span class="check-label">${c.label}</span>
+                <span class="check-label">${c.label}${c.hint ? `<small>${c.hint}</small>` : ''}</span>
                 <span class="check-auto" data-auto="${c.id}" title="依今日紀錄自動勾選">auto</span>
               </button></li>`).join('')}
           </ul>
@@ -206,6 +241,9 @@ export async function renderDay(main, state, date) {
       <section class="block trio">
         <div class="sheet meter" data-reveal>
           <header class="meter-head"><h2 class="h3">睡眠時數</h2><span class="meter-unit">( Hours )</span></header>
+          <label class="bedtime">${icon.clock(16)}<span>就寢時間</span>
+            <input type="time" value="${esc(entry.bedtime)}" data-field="bedtime" aria-label="就寢時間" />
+          </label>
           <div class="units moons" role="radiogroup" aria-label="睡眠時數">
             ${Array.from({ length: 8 }, (_, i) => `<button type="button" class="unit" role="radio" data-action="unit" data-field="sleep" data-value="${i + 1}" aria-label="${i + 1} 小時">${moon(i + 1)}</button>`).join('')}
           </div>
@@ -213,9 +251,8 @@ export async function renderDay(main, state, date) {
         </div>
         <div class="sheet meter" data-reveal>
           <header class="meter-head"><h2 class="h3">今日飲水量</h2><span class="meter-unit">250ml / Glass</span></header>
-          <div class="units glasses" role="radiogroup" aria-label="飲水杯數">
-            ${Array.from({ length: 8 }, (_, i) => `<button type="button" class="unit" role="radio" data-action="unit" data-field="water" data-value="${i + 1}" aria-label="${i + 1} 杯">${glass(i + 1, 'w')}</button>`).join('')}
-          </div>
+          <p class="water-goal" id="waterGoal"></p>
+          <div class="units glasses" id="glasses" role="radiogroup" aria-label="飲水杯數" style="--n:${glassCount()}">${glassesMarkup()}</div>
           <p class="meter-read"><b id="waterRead"></b></p>
         </div>
         <div class="sheet meter mood-meter" data-reveal>
@@ -252,11 +289,32 @@ export async function renderDay(main, state, date) {
       </section>
     </div>
 
-    <aside class="day-aside">${guideMarkup(loc, state.settings)}</aside>
+    <aside class="day-aside">${isSaturday ? weeklyMarkup(weekRows) : ''}${guideMarkup(loc, state.settings)}</aside>
   </div>
 
   <div class="save-pill" id="savePill" data-state="idle"><span class="save-dot"></span><span class="save-text">已同步</span></div>
-  <dialog class="lightbox" id="lightbox"><img alt="餐點照片" /><button type="button" class="icon-btn" data-action="lightbox-close" aria-label="關閉">${icon.close(20)}</button></dialog>`;
+  <dialog class="lightbox" id="lightbox"><img alt="餐點照片" />
+    <button type="button" class="icon-btn" data-action="lightbox-close" aria-label="關閉">${icon.close(20)}</button>
+    <button type="button" class="btn btn-primary lightbox-dl" data-action="photo-dl" data-id="">${icon.download(18)}<span>下載照片</span></button>
+  </dialog>
+  <dialog class="composer" id="composer" aria-labelledby="composerTitle">
+    <div class="composer-card">
+      <header class="composer-head">
+        <div><p class="eyebrow">Photo label</p><h3 class="h3" id="composerTitle">照片標籤</h3></div>
+        <button type="button" class="icon-btn subtle" data-composer="cancel" aria-label="取消">${icon.close(18)}</button>
+      </header>
+      <div class="composer-preview"><canvas id="composerCanvas"></canvas><span class="composer-count" id="composerCount"></span></div>
+      <p class="composer-text muted small">左上角會寫上 <b id="composerLabel"></b>，選一個看得清楚的文字顏色：</p>
+      <div class="swatches" role="radiogroup" aria-label="文字顏色">
+        ${LABEL_COLORS.map((c) => `<button type="button" class="swatch-btn" role="radio" data-color="${c.id}" style="--sw:${c.id}" aria-label="${c.label}" title="${c.label}"></button>`).join('')}
+        <label class="swatch-btn swatch-custom" title="自訂顏色"><input type="color" id="customColor" aria-label="自訂顏色" /></label>
+      </div>
+      <div class="composer-actions">
+        <button type="button" class="btn btn-ghost" data-composer="cancel">取消</button>
+        <button type="button" class="btn btn-primary" data-composer="ok" id="composerOk"></button>
+      </div>
+    </div>
+  </dialog>`;
 
   // ---------- state sync ----------
   const pill = $('#savePill', main);
@@ -271,7 +329,7 @@ export async function renderDay(main, state, date) {
     dirty = false;
     setSave('saving', '儲存中…');
     try {
-      await api.saveEntry(date, entry);
+      await api.saveEntry(date, entry, items);
       const t = new Date();
       setSave('saved', `已儲存 ${String(t.getHours()).padStart(2, '0')}:${String(t.getMinutes()).padStart(2, '0')}`);
     } catch (err) {
@@ -292,7 +350,7 @@ export async function renderDay(main, state, date) {
   };
 
   function applyDerived() {
-    const derived = derivedChecks(entry, photos);
+    const derived = derivedChecks(entry, photos, { weight: baseWeight });
     for (const [id, ok] of Object.entries(derived)) {
       if (ok && !entry.checklistManual[id]) entry.checklist[id] = true;
     }
@@ -300,10 +358,33 @@ export async function renderDay(main, state, date) {
   }
 
   function paint() {
-    const score = checklistScore(entry);
-    const done = CHECKLIST.filter((c) => entry.checklist[c.id]).length;
-    $('#dayScore', main).innerHTML = `${ring(score, { size: 96, stroke: 5, cls: 'big' })}<span class="day-score-num"><b>${done}</b><small>/ ${CHECKLIST.length}</small></span><span class="day-score-label">今日完成度</span>`;
-    $('#checkCount', main).textContent = `${done} / ${CHECKLIST.length}`;
+    const score = checklistScore(entry, items);
+    const done = items.filter((c) => entry.checklist[c.id]).length;
+    $('#dayScore', main).innerHTML = `${ring(score, { size: 96, stroke: 5, cls: 'big' })}<span class="day-score-num"><b>${done}</b><small>/ ${items.length}</small></span><span class="day-score-label">今日完成度</span>`;
+    $('#checkCount', main).textContent = `${done} / ${items.length}`;
+    // per-meal and daily calories
+    let kcalSum = 0;
+    let kcalCount = 0;
+    for (const m of [...MEALS, SNACK]) {
+      const v = entry.meals[m.id]?.kcal;
+      const el = $(`[data-kcal="${m.id}"]`, main);
+      const has = v !== '' && v !== null && v !== undefined;
+      if (has && (m.id !== 'snack' || entry.meals.snack.enabled)) {
+        kcalSum += Number(v);
+        kcalCount++;
+      }
+      el?.classList.toggle('over', isAdapt && m.id !== 'snack' && has && Number(v) > MEAL_KCAL_LIMIT);
+    }
+    $('#kcalTotal', main).innerHTML = kcalCount
+      ? `今日熱量 <b>${kcalSum.toLocaleString()}</b> kcal${isAdapt ? `<span class="${kcalSum > 1800 ? 'warn' : ''}"> · 建議 1,000–1,800 · 單餐 ≤ ${MEAL_KCAL_LIMIT}</span>` : ''}`
+      : `在每餐右上角填入熱量，會自動加總${isAdapt ? `（單餐 ≤ ${MEAL_KCAL_LIMIT} kcal）` : ''}`;
+    // water: the number of glasses follows the weight-based goal
+    if ($$('#glasses .unit', main).length !== glassCount()) {
+      $('#glasses', main).innerHTML = glassesMarkup();
+      $('#glasses', main).style.setProperty('--n', glassCount());
+    }
+    const goal = waterGoal();
+    $('#waterGoal', main).textContent = `今日目標 ${goal.toLocaleString()} ml${goal > 2000 ? '（體重 × 30cc）' : ''}`;
     $$('#checklist .check', main).forEach((b) => b.setAttribute('aria-checked', String(Boolean(entry.checklist[b.dataset.id]))));
     $$('.moons .unit', main).forEach((b) => {
       const on = Number(b.dataset.value) <= entry.sleep;
@@ -316,8 +397,10 @@ export async function renderDay(main, state, date) {
       b.setAttribute('aria-checked', String(Number(b.dataset.value) === entry.water));
     });
     $('#sleepRead', main).innerHTML = entry.sleep ? `${entry.sleep} 小時${entry.sleep >= 7 ? ' · 睡飽了 ✦' : ''}` : '點月亮記錄睡眠';
-    $('#waterRead', main).innerHTML = entry.water ? `${(entry.water * 250).toLocaleString()} ml${entry.water >= 8 ? ' · 達標 ✦' : ` · 還差 ${((8 - entry.water) * 250).toLocaleString()} ml`}` : '點杯子記錄飲水';
+    const ml = entry.water * 250;
+    $('#waterRead', main).innerHTML = entry.water ? `${ml.toLocaleString()} ml${ml >= goal ? ' · 達標 ✦' : ` · 還差 ${(goal - ml).toLocaleString()} ml`}` : '點杯子記錄飲水';
     $$('.mood', main).forEach((b) => b.setAttribute('aria-checked', String(entry.mood === b.dataset.value)));
+    paintDownloadAll();
   }
 
   // ---------- events ----------
@@ -400,11 +483,100 @@ export async function renderDay(main, state, date) {
     if (action === 'photo-open') {
       const dlg = $('#lightbox', main);
       $('img', dlg).src = btn.dataset.src;
+      $('.lightbox-dl', dlg).dataset.id = btn.dataset.id;
       dlg.showModal();
       return;
     }
     if (action === 'lightbox-close') $('#lightbox', main).close();
+    if (action === 'photo-dl' || action === 'photo-dl-all') {
+      const list = action === 'photo-dl' ? photos.filter((p) => String(p.id) === btn.dataset.id) : orderedPhotos();
+      if (!list.length) return;
+      btn.disabled = true;
+      try {
+        await saveFiles(await Promise.all(list.map(photoFile)));
+      } catch (err) {
+        toast(err.message || '下載失敗', 'error');
+      } finally {
+        btn.disabled = false;
+      }
+    }
   };
+
+  // ---------- photo download ----------
+  const MEAL_LABEL = Object.fromEntries([...MEALS, SNACK].map((m) => [m.id, m.label]));
+  const orderedPhotos = () => [...MEALS, SNACK].flatMap((m) => photos.filter((p) => p.meal === m.id));
+  async function photoFile(p) {
+    const blob = await api.downloadPhoto(p);
+    const same = photos.filter((q) => q.meal === p.meal);
+    const n = same.length > 1 ? `-${same.indexOf(p) + 1}` : '';
+    const ext = blob.type === 'image/png' ? 'png' : blob.type === 'image/webp' ? 'webp' : 'jpg';
+    // ASCII file names: some browsers replace non-ASCII download names with "download".
+    return new File([blob], `${date}_${p.meal}${n}.${ext}`, { type: blob.type || 'image/jpeg' });
+  }
+  function paintDownloadAll() {
+    const b = $('#dlAll', main);
+    b.hidden = photos.length === 0;
+    $('span', b).textContent = `下載今日照片（${photos.length}）`;
+  }
+
+  // ---------- upload composer: preview the stamped label and pick its colour ----------
+  function compose(meal, files) {
+    const dlg = $('#composer', main);
+    const canvas = $('#composerCanvas', main);
+    const text = stampText(date, MEAL_LABEL[meal]);
+    let color = state.settings.labelColor || DEFAULT_LABEL_COLOR;
+    let bitmap = null;
+    $('#composerLabel', main).textContent = text;
+    $('#composerCount', main).textContent = files.length > 1 ? `共 ${files.length} 張，套用同一個顏色` : '';
+    $('#composerOk', main).textContent = files.length > 1 ? `上傳 ${files.length} 張` : '上傳';
+    const draw = () => {
+      $$('.swatch-btn[data-color]', dlg).forEach((b) => b.setAttribute('aria-checked', String(b.dataset.color.toLowerCase() === color.toLowerCase())));
+      const custom = !LABEL_COLORS.some((c) => c.id.toLowerCase() === color.toLowerCase());
+      $('.swatch-custom', dlg).classList.toggle('is-on', custom);
+      $('.swatch-custom', dlg).style.setProperty('--sw', color);
+      $('#customColor', main).value = color.length === 7 ? color : '#ffffff';
+      if (bitmap) renderStamped(bitmap, text, color, { maxSide: 1000, canvas });
+    };
+    return new Promise((resolve) => {
+      const done = (ok) => {
+        dlg.onclick = null;
+        $('#customColor', main).oninput = null;
+        dlg.oncancel = null;
+        if (dlg.open) dlg.close();
+        bitmap?.close?.();
+        resolve(ok ? color : null);
+      };
+      dlg.onclick = (e) => {
+        const sw = e.target.closest('[data-color]');
+        if (sw) {
+          color = sw.dataset.color;
+          draw();
+        }
+        const act = e.target.closest('[data-composer]')?.dataset.composer;
+        if (act) done(act === 'ok');
+        if (e.target === dlg) done(false);
+      };
+      $('#customColor', main).oninput = (e) => {
+        color = e.target.value;
+        draw();
+      };
+      // Esc key. (Not "close": that event fires asynchronously and would hit the next composer.)
+      dlg.oncancel = (e) => {
+        e.preventDefault();
+        done(false);
+      };
+      canvas.width = canvas.height = 0;
+      draw();
+      dlg.showModal();
+      document.fonts?.load('700 40px "Noto Sans TC"', text).catch(() => {}).then(() => decodeImage(files[0])).then((b) => {
+        bitmap = b;
+        draw();
+      }).catch((err) => {
+        toast(err.message, 'error');
+        done(false);
+      });
+    });
+  }
 
   $('#lightbox', main).addEventListener('click', (e) => {
     if (e.target.id === 'lightbox') e.target.close();
@@ -433,14 +605,24 @@ export async function renderDay(main, state, date) {
       const meal = el.dataset.upload;
       const files = [...el.files];
       el.value = '';
+      if (!files.length) return;
+      const color = await compose(meal, files);
+      if (!color) return;
+      if (color !== state.settings.labelColor) {
+        state.settings.labelColor = color;
+        api.saveSettings({ labelColor: color }).catch(() => {});
+      }
       const box = $(`[data-photos="${meal}"]`, main);
       const add = $('.photo-add', box);
+      const text = stampText(date, MEAL_LABEL[meal]);
       for (const file of files) {
         const ph = document.createElement('figure');
         ph.className = 'photo is-loading';
         box.insertBefore(ph, add);
         try {
-          const blob = await compressImage(file);
+          const bitmap = await decodeImage(file);
+          const blob = await stampToBlob(bitmap, text, color);
+          bitmap.close?.();
           const saved = await api.uploadPhoto(date, meal, blob);
           photos.push(saved);
           ph.outerHTML = photoThumb(saved);
