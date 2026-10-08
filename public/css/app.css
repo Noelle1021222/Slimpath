@@ -741,18 +741,25 @@ main:focus { outline: none; }
 .composer-count:empty { display: none; }
 .composer-text { margin: 0; }
 .composer-text b { color: var(--ink); font-weight: 700; }
+.swatch-row { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 12px; }
+.swatch-title { font-size: 13px; font-weight: 700; color: var(--ink-2); letter-spacing: 0.08em; }
 .swatches { display: flex; flex-wrap: wrap; gap: 10px; }
 .swatch-btn { position: relative; width: 40px; height: 40px; border-radius: 50%; background: var(--sw); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18); cursor: pointer; transition: transform 0.3s var(--spring); }
 .swatch-btn:hover { transform: scale(1.08); }
 .swatch-btn[aria-checked='true'], .swatch-custom.is-on { box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18), 0 0 0 3px var(--card), 0 0 0 5px var(--ink); }
+.swatch-square { border-radius: 11px; }
+.swatch-none { background: var(--card); }
+.swatch-none::after { content: ''; position: absolute; left: 50%; top: 18%; width: 2px; height: 64%; border-radius: 2px; background: var(--danger); transform: translateX(-50%) rotate(45deg); }
 .swatch-custom { background: conic-gradient(#ff6b6b, #ffd54a, #9be28a, #8ec5ff, #c08bff, #ff6b6b); }
 .swatch-custom.is-on { background: var(--sw); }
 .swatch-custom input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
 .composer-actions { display: flex; justify-content: flex-end; gap: 10px; }
 @media (max-width: 420px) {
   .composer-card { padding: 16px; }
-  .swatches { gap: 8px; }
-  .swatch-btn { width: 34px; height: 34px; }
+  .swatches { gap: 6px; }
+  .swatch-btn { width: 30px; height: 30px; }
+  .swatch-square { border-radius: 8px; }
+  .swatch-row { grid-template-columns: 1fr; gap: 6px; }
 }
 
 @media (max-width: 1080px) {
