@@ -2,7 +2,10 @@
 import { api } from '../api.js';
 import { $, $$, esc, toast, countUp, revealOnScroll } from '../ui.js';
 import { icon, face } from '../icons.js';
-import { PHASES, TOTAL_DAYS, CHECKLIST, MOODS, schedule, locate, addDays, diffDays, todayISO, formatShort } from '../program.js';
+import {
+  PHASES, TOTAL_DAYS, CHECKLIST, MOODS, JOY_KINDS, schedule, locate, addDays, diffDays, todayISO, formatShort,
+  weekDates, weekStart, weekdayLabel, joyWeek,
+} from '../program.js';
 
 function trendChart(rows, start, settings) {
   const W = 960;
@@ -12,8 +15,8 @@ function trendChart(rows, start, settings) {
   const ih = H - pad.t - pad.b;
   const x = (date) => pad.l + (diffDays(date, start) / (TOTAL_DAYS - 1)) * iw;
 
-  const ws = rows.filter((r) => r.weight !== null);
-  const fs = rows.filter((r) => r.body_fat !== null);
+  const ws = rows.filter((r) => r.weight != null);
+  const fs = rows.filter((r) => r.body_fat != null);
   const wVals = ws.map((r) => r.weight).concat(settings.goalWeight ?? [], settings.startWeight ?? []);
   if (!wVals.length) wVals.push(60);
   const wMin = Math.floor(Math.min(...wVals) - 1);
@@ -92,6 +95,71 @@ function trendChart(rows, start, settings) {
   </svg>`;
 }
 
+// ---------- 這週的快樂時刻 (Monday → Sunday; independent of the 84-day programme) ----------
+const rangeLabel = (dates) => `${formatShort(dates[0])}（一）– ${formatShort(dates[6])}（日）`;
+
+function joyWeekMarkup(dates, days, isThisWeek) {
+  const total = JOY_KINDS.reduce((n, k) => n + days[k.id].length, 0);
+  const body = total
+    ? `<ul class="jw-list">
+        ${JOY_KINDS.map((k) => {
+          const set = new Set(days[k.id]);
+          return `
+          <li class="jw-row">
+            <span class="jw-name">${k.label}</span>
+            <span class="jw-count">${set.size ? `<b>${set.size}</b> 天有記下` : ''}</span>
+            <span class="jw-days">${dates.map((d) => set.has(d)
+              ? `<a class="jw-day is-on" href="#/day/${d}" aria-label="${formatShort(d)} 星期${weekdayLabel(d)}，${k.label}有記下">${weekdayLabel(d)}</a>`
+              : `<span class="jw-day" aria-hidden="true">${weekdayLabel(d)}</span>`).join('')}</span>
+          </li>`;
+        }).join('')}
+      </ul>`
+    : `<p class="jw-empty">留一個位置，給想記下的時刻。</p>`;
+  return `
+    <div class="sheet joy-week">
+      <header class="block-head inline jw-head">
+        <div><p class="eyebrow">This week</p><h2 class="h2">這週的快樂時刻</h2></div>
+        <nav class="jw-nav" aria-label="切換週次">
+          <button type="button" class="icon-btn" data-week="-7" aria-label="上一週">${icon.left(18)}</button>
+          <span class="jw-range">${rangeLabel(dates)}</span>
+          <button type="button" class="icon-btn" data-week="7" aria-label="下一週">${icon.right(18)}</button>
+          ${isThisWeek ? '' : '<button type="button" class="chip" data-week="now">本週</button>'}
+        </nav>
+      </header>
+      ${body}
+    </div>`;
+}
+
+function mountJoyWeek(host) {
+  let anchor = weekStart(todayISO());
+  let token = 0;
+  async function load() {
+    const t = ++token;
+    const dates = weekDates(anchor);
+    host.setAttribute('aria-busy', 'true');
+    try {
+      const rows = await api.joyRange(dates[0], dates[6]);
+      if (t !== token) return; // a newer week was requested meanwhile
+      host.innerHTML = joyWeekMarkup(dates, joyWeek(rows, dates), anchor === weekStart(todayISO()));
+    } catch (err) {
+      if (t === token) host.innerHTML = `<div class="sheet joy-week"><p class="jw-empty">這週的紀錄暫時讀不到，稍後再看看。</p></div>`;
+    } finally {
+      if (t === token) host.removeAttribute('aria-busy');
+    }
+  }
+  host.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-week]');
+    if (!b) return;
+    anchor = b.dataset.week === 'now' ? weekStart(todayISO()) : addDays(anchor, Number(b.dataset.week));
+    load().then(() => {
+      // keep keyboard focus on the same control after the section re-renders
+      const sel = b.dataset.week === 'now' ? '[data-week="-7"]' : `[data-week="${b.dataset.week}"]`;
+      host.querySelector(sel)?.focus();
+    });
+  });
+  return load();
+}
+
 export async function renderProgress(main, state) {
   const s = state.settings;
   const start = s.startDate;
@@ -100,8 +168,8 @@ export async function renderProgress(main, state) {
   const rows = await api.entries(start, end);
   const byDate = new Map(rows.map((r) => [r.date, r]));
 
-  const ws = rows.filter((r) => r.weight !== null);
-  const fs = rows.filter((r) => r.body_fat !== null);
+  const ws = rows.filter((r) => r.weight != null);
+  const fs = rows.filter((r) => r.body_fat != null);
   const firstW = s.startWeight ?? ws[0]?.weight ?? null;
   const lastW = ws.at(-1)?.weight ?? null;
   const lost = firstW !== null && lastW !== null ? firstW - lastW : null;
@@ -194,10 +262,13 @@ export async function renderProgress(main, state) {
     </div>
   </section>
 
+  <section class="wrap jw-section" id="joyWeek" data-reveal></section>
+
   <section class="wrap export-row" data-reveal>
     <button class="btn btn-ghost" type="button" id="exportBtn">${icon.download(18)}<span>匯出全部資料（JSON）</span></button>
   </section>`;
 
+  await mountJoyWeek($('#joyWeek', main));
   $('#exportBtn', main).addEventListener('click', () => api.exportAll().catch((err) => toast(err.message, 'error')));
   $$('[data-count]', main).forEach((el) => {
     if (el.dataset.count !== '') countUp(el, Number(el.dataset.count), { decimals: Number(el.dataset.dec || 0) });

@@ -1,17 +1,37 @@
 // Daily journal — a digital twin of the paper 生活日誌 page, autosaved to the database.
 import { api } from '../api.js';
+import { createAutosave } from '../autosave.js';
 import { LABEL_COLORS, LABEL_BGS, NO_BG, DEFAULT_LABEL_COLOR, contrast, textFor, stampText, decodeImage, renderStamped, stampToBlob, saveFiles } from '../stamp.js';
-import { $, $$, esc, toast, ring, debounce, revealOnScroll, wave } from '../ui.js';
+import { $, $$, esc, toast, ring, revealOnScroll, wave } from '../ui.js';
 import { icon, art, moon, glass, face } from '../icons.js';
 import {
   TOTAL_DAYS, VEG_COLORS, PROTEINS, OILS, MEALS, SNACK, MOODS, MEAL_KCAL_LIMIT,
   normalizeEntry, derivedChecks, locate, addDays, formatLong, todayISO, checklistScore, checklistFor, waterGoalMl, parseISO,
+  JOY_KINDS,
 } from '../program.js';
 
-let pendingFlush = null;
-const flushPending = () => pendingFlush?.();
+// The autosave of the day currently on screen, and the last one per date (so
+// re-opening a date waits for its pending save instead of loading stale data).
+let current = null;
+const byDate = new Map();
+const anyUnsaved = () => [...byDate.values()].some((a) => a.hasUnsaved());
+const flushPending = () => current?.flush();
 window.addEventListener('hashchange', flushPending);
 window.addEventListener('pagehide', flushPending);
+// Only a warning: edits that are not yet stored cannot be recovered after the page closes.
+window.addEventListener('beforeunload', (e) => {
+  if (!anyUnsaved()) return;
+  flushPending();
+  e.preventDefault();
+  e.returnValue = '';
+});
+
+const SAVE_TEXT = {
+  pending: '儲存中…',
+  saving: '儲存中…',
+  saved: '已儲存。',
+  error: '這次尚未儲存，內容已保留，可以再試一次。',
+};
 
 // ---------- path helpers ----------
 const getPath = (obj, path) => path.split('.').reduce((o, k) => o?.[k], obj);
@@ -136,6 +156,73 @@ function guideMarkup(loc, settings) {
     </div>`;
 }
 
+// ---------- 每日三件事 ----------
+const MORE_QUESTIONS = [
+  { id: 'goal', label: '今天做了什麼靠近我的目標？' },
+  { id: 'strengths', label: '今天做了什麼發揮我的天賦、才能與技能？' },
+  { id: 'ease', label: '今天做了什麼，讓我更自在地發揮自己？' },
+];
+const filledCount = (r) => MORE_QUESTIONS.filter((q) => r[q.id].trim()).length;
+const moreLabel = (n) => (n ? `想多寫一點（已寫 ${n} 題）` : '想多寫一點');
+
+function reflectionMarkup(r) {
+  return `
+    <div class="sheet soft-card reflect" data-reveal>
+      <header class="soft-head">
+        <p class="eyebrow">Three things</p>
+        <h2 class="h2">每日三件事</h2>
+      </header>
+      <label class="soft-field" for="rf-care">
+        <span class="soft-q">今天，有什麼讓我感到舒服，或被自己好好照顧的時刻？</span>
+      </label>
+      <textarea id="rf-care" class="soft-text" rows="2" data-path="reflection.careMoment"
+        placeholder="例如：好好吃一餐、休息一下、享受喜歡的音樂、留一點時間給自己。">${esc(r.careMoment)}</textarea>
+      <button type="button" class="soft-more" data-action="reflect-more" aria-expanded="false" aria-controls="rf-more">
+        <span>${moreLabel(filledCount(r))}</span>${icon.right(16)}
+      </button>
+      <div class="soft-more-body" id="rf-more" hidden>
+        <p class="soft-note">小小的前進、發揮自己的長處，或讓生活更順心，都可以寫在這裡。</p>
+        ${MORE_QUESTIONS.map((q, i) => `
+          <label class="soft-field" for="rf-${q.id}"><span class="soft-q"><i>${i + 1}</i>${q.label}</span></label>
+          <textarea id="rf-${q.id}" class="soft-text" rows="2" data-path="reflection.${q.id}">${esc(r[q.id])}</textarea>`).join('')}
+      </div>
+    </div>`;
+}
+
+// ---------- 四種快樂 ----------
+function joyItemMarkup(kind, j) {
+  const id = kind.id;
+  return `
+    <li class="joy ${j.felt ? 'is-felt' : ''}" data-joy="${id}">
+      <button type="button" class="joy-mark" data-action="joy-mark" data-joy="${id}" aria-pressed="${j.felt}">
+        <span class="joy-dot" aria-hidden="true">${icon.check(14)}</span>
+        <span class="joy-name">${kind.label}</span>
+        <span class="joy-state">${j.felt ? '今天有感受到' : '輕按記下'}</span>
+      </button>
+      <button type="button" class="joy-note-toggle" data-action="joy-note" data-joy="${id}"
+        aria-expanded="${Boolean(j.note)}" aria-controls="joy-note-${id}">${j.note ? '備註' : '寫一句話'}</button>
+      <div class="joy-note" id="joy-note-${id}" ${j.note ? '' : 'hidden'}>
+        <label class="sr" for="joy-text-${id}">${kind.label}的備註</label>
+        <textarea id="joy-text-${id}" class="soft-text" rows="2" data-path="joy.${id}.note" placeholder="例如：${kind.hint}">${esc(j.note)}</textarea>
+      </div>
+    </li>`;
+}
+
+function joyMarkup(joy) {
+  return `
+    <div class="sheet soft-card joys" data-reveal>
+      <header class="soft-head soft-head-row">
+        <div><p class="eyebrow">Four joys</p><h2 class="h2">四種快樂</h2></div>
+        <button type="button" class="chip joy-fold" data-action="joy-fold" aria-expanded="true" aria-controls="joy-body">今天先到這裡</button>
+      </header>
+      <div id="joy-body">
+        <p class="soft-note">今天有感受到哪一種，就輕按一下；想記下一句話也可以。</p>
+        <ul class="joy-grid">${JOY_KINDS.map((k) => joyItemMarkup(k, joy[k.id])).join('')}</ul>
+      </div>
+      <p class="joy-folded" id="joy-folded" hidden></p>
+    </div>`;
+}
+
 /** Saturday card: lowest weight / body fat of the past 7 days (reported to the group). */
 function weeklyMarkup(rows) {
   const min = (k) => {
@@ -158,7 +245,9 @@ function weeklyMarkup(rows) {
 
 // ---------- view ----------
 export async function renderDay(main, state, date) {
-  flushPending();
+  flushPending(); // the previous day's edits go to the previous day's row
+  current = null;
+  await byDate.get(date)?.idle(); // a save of this same date may still be in flight
   const start = state.settings.startDate;
   const loc = locate(start, date);
   const res = await api.entry(date);
@@ -287,12 +376,20 @@ export async function renderDay(main, state, date) {
           <textarea data-field="tomorrow" rows="4" placeholder="今天的小觀察、明天想調整的一件事……">${esc(entry.tomorrow)}</textarea>
         </label>
       </section>
+
+      <section class="block soft-blocks">
+        ${reflectionMarkup(entry.reflection)}
+        ${joyMarkup(entry.joy)}
+      </section>
     </div>
 
     <aside class="day-aside">${isSaturday ? weeklyMarkup(weekRows) : ''}${guideMarkup(loc, state.settings)}</aside>
   </div>
 
-  <div class="save-pill" id="savePill" data-state="idle"><span class="save-dot"></span><span class="save-text">已同步</span></div>
+  <div class="save-pill" id="savePill" data-state="idle" role="status" aria-live="polite">
+    <span class="save-dot"></span><span class="save-text">已儲存。</span>
+    <button type="button" class="save-retry" data-action="save-retry" hidden>再試一次</button>
+  </div>
   <dialog class="lightbox" id="lightbox"><img alt="餐點照片" />
     <button type="button" class="icon-btn" data-action="lightbox-close" aria-label="關閉">${icon.close(20)}</button>
     <button type="button" class="btn btn-primary lightbox-dl" data-action="photo-dl" data-id="">${icon.download(18)}<span>下載照片</span></button>
@@ -334,30 +431,43 @@ export async function renderDay(main, state, date) {
     $('.save-text', pill).textContent = text;
   };
 
-  let dirty = false;
-  const persist = async () => {
-    if (!dirty) return;
-    dirty = false;
-    setSave('saving', '儲存中…');
-    try {
-      await api.saveEntry(date, entry, items);
-      const t = new Date();
-      setSave('saved', `已儲存 ${String(t.getHours()).padStart(2, '0')}:${String(t.getMinutes()).padStart(2, '0')}`);
-    } catch (err) {
-      dirty = true;
-      setSave('error', '儲存失敗，稍後重試');
-      toast(err.message, 'error');
-    }
-  };
-  const save = debounce(persist, 650);
-  pendingFlush = () => save.flush();
+  const autosave = createAutosave({
+    snapshot: () => JSON.parse(JSON.stringify(entry)),
+    save: (data) => api.saveEntry(date, data, items), // `date` is fixed for this view
+    onState: (st) => {
+      if (current !== autosave) {
+        // This day is no longer on screen; only speak up if its edits did not make it.
+        if (st === 'error') toast(`${date} 的內容這次尚未儲存，回到那一天可以再試一次。`, 'error');
+        return;
+      }
+      setSave(st, SAVE_TEXT[st]);
+      $('.save-retry', pill).hidden = st !== 'error';
+    },
+  });
+  current = autosave;
+  byDate.set(date, autosave);
+
+  // Small, targeted DOM updates for the 四種快樂 card (never re-render it while typing).
+  function paintJoy(id) {
+    const j = entry.joy[id];
+    const li = $(`.joy[data-joy="${id}"]`, main);
+    li.classList.toggle('is-felt', j.felt);
+    const mark = $('.joy-mark', li);
+    mark.setAttribute('aria-pressed', String(j.felt));
+    $('.joy-state', mark).textContent = j.felt ? '今天有感受到' : '輕按記下';
+  }
+  function setJoyNote(id, open) {
+    const li = $(`.joy[data-joy="${id}"]`, main);
+    $(`#joy-note-${id}`, main).hidden = !open;
+    const t = $('.joy-note-toggle', li);
+    t.setAttribute('aria-expanded', String(open));
+    t.textContent = open || entry.joy[id].note ? '備註' : '寫一句話';
+  }
 
   const changed = () => {
-    dirty = true;
-    setSave('dirty', '編輯中…');
     applyDerived();
     paint();
-    save();
+    autosave.touch();
   };
 
   function applyDerived() {
@@ -419,6 +529,55 @@ export async function renderDay(main, state, date) {
     const btn = e.target.closest('[data-action]');
     if (!btn) return;
     const action = btn.dataset.action;
+
+    if (action === 'save-retry') {
+      autosave.retry();
+      return;
+    }
+    if (action === 'reflect-more') {
+      const body = $('#rf-more', main);
+      const open = body.hidden;
+      body.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+      btn.classList.toggle('is-open', open);
+      return;
+    }
+    if (action === 'joy-mark') {
+      const id = btn.dataset.joy;
+      const j = entry.joy[id];
+      if (j.felt || j.note) {
+        if (!confirm('要移除這個時刻的紀錄嗎？')) return;
+        j.felt = false;
+        j.note = '';
+        const ta = $(`#joy-text-${id}`, main);
+        ta.value = '';
+        setJoyNote(id, false);
+      } else {
+        j.felt = true;
+      }
+      paintJoy(id);
+      return changed();
+    }
+    if (action === 'joy-note') {
+      const id = btn.dataset.joy;
+      const open = $(`#joy-note-${id}`, main).hidden;
+      setJoyNote(id, open);
+      if (open) $(`#joy-text-${id}`, main).focus();
+      return;
+    }
+    if (action === 'joy-fold') {
+      // Folding is only a view change; it never touches the stored journal.
+      const body = $('#joy-body', main);
+      const fold = !body.hidden;
+      body.hidden = fold;
+      const summary = $('#joy-folded', main);
+      const felt = JOY_KINDS.filter((k) => entry.joy[k.id].felt).map((k) => k.label);
+      summary.textContent = felt.length ? `今天記下了：${felt.join('、')}` : '想記的時候，再打開就好。';
+      summary.hidden = !fold;
+      btn.textContent = fold ? '打開' : '今天先到這裡';
+      btn.setAttribute('aria-expanded', String(!fold));
+      return;
+    }
 
     if (action === 'step') {
       const path = btn.dataset.path;
@@ -625,6 +784,14 @@ export async function renderDay(main, state, date) {
     if (el.id === 'datePick') return;
     if (el.dataset.path) {
       setPath(entry, el.dataset.path, el.value);
+      const [group, key] = el.dataset.path.split('.');
+      if (group === 'joy' && el.value.trim() && !entry.joy[key].felt) {
+        entry.joy[key].felt = true; // writing a note about it means it was felt
+        paintJoy(key);
+      }
+      if (group === 'reflection') {
+        $('[data-action="reflect-more"] span', main).textContent = moreLabel(filledCount(entry.reflection));
+      }
       return changed();
     }
     if (el.dataset.field) {

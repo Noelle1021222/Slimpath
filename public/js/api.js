@@ -1,7 +1,7 @@
 // Data layer backed by Supabase (Postgres + Auth + Storage).
 // The vendored UMD bundle (vendor/supabase.js) exposes `window.supabase`.
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js';
-import { CHECKLIST } from './program.js';
+import { CHECKLIST, todayISO } from './program.js';
 
 const BUCKET = 'meal-photos';
 const SIGNED_URL_TTL = 60 * 60 * 6; // 6 hours
@@ -88,6 +88,18 @@ export const api = {
     return rows.map((r) => ({ ...r, photo_count: counts.get(r.date) || 0 }));
   },
 
+  /**
+   * The 四種快樂 part of each journal in a date range, in one request
+   * (only `data->joy` is read, not the whole journal). Returns [{ date, joy }].
+   */
+  async joyRange(from, to) {
+    const id = await uid();
+    const rows = unwrap(
+      await sb.from('entries').select('date, joy:data->joy').eq('user_id', id).gte('date', from).lte('date', to).order('date')
+    );
+    return rows.map((r) => ({ date: r.date, joy: r.joy ?? r.data?.joy ?? null }));
+  },
+
   async entry(date) {
     const id = await uid();
     const [row, photos] = await Promise.all([
@@ -138,7 +150,7 @@ export const api = {
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
     const a = Object.assign(document.createElement('a'), {
       href: URL.createObjectURL(blob),
-      download: `slimpath-${new Date().toISOString().slice(0, 10)}.json`,
+      download: `slimpath-${todayISO()}.json`, // local date, not UTC
     });
     document.body.append(a);
     a.click();
