@@ -1,6 +1,6 @@
 // Daily journal — a digital twin of the paper 生活日誌 page, autosaved to the database.
 import { api } from '../api.js';
-import { LABEL_COLORS, DEFAULT_LABEL_COLOR, stampText, decodeImage, renderStamped, stampToBlob, saveFiles } from '../stamp.js';
+import { LABEL_COLORS, LABEL_BGS, NO_BG, DEFAULT_LABEL_COLOR, contrast, textFor, stampText, decodeImage, renderStamped, stampToBlob, saveFiles } from '../stamp.js';
 import { $, $$, esc, toast, ring, debounce, revealOnScroll, wave } from '../ui.js';
 import { icon, art, moon, glass, face } from '../icons.js';
 import {
@@ -304,10 +304,21 @@ export async function renderDay(main, state, date) {
         <button type="button" class="icon-btn subtle" data-composer="cancel" aria-label="取消">${icon.close(18)}</button>
       </header>
       <div class="composer-preview"><canvas id="composerCanvas"></canvas><span class="composer-count" id="composerCount"></span></div>
-      <p class="composer-text muted small">左上角會寫上 <b id="composerLabel"></b>，選一個看得清楚的文字顏色：</p>
-      <div class="swatches" role="radiogroup" aria-label="文字顏色">
-        ${LABEL_COLORS.map((c) => `<button type="button" class="swatch-btn" role="radio" data-color="${c.id}" style="--sw:${c.id}" aria-label="${c.label}" title="${c.label}"></button>`).join('')}
-        <label class="swatch-btn swatch-custom" title="自訂顏色"><input type="color" id="customColor" aria-label="自訂顏色" /></label>
+      <p class="composer-text muted small">左上角會寫上 <b id="composerLabel"></b>。文字和照片顏色太接近時，可以加一個背景：</p>
+      <div class="swatch-row">
+        <span class="swatch-title">文字</span>
+        <div class="swatches" role="radiogroup" aria-label="文字顏色">
+          ${LABEL_COLORS.map((c) => `<button type="button" class="swatch-btn" role="radio" data-color="${c.id}" style="--sw:${c.id}" aria-label="文字${c.label}" title="${c.label}"></button>`).join('')}
+          <label class="swatch-btn swatch-custom" data-custom="color" title="自訂文字顏色"><input type="color" id="customColor" aria-label="自訂文字顏色" /></label>
+        </div>
+      </div>
+      <div class="swatch-row">
+        <span class="swatch-title">背景</span>
+        <div class="swatches" role="radiogroup" aria-label="文字背景">
+          <button type="button" class="swatch-btn swatch-none" role="radio" data-bg="${NO_BG}" aria-label="不加背景" title="不加背景"></button>
+          ${LABEL_BGS.map((c) => `<button type="button" class="swatch-btn swatch-square" role="radio" data-bg="${c.id}" style="--sw:${c.id}" aria-label="背景${c.label}" title="${c.label}"></button>`).join('')}
+          <label class="swatch-btn swatch-square swatch-custom" data-custom="bg" title="自訂背景顏色"><input type="color" id="customBg" aria-label="自訂背景顏色" /></label>
+        </div>
       </div>
       <div class="composer-actions">
         <button type="button" class="btn btn-ghost" data-composer="cancel">取消</button>
@@ -519,37 +530,59 @@ export async function renderDay(main, state, date) {
     $('span', b).textContent = `下載今日照片（${photos.length}）`;
   }
 
-  // ---------- upload composer: preview the stamped label and pick its colour ----------
+  // ---------- upload composer: preview the stamped label, pick text colour and optional background ----------
   function compose(meal, files) {
     const dlg = $('#composer', main);
     const canvas = $('#composerCanvas', main);
     const text = stampText(date, MEAL_LABEL[meal]);
-    let color = state.settings.labelColor || DEFAULT_LABEL_COLOR;
+    const style = {
+      color: state.settings.labelColor || DEFAULT_LABEL_COLOR,
+      bg: state.settings.labelBg || NO_BG,
+    };
     let bitmap = null;
     $('#composerLabel', main).textContent = text;
-    $('#composerCount', main).textContent = files.length > 1 ? `共 ${files.length} 張，套用同一個顏色` : '';
+    $('#composerCount', main).textContent = files.length > 1 ? `共 ${files.length} 張，套用同一個樣式` : '';
     $('#composerOk', main).textContent = files.length > 1 ? `上傳 ${files.length} 張` : '上傳';
+    const same = (a, b) => a.toLowerCase() === b.toLowerCase();
+    const markGroup = (attr, presets, value, customKey) => {
+      $$(`.swatch-btn[data-${attr}]`, dlg).forEach((b) => b.setAttribute('aria-checked', String(same(b.dataset[attr], value))));
+      const custom = $(`[data-custom="${customKey}"]`, dlg);
+      const isCustom = value !== NO_BG && !presets.some((c) => same(c.id, value));
+      custom.classList.toggle('is-on', isCustom);
+      if (isCustom) custom.style.setProperty('--sw', value);
+      else custom.style.removeProperty('--sw');
+    };
     const draw = () => {
-      $$('.swatch-btn[data-color]', dlg).forEach((b) => b.setAttribute('aria-checked', String(b.dataset.color.toLowerCase() === color.toLowerCase())));
-      const custom = !LABEL_COLORS.some((c) => c.id.toLowerCase() === color.toLowerCase());
-      $('.swatch-custom', dlg).classList.toggle('is-on', custom);
-      $('.swatch-custom', dlg).style.setProperty('--sw', color);
-      $('#customColor', main).value = color.length === 7 ? color : '#ffffff';
-      if (bitmap) renderStamped(bitmap, text, color, { maxSide: 1000, canvas });
+      markGroup('color', LABEL_COLORS, style.color, 'color');
+      markGroup('bg', LABEL_BGS, style.bg, 'bg');
+      $('#customColor', main).value = style.color.length === 7 ? style.color : '#ffffff';
+      $('#customBg', main).value = style.bg !== NO_BG && style.bg.length === 7 ? style.bg : '#1b2130';
+      if (bitmap) renderStamped(bitmap, text, style, { maxSide: 1000, canvas });
+    };
+    // Keep the label readable: if text and box end up too similar, flip the text to ink or white.
+    const ensureContrast = () => {
+      if (style.bg !== NO_BG && contrast(style.color, style.bg) < 2.2) style.color = textFor(style.bg);
     };
     return new Promise((resolve) => {
       const done = (ok) => {
         dlg.onclick = null;
         $('#customColor', main).oninput = null;
+        $('#customBg', main).oninput = null;
         dlg.oncancel = null;
         if (dlg.open) dlg.close();
         bitmap?.close?.();
-        resolve(ok ? color : null);
+        resolve(ok ? { ...style } : null);
       };
       dlg.onclick = (e) => {
-        const sw = e.target.closest('[data-color]');
-        if (sw) {
-          color = sw.dataset.color;
+        const c = e.target.closest('[data-color]');
+        if (c) {
+          style.color = c.dataset.color;
+          draw();
+        }
+        const b = e.target.closest('[data-bg]');
+        if (b) {
+          style.bg = b.dataset.bg;
+          ensureContrast();
           draw();
         }
         const act = e.target.closest('[data-composer]')?.dataset.composer;
@@ -557,7 +590,12 @@ export async function renderDay(main, state, date) {
         if (e.target === dlg) done(false);
       };
       $('#customColor', main).oninput = (e) => {
-        color = e.target.value;
+        style.color = e.target.value;
+        draw();
+      };
+      $('#customBg', main).oninput = (e) => {
+        style.bg = e.target.value;
+        ensureContrast();
         draw();
       };
       // Esc key. (Not "close": that event fires asynchronously and would hit the next composer.)
@@ -606,11 +644,12 @@ export async function renderDay(main, state, date) {
       const files = [...el.files];
       el.value = '';
       if (!files.length) return;
-      const color = await compose(meal, files);
-      if (!color) return;
-      if (color !== state.settings.labelColor) {
-        state.settings.labelColor = color;
-        api.saveSettings({ labelColor: color }).catch(() => {});
+      const style = await compose(meal, files);
+      if (!style) return;
+      if (style.color !== state.settings.labelColor || style.bg !== (state.settings.labelBg || NO_BG)) {
+        state.settings.labelColor = style.color;
+        state.settings.labelBg = style.bg;
+        api.saveSettings({ labelColor: style.color, labelBg: style.bg }).catch(() => {});
       }
       const box = $(`[data-photos="${meal}"]`, main);
       const add = $('.photo-add', box);
@@ -621,7 +660,7 @@ export async function renderDay(main, state, date) {
         box.insertBefore(ph, add);
         try {
           const bitmap = await decodeImage(file);
-          const blob = await stampToBlob(bitmap, text, color);
+          const blob = await stampToBlob(bitmap, text, style);
           bitmap.close?.();
           const saved = await api.uploadPhoto(date, meal, blob);
           photos.push(saved);
