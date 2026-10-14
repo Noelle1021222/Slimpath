@@ -129,6 +129,40 @@ export const MOODS = [
   { id: 'fun', label: 'FUN', zh: '開心' },
 ];
 
+// ---------- 每日三件事 & 四種快樂 (a gentle space, separate from the checklist) ----------
+
+export const REFLECTION_FIELDS = ['careMoment', 'goal', 'strengths', 'ease'];
+
+export const JOY_KINDS = [
+  { id: 'life', label: '生活的快樂', hint: '喝到喜歡的咖啡。' },
+  { id: 'adventure', label: '冒險的快樂', hint: '走一條沒走過的路。' },
+  { id: 'goal', label: '目標的快樂', hint: '讓研究或個人目標前進一點。' },
+  { id: 'being', label: '存在的快樂', hint: '安靜坐一會兒，享受當下。' },
+];
+
+export const emptyReflection = () => Object.fromEntries(REFLECTION_FIELDS.map((k) => [k, '']));
+export const emptyJoy = () => Object.fromEntries(JOY_KINDS.map((k) => [k.id, { felt: false, note: '' }]));
+
+const str = (v) => (typeof v === 'string' ? v : '');
+const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
+
+/** Fill missing/partial reflection fields; anything that is not a string becomes ''. */
+export function normalizeReflection(r) {
+  const src = isObj(r) ? r : {};
+  return Object.fromEntries(REFLECTION_FIELDS.map((k) => [k, str(src[k])]));
+}
+
+/** Fill missing/partial joy kinds; `felt` is only true when stored as true. */
+export function normalizeJoy(j) {
+  const src = isObj(j) ? j : {};
+  return Object.fromEntries(
+    JOY_KINDS.map(({ id }) => {
+      const k = isObj(src[id]) ? src[id] : {};
+      return [id, { felt: k.felt === true, note: str(k.note) }];
+    })
+  );
+}
+
 export function emptyMeal(defaultTime = '') {
   return {
     time: defaultTime,
@@ -159,6 +193,8 @@ export function emptyEntry() {
     weight: '',
     bodyFat: '',
     tomorrow: '',
+    reflection: emptyReflection(),
+    joy: emptyJoy(),
   };
 }
 
@@ -178,6 +214,8 @@ export function normalizeEntry(data) {
       protein: Array.isArray(m.protein) ? m.protein : [],
     };
   }
+  out.reflection = normalizeReflection(data.reflection);
+  out.joy = normalizeJoy(data.joy);
   return out;
 }
 
@@ -216,6 +254,34 @@ export function formatShort(s) {
 }
 export function weekdayLabel(s) {
   return WEEKDAYS[parseISO(s).getDay()];
+}
+
+/** Monday of the week containing `date` (weeks run Monday → Sunday). */
+export function weekStart(date) {
+  const dow = (parseISO(date).getDay() + 6) % 7; // Mon=0 … Sun=6
+  return addDays(date, -dow);
+}
+
+/** The seven dates of the Monday-start week containing `date`. */
+export function weekDates(date) {
+  const start = weekStart(date);
+  return Array.from({ length: 7 }, (_, i) => addDays(start, i));
+}
+
+/**
+ * Days on which each kind of joy was recorded, within the given dates.
+ * `rows` are { date, joy } (joy may be missing or partial). Each date counts at most once per kind.
+ * No record simply means nothing was written down — it is not read as "no joy".
+ */
+export function joyWeek(rows, dates) {
+  const inRange = new Set(dates);
+  const out = Object.fromEntries(JOY_KINDS.map((k) => [k.id, new Set()]));
+  for (const r of rows || []) {
+    if (!r || !inRange.has(r.date)) continue;
+    const joy = normalizeJoy(r.joy);
+    for (const { id } of JOY_KINDS) if (joy[id].felt) out[id].add(r.date);
+  }
+  return Object.fromEntries(Object.entries(out).map(([id, set]) => [id, [...set].sort()]));
 }
 
 /** Phase ranges for a given start date. */
