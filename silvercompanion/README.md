@@ -23,10 +23,10 @@ npm run dev          # http://127.0.0.1:5174
 
 沒有設定 Supabase 時會自動進入**示範模式**：資料存在瀏覽器（localStorage），以 BroadcastChannel 模擬 Realtime，LINE Pay 以模擬付款頁取代。首頁或登入頁的「家屬版／陪伴者版」可直接進入示範帳號：
 
-| 身分 | 示範帳號 | 說明 |
-| --- | --- | --- |
-| 家屬 | 陳怡君 `yijun@silvercompanion.test` | 照顧陳媽媽、陳爸爸，有進行中的陪診 |
-| 陪伴者 | 林小君 `xiaojun@silvercompanion.test` | 已審核、上線中，有待接請求與行程 |
+| 身分   | 示範帳號                              | 說明                               |
+| ------ | ------------------------------------- | ---------------------------------- |
+| 家屬   | 陳怡君 `yijun@silvercompanion.test`   | 照顧陳媽媽、陳爸爸，有進行中的陪診 |
+| 陪伴者 | 林小君 `xiaojun@silvercompanion.test` | 已審核、上線中，有待接請求與行程   |
 
 > 開**兩個分頁**，一個用家屬版、一個用陪伴者版：在陪伴者分頁接單、開始導航、送出聯絡簿，家屬分頁會即時收到通知、看到地圖上的移動與聯絡簿。Supabase 版的種子資料（`supabase/seed.sql`）也有同樣的帳號，密碼 `SilverDemo#2026`。
 
@@ -98,12 +98,12 @@ silvercompanion/
 
 ### 資料庫與權限（RLS）
 
-| 資料 | 誰看得到 |
-| --- | --- |
-| `kinship_recipients`、`health_logs` | 家屬本人；陪伴者只在**接單後到服務完成前**可讀 |
-| `provider_details` 銀行帳號、餘額 | 僅陪伴者本人（欄位層級 GRANT + `provider_public` 視圖只暴露公開欄位） |
-| `orders` | 訂單雙方；所有狀態轉換只能透過 RPC（`accept_order`、`start_navigation`、`mark_arrived`、`submit_care_log`…） |
-| 公開媒合請求 | 只顯示行政區與四捨五入到 0.01° 的座標，接單後才看到完整地址 |
+| 資料                                | 誰看得到                                                                                                     |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `kinship_recipients`、`health_logs` | 家屬本人；陪伴者只在**接單後到服務完成前**可讀                                                               |
+| `provider_details` 銀行帳號、餘額   | 僅陪伴者本人（欄位層級 GRANT + `provider_public` 視圖只暴露公開欄位）                                        |
+| `orders`                            | 訂單雙方；所有狀態轉換只能透過 RPC（`accept_order`、`start_navigation`、`mark_arrived`、`submit_care_log`…） |
+| 公開媒合請求                        | 只顯示行政區與四捨五入到 0.01° 的座標，接單後才看到完整地址                                                  |
 
 RPC 皆為 `SECURITY DEFINER` + `search_path = ''`；計價由觸發器在伺服器端重算；`pg_cron` 每 10 分鐘取消逾時未付款的 LINE Pay 訂單。
 

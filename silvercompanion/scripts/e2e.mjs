@@ -3,10 +3,11 @@
  * End-to-end smoke test + accessibility audit, run against the in-browser demo
  * backend (no Supabase needed).
  *
- *   npm run e2e                       # starts Vite in demo mode on a free port
+ *   npm run e2e                       # builds a demo-mode bundle, serves it with vite preview
+ *   E2E_DEV=1 npm run e2e             # use the Vite dev server instead
  *   E2E_BASE_URL=http://localhost:5173 npm run e2e   # reuse a running server
  *
- * Optional: CHROMIUM_PATH=/path/to/chrome, E2E_HEADED=1, E2E_SKIP_A11Y=1.
+ * Optional: CHROMIUM_PATH=/path/to/chrome, E2E_HEADED=1, E2E_SKIP_A11Y=1, E2E_VERBOSE=1.
  * Exits non-zero when a flow fails or axe reports a serious/critical issue.
  */
 import { spawn } from 'node:child_process'
@@ -70,13 +71,29 @@ async function waitFor(url, timeoutMs = 60_000) {
 
 async function startServer() {
   if (process.env.E2E_BASE_URL) return { base: process.env.E2E_BASE_URL.replace(/\/$/, ''), stop: () => {} }
+  const vite = resolve(root, 'node_modules/.bin/vite')
+  const env = { ...process.env, VITE_DEMO_MODE: 'true' }
   const port = await freePort()
-  const child = spawn(resolve(root, 'node_modules/.bin/vite'), ['--host', '127.0.0.1', '--port', String(port), '--strictPort'], {
-    cwd: root,
-    env: { ...process.env, VITE_DEMO_MODE: 'true' },
-    stdio: ['ignore', 'pipe', 'pipe'],
-  })
-  child.stderr.on('data', (d) => process.env.E2E_VERBOSE && process.stderr.write(d))
+  const quiet = (child) => child.stderr.on('data', (d) => process.env.E2E_VERBOSE && process.stderr.write(d))
+  let args
+  if (process.env.E2E_DEV) {
+    args = ['--host', '127.0.0.1', '--port', String(port), '--strictPort']
+  } else {
+    // A production bundle in demo mode: deterministic (no on-demand dependency
+    // optimisation reloading the page mid-test) and closer to what ships.
+    const outDir = resolve(root, 'node_modules/.e2e-dist')
+    console.log('Building a demo-mode bundle…')
+    const build = spawn(vite, ['build', '--mode', 'e2e', '--outDir', outDir, '--emptyOutDir', '--logLevel', 'warn'], {
+      cwd: root,
+      env,
+      stdio: ['ignore', 'inherit', 'inherit'],
+    })
+    const code = await new Promise((ok) => build.on('exit', ok))
+    if (code !== 0) throw new Error(`vite build failed (${code})`)
+    args = ['preview', '--outDir', outDir, '--host', '127.0.0.1', '--port', String(port), '--strictPort']
+  }
+  const child = spawn(vite, args, { cwd: root, env, stdio: ['ignore', 'pipe', 'pipe'] })
+  quiet(child)
   const base = `http://127.0.0.1:${port}`
   await waitFor(base)
   return { base, stop: () => child.kill('SIGTERM') }

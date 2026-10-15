@@ -19,8 +19,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:db": "bash scripts/test-db.sh",
-    "test:functions": "deno test --allow-env supabase/functions",
-    "check:functions": "deno check supabase/functions/*/index.ts",
+    "test:functions": "cd supabase/functions && deno test --allow-env",
+    "check:functions": "cd supabase/functions && deno check */index.ts",
     "e2e": "node scripts/e2e.mjs",
     "og-image": "node scripts/og-image.mjs",
     "check": "npm run typecheck && npm run lint && npm run format:check && npm test && npm run build"
