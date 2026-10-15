@@ -1,0 +1,59 @@
+name: SilverCompanion CI
+
+on:
+  push:
+    paths:
+      - 'silvercompanion/**'
+      - '.github/workflows/silvercompanion-ci.yml'
+  pull_request:
+    paths:
+      - 'silvercompanion/**'
+      - '.github/workflows/silvercompanion-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: silvercompanion-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: silvercompanion
+
+jobs:
+  web:
+    name: Typecheck · lint · unit · build · e2e + a11y
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: silvercompanion/package-lock.json
+      - run: npm ci
+      - run: npm run check
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+      - name: End-to-end flows and axe-core audit (demo backend)
+        run: npm run e2e
+
+  database:
+    name: Migrations, seed and RLS tests (PostgreSQL)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm run test:db
+
+  functions:
+    name: Edge Functions (Deno)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - run: npm run check:functions
+      - run: npm run test:functions

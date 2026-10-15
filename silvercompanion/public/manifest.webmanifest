@@ -1,0 +1,37 @@
+{
+  "name": "銀髮伴 SilverCompanion",
+  "short_name": "銀髮伴",
+  "description": "長者與專業陪伴者的媒合平台：預約陪伴、即時定位、數位聯絡簿。",
+  "lang": "zh-Hant-TW",
+  "start_url": "./app",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fbf6ef",
+  "theme_color": "#b5481b",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
