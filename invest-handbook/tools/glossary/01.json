@@ -1,0 +1,20 @@
+{
+  "chapter": 1,
+  "terms": [
+    { "term": "投資", "en": "Investing", "def": "把錢放進能持續產生價值的資產（獲利、利息、租金），用時間換取報酬；報酬主要來自資產本身創造的價值。", "anchor": "def-invest" },
+    { "term": "投機", "en": "Speculation", "def": "押注價格在較短期間內的變動，報酬主要來自買低賣高的價差，更依賴時機。", "anchor": "def-speculate" },
+    { "term": "報酬率", "en": "Rate of return", "def": "一段期間賺賠的金額（含股利、利息）占期初投入的比例：（期末 − 期初 ＋ 收入）÷ 期初。", "anchor": "def-return" },
+    { "term": "年化報酬率", "en": "Annualized return", "def": "把任何期間的報酬換算成每年平均複利的速度，方便比較長短不同的成績。", "anchor": "def-annual" },
+    { "term": "複利", "en": "Compounding", "def": "報酬再投入，下一期連同報酬一起賺報酬；期數越多，成長曲線越往上彎。", "anchor": "def-compound", "aliases": ["利滾利"] },
+    { "term": "72法則", "en": "Rule of 72", "def": "72 ÷ 年報酬率（%）≈ 資金翻倍所需年數；年報酬 7% 約 10 年翻倍。", "anchor": "def-72", "aliases": ["72 法則"] },
+    { "term": "風險", "en": "Risk", "def": "實際結果和預期不同的可能性，特別是比預期差、甚至虧損的可能；結果分布越寬，風險越高。", "anchor": "def-risk" },
+    { "term": "波動度", "en": "Volatility", "def": "報酬上下跳動的幅度，常用標準差衡量；是風險最常用的量尺。", "anchor": "def-vol", "aliases": ["波動"] },
+    { "term": "風險溢酬", "en": "Risk premium", "def": "承擔風險所要求的額外預期報酬，例如股票預期報酬減去定存利率；是預期，不是保證。", "anchor": "def-premium" },
+    { "term": "資產類別", "en": "Asset class", "def": "性質相近的一群資產，例如現金、債券、股票、原物料；不同類別的風險與報酬特性不同。", "anchor": "def-asset-class" },
+    { "term": "流動性", "en": "Liquidity", "def": "能否快速、以接近合理的價格把資產換成現金；休市或恐慌時流動性會消失。", "anchor": "def-liquidity" },
+    { "term": "回本數學", "en": "Recovery math", "def": "虧損後回到原點所需漲幅＝1 ÷（1 − 虧損）− 1；跌 50% 要漲 100% 才回本。", "anchor": "def-recovery" },
+    { "term": "通膨", "en": "Inflation", "def": "整體物價持續上漲，同樣的錢能買的東西變少；常用 CPI 衡量。", "anchor": "def-inflation", "aliases": ["通貨膨脹"] },
+    { "term": "實質報酬", "en": "Real return", "def": "扣掉通膨後的報酬，代表購買力真正增加多少；約等於名目報酬減通膨率。", "anchor": "def-real" },
+    { "term": "分散", "en": "Diversification", "def": "把資金分到多個資產，稀釋單一資產出事的影響；效果取決於資產是否一起漲跌。", "anchor": "def-diversify", "aliases": ["分散投資"] }
+  ]
+}

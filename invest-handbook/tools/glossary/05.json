@@ -1,0 +1,25 @@
+{
+  "chapter": 5,
+  "terms": [
+    { "term": "指數", "en": "Stock index", "def": "依固定規則挑一籃子股票，把價格變化合成一個數字的溫度計。點數本身沒有意義，和自己的過去比較的變化才有意義。", "anchor": "def-index", "aliases": ["股價指數"] },
+    { "term": "加權指數", "en": "TAIEX", "def": "臺灣證券交易所發行量加權股價指數，以上市股票市值加權，1966 年基期為 100 點，俗稱「大盤」；台指期的標的。", "anchor": "def-taiex", "aliases": ["台股加權指數", "TAIEX", "大盤", "發行量加權股價指數"] },
+    { "term": "市值加權", "en": "Capitalization-weighted", "def": "每檔成分股的權重等於市值占比，公司越大影響越大。加權指數、S&P 500、Nasdaq 都是。", "anchor": "def-cap-weight" },
+    { "term": "價格加權", "en": "Price-weighted", "def": "把成分股股價加總再除以除數，股價越高影響越大，與公司大小無關。道瓊工業指數是代表。", "anchor": "def-price-weight" },
+    { "term": "等權重", "en": "Equal-weighted", "def": "每檔成分股權重相同，不論市值大小；較接近「一般股票」的平均表現，常用來對照市值加權指數。", "anchor": "def-equal-weight" },
+    { "term": "成分股", "en": "Constituents", "def": "被納入某個指數計算的股票。指數公司依規則定期調整名單與權重。", "anchor": "def-index" },
+    { "term": "權值股", "en": "Index heavyweights", "def": "市值加權指數中權重最大、足以主導指數方向的股票，例如台積電之於加權指數。", "anchor": "def-heavyweight" },
+    { "term": "道瓊工業指數", "en": "Dow Jones Industrial Average", "def": "美國最古老的股價指數之一，30 檔大型藍籌股，採價格加權；代表性較弱但新聞最常報。", "anchor": "def-dow", "aliases": ["Dow Jones", "道瓊", "Dow"] },
+    { "term": "S&P 500", "en": "S&P 500 Index (SPX)", "def": "美國約 500 家大型上市公司，依自由流通市值加權，是美股最常用的大盤基準；期貨為 ES。", "anchor": "def-spx", "aliases": ["標普500", "SPX", "S&P"] },
+    { "term": "那斯達克綜合指數", "en": "Nasdaq Composite", "def": "所有在 Nasdaq 交易所上市普通股的市值加權指數，三千多檔，科技股比重高，常被當成科技股指數。", "anchor": "def-nasdaq", "aliases": ["Nasdaq", "Nasdaq 綜合指數", "那斯達克"] },
+    { "term": "Nasdaq-100", "en": "Nasdaq-100 Index (NDX)", "def": "Nasdaq 上市、市值前 100 大的非金融公司，修正市值加權；期貨為 NQ。GCFIE 視為台股 AI 傳導的關鍵。", "anchor": "def-ndx", "aliases": ["NDX", "那斯達克100"] },
+    { "term": "費城半導體指數", "en": "PHLX Semiconductor Index (SOX)", "def": "30 檔在美國上市的大型半導體公司（含台積電 ADR），修正市值加權；台股電子股的重要風向球。", "anchor": "def-sox", "aliases": ["SOX", "費半"] },
+    { "term": "羅素2000", "en": "Russell 2000", "def": "美國小型股指數：Russell 3000 中市值最小的 2,000 家。對利率與美國內需特別敏感。", "anchor": "def-russell", "aliases": ["Russell 2000"] },
+    { "term": "ETF", "en": "Exchange-traded fund", "def": "在交易所掛牌、像股票一樣買賣的基金，多數追蹤某個指數，買一張就按比例持有整籃成分股。", "anchor": "def-etf", "aliases": ["指數股票型基金"] },
+    { "term": "0050", "en": "Yuanta Taiwan Top 50 ETF", "def": "元大台灣50，追蹤臺灣50指數（上市市值前 50 大）的 ETF，台積電權重高；2025 年 6 月一拆四。", "anchor": "def-0050", "aliases": ["元大台灣50"] },
+    { "term": "市場廣度", "en": "Market breadth", "def": "有多少股票參與漲跌。用上漲／下跌家數、創新高家數、大小型股表現衡量，回答「全面上漲還是權值股撐盤」。", "anchor": "def-breadth", "aliases": ["廣度", "Market Breadth"] },
+    { "term": "騰落", "en": "Advance–decline", "def": "上漲家數與下跌家數的比較；每日差額累加成騰落線，用來追蹤上漲是否擴散。", "anchor": "def-ad", "aliases": ["上漲家數", "下跌家數", "騰落線", "漲跌家數"] },
+    { "term": "背離", "en": "Divergence", "def": "兩個平常同向的指標走勢分歧，例如指數創高但騰落線或小型股走弱，代表上漲的基礎變窄。", "anchor": "def-divergence" },
+    { "term": "創高", "en": "New high", "def": "價格超過過去一段期間（如 52 週或歷史）的最高點；創新高家數的多寡也是廣度指標。", "anchor": "def-new-high", "aliases": ["創新高"] },
+    { "term": "跌點", "en": "Point change", "def": "指數漲跌的點數。指數水位越高，同樣百分比代表越多點，比較幅度要換算成百分比。", "anchor": "def-points", "aliases": ["點數", "漲點"] }
+  ]
+}

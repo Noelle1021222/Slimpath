@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>指數與市場廣度 · 讀通投資</title>
+<meta name="description" content="指數是一籃子股票的溫度計。看懂市值加權與價格加權、GCFIE 第 2 章追蹤的六個美股指數、把「史上第六大跌點」換成百分比，並用市場廣度分辨全面上漲與權值股撐盤。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=LXGW+WenKai+TC:wght@400;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;900&amp;display=swap">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/handbook.css">
+<script>try{var d=document.documentElement,g=function(k){return JSON.parse(localStorage.getItem("hb."+k))},t=g("theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);if(g("quote")==="intl")d.setAttribute("data-quote","intl");if(g("size")==="lg")d.setAttribute("data-size","lg")}catch(e){}</script>
+<script src="../assets/js/curriculum.js" defer></script>
+<script src="../assets/js/data-plan.js" defer></script>
+<script src="../assets/js/glossary-data.js" defer></script>
+<script src="../assets/js/handbook.js" defer></script>
+<script src="../assets/js/widgets.js" defer></script>
+<script src="../assets/js/widgets-plan.js" defer></script>
+<script src="../assets/js/widgets-basics.js" defer></script>
+<script src="../assets/js/widgets-markets.js" defer></script>
+</head>
+<body data-chapter="05-indices-breadth">
+<div class="page">
+<div class="chapter-grid">
+<main class="chapter" id="main">
+
+<header class="opener">
+  <p class="eyebrow"></p>
+  <div class="opener-num" aria-hidden="true"></div>
+  <h1>指數與市場廣度：市場的溫度計</h1>
+  <p class="lede">新聞說「台股大跌 1,656 點，史上第六大跌點」，到底跌了多少？指數是一籃子股票的溫度計，怎麼加權決定了誰說了算。這一章帶你認識 GCFIE 第 2 章要追蹤的每一個指數，把點數換成百分比，並用市場廣度分辨「全面上漲」和「少數權值股撐盤」。</p>
+  <dl class="opener-meta"></dl>
+</header>
+
+<section class="objectives" aria-labelledby="obj-h">
+  <h2 id="obj-h">學完這章，你能夠</h2>
+  <ol>
+    <li>說清楚指數是怎麼算出來的，為什麼點數本身沒有意義、只有變化才有意義。</li>
+    <li>分辨市值加權、價格加權與等權重，解釋為什麼台積電一檔股票就能左右加權指數。</li>
+    <li>認得 GCFIE 第 2 章要求追蹤的道瓊、S&amp;P 500、Nasdaq、Nasdaq-100、SOX、Russell 2000，知道各自代表哪一群公司。</li>
+    <li>把點數換算成百分比，看懂「史上第六大跌點」與「一週跌 2,022 點」的真正幅度。</li>
+    <li>用漲跌家數、創新高家數、大小型股表現判斷市場廣度，回答 GCFIE 的問題：全面上漲，還是權值股撐盤？</li>
+  </ol>
+</section>
+
+<article class="prose">
+
+<section id="what-index">
+  <h2><span class="sec-num">5.1</span>指數：一籃子股票的溫度</h2>
+  <p class="lead-in">台灣上市的股票有一千多檔，每天有漲有跌。如果有人問你「今天股市好不好」，你不可能把一千多個數字念一遍。指數就是為了回答這個問題而發明的：把一整籃股票的價格變化，濃縮成一個數字。</p>
+
+  <div class="box define" id="def-index">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>指數</dfn><span class="en">Stock index</span></p>
+    <p>依照固定規則挑選一籃子股票，把它們的價格變化合成一個數字。被挑進籃子的股票叫<dfn>成分股</dfn>。指數就像溫度計：刻度本身是人訂的，真正有用的資訊是「比昨天高還是低、高多少」。</p>
+  </div>
+
+  <p>台灣最常聽到的指數是<span class="term" data-term="加權指數">加權指數</span>，全名「臺灣證券交易所發行量加權股價指數」，英文縮寫 TAIEX，大家口語叫它「大盤」。它的算法可以用一句話說完：</p>
+
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">指數 ＝ <span class="frac"><span>今天成分股的總市值</span><span>基值</span></span> × 100</div>
+    <div class="where"><span class="term" data-term="市值">市值</span>是股價乘以股數。基值是「基期那天的總市值」，之後會依規則調整。加權指數以 1966 年的市值為基期，訂為 100 點。</div>
+  </div>
+
+  <div class="box define" id="def-taiex">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>加權指數</dfn><span class="en">TAIEX</span></p>
+    <p>臺灣證券交易所編製的「發行量加權股價指數」，以上市股票的市值加權計算。依證交所與期交所的說明，除了特別股、全額交割股與上市未滿一個月的股票，其他上市股票都納入計算。台指期的標的就是它。</p>
+  </div>
+
+  <p>從公式可以讀出兩件事。第一，2026/10/16 加權指數收 47,111 點，意思是上市股票的整體價格（不含股利）大約是 1966 年基期的 471 倍。第二，基值會調整。為什麼要調？看下面這張圖。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 300" role="img" aria-label="指數計算與基值調整：股價變成三倍時指數從 100 變 300；新股上市使總市值增加，但基值同步放大，指數維持 300 不跳動">
+        <text x="200" y="22" class="ta-m t-b">指數 ＝ 總市值 ÷ 基值 × 100</text>
+        <text x="20" y="54" class="t-b t-sm">① 基期</text>
+        <rect x="20" y="62" width="36" height="22" class="f-c1"/>
+        <rect x="56" y="62" width="18" height="22" class="f-c2"/>
+        <rect x="74" y="62" width="6" height="22" class="f-c3"/>
+        <text x="38" y="78" class="ta-m t-sm t-paper t-b">甲</text>
+        <text x="88" y="78" class="t-mono t-sm t-2">500</text>
+        <text x="20" y="104" class="t-sm t-2">總市值 500 ÷ 基值 500 × 100</text>
+        <text x="388" y="88" class="ta-e t-num t-xl">100</text>
+
+        <text x="20" y="134" class="t-b t-sm">② 股價都變成 3 倍</text>
+        <rect x="20" y="142" width="108" height="22" class="f-c1"/>
+        <rect x="128" y="142" width="54" height="22" class="f-c2"/>
+        <rect x="182" y="142" width="18" height="22" class="f-c3"/>
+        <text x="74" y="158" class="ta-m t-sm t-paper t-b">甲</text>
+        <text x="155" y="158" class="ta-m t-sm t-paper t-b">乙</text>
+        <text x="191" y="158" class="ta-m t-sm t-paper t-b">丙</text>
+        <text x="208" y="158" class="t-mono t-sm t-2">1,500</text>
+        <text x="20" y="184" class="t-sm t-2">總市值 1,500 ÷ 基值 500 × 100</text>
+        <text x="388" y="168" class="ta-e t-num t-xl t-up">300</text>
+
+        <text x="20" y="214" class="t-b t-sm">③ 丁股新上市（市值 300）</text>
+        <rect x="20" y="222" width="108" height="22" class="f-c1"/>
+        <rect x="128" y="222" width="54" height="22" class="f-c2"/>
+        <rect x="182" y="222" width="18" height="22" class="f-c3"/>
+        <rect x="200" y="222" width="36" height="22" class="f-c4"/>
+        <text x="218" y="238" class="ta-m t-sm t-paper t-b">丁</text>
+        <text x="244" y="238" class="t-mono t-sm t-2">1,800</text>
+        <text x="20" y="264" class="t-sm t-2">總市值 1,800 ÷ 基值 <tspan class="t-accent t-b">600</tspan> × 100</text>
+        <text x="388" y="248" class="ta-e t-num t-xl">300</text>
+        <text x="20" y="290" class="t-sm t-red">基值若不調：1,800 ÷ 500 × 100 ＝ 360，指數假漲 20%</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意，單位億元。股價上漲會推高指數（①→②）；但新股上市、公司增資讓總市值變大時，基值會同比例放大（500 → 600），指數才不會因為「籃子變大」而假漲（③）。</span></figcaption>
+  </figure>
+
+  <p>所以指數只反映<strong>價格的變化</strong>，不反映籃子裡的股票變多。這也解釋了為什麼不同指數的點數不能互相比較：道瓊的點數是 S&amp;P 500 的好幾倍，只是因為兩者的起點、算法不同，和「誰比較貴」毫無關係。看指數要看它和自己的過去比：比昨天高多少、比一年前高多少、離高點有多遠。</p>
+
+  <details class="deep">
+    <summary>除權不影響指數，除息會讓指數「蒸發」</summary>
+    <div>
+      <p>證交所的說明是：成分股發放<span class="term" data-term="股票股利">股票股利</span>（除權）時，股數變多、股價變低，總市值不變，所以不影響指數；發放<span class="term" data-term="現金股利">現金股利</span>（除息）時，現金從公司流到股東手上，股價扣掉股息，總市值變小，指數就跟著下降。每逢台積電除息，財經新聞常出現「加權指數蒸發四十多點」這類標題，指的就是這件事。</p>
+      <p>想看「含股利」的表現，證交所另外編製了「發行量加權股價報酬指數」，把現金股利視為再投入。比較長期績效時，報酬指數比較公平。</p>
+    </div>
+  </details>
+</section>
+
+<section id="weighting">
+  <h2><span class="sec-num">5.2</span>三種加權方式：籃子裡誰說了算</h2>
+  <p>把很多股票合成一個數字，一定要決定「每檔股票占多少份量」，這就是加權。世界上主要有三種做法。</p>
+
+  <div class="box define" id="def-cap-weight">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>市值加權</dfn><span class="en">Capitalization-weighted</span></p>
+    <p>每檔股票的權重等於它的市值占全部成分股總市值的比例。公司越大，漲跌對指數的影響越大。加權指數、S&amp;P 500、Nasdaq 都屬於這一類（S&amp;P 500 用的是扣除大股東持股後的「自由流通市值」）。</p>
+  </div>
+
+  <div class="box define" id="def-price-weight">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>價格加權</dfn><span class="en">Price-weighted</span></p>
+    <p>把成分股的股價直接加總，再除以一個「除數」。股價越高的股票影響越大，和公司大小無關。道瓊工業指數是最有名的例子。</p>
+  </div>
+
+  <div class="box define" id="def-equal-weight">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>等權重</dfn><span class="en">Equal-weighted</span></p>
+    <p>每檔成分股的權重一樣，不管市值大小。它比較接近「一般股票平均表現如何」，常被拿來和市值加權指數對照，例如 S&amp;P 500 就另有一個等權重版本。</p>
+  </div>
+
+  <p>三種算法在平常日子差不多，但在「大公司和小公司走勢分歧」的日子會給出完全不同的答案。下面用五檔假設的股票，同一天算三次。</p>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>五檔示意股票（假設數字，市值單位億元）</caption>
+      <thead><tr><th>股票</th><th class="r">股價</th><th class="r">股數（億股）</th><th class="r">市值</th><th class="r">今天漲跌</th></tr></thead>
+      <tbody>
+        <tr><th>甲</th><td class="r">1,000</td><td class="r">6</td><td class="r">6,000</td><td class="r"><span class="down">−5%</span></td></tr>
+        <tr><th>乙</th><td class="r">800</td><td class="r">0.5</td><td class="r">400</td><td class="r"><span class="up">+6%</span></td></tr>
+        <tr><th>丙</th><td class="r">100</td><td class="r">10</td><td class="r">1,000</td><td class="r"><span class="up">+3%</span></td></tr>
+        <tr><th>丁</th><td class="r">50</td><td class="r">8</td><td class="r">400</td><td class="r"><span class="up">+4%</span></td></tr>
+        <tr><th>戊</th><td class="r">50</td><td class="r">4</td><td class="r">200</td><td class="r"><span class="up">+2%</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>同一天、同五檔股票，三種指數各漲跌多少？</h4>
+    <ol class="calc">
+      <li>市值加權：總市值 8,000 億，權重分別是 75%、5%、12.5%、5%、2.5%。<span class="eq">0.75×(−5%) ＋ 0.05×6% ＋ 0.125×3% ＋ 0.05×4% ＋ 0.025×2% ＝ −2.83%</span></li>
+      <li>價格加權：股價總和 2,000 元。甲跌 50 元，乙漲 48 元，丙漲 3 元，丁漲 2 元，戊漲 1 元。<span class="eq">(−50 ＋ 48 ＋ 3 ＋ 2 ＋ 1) ÷ 2,000 ＝ ＋4 ÷ 2,000 ＝ ＋0.20%</span></li>
+      <li>等權重：五檔漲跌直接平均。<span class="eq">(−5 ＋ 6 ＋ 3 ＋ 4 ＋ 2) ÷ 5 ＝ ＋2.00%</span></li>
+    </ol>
+    <p class="answer">同一天，市值加權跌 2.83%、價格加權漲 0.20%、等權重漲 2.00%。而這天五檔裡有四檔上漲。</p>
+  </div>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 320" role="img" aria-label="同一天三種加權的結果：市值加權時甲占 75% 權重，指數跌 2.83%；價格加權時高價的乙占 40%，指數漲 0.20%；等權重各占 20%，指數漲 2.00%">
+        <text x="20" y="24" class="t-sm t-2">甲 <tspan class="t-down t-b">−5%</tspan>　乙 <tspan class="t-up t-b">+6%</tspan>　丙 <tspan class="t-up t-b">+3%</tspan>　丁 <tspan class="t-up t-b">+4%</tspan>　戊 <tspan class="t-up t-b">+2%</tspan></text>
+        <line x1="20" y1="36" x2="388" y2="36" class="s-rule s-1"/>
+
+        <text x="20" y="62" class="t-b">市值加權</text>
+        <text x="92" y="62" class="t-sm t-3">權重＝市值占比</text>
+        <rect x="20" y="70" width="202.5" height="28" class="f-down"/>
+        <rect x="222.5" y="70" width="13.5" height="28" class="f-up-soft s-paper s-1"/>
+        <rect x="236" y="70" width="33.75" height="28" class="f-up-soft s-paper s-1"/>
+        <rect x="269.75" y="70" width="13.5" height="28" class="f-up-soft s-paper s-1"/>
+        <rect x="283.25" y="70" width="6.75" height="28" class="f-up-soft s-paper s-1"/>
+        <text x="121" y="89" class="ta-m t-sm t-paper t-b">甲 75%</text>
+        <text x="253" y="89" class="ta-m t-xs t-2">丙</text>
+        <text x="388" y="90" class="ta-e t-lg t-mono t-down t-b">−2.83%</text>
+
+        <text x="20" y="140" class="t-b">價格加權</text>
+        <text x="92" y="140" class="t-sm t-3">權重＝股價占比</text>
+        <rect x="20" y="148" width="135" height="28" class="f-down"/>
+        <rect x="155" y="148" width="108" height="28" class="f-up-soft s-paper s-1"/>
+        <rect x="263" y="148" width="13.5" height="28" class="f-up-soft s-paper s-1"/>
+        <rect x="276.5" y="148" width="6.75" height="28" class="f-up-soft s-paper s-1"/>
+        <rect x="283.25" y="148" width="6.75" height="28" class="f-up-soft s-paper s-1"/>
+        <text x="87" y="167" class="ta-m t-sm t-paper t-b">甲 50%</text>
+        <text x="209" y="167" class="ta-m t-sm t-up t-b">乙 40%</text>
+        <text x="388" y="168" class="ta-e t-lg t-mono t-up t-b">+0.20%</text>
+
+        <text x="20" y="218" class="t-b">等權重</text>
+        <text x="78" y="218" class="t-sm t-3">每檔 20%</text>
+        <rect x="20" y="226" width="54" height="28" class="f-down"/>
+        <rect x="74" y="226" width="54" height="28" class="f-up-soft s-paper s-1"/>
+        <rect x="128" y="226" width="54" height="28" class="f-up-soft s-paper s-1"/>
+        <rect x="182" y="226" width="54" height="28" class="f-up-soft s-paper s-1"/>
+        <rect x="236" y="226" width="54" height="28" class="f-up-soft s-paper s-1"/>
+        <text x="47" y="245" class="ta-m t-sm t-paper t-b">甲</text>
+        <text x="101" y="245" class="ta-m t-sm t-up">乙</text>
+        <text x="155" y="245" class="ta-m t-sm t-up">丙</text>
+        <text x="209" y="245" class="ta-m t-sm t-up">丁</text>
+        <text x="263" y="245" class="ta-m t-sm t-up">戊</text>
+        <text x="388" y="246" class="ta-e t-lg t-mono t-up t-b">+2.00%</text>
+
+        <line x1="20" y1="276" x2="388" y2="276" class="s-rule s-1"/>
+        <text x="200" y="298" class="ta-m t-sm t-2">同一天：4 檔上漲、1 檔下跌</text>
+        <text x="200" y="316" class="ta-m t-sm t-accent t-b">權重放在哪裡，指數就聽誰的</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意。綠色（下跌）那一段的寬度決定了結果：市值加權時，甲一檔就占四分之三，其他四檔漲再多也拉不回來；價格加權時，股價 800 元的乙雖然公司很小，卻拿到四成權重。</span></figcaption>
+  </figure>
+
+  <p>這個例子把市值加權的特性放大了，但台股真的很接近這個樣子。依媒體引用的統計，台積電在加權指數的權重在 2025 年已接近四成，2026 年隨股價上漲又更高（各家統計日期不同，以臺灣指數公司或證交所公布為準）。用四成粗估：台積電漲跌 1%，加權指數在 47,000 點附近大約就動 47,111 × 40% × 1% ≈ 190 點。這種權重大到足以主導指數的股票，叫做權值股。</p>
+
+  <div class="box define" id="def-heavyweight">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>權值股</dfn><span class="en">Index heavyweights</span></p>
+    <p>在市值加權指數裡權重最大的幾檔股票。台股的權值股以台積電為首，加上聯發科、鴻海、台達電、廣達等大型電子股與大型金融股。權值股一起動，指數就跟著動；權值股和其他股票走勢分歧時，指數就不再代表「大多數股票」。</p>
+  </div>
+
+  <p>價格加權的怪處在於：公司大小不重要，股價高低才重要。如果一家公司把股票一股拆成四股（股價變成四分之一），它在價格加權指數裡的影響力就少了四分之三，雖然公司本身什麼都沒變。道瓊因此會在成分股分割時調整除數，讓指數不會跳動，但分割後那檔股票的影響力確實變小了。</p>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>大盤漲了，代表大部分股票都漲了；大盤跌了，我的股票應該也跌。</p></div>
+    <div class="myth-right"><p>市值加權指數主要反映<strong>大公司</strong>的表現。上面的例子裡五檔有四檔上漲，大盤卻跌 2.83%。台股也常出現「台積電大漲撐住指數、多數個股下跌」或反過來的日子。想知道「大部分股票」怎麼了，要看 5.6 節的市場廣度。</p></div>
+  </div>
+</section>
+
+<section id="us-indices">
+  <h2><span class="sec-num">5.3</span>GCFIE 第 2 章的指數名單</h2>
+  <p>GCFIE 每天早上的第 2 章「全球市場 DATA」，第一行就是一串指數名稱。這些名字你會一再看到，先把它們各自代表什麼弄清楚。</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第六節（第2章規格）</span></div>
+    <p class="quote">至少涵蓋：Dow Jones、S&amp;P 500、Nasdaq、SOX、Russell 2000（具判讀價值時）、VIX、美國10Y、美國30Y（若有特殊訊號）、WTI、Brent、DXY、USD/JPY、黃金。</p>
+    <p>前五個是股價指數，本章負責。<span class="term" data-term="VIX">VIX</span> 是波動率指數（第 20 章），10Y、30Y 是美國公債殖利率（第 13 章），WTI、Brent、黃金是原物料（第 15 章），DXY、USD/JPY 是匯率（第 14 章）。</p>
+  </div>
+
+  <div class="box define" id="def-dow">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>道瓊工業指數</dfn><span class="en">Dow Jones Industrial Average</span></p>
+    <p>美國最古老的股價指數之一，只有 30 檔大型藍籌股，採價格加權。名字雖有「工業」，成分股早已涵蓋科技、金融、醫療與消費。因為只有 30 檔又是價格加權，它代表性最弱，但歷史最長、新聞最常報。</p>
+  </div>
+
+  <div class="box define" id="def-spx">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>S&amp;P 500</dfn><span class="en">S&amp;P 500 Index (SPX)</span></p>
+    <p>美國約 500 家大型上市公司組成，依自由流通市值加權，涵蓋美股總市值的大部分，是專業投資人最常用的「美股大盤」。代號 SPX；追蹤它的期貨是 <span class="term" data-term="ES">ES</span>（第 17 章）。</p>
+  </div>
+
+  <div class="box define" id="def-nasdaq">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>那斯達克綜合指數</dfn><span class="en">Nasdaq Composite</span></p>
+    <p>所有在 Nasdaq 交易所上市的普通股，三千多檔，市值加權。科技公司多選擇在 Nasdaq 上市，所以它常被當成「科技股指數」。GCFIE 名單裡的「Nasdaq」通常指這一個。</p>
+  </div>
+
+  <div class="box define" id="def-ndx">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>Nasdaq-100</dfn><span class="en">Nasdaq-100 Index (NDX)</span></p>
+    <p>Nasdaq 上市公司中，市值最大的 100 家<strong>非金融</strong>公司，採修正市值加權。大型科技與 AI 相關公司權重很高。追蹤它的期貨是 <span class="term" data-term="NQ">NQ</span>，GCFIE 第 4 章追蹤的部位資料就是 ES 與 Nasdaq-100 期貨。</p>
+  </div>
+
+  <div class="box define" id="def-sox">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>費城半導體指數</dfn><span class="en">PHLX Semiconductor Index (SOX)</span></p>
+    <p>簡稱「費半」，由 30 檔在美國上市、市值最大的半導體公司組成，現由 Nasdaq 編製。採修正市值加權：依 Nasdaq 2024 年的規則，前三大權重上限分別為 12%、10%、8%，其餘每檔最多 4%。<span class="term" data-term="台積電ADR">台積電 ADR</span>、ASML 都是成分股（依 Nasdaq 2026 年初公布的名單），所以它是台股電子股最直接的風向球。</p>
+  </div>
+
+  <div class="box define" id="def-russell">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>羅素2000</dfn><span class="en">Russell 2000</span></p>
+    <p>美國小型股指數：在涵蓋約 3,000 家公司的 Russell 3000 裡，市值最小的 2,000 家。小公司比較依賴借款、營收多在美國本土，所以對利率與美國景氣特別敏感。</p>
+  </div>
+
+  <p>六個指數重疊又不同，用「公司大小」和「涵蓋範圍」兩個方向放在一張地圖上，就清楚多了。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 350" role="img" aria-label="美股指數家族地圖：橫軸公司規模由小到大，縱軸涵蓋範圍。Russell 2000 在小型股；S&amp;P 500 與道瓊在大型股；Nasdaq 綜合涵蓋 Nasdaq 上市各種規模，Nasdaq-100 是其中前 100 大非金融；SOX 是 30 檔半導體">
+        <text x="14" y="24" class="t-serif t-md">美股指數家族地圖</text>
+        <text x="388" y="24" class="ta-e t-xs t-3">涵蓋範圍 × 公司規模</text>
+        <text x="14" y="78" class="t-b t-sm">各產業</text>
+        <text x="14" y="96" class="t-xs t-3">全美上市</text>
+        <text x="14" y="178" class="t-b t-sm">Nasdaq</text>
+        <text x="14" y="196" class="t-xs t-3">上市（偏科技）</text>
+        <text x="14" y="266" class="t-b t-sm">半導體</text>
+        <line x1="104" y1="144" x2="390" y2="144" class="s-rule s-1 s-dash"/>
+        <line x1="104" y1="236" x2="390" y2="236" class="s-rule s-1 s-dash"/>
+
+        <rect x="110" y="52" width="104" height="84" class="f-wash s-c3 s-15"/>
+        <text x="118" y="72" class="t-b t-sm">Russell 2000</text>
+        <text x="118" y="92" class="t-xs t-2">小型股 2,000 檔</text>
+        <text x="118" y="110" class="t-xs t-2">對利率、內需</text>
+        <text x="118" y="125" class="t-xs t-2">特別敏感</text>
+
+        <rect x="270" y="52" width="118" height="84" class="f-wash s-c1 s-15"/>
+        <text x="276" y="72" class="t-b t-sm">S&amp;P 500</text>
+        <text x="276" y="90" class="t-xs t-2">約 500 家大型股</text>
+        <text x="276" y="106" class="t-xs t-2">市值加權</text>
+        <rect x="336" y="96" width="48" height="36" class="f-accent-soft s-accent s-1"/>
+        <text x="360" y="111" class="ta-m t-xs t-b">道瓊</text>
+        <text x="360" y="126" class="ta-m t-xs t-2">30 價格</text>
+
+        <rect x="110" y="152" width="278" height="76" class="f-none s-2 s-1 s-dash"/>
+        <text x="118" y="172" class="t-b t-sm">Nasdaq 綜合</text>
+        <text x="118" y="190" class="t-xs t-2">三千多檔，各種規模</text>
+        <rect x="270" y="160" width="114" height="62" class="f-accent-soft s-accent s-15"/>
+        <text x="278" y="182" class="t-b t-sm">Nasdaq-100</text>
+        <text x="278" y="200" class="t-xs t-2">前 100 大非金融</text>
+        <text x="278" y="215" class="t-xs t-2">期貨：NQ</text>
+
+        <rect x="214" y="244" width="174" height="56" class="f-foil-soft s-foil s-15"/>
+        <text x="222" y="264" class="t-b t-sm">SOX 費半：30 檔</text>
+        <text x="222" y="282" class="t-xs t-2">含台積電、ASML 的 ADR</text>
+        <text x="222" y="296" class="t-xs t-2">修正市值加權</text>
+
+        <line x1="110" y1="322" x2="388" y2="322" class="s-ink s-1"/>
+        <path d="M382 318 L390 322 L382 326" class="f-none s-ink s-1"/>
+        <text x="160" y="342" class="ta-m t-xs t-3">小型</text>
+        <text x="242" y="342" class="ta-m t-xs t-3">中型</text>
+        <text x="330" y="342" class="ta-m t-xs t-3">大型</text>
+        <text x="14" y="326" class="t-xs t-3">公司規模</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>位置是概念示意，不是精確的市值切點。同一家公司可以同時在好幾個指數裡：例如輝達同時是 S&amp;P 500、Nasdaq-100、SOX 與道瓊的成分股，所以這些指數經常同向，但權重不同，漲跌幅就不同。</span></figcaption>
+  </figure>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>GCFIE 第 2 章的五個股價指數，各自回答什麼問題</caption>
+      <thead><tr><th>指數</th><th>成分</th><th>加權</th><th>看它是為了回答</th></tr></thead>
+      <tbody>
+        <tr><th>Dow Jones</th><td>30 檔藍籌</td><td>價格</td><td>傳統大型企業、景氣循環股的情緒</td></tr>
+        <tr><th>S&amp;P 500</th><td>約 500 家大型股</td><td>市值</td><td>美股整體，大多數專業資金的基準</td></tr>
+        <tr><th>Nasdaq</th><td>Nasdaq 上市全部</td><td>市值</td><td>科技與成長股的溫度</td></tr>
+        <tr><th>SOX</th><td>30 檔半導體</td><td>修正市值</td><td>半導體與 AI 硬體，台股電子股的前一晚預告</td></tr>
+        <tr><th>Russell 2000</th><td>2,000 檔小型股</td><td>市值</td><td>上漲是否擴散到小公司、利率壓力有多大</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>為什麼 GCFIE 特別看重 Nasdaq 與 SOX？因為台股是全世界最集中在半導體與電子供應鏈的市場之一。美股收盤後，台股還沒開盤（第 4 章的時差傳導），前一晚 SOX 怎麼走，常常就是台股電子股早上開盤的第一個訊號。</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第八節（第4章）</span></div>
+    <p class="quote">Nasdaq 權重高於 ES，因為它與台股 AI／半導體傳導關係更直接。</p>
+    <p>這句話談的是期貨部位（第 21 章），但理由和這一節相同：Nasdaq-100 裡 AI 與半導體公司的權重遠高於 S&amp;P 500，它的變化更快傳到台積電與 AI 供應鏈。</p>
+  </div>
+
+  <p>Russell 2000 的「具判讀價值時」也值得細讀。它平常不一定要特別解讀，但當它和 S&amp;P 500 走勢明顯分歧時就很有資訊：大型股創高、小型股卻一路走弱，代表上漲集中在少數大公司；反過來，小型股突然大漲、大型科技股休息，可能是 GCFIE 第 3 章說的 Mega Cap → Small Cap <span class="term" data-term="資金輪動">資金輪動</span>。</p>
+</section>
+
+<section id="points-pct">
+  <h2><span class="sec-num">5.4</span>點數與百分比：「史上第六大跌點」有多大</h2>
+  <p>新聞標題愛用點數，因為數字大、有衝擊力。但點數本身會騙人。</p>
+
+  <div class="box define" id="def-points">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>跌點</dfn><span class="en">Point change</span></p>
+    <p>指數漲跌的點數，例如「下跌 1,656 點」。指數水位越高，同樣的百分比代表越多點，所以比較兩次漲跌的大小，一定要換算成百分比。</p>
+  </div>
+
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">漲跌幅 ＝ <span class="frac"><span>漲跌點數</span><span>前一日收盤點數</span></span> × 100%</div>
+    <div class="where">分母是<strong>前一天</strong>的收盤，不是今天的收盤。反過來：前一日收盤 ＝ 今日收盤 ＋ 跌掉的點數。</div>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §二</span></div>
+    <p class="quote">加權指數收 47,111 點；10/15 因美國 CPI 高於預期、加上 AI 資料中心融資的信用風險疑慮，大跌 1,656 點，為史上第六大跌點。</p>
+    <p>注意兩個日期：47,111 是 10/16 的收盤；1,656 點是 10/15 那一天的跌點。「史上第六大」是以<strong>點數</strong>排名。</p>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>10/15 跌 1,656 點，是跌了百分之幾？一週跌 2,022 點又是多少？</h4>
+    <ol class="calc">
+      <li>依 10/15 盤後報導，加權指數當天跌 1,655.96 點，收 46,969.87 點。前一日收盤：<span class="eq">46,969.87 ＋ 1,655.96 ＝ 48,625.83</span></li>
+      <li>當日跌幅：<span class="eq">1,655.96 ÷ 48,625.83 ＝ 3.41%</span></li>
+      <li>計畫第一節說 10/12–10/16 這一週跌了 2,022 點，週五收 47,111 點，所以上週五大約是：<span class="eq">47,111 ＋ 2,022 ＝ 49,133</span></li>
+      <li>一週跌幅：<span class="eq">2,022 ÷ 49,133 ≈ 4.1%</span></li>
+    </ol>
+    <p class="answer">「史上第六大跌點」換成百分比是 −3.41%；整週約 −4.1%。對一般投資人來說這是很難受的一週，但和下面幾次急跌相比，百分比幅度小得多。</p>
+  </div>
+
+  <p>點數排名會被「指數水位」扭曲。2023 年底加權指數是 17,930.81 點，2026/10/16 是 47,111 點，水位變成約 2.6 倍。同樣跌 3%，在 2023 年底是約 538 點，在 47,111 點卻是約 1,413 點。所以「史上前十大跌點」幾乎都會落在最近幾年，這是數學，不代表最近的下跌比較嚴重。把計畫第八節列出的幾次急跌放在一起比：</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 296" role="img" aria-label="四次急跌的點數排名與百分比排名對照：點數最大的 2026/7/17 以百分比只排第三；2025/4/7 的 −9.70% 才是幅度最大；10/15 兩種排名都在最後">
+        <text x="16" y="28" class="t-b t-sm">依點數排名</text>
+        <text x="250" y="28" class="t-b t-sm">依百分比排名</text>
+        <line x1="16" y1="38" x2="152" y2="38" class="s-rule s-1"/>
+        <line x1="250" y1="38" x2="386" y2="38" class="s-rule s-1"/>
+
+        <text x="16" y="66" class="t-sm">2026/7/17</text>
+        <text x="152" y="66" class="ta-e t-mono t-sm t-b">−2,954</text>
+        <rect x="16" y="73" width="134" height="7" class="f-down"/>
+        <text x="16" y="116" class="t-sm">2025/4/7</text>
+        <text x="152" y="116" class="ta-e t-mono t-sm t-b">−2,066</text>
+        <rect x="16" y="123" width="93.7" height="7" class="f-down"/>
+        <text x="16" y="166" class="t-sm">2024/8/5</text>
+        <text x="152" y="166" class="ta-e t-mono t-sm t-b">−1,807</text>
+        <rect x="16" y="173" width="82" height="7" class="f-down"/>
+        <text x="16" y="216" class="t-sm t-accent t-b">2026/10/15</text>
+        <text x="152" y="216" class="ta-e t-mono t-sm t-b t-accent">−1,656</text>
+        <rect x="16" y="223" width="75.1" height="7" class="f-accent"/>
+
+        <text x="250" y="66" class="t-sm">2025/4/7</text>
+        <text x="386" y="66" class="ta-e t-mono t-sm t-b">−9.70%</text>
+        <rect x="250" y="73" width="136" height="7" class="f-down"/>
+        <text x="250" y="116" class="t-sm">2024/8/5</text>
+        <text x="386" y="116" class="ta-e t-mono t-sm t-b">−8.35%</text>
+        <rect x="250" y="123" width="117" height="7" class="f-down"/>
+        <text x="250" y="166" class="t-sm">2026/7/17</text>
+        <text x="386" y="166" class="ta-e t-mono t-sm t-b">−6.47%</text>
+        <rect x="250" y="173" width="90.7" height="7" class="f-down"/>
+        <text x="250" y="216" class="t-sm t-accent t-b">2026/10/15</text>
+        <text x="386" y="216" class="ta-e t-mono t-sm t-b t-accent">−3.41%</text>
+        <rect x="250" y="223" width="47.8" height="7" class="f-accent"/>
+
+        <line x1="158" y1="62" x2="244" y2="162" class="s-3 s-15"/>
+        <line x1="158" y1="112" x2="244" y2="62" class="s-3 s-15"/>
+        <line x1="158" y1="162" x2="244" y2="112" class="s-3 s-15"/>
+        <line x1="158" y1="212" x2="244" y2="212" class="s-accent s-2w"/>
+
+        <line x1="16" y1="250" x2="386" y2="250" class="s-rule s-1"/>
+        <text x="200" y="272" class="ta-m t-sm t-2">指數水位越高，同樣點數代表的幅度越小</text>
+        <text x="200" y="290" class="ta-m t-sm t-2">比較急跌要看百分比，不是點數</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>點數與百分比取自計畫第二、八節（10/15 的百分比依盤後收盤計算）。2026/7/17 是史上最大跌點，但以百分比只排第三；幅度最大的是 2025/4/7 關稅衝擊那天。線條交叉的地方，就是「點數」和「幅度」說法不一致的地方。</span></figcaption>
+  </figure>
+
+  <p>動手試試看。下面的工具預設是 10/15 的情況：前一日收盤約 48,626 點、跌 1,656 點。再把前一日收盤改成 21,298、點數改成 −2,066（2025/4/7），看看百分比差多少。</p>
+
+  <div class="widget" data-widget="pointpct" data-level="48626" data-points="-1656" data-note="前一日收盤 48,626 點由 10/15 盤後收盤 46,969.87 點加回跌點推得；其餘指數水位取自計畫第八節。"></div>
+
+  <aside class="note">背一個心算捷徑：加權指數在 47,000 點附近時，<b>每 470 點約等於 1%</b>。看到「跌 1,656 點」，心裡馬上換成「約 3.5%」。</aside>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §一</span></div>
+    <p class="quote">光是 10/12–10/16 這一週，加權指數就跌了2,022點，因此不建議用融資追求翻倍。</p>
+    <p>上面算過，這一週約 −4.1%。換成上市股票 2.5 倍的融資槓桿，本金一週大約就少一成（<a href="25-margin-leverage.html#plan-math">第 25 章</a>的算法）。看懂百分比，才能把「點數」翻譯成「我的錢會少多少」。</p>
+  </div>
+</section>
+
+<section id="etf">
+  <h2><span class="sec-num">5.5</span>ETF 與 0050：指數可以被買</h2>
+  <p>指數只是一個數字，本身不能買。但金融市場發明了一種商品，讓你一次買下整個籃子：ETF。</p>
+
+  <div class="box define" id="def-etf">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>ETF</dfn><span class="en">Exchange-traded fund</span></p>
+    <p>指數股票型基金。它是一檔基金，但在證券交易所掛牌，可以像股票一樣用券商帳戶買賣。多數 ETF 追蹤某個指數，依指數的權重持有成分股，所以買一張 ETF 就等於按比例買進整籃股票。</p>
+  </div>
+
+  <p>台灣最有名的 ETF 是元大台灣50，代號 <dfn id="def-0050">0050</dfn>。它追蹤「臺灣50指數」，成分股是上市公司中市值最大的 50 檔，也採市值加權，所以台積電在 0050 裡的權重同樣很高。0050 在 2025 年 6 月做了一拆四的分割（6/18 恢復交易），每股價格變成原來的約四分之一，總價值不變，讓小資金比較容易買到整張。</p>
+
+  <p>市值加權的 ETF 有一個很少人想到的特性：<strong>它會自動把更多錢放在漲最多的公司</strong>。某檔成分股漲得多，市值變大，權重就變高；ETF 不必買賣，持有比例就自然向它傾斜。好處是不必猜誰會贏，壞處是集中度會越來越高。0050 的投資人，其實有一大部分曝險就在台積電一檔。</p>
+
+  <p>指數也能透過期貨交易。台指期的標的是加權指數，ES 追蹤 S&amp;P 500，NQ 追蹤 Nasdaq-100（第 17 章）。GCFIE 盤前看的「電子盤」報價，就是這些指數期貨在美股開盤前、台股開盤前的價格。</p>
+
+  <details class="deep">
+    <summary>ETF 的價格和指數為什麼不會完全一樣</summary>
+    <div>
+      <p>ETF 的淨值會因為管理費、成分股調整的交易成本、股利入帳與配息時點，和指數產生小差距，稱為追蹤誤差。另外，ETF 在交易所的成交價由買賣雙方決定，短時間內可能高於或低於淨值，稱為溢價或折價。大型、成交熱絡的 ETF 通常差距很小；冷門或追蹤海外市場的 ETF 差距可能較大。</p>
+    </div>
+  </details>
+</section>
+
+<section id="breadth">
+  <h2><span class="sec-num">5.6</span>市場廣度：全面上漲，還是幾檔撐盤</h2>
+  <p>5.2 節的例子說明了一件事：市值加權指數只告訴你「大公司加起來」怎麼了。要知道「大多數股票」怎麼了，需要另一組工具。</p>
+
+  <div class="box define" id="def-breadth">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>市場廣度</dfn><span class="en">Market breadth</span></p>
+    <p>有多少股票參與了這次的漲或跌。廣度好，代表上漲由很多股票一起推動；廣度差，代表只靠少數幾檔撐著。常用的衡量方法有：上漲與下跌家數、創新高與創新低家數、站在均線之上的股票比例、大型股與小型股指數的相對表現。</p>
+  </div>
+
+  <div class="box define" id="def-ad">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>騰落</dfn><span class="en">Advance–decline</span></p>
+    <p>上漲家數（騰）與下跌家數（落）的比較。把每天「上漲家數 − 下跌家數」一天天累加起來，就得到<dfn>騰落線</dfn>（ADL）。指數往上、騰落線也往上，代表多數股票跟著漲；指數往上、騰落線卻往下，代表上漲越來越集中。證交所每天收盤後公布上漲、下跌、持平與漲停、跌停家數。</p>
+  </div>
+
+  <p>把「指數方向」和「廣度方向」組合起來，可以得到四種情況。這張表就是 GCFIE 第 2 章那句「全面上漲還是權值股撐盤」的操作版。</p>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>指數與廣度的四種組合</caption>
+      <thead><tr><th>指數</th><th>廣度</th><th>解讀</th></tr></thead>
+      <tbody>
+        <tr><th><span class="up">上漲</span></th><td>多數股票上漲</td><td>全面上漲：資金廣泛進場，上漲的基礎最穩</td></tr>
+        <tr><th><span class="up">上漲</span></th><td>多數股票下跌</td><td>權值股撐盤：少數大型股拉指數，其他股票其實在跌</td></tr>
+        <tr><th><span class="down">下跌</span></th><td>多數股票上漲</td><td>權值股拖累：可能是資金從大型股流向中小型股（輪動）</td></tr>
+        <tr><th><span class="down">下跌</span></th><td>多數股票下跌</td><td>全面下跌：賣壓普遍，需要再看量與跨資產確認</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第六節（第2章規格）</span></div>
+    <p class="quote">同時觀察市場廣度、成交量、指數是否創高／跌破、大型股與小型股是否背離。不得只列漲跌幅；必須回答市場是全面上漲／下跌，還是只有權值股撐盤。</p>
+    <p>這一段把「看指數」從抄數字升級成判讀。<span class="term" data-term="成交量">成交量</span>（第 6 章）告訴你參與的熱度；創高、跌破告訴你位置；大小型股是否背離告訴你上漲有沒有擴散。四件事都要回答，才算完成第 2 章。</p>
+  </div>
+
+  <div class="box define" id="def-divergence">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>背離</dfn><span class="en">Divergence</span></p>
+    <p>兩個平常會同方向走的東西，開始往不同方向走。例如指數創高，但騰落線沒有創高；大型股創高，小型股卻在下跌。背離本身不是賣出訊號，它說的是「上漲的基礎正在變窄」。</p>
+  </div>
+
+  <p>其中最經典的一種是「指數<dfn id="def-new-high">創高</dfn>、廣度卻下降」。創高指的是價格超過過去一段期間（例如 52 週或有史以來）的最高點。下圖是示意：</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 320" role="img" aria-label="廣度背離示意：上方指數三個高點一個比一個高，持續創高；下方騰落線三個高點一個比一個低，參與上漲的股票越來越少">
+        <text x="20" y="22" class="t-b t-sm">加權指數（示意）</text>
+        <line x1="100" y1="34" x2="100" y2="290" class="s-rule s-1 s-dot"/>
+        <line x1="220" y1="34" x2="220" y2="290" class="s-rule s-1 s-dot"/>
+        <line x1="340" y1="34" x2="340" y2="290" class="s-rule s-1 s-dot"/>
+        <polyline points="20,140 40,130 60,120 80,108 100,92 120,104 140,116 160,110 180,98 200,84 220,72 240,86 260,100 280,94 300,80 320,66 340,54 360,64 380,70" class="f-none s-ink s-2w s-round draw"/>
+        <line x1="100" y1="86" x2="340" y2="48" class="s-up s-15 s-dash"/>
+        <circle cx="100" cy="92" r="4" class="f-up"/>
+        <circle cx="220" cy="72" r="4" class="f-up"/>
+        <circle cx="340" cy="54" r="4" class="f-up"/>
+        <text x="352" y="38" class="t-sm t-up t-b">創高</text>
+        <text x="236" y="132" class="t-sm t-up">高點一個比一個高</text>
+
+        <line x1="20" y1="158" x2="388" y2="158" class="s-rule s-1"/>
+        <text x="20" y="178" class="t-b t-sm">騰落線（累計上漲−下跌家數，示意）</text>
+        <polyline points="20,262 40,250 60,232 80,214 100,196 120,212 140,230 160,236 180,226 200,218 220,214 240,228 260,246 280,250 300,246 320,244 340,234 360,256 380,268" class="f-none s-accent s-2w s-round draw"/>
+        <line x1="100" y1="190" x2="340" y2="228" class="s-down s-15 s-dash"/>
+        <circle cx="100" cy="196" r="4" class="f-down"/>
+        <circle cx="220" cy="214" r="4" class="f-down"/>
+        <circle cx="340" cy="234" r="4" class="f-down"/>
+        <text x="120" y="282" class="t-sm t-down">高點一個比一個低</text>
+
+        <line x1="20" y1="296" x2="388" y2="296" class="s-ink s-1"/>
+        <text x="200" y="314" class="ta-m t-sm t-2">時間 →　同一段期間，兩條線方向相反：背離</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意走勢，非真實資料。三條虛線對齊三個高點：指數一次比一次高，騰落線一次比一次低，代表每一波上漲參與的股票越來越少，最後只剩少數權值股在推。</span></figcaption>
+  </figure>
+
+  <p>大型股與小型股的背離是同一件事的另一個角度。美股看 S&amp;P 500 或 Nasdaq-100 對 Russell 2000；台股可以看加權指數對櫃買指數（上櫃公司以中小型為主），或看台積電以外的股票表現如何。當大型股指數創高，小型股指數卻離高點越來越遠，上漲就集中在越來越少的公司身上。</p>
+
+  <aside class="note">廣度差的上漲不一定馬上結束，可以持續好幾個月。它的意思是「容錯率變低」：一旦撐盤的那幾檔權值股轉弱，就沒有其他股票接棒。這正是 GCFIE 所說的<span class="term" data-term="高檔脆弱">高檔脆弱</span>。</aside>
+</section>
+
+<section id="gcfie-breadth">
+  <h2><span class="sec-num">5.7</span>用在 GCFIE：創高但廣度下降</h2>
+  <p>GCFIE 第 13 章「非顯而易見觀察」要找的是表面看不到、交叉比對資料後才浮現的第二層訊號。它舉的七個例子裡，有兩個直接用到本章的工具。</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第二十五節（第13章）</span></div>
+    <p class="quote">例如 Fed不升息但長債殖利率上升、外資買很多但指數下跌、空單回補但指數漲不動、AI財測上修但股價下跌、Nasdaq跌但SOX上漲、VIX低但專業資金買VIX、市場創高但廣度下降。</p>
+    <p>「市場創高但廣度下降」就是 5.6 節的背離。「Nasdaq 跌但 SOX 上漲」是另一種內部分歧：科技股整體在跌，半導體卻在漲，代表資金在科技股內部換位置，從軟體或其他科技公司移到半導體。對台股來說，這通常比 Nasdaq 本身的漲跌更重要，因為台股電子股和 SOX 的連動更直接。</p>
+  </div>
+
+  <p>這兩個觀察都在提醒同一件事：<strong>單一指數的漲跌只是第一層</strong>。GCFIE 的<span class="term" data-term="非顯而易見觀察">非顯而易見觀察</span>要你再問「是誰在漲、誰在跌」。同樣是指數上漲 1%，全面上漲和權值股撐盤代表的市場狀態完全不同，後者在 GCFIE 的<span class="term" data-term="市場狀態分類">市場狀態分類</span>裡比較接近 <span class="term" data-term="Bullish but Fragile">Bullish but Fragile</span>（趨勢偏多但出現警訊）。</p>
+
+  <p>GCFIE 第 12 章的風險矩陣也把廣度列為固定項目，而且美股和台股各一項：</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第二十四節（第12章）</span></div>
+    <p class="quote">固定使用紅黃綠燈。至少包含 SPX/Nasdaq、SOX、Market Breadth、VIX、VIX Structure、Put/Call、ES/NQ positioning、Short Covering、10Y / 30Y、Oil、Macro event、台股外資現貨、台指期、台股市場廣度、AI基本面、AI估值、追價風險。</p>
+    <p>十七個項目裡，SPX/Nasdaq、SOX、Market Breadth、台股市場廣度這四項都來自本章。一個簡化的打燈方式：廣度跟著指數一起擴張給 <span class="sig g">綠燈</span>；指數上漲但上漲家數持平給 <span class="sig y">黃燈</span>；指數創高、上漲家數卻明顯減少給 <span class="sig o">橙燈</span>；指數跌破重要位置、下跌家數壓倒性多數給 <span class="sig r">紅燈</span>。這是教學用的示範，GCFIE 沒有公布門檻。</p>
+  </div>
+
+  <p>回到計畫的情境。計畫第四節提到「中信金在 10/15 大跌當天仍創歷史新高」，同一節的候補名單也寫到「10/15 大跌時電信股逆勢上漲」。這就是廣度的細節：指數跌 3.41% 的日子，仍有一部分防守型股票逆勢走強。只看指數，你會以為所有股票都在跌；看了廣度與類股，才會發現資金是在換位置，而這正是計畫把金融、電信、油品放進「分散／避險」組的理由（第 31 章）。</p>
+
+  <div class="box key">
+    <div class="box-label"><span class="zh"></span><span class="lat">KEY IDEA</span></div>
+    <p>看指數永遠問三個問題：<strong>漲跌幾個百分比？是誰貢獻的？有多少股票一起動？</strong>只回答第一個問題，就是 GCFIE 禁止的「只列漲跌幅」。</p>
+  </div>
+
+  <p>把本章變成每天早上的習慣，可以用下面這份清單。勾選會記在你的瀏覽器裡。</p>
+  <ul class="checklist" data-key="ch05-daily-index">
+    <li>把加權指數、S&amp;P 500、Nasdaq、SOX 的漲跌都換成百分比</li>
+    <li>台積電與前幾大權值股貢獻了多少點？扣掉它們，指數是漲是跌？</li>
+    <li>上漲家數與下跌家數哪邊多？創新高的股票變多還是變少？</li>
+    <li>大型股與小型股（S&amp;P 500 對 Russell 2000、加權對櫃買）有沒有背離？</li>
+    <li>Nasdaq 與 SOX 方向一致嗎？不一致時，錢從哪裡流到哪裡？</li>
+    <li>指數有沒有創高或跌破重要位置？成交量是放大還是縮小（第 6 章）？</li>
+  </ul>
+
+  <div class="box warn">
+    <div class="box-label"><span class="zh"></span><span class="lat">RISK</span></div>
+    <p>廣度背離描述的是「條件」，不是「時間點」。它告訴你市場變脆弱了，卻不告訴你哪一天會跌。GCFIE 的原則是等待價格確認：背離出現時提高警覺、準備好<span class="term" data-term="價格確認線">價格確認線</span>，等價格真的跌破再行動，而不是看到背離就預測崩盤。</p>
+  </div>
+</section>
+
+</article>
+
+<section class="recap" id="recap">
+  <h2>本章重點</h2>
+  <ul>
+    <li>指數 ＝ 成分股總市值 ÷ 基值 × 100。點數本身沒有意義，只能和自己的過去比；新股上市時基值同步調整，所以指數只反映價格變化。</li>
+    <li>市值加權由大公司主導（加權指數、S&amp;P 500、Nasdaq），價格加權由高價股主導（道瓊），等權重每檔一樣。同一天三種算法可以得出相反的結論。</li>
+    <li>台積電在加權指數的權重約四成以上，它漲跌 1%，大盤在 47,000 點附近約動 190 點。</li>
+    <li>GCFIE 第 2 章的股價指數：道瓊（30 檔、價格加權）、S&amp;P 500（大型股基準）、Nasdaq（科技）、SOX（30 檔半導體，含台積電 ADR）、Russell 2000（小型股、利率敏感）。</li>
+    <li>漲跌幅 ＝ 點數 ÷ 前一日收盤。10/15 的「史上第六大跌點」是 −3.41%，一週 2,022 點約 −4.1%；比較急跌要看百分比。</li>
+    <li>市場廣度回答「全面上漲還是權值股撐盤」。指數創高但騰落線、小型股走弱，就是背離，代表上漲基礎變窄、容錯率變低。</li>
+  </ul>
+</section>
+
+<section class="quiz-set" id="quiz">
+  <h2>自我檢測</h2>
+  <p>每題選一個答案，選完會顯示解析。</p>
+
+  <div class="quiz" data-answer="b">
+    <p class="q">加權指數從 47,111 點跌到 46,640 點，最接近下列哪個跌幅？</p>
+    <ol class="opts"><li>−0.47%</li><li>−1.0%</li><li>−4.7%</li><li>−10%</li></ol>
+    <div class="explain">跌了 47,111 − 46,640 ＝ 471 點，471 ÷ 47,111 ≈ 1.0%。記住捷徑：在 47,000 點附近，每 470 點約 1%。</div>
+  </div>
+
+  <div class="quiz" data-answer="d">
+    <p class="q">在市值加權指數裡，下列哪種情況最可能出現「指數下跌，但多數股票上漲」？</p>
+    <ol class="opts"><li>所有股票都小跌</li><li>小型股大跌、權值股小漲</li><li>成交量突然放大</li><li>權重最大的幾檔大跌，其餘多數股票小漲</li></ol>
+    <div class="explain">市值加權由大公司主導。權值股大跌時，即使其他多數股票上漲，加總後指數仍可能下跌，就像本章五檔股票的例子（四漲一跌，指數 −2.83%）。這時要看廣度才知道多數股票的狀況。</div>
+  </div>
+
+  <div class="quiz" data-answer="a">
+    <p class="q">道瓊採價格加權。成分股甲股價 600 美元、乙股價 60 美元，兩者同一天都漲 1%，對道瓊的影響是？</p>
+    <ol class="opts"><li>甲的影響約是乙的 10 倍</li><li>兩者影響一樣，因為都漲 1%</li><li>要看哪一家公司市值大</li><li>乙的影響比較大，因為低價股漲得比較容易</li></ol>
+    <div class="explain">價格加權看的是股價變動的「元」：甲漲 6 美元、乙漲 0.6 美元，所以甲的影響是乙的 10 倍，和公司市值無關。這也是道瓊代表性較弱的原因。</div>
+  </div>
+
+  <div class="quiz" data-answer="c">
+    <p class="q">GCFIE 寫「Russell 2000（具判讀價值時）」。下列哪個情況最值得特別判讀？</p>
+    <ol class="opts"><li>Russell 2000 和 S&amp;P 500 同一天都漲 0.5%</li><li>Russell 2000 的點數比 S&amp;P 500 低</li><li>S&amp;P 500 連續創高，Russell 2000 卻連續走弱</li><li>Russell 2000 今天休市</li></ol>
+    <div class="explain">大型股創高、小型股走弱是大小型股背離，代表上漲集中在少數大公司，廣度變窄，這正是 GCFIE 第 2 章要求觀察的項目。點數高低本身沒有意義。</div>
+  </div>
+
+  <div class="quiz" data-answer="b">
+    <p class="q">某天加權指數上漲 0.9%，但上市股票的下跌家數是上漲家數的兩倍，而台積電大漲。依 GCFIE 第 2 章，應該怎麼描述？</p>
+    <ol class="opts"><li>全面上漲，市場偏多</li><li>權值股撐盤，廣度偏弱，不是全面上漲</li><li>資料互相矛盾，標示資料不足</li><li>全面下跌，因為下跌家數比較多</li></ol>
+    <div class="explain">指數上漲但多數股票下跌，屬於「權值股撐盤」。GCFIE 禁止只列漲跌幅，必須回答是全面上漲還是只有權值股撐盤。兩種資料並不矛盾，它們合起來才是完整的描述。</div>
+  </div>
+
+  <div class="quiz" data-answer="d">
+    <p class="q">2026/10/15 跌 1,656 點（約 −3.41%）被稱為史上第六大跌點；2024/8/5 跌 1,807 點（−8.35%）。下列敘述何者正確？</p>
+    <ol class="opts"><li>兩天的跌幅差不多，因為點數只差 151 點</li><li>10/15 比較嚴重，因為它更接近現在</li><li>點數排名是最客觀的比較方式</li><li>以百分比看，8/5 的跌幅約是 10/15 的 2.4 倍；點數排名會偏向指數水位高的近年</li></ol>
+    <div class="explain">8.35% ÷ 3.41% ≈ 2.4 倍。2024 年 8 月指數約在兩萬點附近，2026 年 10 月在四萬七千點附近，同樣的點數代表的幅度差了一倍多。比較急跌要用百分比。</div>
+  </div>
+</section>
+
+</main>
+</div>
+</div>
+</body>
+</html>

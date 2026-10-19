@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>投資的第一原理：報酬、風險與時間 · 讀通投資</title>
+<meta name="description" content="從零開始：投資和投機差在哪、報酬率與年化怎麼算、複利為什麼需要時間、虧損為什麼不對稱。學完就能看懂計畫第一節「5 個月翻倍和分散 20 檔幾乎不可能同時做到」。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=LXGW+WenKai+TC:wght@400;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;900&amp;display=swap">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/handbook.css">
+<script>try{var d=document.documentElement,g=function(k){return JSON.parse(localStorage.getItem("hb."+k))},t=g("theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);if(g("quote")==="intl")d.setAttribute("data-quote","intl");if(g("size")==="lg")d.setAttribute("data-size","lg")}catch(e){}</script>
+<script src="../assets/js/curriculum.js" defer></script>
+<script src="../assets/js/data-plan.js" defer></script>
+<script src="../assets/js/glossary-data.js" defer></script>
+<script src="../assets/js/handbook.js" defer></script>
+<script src="../assets/js/widgets.js" defer></script>
+<script src="../assets/js/widgets-plan.js" defer></script>
+<script src="../assets/js/widgets-basics.js" defer></script>
+<script src="../assets/js/widgets-markets.js" defer></script>
+</head>
+<body data-chapter="01-first-principles">
+<div class="page">
+<div class="chapter-grid">
+<main class="chapter" id="main">
+
+<header class="opener">
+  <p class="eyebrow"></p>
+  <div class="opener-num" aria-hidden="true"></div>
+  <h1>投資的第一原理：報酬、風險與時間</h1>
+  <p class="lede">投資是用今天確定的錢，交換未來不確定的報酬。這一章從零建立三個直覺：報酬怎麼算、時間怎麼把小差距放大、虧損為什麼比獲利更傷。學完之後，你會看懂計畫第一節那句話：5 個月翻倍，和分散成 20 檔，幾乎不可能同時做到。</p>
+  <dl class="opener-meta"></dl>
+</header>
+
+<section class="objectives" aria-labelledby="obj-h">
+  <h2 id="obj-h">學完這章，你能夠</h2>
+  <ol>
+    <li>用期望值、資訊與時間三把尺，分辨投資、投機與賭博。</li>
+    <li>算出簡單報酬率、含股利的總報酬與年化報酬率，並說明「5 個月翻倍」等於年化約 +428%。</li>
+    <li>用複利與 72 法則估算資金翻倍要多久，說出時間為什麼是複利的燃料。</li>
+    <li>解釋風險、波動、風險溢酬與流動性，用回本數學說明虧損的不對稱。</li>
+    <li>區分名目與實質報酬，說出分散能降低哪一種風險、降不了哪一種。</li>
+    <li>知道 GCFIE 與 20 檔計畫各自扮演什麼角色，以及本書八個部分分別幫你讀懂哪裡。</li>
+  </ol>
+</section>
+
+<article class="prose">
+
+<section id="three-rulers">
+  <h2><span class="sec-num">1.1</span>投資、投機與賭博：三把尺</h2>
+  <p class="lead-in">買股票、買彩券、買一間店面，都是先把錢拿出去，期待之後拿回更多。差別不在於工具，而在於這個決定背後的三件事：平均下來划不划算、你知道多少、你願意等多久。</p>
+
+  <div class="box define" id="def-invest">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>投資</dfn><span class="en">Investing</span></p>
+    <p>把錢放進一項能持續產生價值的資產（公司的獲利、債券的利息、房子的租金），用時間換取報酬。報酬主要來自資產本身創造的價值，而不是下一個人願意出更高的價格。</p>
+  </div>
+
+  <p>和投資相對的是<dfn id="def-speculate">投機</dfn>（Speculation）：押注價格在一段較短時間內的變動，報酬主要來自「買低賣高」的價差。投機本身不違法也不可恥，期貨市場裡很多參與者就是投機者，他們承擔了避險者想轉出去的風險。但投機的報酬更依賴時機，判斷錯誤的代價也更快出現。</p>
+  <p>賭博則是另一回事。賭場和彩券在設計上就讓莊家長期穩賺，參加的人平均下來一定是虧的。判斷三者的差別，可以用三把尺：</p>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>用三把尺區分投資、投機與賭博</caption>
+      <thead><tr><th>尺</th><th>投資</th><th>投機</th><th>賭博</th></tr></thead>
+      <tbody>
+        <tr><th>平均划不划算（期望值）</th><td>長期為正，來自資產創造的價值</td><td>可能為正也可能為負，看判斷與成本</td><td>設計上為負，莊家抽成</td></tr>
+        <tr><th>資訊</th><td>研究公司、產業、價格</td><td>研究價格、資金、情緒</td><td>無法靠研究改變結果</td></tr>
+        <tr><th>時間</th><td>年為單位，時間站在你這邊</td><td>天到月，時間是成本</td><td>一把定輸贏</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>第一把尺叫<span class="term" data-term="期望值">期望值</span>：把每一種可能的結果乘上它發生的機率，再加起來，就是「重複做很多次之後，平均每次得到多少」。舉個簡單的例子：丟一枚公平的硬幣，正面你拿 100 元，反面你付 50 元。期望值是 0.5 × 100 ＋ 0.5 ×（−50）＝ +25 元。這個遊戲每玩一次平均賺 25 元，值得玩。反過來，如果莊家把規則改成正面拿 40 元、反面付 50 元，期望值變成 −5 元，玩越多次虧越多。第 33 章會用同樣的方法，算出計畫的「加權期望報酬約 +10%」。</p>
+  <p>第二把尺是資訊。一家公司每年賣出多少晶片、賺多少錢，你可以查財報（第 7–9 章）；骰子會擲出幾點，再怎麼研究也查不到。第三把尺是時間：公司的獲利會隨時間累積，所以持有越久，報酬越有機會向公司的真實表現靠攏；短線價格則充滿雜訊，時間越短，結果越像丟硬幣。</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第一節</span></div>
+    <p class="quote">GCFIE v3.3-GOLD 的目的不是預測「今天一定漲或一定跌」，而是建立一套可持續驗證的市場風險辨識系統。</p>
+    <p>這句話把 GCFIE 放在三把尺的哪個位置？它不去猜明天的價格（那是丟硬幣的部分），而是整理資訊、建立「如果……就代表……」的條件，再拿隔天的價格驗證。你可以把它想成提高資訊品質的工具，讓每一次決定的期望值稍微好一點。</p>
+  </div>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>股票就是賭博，漲跌全憑運氣。</p></div>
+    <div class="myth-right"><p>股票背後是會賺錢的公司，長期報酬有來源；但如果你用借來的錢、在幾天內押注單一股票的漲跌，行為上就很接近賭博。同一個工具，用法決定它是投資還是投機。</p></div>
+  </div>
+</section>
+
+<section id="returns">
+  <h2><span class="sec-num">1.2</span>報酬率：賺多少，要和投入的錢比</h2>
+  <p>「我賺了 10 萬」這句話資訊不完整。用 100 萬賺 10 萬，和用 1,000 萬賺 10 萬，是完全不同的成績。所以我們用比例來描述結果。</p>
+
+  <div class="box define" id="def-return">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>報酬率</dfn><span class="en">Rate of return</span></p>
+    <p>一段期間內賺到（或賠掉）的錢，占期初投入金額的比例。賺到的錢包括價格的漲跌，也包括期間領到的<span class="term" data-term="股利">股利</span>或利息。</p>
+  </div>
+
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">報酬率 ＝ <span class="frac"><span>期末價值 − 期初價值 ＋ 期間收入</span><span>期初價值</span></span></div>
+    <div class="where">期間收入指股利、利息等現金。沒有收入時，公式就是「漲了多少 ÷ 本來多少」。</div>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>兩個基本例子</h4>
+    <ol class="calc">
+      <li>100 萬元的組合，5 個月後變成 114 萬元：<span class="eq">(114 − 100) ÷ 100 ＝ +14%</span></li>
+      <li>假設用每股 100 元買進一檔股票，期間領到 3 元現金股利，現在股價 108 元：<span class="eq">(108 − 100 ＋ 3) ÷ 100 ＝ +11%</span></li>
+      <li>如果只看股價，會以為只賺 8%；把股利算進去才是完整的「總報酬」。</li>
+    </ol>
+    <p class="answer">報酬率永遠和期初投入的錢相比；股利、利息都要算進去。</p>
+  </div>
+
+  <p>報酬率還缺一個資訊：<strong>花了多久</strong>。5 個月賺 14% 和 5 年賺 14% 差很多。為了把不同長度的期間放在同一把尺上比較，我們把它換算成「如果用同樣的速度跑滿一年，會是多少」，這就是年化。</p>
+
+  <div class="box define" id="def-annual">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>年化報酬率</dfn><span class="en">Annualized return</span></p>
+    <p>把任何期間的報酬，換算成「每年平均複利多少」的速度。它讓 5 個月、3 年、10 年的成績可以互相比較。</p>
+  </div>
+
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">年化報酬率 ＝ (1 ＋ 期間報酬率)<sup>12 ÷ 月數</sup> − 1</div>
+    <div class="where">5 個月的期間，指數就是 12 ÷ 5 ＝ 2.4。用次方而不是乘法，是因為每一段賺到的錢會在下一段繼續滾（下一節的複利）。</div>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §一</span></div>
+    <p class="quote">5個月從100萬變200萬（+100%），和「分散成20檔」幾乎不可能同時做到。本計畫的設計原則：下檔控制在 −12% 至 −15%，上檔爭取 +15% 至 +30%。</p>
+    <p>把計畫第一節情境表裡的數字年化，就能看出「翻倍」有多極端：</p>
+  </div>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>5 個月的報酬換算成年化速度（計算值，不含成本）</caption>
+      <thead><tr><th>5 個月的結果</th><th>出處</th><th class="r">年化報酬率</th></tr></thead>
+      <tbody>
+        <tr><th>+10%（約 110 萬）</th><td>計畫 §十一 加權期望報酬</td><td class="r">約 +25.7%</td></tr>
+        <tr><th>+14%（約 114 萬）</th><td>計畫 §一「20 檔全部達到目標1」</td><td class="r">約 +37.0%</td></tr>
+        <tr><th>+28%（約 128 萬）</th><td>計畫 §一「20 檔全部達到目標2」</td><td class="r">約 +80.8%</td></tr>
+        <tr><th>+100%（200 萬）</th><td>計畫 §一「原始目標（翻倍）」</td><td class="r">約 +427.8%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>年化 +428% 是什麼概念？它等於連續 5 個月，<strong>每個月</strong>都要賺 14.9%（1.149 的 5 次方約等於 2）。計畫情境表裡的「目標1」（<span class="term" data-term="目標1">目標1</span>），年化起來已經接近四成，是相當積極的目標；翻倍則需要每一個月都交出這種成績，中間不能有一個月失手。</p>
+  <aside class="note">年化是比較用的尺，不是預測。短期間的報酬一旦年化，數字會被放大得很誇張，例如某檔股票一週漲 10%，年化起來超過 14,000%。看到「年化」兩個字，先問它是用多長的期間算出來的。</aside>
+</section>
+
+<section id="compounding">
+  <h2><span class="sec-num">1.3</span>複利：讓時間替你工作</h2>
+  <p>假設你把 100 萬元放進一個每年穩定賺 7% 的地方（這是假設，現實中沒有每年固定 7% 的股票）。第一年賺 7 萬，這沒有疑問。第二年呢？</p>
+  <ul>
+    <li><b>單利</b>：每年只用最初的 100 萬計算，第二年一樣賺 7 萬。20 年後是 100 ＋ 7 × 20 ＝ 240 萬。</li>
+    <li><b>複利</b>：第一年賺的 7 萬也放進去一起滾，第二年用 107 萬計算，賺 7.49 萬。20 年後是 100 × 1.07<sup>20</sup> ≈ 387 萬。</li>
+  </ul>
+
+  <div class="box define" id="def-compound">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>複利</dfn><span class="en">Compounding</span></p>
+    <p>報酬再投入，下一期連同報酬一起賺報酬，俗稱利滾利。期末價值 ＝ 本金 ×（1 ＋ 每期報酬率）<sup>期數</sup>。期數越多，曲線越往上彎。</p>
+  </div>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 300" role="img" aria-label="100 萬元以年報酬 7% 計算：單利 20 年後 240 萬、30 年後 310 萬，是一條直線；複利 20 年後約 387 萬、30 年後約 761 萬，是一條越來越陡的曲線">
+        <line x1="50" y1="202.5" x2="370" y2="202.5" class="s-rule s-1"/>
+        <line x1="50" y1="145" x2="370" y2="145" class="s-rule s-1"/>
+        <line x1="50" y1="87.5" x2="370" y2="87.5" class="s-rule s-1"/>
+        <line x1="50" y1="30" x2="370" y2="30" class="s-rule s-1"/>
+        <line x1="50" y1="260" x2="370" y2="260" class="s-ink s-1"/>
+        <line x1="50" y1="30" x2="50" y2="260" class="s-ink s-1"/>
+        <text x="44" y="264" class="ta-e t-xs t-mono t-3">0</text>
+        <text x="44" y="206.5" class="ta-e t-xs t-mono t-3">200</text>
+        <text x="44" y="149" class="ta-e t-xs t-mono t-3">400</text>
+        <text x="44" y="91.5" class="ta-e t-xs t-mono t-3">600</text>
+        <text x="44" y="34" class="ta-e t-xs t-mono t-3">800</text>
+        <text x="14" y="18" class="t-sm t-3">萬元</text>
+        <text x="50" y="278" class="ta-m t-xs t-mono t-3">0</text>
+        <text x="156.7" y="278" class="ta-m t-xs t-mono t-3">10</text>
+        <text x="263.3" y="278" class="ta-m t-xs t-mono t-3">20</text>
+        <text x="370" y="278" class="ta-m t-xs t-mono t-3">30</text>
+        <text x="210" y="296" class="ta-m t-sm t-3">年</text>
+        <line x1="50" y1="231.3" x2="370" y2="170.9" class="s-3 s-2w s-dash"/>
+        <polyline points="50.0 231.3 60.7 229.2 71.3 227.1 82.0 224.8 92.7 222.3 103.3 219.7 114.0 216.9 124.7 213.8 135.3 210.6 146.0 207.1 156.7 203.4 167.3 199.5 178.0 195.2 188.7 190.7 199.3 185.9 210.0 180.7 220.7 175.1 231.3 169.2 242.0 162.8 252.7 156.0 263.3 148.7 274.0 141.0 284.7 132.6 295.3 123.7 306.0 114.2 316.7 104.0 327.3 93.0 338.0 81.4 348.7 68.8 359.3 55.5 370.0 41.1" class="f-none s-accent s-3w s-round draw"/>
+        <line x1="263.3" y1="191" x2="263.3" y2="148.7" class="s-ink s-1"/>
+        <circle cx="263.3" cy="148.7" r="4" class="f-accent"/>
+        <circle cx="263.3" cy="191" r="4" class="f-3"/>
+        <circle cx="370" cy="41.1" r="4" class="f-accent"/>
+        <circle cx="370" cy="170.9" r="4" class="f-3"/>
+        <text x="256" y="140" class="ta-e t-sm t-mono t-accent t-b">387 萬</text>
+        <text x="256" y="205" class="ta-e t-sm t-mono t-2">240 萬</text>
+        <text x="271" y="174" class="t-sm t-b">差 147 萬</text>
+        <text x="362" y="45" class="ta-e t-sm t-mono t-accent t-b">761 萬</text>
+        <text x="362" y="190" class="ta-e t-sm t-mono t-2">310 萬</text>
+        <rect x="68" y="44" width="18" height="4" class="f-accent"/>
+        <text x="92" y="50" class="t-sm">複利：報酬再投入</text>
+        <line x1="68" y1="70" x2="86" y2="70" class="s-3 s-2w s-dash"/>
+        <text x="92" y="74" class="t-sm t-2">單利：只用本金計算</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>100 萬元、年報酬 7%（假設）。前 10 年兩條線幾乎重疊，差距要到後段才拉開：第 20 年差 147 萬，第 30 年差 451 萬。複利的力量主要來自「後面的年份」。</span></figcaption>
+  </figure>
+
+  <p>圖上最值得記住的是形狀。前幾年兩條線幾乎分不開，很多人因此覺得複利沒什麼了不起；真正的差距集中在後段。這代表兩件事：越早開始越有利，以及<strong>中途不要讓本金大幅受傷</strong>，因為受傷會把你拉回曲線的起點（1.5 節）。</p>
+
+  <h3>72 法則：心算翻倍時間</h3>
+  <div class="box define" id="def-72">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>72法則</dfn><span class="en">Rule of 72</span></p>
+    <p>用 72 除以年報酬率（百分比的數字），大約就是資金翻倍需要的年數。年報酬 7%，72 ÷ 7 ≈ 10.3 年翻倍。適用於年報酬約 2%–15% 的範圍。</p>
+  </div>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>72 法則與精確翻倍年數的比較</caption>
+      <thead><tr><th>年報酬率</th><th class="r">72 法則估計</th><th class="r">精確值</th></tr></thead>
+      <tbody>
+        <tr><th>2%</th><td class="r">36.0 年</td><td class="r">35.0 年</td></tr>
+        <tr><th>4%</th><td class="r">18.0 年</td><td class="r">17.7 年</td></tr>
+        <tr><th>7%</th><td class="r">10.3 年</td><td class="r">10.2 年</td></tr>
+        <tr><th>10%</th><td class="r">7.2 年</td><td class="r">7.3 年</td></tr>
+        <tr><th>15%</th><td class="r">4.8 年</td><td class="r">5.0 年</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>72 法則也能反過來用：想在 5 個月（約 0.42 年）內翻倍，72 ÷ 0.42 ≈ 172，也就是需要年報酬約 170% 的速度。這個估計比 1.2 節算出的 428% 低很多，因為 72 法則只在報酬率不太高時準確；但它已經足夠告訴你，這個目標遠遠超出正常範圍。</p>
+
+  <p>下面的工具可以自己試。先維持 7%、20 年，看終值；再把年數拉到 30 年，看最後 10 年多長出多少；最後把報酬率改成 2%，感受一下低報酬時複利有多慢。</p>
+  <div class="widget" data-widget="compound" data-principal="1000000" data-monthly="0" data-rate="7" data-years="20" data-note="報酬率是假設的固定值；真實的股票報酬每年都不一樣，也可能是負的。"></div>
+
+  <aside class="note">複利對成本也有效。計畫第六節提醒台股「來回手續費加證交稅約 0.4–0.6%」。如果一年進出 20 次、每次約 0.47%，一年下來吃掉約 9% 的本金（第 3 章會算給你看）。成本也會利滾利。</aside>
+</section>
+
+<section id="risk">
+  <h2><span class="sec-num">1.4</span>風險：不確定性，以及它的價格</h2>
+  <div class="box define" id="def-risk">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>風險</dfn><span class="en">Risk</span></p>
+    <p>實際結果和預期不同的可能性，特別是結果比預期差、甚至虧錢的可能性。風險越高，結果的分布越寬。</p>
+  </div>
+  <p>風險的日常感受是「會不會賠錢」，但專業上更在意「結果有多分散」。定存一年後拿回多少錢，幾乎可以精準算出來；一檔股票一年後會漲 40% 還是跌 30%，事先無法知道。衡量這種分散程度最常用的是<dfn id="def-vol">波動度</dfn>（Volatility，也常簡稱波動）：報酬上下跳動的幅度。數學上它用標準差計算，第 20 章會講<span class="term" data-term="波動率">波動率</span>和 VIX 怎麼量化市場的恐懼。</p>
+
+  <h3>同樣的平均，不同的結局</h3>
+  <p>波動不只讓人心情起伏，它還會吃掉報酬。看下面三條假設的路徑，三者兩年的「平均年報酬」都是 +10%：</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 276" role="img" aria-label="三條路徑的算術平均年報酬都是 10%：A 兩年各漲 10% 變 121；B 先漲 50% 再跌 30% 變 105；C 先漲 60% 再跌 40% 變 96，反而虧錢">
+        <line x1="60" y1="221" x2="350" y2="221" class="s-3 s-1 s-dash"/>
+        <text x="54" y="225" class="ta-e t-xs t-mono t-3">100</text>
+        <line x1="70" y1="248" x2="330" y2="248" class="s-ink s-1"/>
+        <text x="70" y="266" class="ta-m t-sm t-3">期初</text>
+        <text x="200" y="266" class="ta-m t-sm t-3">第 1 年</text>
+        <text x="330" y="266" class="ta-m t-sm t-3">第 2 年</text>
+        <polyline points="70 221 200 202 330 181.1" class="f-none s-c1 s-2w s-round draw"/>
+        <polyline points="70 221 200 126 330 211.5" class="f-none s-c2 s-2w s-round draw"/>
+        <polyline points="70 221 200 107 330 228.6" class="f-none s-c4 s-2w s-round draw"/>
+        <circle cx="70" cy="221" r="4" class="f-ink"/>
+        <circle cx="200" cy="202" r="4" class="f-c1"/>
+        <circle cx="200" cy="126" r="4" class="f-c2"/>
+        <circle cx="200" cy="107" r="4" class="f-c4"/>
+        <circle cx="330" cy="181.1" r="4" class="f-c1"/>
+        <circle cx="330" cy="211.5" r="4" class="f-c2"/>
+        <circle cx="330" cy="228.6" r="4" class="f-c4"/>
+        <text x="208" y="218" class="t-sm t-mono">A 110</text>
+        <text x="208" y="131" class="t-sm t-mono">B 150</text>
+        <text x="208" y="102" class="t-sm t-mono">C 160</text>
+        <text x="338" y="185" class="t-sm t-mono t-b">A 121</text>
+        <text x="338" y="208" class="t-sm t-mono t-b">B 105</text>
+        <text x="338" y="233" class="t-sm t-mono t-b t-red">C 96</text>
+        <text x="16" y="24" class="t-sm t-b">三條路徑，平均年報酬都是 +10%</text>
+        <text x="16" y="44" class="t-sm t-c1 t-2">A：+10%、+10%</text>
+        <text x="16" y="62" class="t-sm t-2">B：+50%、−30%</text>
+        <text x="16" y="80" class="t-sm t-2">C：+60%、−40%</text>
+        <rect x="128" y="35" width="14" height="4" class="f-c1"/>
+        <rect x="128" y="53" width="14" height="4" class="f-c2"/>
+        <rect x="128" y="71" width="14" height="4" class="f-c4"/>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意。三條路徑的算術平均都是 +10%，但波動越大，兩年後剩下的錢越少：C 先大漲 60% 再跌 40%，最後反而虧了 4%。這叫「波動拖累」。</span></figcaption>
+  </figure>
+
+  <p>原因很簡單：漲跌的百分比是對「當時的金額」計算的。B 漲 50% 到 150 之後，跌 30% 是跌在 150 上，少了 45；C 在 160 上跌 40%，一口氣少了 64。這也預告了 1.5 節的回本數學。</p>
+  <p>另一個描述風險的方式是看「從高點最多跌掉多少」，也就是<span class="term" data-term="最大回撤">最大回撤</span>（第 30 章）。對持有者來說，這往往比波動度更有感：計畫第八節整理了 2023 年以來的台股，結論是「每年都有一次兩成上下的急跌」。</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §八</span></div>
+    <p class="quote">每年都有一次兩成上下的急跌（2024 年 8 月約 −19%；2025 年 4 月跌到 17,307），導火線多半是總經、關稅、戰爭或韓國槓桿，而不是 AI 訂單轉壞；只要月營收與法說沒轉弱，數週到數月內都收復。</p>
+    <p>即使在大多頭裡，持有股票也要承受這種程度的回檔。這就是風險的真實樣貌：長期方向向上，路途中隨時可能少掉兩成。計畫的停損寬度、現金比例、不融資的紀律，全都是為了讓你撐得過這種回檔。</p>
+  </div>
+
+  <h3>風險溢酬：承擔不確定的報酬</h3>
+  <p>如果股票和定存的長期報酬一樣，沒有人會選擇心驚膽跳的股票。正因為股票的結果更分散，投資人要求更高的平均報酬作為補償，價格才會在一個「預期報酬夠高」的位置成交。</p>
+  <div class="box define" id="def-premium">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>風險溢酬</dfn><span class="en">Risk premium</span></p>
+    <p>承擔風險所要求的額外預期報酬，常以「某資產的預期報酬 − 幾乎無風險的報酬（如定存、短期公債）」表示。它是預期，不是保證：某些年份股票的報酬會低於定存，甚至是負的。</p>
+  </div>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 344" role="img" aria-label="風險與報酬的光譜示意：從現金、定存、債券、大型股、小型股到槓桿，長期平均報酬逐步提高，但每一年可能結果的範圍也越來越寬，越往右越可能出現虧損年">
+        <text x="14" y="22" class="t-sm t-3">年報酬</text>
+        <circle cx="106" cy="18" r="4" class="f-accent"/>
+        <text x="116" y="22" class="t-sm">長期平均（示意）</text>
+        <rect x="100" y="32" width="12" height="14" class="f-up-soft"/>
+        <rect x="100" y="46" width="12" height="8" class="f-down-soft"/>
+        <text x="116" y="47" class="t-sm">某一年可能的範圍</text>
+        <line x1="50" y1="296" x2="390" y2="296" class="s-ink s-1"/>
+        <line x1="50" y1="200" x2="390" y2="200" class="s-3 s-1 s-dash"/>
+        <text x="44" y="204" class="ta-e t-xs t-mono t-3">0%</text>
+        <text x="14" y="128" class="t-sm t-up">獲利</text>
+        <text x="14" y="254" class="t-sm t-down">虧損</text>
+        <rect x="54" y="195" width="12" height="5" class="f-up-soft"/>
+        <rect x="104" y="186" width="12" height="14" class="f-up-soft"/>
+        <rect x="159" y="160" width="12" height="40" class="f-up-soft"/>
+        <rect x="159" y="200" width="12" height="12" class="f-down-soft"/>
+        <rect x="234" y="92" width="12" height="108" class="f-up-soft"/>
+        <rect x="234" y="200" width="12" height="50" class="f-down-soft"/>
+        <rect x="309" y="66" width="12" height="134" class="f-up-soft"/>
+        <rect x="309" y="200" width="12" height="68" class="f-down-soft"/>
+        <rect x="364" y="34" width="12" height="166" class="f-up-soft"/>
+        <rect x="364" y="200" width="12" height="94" class="f-down-soft"/>
+        <polyline points="60 197 110 190 165 182 240 152 315 138 370 124" class="f-none s-accent s-15 s-dash"/>
+        <circle cx="60" cy="197" r="4.5" class="f-accent"/>
+        <circle cx="110" cy="190" r="4.5" class="f-accent"/>
+        <circle cx="165" cy="182" r="4.5" class="f-accent"/>
+        <circle cx="240" cy="152" r="4.5" class="f-accent"/>
+        <circle cx="315" cy="138" r="4.5" class="f-accent"/>
+        <circle cx="370" cy="124" r="4.5" class="f-accent"/>
+        <line x1="117" y1="190" x2="262" y2="190" class="s-3 s-1 s-dot"/>
+        <line x1="262" y1="190" x2="262" y2="152" class="s-ink s-15"/>
+        <line x1="257" y1="152" x2="267" y2="152" class="s-ink s-15"/>
+        <line x1="257" y1="190" x2="267" y2="190" class="s-ink s-15"/>
+        <text x="270" y="168" class="t-sm t-b">風險</text>
+        <text x="270" y="184" class="t-sm t-b">溢酬</text>
+        <text x="60" y="316" class="ta-m t-sm">現金</text>
+        <text x="110" y="316" class="ta-m t-sm">定存</text>
+        <text x="165" y="316" class="ta-m t-sm">債券</text>
+        <text x="240" y="316" class="ta-m t-sm">大型股</text>
+        <text x="315" y="316" class="ta-m t-sm">小型股</text>
+        <text x="370" y="316" class="ta-m t-sm">槓桿</text>
+        <text x="220" y="338" class="ta-m t-sm t-3">往右：結果越分散，平均報酬越高</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意圖，只表示相對位置，不是實際數字。越往右，長期平均（藍點）越高，但每一年可能落在的範圍（直條）也越寬；直條跨到 0% 以下，代表那一年可能賠錢。槓桿把整條直條拉長，上下兩頭一起放大。</span></figcaption>
+  </figure>
+
+  <p>這張圖是整本書的地圖之一。<span class="term" data-term="債券">債券</span>（第 13 章）介於定存與股票之間；大型股通常比小型股穩；最右邊的槓桿（第 25 章的<span class="term" data-term="融資">融資</span>、第 17 章的<span class="term" data-term="期貨">期貨</span>）不會改變資產本身，只是把結果的範圍上下一起拉長。</p>
+
+  <h3>資產類別與流動性</h3>
+  <p>圖上每一欄代表一種<dfn id="def-asset-class">資產類別</dfn>（Asset class）：一群報酬來源和風險性質相近的資產。同一類別裡的東西常常一起漲跌，不同類別之間則可能各走各的。</p>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>常見的資產類別</caption>
+      <thead><tr><th>類別</th><th>報酬主要來自</th><th>主要風險</th><th>變現速度</th></tr></thead>
+      <tbody>
+        <tr><th>現金、定存</th><td>利息</td><td>通膨侵蝕購買力</td><td>很快（定存解約少領利息）</td></tr>
+        <tr><th>債券</th><td>利息、價格變動</td><td>利率上升、發行者違約</td><td>快到中等</td></tr>
+        <tr><th>股票</th><td>公司獲利成長、股利</td><td>景氣、估值、情緒</td><td>大型股很快</td></tr>
+        <tr><th>原物料</th><td>供需造成的價格變動</td><td>景氣、地緣政治</td><td>透過期貨或基金</td></tr>
+        <tr><th>不動產</th><td>租金、價格變動</td><td>利率、景氣、難以變現</td><td>慢，交易要數週到數月</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box define" id="def-liquidity">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>流動性</dfn><span class="en">Liquidity</span></p>
+    <p>能不能快速、以接近合理的價格把資產換成現金。台積電每天成交金額龐大，想賣隨時賣得掉；一間房子或冷門股票，急著賣就得降價。市場在某段期間休市時，流動性等於零。</p>
+  </div>
+  <p>計畫第五節提到「春節……休市約一週，美股照常交易」。休市那一週，你手上的台股完全沒有流動性：世界在動，你卻不能賣。這就是計畫在封關前「節前降碼」到約 60% 的原因之一（第 4 章、第 33 章）。另外，市場恐慌時流動性會突然變差，GCFIE 的 Systemic Stress 狀態就把「流動性壓力」列為條件之一（第 36 章）。</p>
+</section>
+
+<section id="recovery-math">
+  <h2><span class="sec-num">1.5</span>回本數學：虧損的不對稱</h2>
+  <p>假設你有 100 萬，跌了 50% 剩 50 萬。要回到 100 萬，需要漲多少？很多人直覺回答 50%，但 50 萬漲 50% 只到 75 萬。正確答案是 100%：50 萬要翻倍才回得去。</p>
+  <div class="box define" id="def-recovery">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>回本數學</dfn><span class="en">Recovery math</span></p>
+    <p>虧損之後，要回到原點所需的漲幅永遠大於虧損幅度，而且虧得越深，差距越不成比例。所需漲幅 ＝ 1 ÷（1 − 虧損幅度）− 1。</p>
+  </div>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 312" role="img" aria-label="回本曲線：虧損 12% 要漲 13.6%，虧損 22% 要漲 28.2%，虧損 50% 要漲 100%，虧損 80% 要漲 400%；曲線遠高於代表漲跌對稱的虛線">
+        <line x1="50" y1="212.5" x2="370" y2="212.5" class="s-rule s-1"/>
+        <line x1="50" y1="155" x2="370" y2="155" class="s-rule s-1"/>
+        <line x1="50" y1="97.5" x2="370" y2="97.5" class="s-rule s-1"/>
+        <line x1="50" y1="40" x2="370" y2="40" class="s-rule s-1"/>
+        <line x1="50" y1="270" x2="370" y2="270" class="s-ink s-1"/>
+        <line x1="50" y1="40" x2="50" y2="270" class="s-ink s-1"/>
+        <text x="44" y="274" class="ta-e t-xs t-mono t-3">0%</text>
+        <text x="44" y="216.5" class="ta-e t-xs t-mono t-3">100%</text>
+        <text x="44" y="159" class="ta-e t-xs t-mono t-3">200%</text>
+        <text x="44" y="101.5" class="ta-e t-xs t-mono t-3">300%</text>
+        <text x="44" y="44" class="ta-e t-xs t-mono t-3">400%</text>
+        <text x="14" y="24" class="t-sm t-3">回本需要的漲幅</text>
+        <text x="50" y="288" class="ta-m t-xs t-mono t-3">0%</text>
+        <text x="130" y="288" class="ta-m t-xs t-mono t-3">20%</text>
+        <text x="210" y="288" class="ta-m t-xs t-mono t-3">40%</text>
+        <text x="290" y="288" class="ta-m t-xs t-mono t-3">60%</text>
+        <text x="370" y="288" class="ta-m t-xs t-mono t-3">80%</text>
+        <text x="210" y="306" class="ta-m t-sm t-3">虧損幅度</text>
+        <line x1="50" y1="270" x2="370" y2="224" class="s-3 s-15 s-dash"/>
+        <text x="372" y="244" class="ta-e t-sm t-3">對稱線（假想）</text>
+        <polyline points="50.0 270.0 58.0 268.8 66.0 267.6 74.0 266.3 82.0 265.0 90.0 263.6 98.0 262.2 106.0 260.6 114.0 259.0 122.0 257.4 130.0 255.6 138.0 253.8 146.0 251.8 154.0 249.8 162.0 247.6 170.0 245.4 178.0 242.9 186.0 240.4 194.0 237.7 202.0 234.8 210.0 231.7 218.0 228.4 226.0 224.8 234.0 221.0 242.0 216.9 250.0 212.5 258.0 207.7 266.0 202.5 274.0 196.8 282.0 190.6 290.0 183.8 298.0 176.2 306.0 167.8 314.0 158.4 322.0 147.8 330.0 135.8 338.0 122.1 346.0 106.3 354.0 87.9 362.0 66.1 370.0 40.0" class="f-none s-down s-3w s-round draw"/>
+        <line x1="98" y1="198" x2="98" y2="258" class="s-ink s-1"/>
+        <circle cx="98" cy="262.2" r="4" class="f-o"/>
+        <text x="62" y="176" class="t-sm t-b">計畫停損 −12%</text>
+        <text x="62" y="193" class="t-sm t-2">回本要 +13.6%</text>
+        <line x1="142" y1="142" x2="138" y2="249" class="s-ink s-1"/>
+        <circle cx="138" cy="253.8" r="4" class="f-r"/>
+        <text x="142" y="118" class="t-sm t-b">融資追繳 −22%</text>
+        <text x="142" y="135" class="t-sm t-2">回本要 +28.2%</text>
+        <circle cx="250" cy="212.5" r="4.5" class="f-ink"/>
+        <text x="242" y="190" class="ta-e t-sm t-b">腰斬 −50%</text>
+        <text x="242" y="207" class="ta-e t-sm t-2">回本要 +100%</text>
+        <circle cx="370" cy="40" r="4.5" class="f-ink"/>
+        <text x="360" y="44" class="ta-e t-sm t-b">−80% 要 +400%</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>綠色曲線是回本需要的漲幅，虛線是「跌多少就漲多少」的假想對稱。小虧時兩者差不多，虧損越深，曲線越往上翹：這就是為什麼控制下檔比追求上檔更重要。</span></figcaption>
+  </figure>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>虧損幅度與回本所需漲幅</caption>
+      <thead><tr><th>虧損</th><th class="r">回本需要</th><th>在你的文件裡</th></tr></thead>
+      <tbody>
+        <tr><th>−12%</th><td class="r">+13.6%</td><td>計畫 §六 組合總停損（總資產約 88 萬）</td></tr>
+        <tr><th>−14%</th><td class="r">+16.3%</td><td>計畫 §一「20 檔全部觸發停損」的下緣</td></tr>
+        <tr><th>−19%</th><td class="r">+23.5%</td><td>計畫 §八 2024 年 7 月高點到 8/5</td></tr>
+        <tr><th>−22%</th><td class="r">+28.2%</td><td>計畫 §一 融資碰到 130% 追繳線（第 25 章）</td></tr>
+        <tr><th>−50%</th><td class="r">+100%</td><td>腰斬</td></tr>
+        <tr><th>−80%</th><td class="r">+400%</td><td>題材股泡沫破裂後常見</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §一</span></div>
+    <p class="quote">20檔全部觸發停損　約 −12% 至 −14%　86–88萬</p>
+    <p>計畫把最壞情境設計在 −12% 至 −14%。從回本數學看，這個範圍的意義是：就算全部停損，只要之後賺 13.6%–16.3% 就能回到 100 萬，大約等於另一次「全部達到<span class="term" data-term="目標1">目標1</span>」的成績。如果放任虧損擴大到 −30%，就需要 +42.9%，那幾乎得等下一個大行情。這就是<span class="term" data-term="停損">停損</span>的數學理由（第 32 章）。</p>
+  </div>
+
+  <p>現在換你試。先輸入 12，看回本需要多少；再輸入 22、50，比較曲線的陡峭程度。</p>
+  <div class="widget" data-widget="recovery" data-loss="12" data-note="計算不含交易成本與股利。"></div>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>跌 20% 之後再漲 20%，就回到原點了。</p></div>
+    <div class="myth-right"><p>100 × 0.8 × 1.2 ＝ 96，還少 4%。要回到 100 需要漲 25%。順序反過來也一樣：先漲 20% 再跌 20%，也是 96。</p></div>
+  </div>
+</section>
+
+<section id="inflation">
+  <h2><span class="sec-num">1.6</span>通膨與實質報酬：錢會悄悄變小</h2>
+  <div class="box define" id="def-inflation">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>通膨</dfn><span class="en">Inflation</span></p>
+    <p>通貨膨脹的簡稱：整體物價持續上漲，同樣的錢能買的東西變少。最常用的衡量是<span class="term" data-term="CPI">CPI</span>（消費者物價指數），第 12 章會詳細說明。</p>
+  </div>
+  <p>假設每年通膨 2%，今天的 100 萬元放在抽屜裡 10 年，數字還是 100 萬，但只能買到今天約 82 萬元的東西（1 ÷ 1.02<sup>10</sup> ≈ 0.82）。所以投資的第一個門檻不是「不虧錢」，而是「跑贏通膨」。</p>
+
+  <div class="box define" id="def-real">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>實質報酬</dfn><span class="en">Real return</span></p>
+    <p>扣掉通膨之後的報酬，代表購買力真正增加多少。帳面上看到的報酬叫名目報酬。</p>
+  </div>
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">實質報酬 ＝ <span class="frac"><span>1 ＋ 名目報酬</span><span>1 ＋ 通膨率</span></span> − 1 ≈ 名目報酬 − 通膨率</div>
+    <div class="where">假設定存年利率 1.7%、通膨 2%：(1.017 ÷ 1.02) − 1 ≈ −0.29%。帳面上每年賺 1.7%，購買力卻每年少 0.29%。</div>
+  </div>
+
+  <p>通膨對股市的影響比「錢變小」更直接。物價漲太快，央行會升息壓通膨；利率上升，借錢變貴，未來獲利的價值也被打折（第 12、13 章）。你的計畫在 2026/10/16 寫下的盤勢，就是一個現成的例子：</p>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §二</span></div>
+    <p class="quote">加權指數收 47,111 點；10/15 因美國 CPI 高於預期、加上 AI 資料中心融資的信用風險疑慮，大跌 1,656 點，為史上第六大跌點。</p>
+    <p>美國的通膨數字比預期高，市場立刻擔心<span class="term" data-term="聯準會">聯準會</span>繼續升息，台股當天重挫。通膨是一個「遠方的數字」如何在一天之內影響你帳戶的典型路徑：CPI → 利率預期 → 估值 → 股價。第 12 章會把這條鏈拆開。</p>
+  </div>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>把錢放定存最安全，絕對不會虧。</p></div>
+    <div class="myth-right"><p>定存的名目金額幾乎不會少，但當利率低於通膨，實質購買力每年都在流失。「沒有波動」和「沒有風險」是兩件事；定存的風險是慢慢變小。</p></div>
+  </div>
+</section>
+
+<section id="diversification">
+  <h2><span class="sec-num">1.7</span>分散：能做到與做不到的事</h2>
+  <div class="box define" id="def-diversify">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>分散</dfn><span class="en">Diversification</span></p>
+    <p>把資金分配到多個資產，讓單一資產出事時不至於拖垮整體。分散的效果取決於這些資產「是否一起漲跌」：越不同步，效果越好。</p>
+  </div>
+  <p>先看分散做得到的事。假設你平均買 20 檔股票，每檔占 5%。其中一檔因為公司自己的問題（例如財報作假、失去大客戶）暴跌 50%，整個組合只少 5% × 50% ＝ 2.5%。這種只屬於單一公司的風險，叫公司特有風險，分散可以把它稀釋掉。</p>
+  <p>再看分散做不到的事。如果壞消息影響所有公司，例如利率大升、景氣衰退、整個 AI 產業的資金鏈出問題，20 檔會一起跌。這種影響整個市場的風險，持股再多也分散不掉。兩檔股票一起漲跌的程度叫<span class="term" data-term="相關性">相關性</span>（第 16 章）：相關性越高，分散的效果越弱。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 300" role="img" aria-label="分散的效果示意：持股從 1 檔增加到 30 檔，組合波動快速下降後趨平；低相關的組合降到較低的地板，高相關（同一條供應鏈）的組合停在較高的地板">
+        <rect x="50" y="171.3" width="320" height="78.7" class="f-wash"/>
+        <text x="210" y="216" class="ta-m t-sm t-accent">市場風險：持股再多也分散不掉</text>
+        <line x1="50" y1="250" x2="370" y2="250" class="s-ink s-1"/>
+        <line x1="50" y1="60" x2="50" y2="250" class="s-ink s-1"/>
+        <line x1="50" y1="113.7" x2="370" y2="113.7" class="s-o s-1 s-dash"/>
+        <line x1="50" y1="171.3" x2="370" y2="171.3" class="s-accent s-1 s-dash"/>
+        <text x="44" y="254" class="ta-e t-xs t-mono t-3">0</text>
+        <text x="44" y="210" class="ta-e t-xs t-mono t-3">10</text>
+        <text x="44" y="166" class="ta-e t-xs t-mono t-3">20</text>
+        <text x="44" y="122" class="ta-e t-xs t-mono t-3">30</text>
+        <text x="44" y="78" class="ta-e t-xs t-mono t-3">40</text>
+        <text x="14" y="24" class="t-sm t-3">組合波動（%，示意）</text>
+        <text x="50" y="268" class="ta-m t-xs t-mono t-3">1</text>
+        <text x="149.3" y="268" class="ta-m t-xs t-mono t-3">10</text>
+        <text x="259.7" y="268" class="ta-m t-xs t-mono t-3">20</text>
+        <text x="370" y="268" class="ta-m t-xs t-mono t-3">30</text>
+        <text x="210" y="290" class="ta-m t-sm t-3">持股檔數</text>
+        <polyline points="50.0 74.0 61.0 92.6 72.1 99.3 83.1 102.7 94.1 104.9 105.2 106.3 116.2 107.3 127.2 108.1 138.3 108.7 149.3 109.2 160.3 109.6 171.4 109.9 182.4 110.2 193.4 110.5 204.5 110.7 215.5 110.9 226.6 111.0 237.6 111.2 248.6 111.3 259.7 111.4 270.7 111.5 281.7 111.6 292.8 111.7 303.8 111.8 314.8 111.9 325.9 111.9 336.9 112.0 347.9 112.1 359.0 112.1 370.0 112.2" class="f-none s-o s-3w s-round draw"/>
+        <polyline points="50.0 74.0 61.0 113.7 72.1 129.8 83.1 138.7 94.1 144.4 105.2 148.4 116.2 151.3 127.2 153.6 138.3 155.4 149.3 156.9 160.3 158.1 171.4 159.1 182.4 160.0 193.4 160.8 204.5 161.4 215.5 162.0 226.6 162.5 237.6 163.0 248.6 163.4 259.7 163.8 270.7 164.1 281.7 164.4 292.8 164.7 303.8 165.0 314.8 165.2 325.9 165.5 336.9 165.7 347.9 165.9 359.0 166.0 370.0 166.2" class="f-none s-accent s-3w s-round draw"/>
+        <circle cx="50" cy="74" r="4.5" class="f-ink"/>
+        <text x="60" y="66" class="t-sm t-b">只買 1 檔</text>
+        <text x="370" y="100" class="ta-e t-sm t-b">高相關：同一條供應鏈</text>
+        <text x="370" y="154" class="ta-e t-sm t-b t-accent">低相關：跨產業、跨驅動因子</text>
+        <line x1="116" y1="117" x2="116" y2="147" class="s-ink s-1"/>
+        <text x="122" y="136" class="t-sm t-2">相關性墊高的地板</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意（假設每檔波動 40%，相關係數 0.2 與 0.6）。前 10 檔降得最多，之後幾乎持平。持股都在同一條供應鏈時（橘線），地板高得多：持股從 10 檔加到 30 檔，風險幾乎沒有再下降。</span></figcaption>
+  </figure>
+
+  <p>這正是你的計畫面對的問題。20 檔裡有 13 檔集中在 AI 供應鏈的核心與成長組，它們的獲利都取決於同一件事：雲端大廠是否繼續大舉投資 AI（第 26 章）。10/15 美國 CPI 公布後的大跌，就是一次「高相關」的示範；但同一天，計畫也記錄了不同步的例子：</p>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §四</span></div>
+    <p class="quote">美國升息而台灣央行未跟進時，美元放款比重高的兆豐金、中信金利差擴大；中信金在 10/15 大跌當天仍創歷史新高。</p>
+    <p class="quote">中華電（純防守，10/15 大跌時電信股逆勢上漲）</p>
+    <p>計畫把 19% 放在「分散／避險」組（金融、油品、電網），再保留 12% 現金，就是要讓組合裡有一部分資產由<strong>不同的因素</strong>驅動：升息對 AI 股是壞消息，對銀行的利差可能是好消息；油價上漲推升通膨，對台塑化的油品價差卻是助力。這種設計在第 31 章會用權重算一遍。</p>
+  </div>
+
+  <h3>為什麼分散和翻倍難以兩全</h3>
+  <p>回到計畫第一節的結論。分散的本質是「取平均」：20 檔裡有的大漲、有的小漲、有的停損，整體結果會被拉向中間。要讓 20 檔的平均報酬達到 +100%，等於要每一檔平均都翻倍；只要有幾檔停損，其他檔就得漲更多來彌補。反過來，如果只押一兩檔，翻倍的機會變大了，全軍覆沒的機會也一起變大。</p>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §十一</span></div>
+    <p class="quote">加權期望報酬約 +10%（約 110 萬），這是比較貼近現實的目標；翻倍需要樂觀情境再加上槓桿，風險不對稱。</p>
+    <p>「風險不對稱」把這一章的三個觀念串在一起：要翻倍得加<span class="term" data-term="槓桿">槓桿</span>（1.4 節的光譜最右端），槓桿放大虧損，而虧損需要更大的漲幅才能回本（1.5 節）。上檔被分散壓低、下檔被槓桿放大，期望結果就變差了。</p>
+  </div>
+  <div class="box key">
+    <div class="box-label"><span class="zh"></span><span class="lat">KEY IDEA</span></div>
+    <p>分散降低的是<b>公司特有風險</b>，降不了<b>市場風險</b>。持股檔數不等於分散程度，要看它們是不是被同一件事驅動。</p>
+  </div>
+</section>
+
+<section id="two-documents">
+  <h2><span class="sec-num">1.8</span>你的兩份文件在說什麼</h2>
+  <p>這本手冊的終點，是讓你能逐字讀懂兩份文件。先用一個比喻建立整體印象：</p>
+  <ul>
+    <li><b>GCFIE v3.3-GOLD 是每天的天氣預報系統。</b>它規定每天台北時間 07:45 要產出一份<span class="term" data-term="盤前報告">盤前報告</span>，回答五個固定問題：全球市場處於什麼狀態、現貨和衍生品是否一致、專業資金在做什麼、美股的風險有沒有傳到台股、昨天的預警有沒有被價格證實。它不告訴你買什麼，而是告訴你今天的「風向和浪高」。</li>
+    <li><b>20 檔操作計畫是一份 5 個月的航行計畫。</b>它決定要帶哪些貨（20 檔股票和權重）、每一段航程的目標（建倉、加碼、停利、出場）、什麼情況要掉頭（停損與組合總停損），以及沿途要注意的暗礁（聯準會、財報、春節休市）。</li>
+  </ul>
+  <p>兩者的關係是：航行計畫決定方向和紀律，天氣預報決定今天能不能出航、要不要收帆。計畫第五節寫的加碼條件「大盤站回月線且外資停止連賣」，正是需要每天用 GCFIE 那種資料去檢查的條件。</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 表頭、20 檔計畫 卷首</span></div>
+    <p class="quote">執行時間　台北時間每日 07:45</p>
+    <p class="quote">本頁依 2026/10/16 公開資訊整理（整理日 2026/10/17；v2 新增第八至十一節：AI 瘋潮回顧、供需評估與配置微調），是研究框架，不是買賣建議；整理者（Claude）並非持牌投顧或財務顧問。下單前請以即時報價與公司最新公告為準。</p>
+    <p>兩份文件都清楚標示了自己的性質：一份是固定時間產出、可被驗證的風險辨識系統，一份是特定日期的研究框架。讀它們的時候要記得資料日（計畫是 2026/10/16）：裡面的價格、機率、事件日期，都是那一天看到的樣子。</p>
+  </div>
+
+  <p>下面這張圖是本書八個部分和兩份文件的對應。顏色越深，代表那一部分的知識在該文件裡用得越多。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 400" role="img" aria-label="本書八個部分與兩份文件的對應矩陣：地基與畢業兩部對兩份文件都必要；衍生品、籌碼、總經主要用於 GCFIE；公司、產業、實戰主要用於 20 檔計畫">
+        <text x="290" y="30" class="ta-m t-b t-mono">GCFIE</text>
+        <text x="360" y="30" class="ta-m t-b">20 檔計畫</text>
+        <line x1="16" y1="42" x2="390" y2="42" class="s-ink s-1"/>
+        <text x="16" y="66" class="t-b">一　地基</text>
+        <text x="16" y="83" class="t-sm t-3">錢、風險與市場 · 1–6 章</text>
+        <circle cx="290" cy="70" r="10" class="f-accent"/>
+        <circle cx="360" cy="70" r="10" class="f-accent"/>
+        <line x1="16" y1="94" x2="390" y2="94" class="s-rule s-1"/>
+        <text x="16" y="118" class="t-b">二　公司</text>
+        <text x="16" y="135" class="t-sm t-3">財報與估值 · 7–11 章</text>
+        <circle cx="290" cy="122" r="10" class="f-accent-soft s-accent s-15"/>
+        <circle cx="360" cy="122" r="10" class="f-accent"/>
+        <line x1="16" y1="146" x2="390" y2="146" class="s-rule s-1"/>
+        <text x="16" y="170" class="t-b">三　總經</text>
+        <text x="16" y="187" class="t-sm t-3">利率、匯率與跨資產 · 12–16 章</text>
+        <circle cx="290" cy="174" r="10" class="f-accent"/>
+        <circle cx="360" cy="174" r="10" class="f-accent-soft s-accent s-15"/>
+        <line x1="16" y1="198" x2="390" y2="198" class="s-rule s-1"/>
+        <text x="16" y="222" class="t-b">四　衍生品</text>
+        <text x="16" y="239" class="t-sm t-3">期貨、選擇權與波動率 · 17–22 章</text>
+        <circle cx="290" cy="226" r="10" class="f-accent"/>
+        <circle cx="360" cy="226" r="10" class="f-plate s-3 s-15"/>
+        <line x1="16" y1="250" x2="390" y2="250" class="s-rule s-1"/>
+        <text x="16" y="274" class="t-b">五　籌碼</text>
+        <text x="16" y="291" class="t-sm t-3">法人、台指期與融資 · 23–25 章</text>
+        <circle cx="290" cy="278" r="10" class="f-accent"/>
+        <circle cx="360" cy="278" r="10" class="f-accent-soft s-accent s-15"/>
+        <line x1="16" y1="302" x2="390" y2="302" class="s-rule s-1"/>
+        <text x="16" y="326" class="t-b">六　產業</text>
+        <text x="16" y="343" class="t-sm t-3">AI 供應鏈與景氣循環 · 26–30 章</text>
+        <circle cx="290" cy="330" r="10" class="f-accent-soft s-accent s-15"/>
+        <circle cx="360" cy="330" r="10" class="f-accent"/>
+        <line x1="16" y1="354" x2="390" y2="354" class="s-rule s-1"/>
+        <text x="16" y="378" class="t-b">七　實戰　八　畢業</text>
+        <text x="16" y="395" class="t-sm t-3">配置、紀律、心理、拆解文件 · 31–38 章</text>
+        <circle cx="290" cy="382" r="10" class="f-accent"/>
+        <circle cx="360" cy="382" r="10" class="f-accent"/>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>實心圓：該文件大量使用這部分的知識；淺色圓：部分用到；空心圓：很少用到。衍生品（第四部）幾乎都是為 GCFIE 準備的，產業（第六部）則主要用來讀懂計畫第八到十節。</span></figcaption>
+  </figure>
+
+  <p>建議的讀法是照章節順序走。前六章（第一部）是共同的地基：報酬與風險、股票、交易規則、美股與時差、指數、K 線。打好地基後，你可以依興趣先讀第二部（公司）或第三部（總經），但第四、五部的衍生品與籌碼要按順序讀，因為每一章都用到前一章的觀念。第八部的四章會把兩份文件逐節拆開，那時你會發現每一句話都對應到前面某一章。</p>
+  <aside class="note">每一章的名詞都可以點。看到底線虛線的詞（例如<span class="term" data-term="GCFIE">GCFIE</span>），點一下就會出現解釋和它所在的章節；也可以到<a href="../glossary.html">名詞表</a>一次查全部。</aside>
+</section>
+
+</article>
+
+<section class="recap" id="recap">
+  <h2>本章重點</h2>
+  <ul>
+    <li>投資、投機與賭博用三把尺區分：期望值（平均划不划算）、資訊（能不能靠研究改善判斷）、時間（時間是朋友還是成本）。</li>
+    <li>報酬率 ＝（期末 − 期初 ＋ 期間收入）÷ 期初；年化 ＝（1 ＋ 報酬率）<sup>12÷月數</sup> − 1。5 個月翻倍等於年化約 +428%，每個月要賺約 14.9%。</li>
+    <li>複利讓報酬再生報酬，差距集中在後段；72 法則：72 ÷ 年報酬率 ≈ 翻倍年數。成本與虧損也會複利。</li>
+    <li>風險是結果的分散程度。波動會吃掉報酬；風險溢酬是承擔不確定的補償，是預期而不是保證。流動性是能否快速以合理價格變現。</li>
+    <li>回本所需漲幅 ＝ 1 ÷（1 − 虧損）− 1：−12% 要 +13.6%，−22% 要 +28.2%，−50% 要 +100%。控制下檔比追求上檔重要。</li>
+    <li>實質報酬 ≈ 名目報酬 − 通膨。通膨透過利率影響估值，10/15 的 CPI 大跌就是例子。</li>
+    <li>分散只能降低公司特有風險；同一條供應鏈的 20 檔高度相關。GCFIE 是每天的風險天氣預報，20 檔計畫是 5 個月的航行計畫。</li>
+  </ul>
+</section>
+
+<section class="quiz-set" id="quiz">
+  <h2>自我檢測</h2>
+  <p>每題選一個答案，選完會顯示解析。</p>
+
+  <div class="quiz" data-answer="c">
+    <p class="q">一個遊戲：60% 機率贏 50 元、40% 機率輸 100 元。這個遊戲的期望值是多少？</p>
+    <ol class="opts"><li>+10 元，值得玩</li><li>−50 元</li><li>−10 元，玩越多次越虧</li><li>0 元，不賺不賠</li></ol>
+    <div class="explain">期望值 ＝ 0.6 × 50 ＋ 0.4 ×（−100）＝ 30 − 40 ＝ −10 元。勝率雖然超過一半，但輸的時候輸得多，平均下來每次虧 10 元。勝率高不等於划算，這也是停損與停利要一起看的原因。</div>
+  </div>
+
+  <div class="quiz" data-answer="b">
+    <p class="q">一個組合 5 個月賺了 14%。換算成年化報酬率大約是多少？</p>
+    <ol class="opts"><li>約 +14%</li><li>約 +37%</li><li>約 +33.6%</li><li>約 +70%</li></ol>
+    <div class="explain">年化 ＝ 1.14<sup>12÷5</sup> − 1 ＝ 1.14<sup>2.4</sup> − 1 ≈ +37.0%。如果直接把 14% × 12 ÷ 5 ＝ 33.6%，就忽略了複利。年化是比較速度用的尺，不代表接下來 7 個月也會用同樣速度上漲。</div>
+  </div>
+
+  <div class="quiz" data-answer="d">
+    <p class="q">股票 A 先跌 30%、再漲 30%。和起點相比，現在是：</p>
+    <ol class="opts"><li>回到原點</li><li>多賺了一點</li><li>少了 30%</li><li>少了 9%</li></ol>
+    <div class="explain">0.7 × 1.3 ＝ 0.91，少了 9%。漲跌的百分比是對「當時的金額」算的：30% 的漲幅作用在已經變小的 70 上。要從 70 回到 100，需要漲 42.9%。</div>
+  </div>
+
+  <div class="quiz" data-answer="a">
+    <p class="q">一個組合持有 20 檔股票，但幾乎都是 AI 伺服器供應鏈的公司。下列哪一種情況，這個組合最不容易被分散保護？</p>
+    <ol class="opts"><li>雲端大廠同時宣布削減 AI 資本支出</li><li>其中一家公司爆發會計醜聞</li><li>其中一家工廠失火停工一個月</li><li>其中一家公司的董事長突然辭職</li></ol>
+    <div class="explain">B、C、D 都是單一公司的事件，20 檔分散可以把衝擊稀釋到約 1/20。A 會同時打擊整條供應鏈，20 檔高度相關，持股再多也躲不掉。這就是計畫要另外放 19% 避險組與 12% 現金的原因。</div>
+  </div>
+
+  <div class="quiz" data-answer="c">
+    <p class="q">定存年利率 1.7%，同期通膨 2.5%。下列說法何者正確？</p>
+    <ol class="opts"><li>名目報酬為負，所以定存虧錢了</li><li>實質報酬約 +4.2%</li><li>實質報酬約 −0.8%，購買力在下降</li><li>只要沒有波動，就沒有風險</li></ol>
+    <div class="explain">實質報酬 ＝ 1.017 ÷ 1.025 − 1 ≈ −0.78%。帳面金額增加（名目為正），但能買的東西變少。定存沒有波動，卻有通膨侵蝕購買力的風險。</div>
+  </div>
+
+  <div class="quiz" data-answer="b">
+    <p class="q">GCFIE 第一節說它的目的「不是預測今天一定漲或一定跌」。這最接近下列哪一種做法？</p>
+    <ol class="opts"><li>每天選一檔最可能漲的股票</li><li>先建立「如果……就代表……」的條件，再用隔天的價格檢查</li><li>只看新聞的利多與利空數量決定方向</li><li>預測加權指數的收盤點數</li></ol>
+    <div class="explain">GCFIE 是一套「可持續驗證的市場風險辨識系統」：建立條件、等待價格確認，並在隔天回頭驗證（第 36 章的 Forecast Accountability）。它的最高原則也明說不是數利多與利空，而是看價格是否願意對消息做出反應。</div>
+  </div>
+</section>
+
+</main>
+</div>
+</div>
+</body>
+</html>
