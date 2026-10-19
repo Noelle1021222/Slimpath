@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>讀通投資</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="從零開始的投資學習手冊：38 章、圖解與互動工具，一路讀懂 GCFIE 盤前報告與你的 20 檔台股操作計畫。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=LXGW+WenKai+TC:wght@400;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;900&amp;display=swap">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/handbook.css">
+<link rel="stylesheet" href="assets/css/cover.css">
+<script>try{var d=document.documentElement,g=function(k){return JSON.parse(localStorage.getItem("hb."+k))},t=g("theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);if(g("quote")==="intl")d.setAttribute("data-quote","intl");if(g("size")==="lg")d.setAttribute("data-size","lg")}catch(e){}</script>
+<script src="assets/js/curriculum.js" defer></script>
+<script src="assets/js/glossary-data.js" defer></script>
+<script src="assets/js/handbook.js" defer></script>
+<script src="assets/js/cover.js" defer></script>
+</head>
+<body data-page="home">
+<main id="main">
+
+<section class="hero page" aria-labelledby="hero-title">
+  <div class="cert">
+    <div class="micro micro-top" aria-hidden="true"></div>
+    <div class="micro micro-bottom" aria-hidden="true"></div>
+    <div class="micro micro-left" aria-hidden="true"></div>
+    <div class="micro micro-right" aria-hidden="true"></div>
+    <div class="cert-inner">
+      <div class="cert-copy">
+        <p class="cert-serial"><span>No. 2026–1016</span><span>學習手冊 · 第一版</span></p>
+        <h1 id="hero-title" class="cert-title">讀通<br>投資</h1>
+        <p class="cert-sub">從第一張股票，讀到每天 07:45 的盤前報告。</p>
+        <p class="cert-body">這本手冊從零開始，一章一章帶你讀懂兩份文件：<b>GCFIE v3.3-GOLD 盤前報告規格書</b>，以及你的 <b>台股 5 個月操作計畫（20 檔，2026/10/16）</b>。每個名詞都有解釋，每個數字都算給你看，每個機制都畫成圖。</p>
+        <div class="cert-actions">
+          <a class="btn primary" id="cta-start" href="chapters/01-first-principles.html">從第一章開始</a>
+          <a class="btn" href="#routes">選一條路線</a>
+          <a class="btn ghost" href="glossary.html">查名詞</a>
+        </div>
+        <dl class="cert-stats" id="cert-stats">
+          <div><dt>部</dt><dd>8</dd></div>
+          <div><dt>章</dt><dd>38</dd></div>
+          <div><dt>名詞</dt><dd id="stat-terms">—</dd></div>
+          <div><dt>已讀完</dt><dd id="stat-done">0</dd></div>
+        </dl>
+      </div>
+      <div class="cert-art" aria-hidden="true">
+        <div class="rosette" id="rosette"></div>
+        <p class="par">面額　新臺幣壹拾元整</p>
+      </div>
+    </div>
+  </div>
+  <div class="waveband" id="waveband" aria-hidden="true"></div>
+</section>
+
+<section class="decoder page" id="decoder" aria-labelledby="decoder-title">
+  <div class="sec-head">
+    <p class="eyebrow">文件解碼器</p>
+    <h2 id="decoder-title">你現在讀得懂多少？</h2>
+    <p class="sec-lede">下面是你的兩份文件的每一節。被塗黑的段落，是你還缺前置知識的地方；每讀完一章並按下「標記為已讀完」，相關段落就會解鎖。點任何一節，可以看到需要哪幾章。</p>
+  </div>
+  <div class="docs" id="docs"></div>
+</section>
+
+<section class="path page" id="path" aria-labelledby="path-title">
+  <div class="sec-head">
+    <p class="eyebrow">學習地圖</p>
+    <h2 id="path-title">38 根 K 棒，八個部</h2>
+    <p class="sec-lede">每一根 K 棒是一章，高度是難度。讀完的章節會填上顏色，像一段往上走的行情。</p>
+  </div>
+  <div class="kchart" id="kchart"></div>
+  <div class="parts" id="parts"></div>
+</section>
+
+<section class="routes page" id="routes" aria-labelledby="routes-title">
+  <div class="sec-head">
+    <p class="eyebrow">讀法</p>
+    <h2 id="routes-title">三條路線</h2>
+    <p class="sec-lede">完全新手照順序讀。已經有基礎、想先看懂某一份文件，就走對應的捷徑；路上遇到不懂的名詞，點一下就有解釋。</p>
+  </div>
+  <div class="route-grid" id="route-grid"></div>
+</section>
+
+<section class="howto page" aria-labelledby="howto-title">
+  <div class="sec-head">
+    <p class="eyebrow">使用方式</p>
+    <h2 id="howto-title">這本書的元件</h2>
+  </div>
+  <div class="howto-grid">
+    <div class="howto-item"><span class="hi-tag">名詞</span><p>內文中<span class="term" data-term="槓桿">底線虛線的詞</span>可以點，會跳出簡短解釋與出處章節。</p></div>
+    <div class="howto-item"><span class="hi-tag">文件</span><p>「在你的文件裡」框逐字引用 GCFIE 或 20 檔計畫，下面接著解讀那一句在說什麼。</p></div>
+    <div class="howto-item"><span class="hi-tag">互動</span><p>互動工具可以拉動數字，親手驗證計畫裡的每個試算，例如融資跌 22% 為什麼會被追繳。</p></div>
+    <div class="howto-item"><span class="hi-tag">檢測</span><p>每章最後有自我檢測與重點回顧。讀完按「標記為已讀完」，封面的解碼器就會更新。</p></div>
+  </div>
+</section>
+
+</main>
+</body>
+</html>

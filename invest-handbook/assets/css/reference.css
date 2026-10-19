@@ -1,0 +1,226 @@
+/* 讀通投資 — reference pages (glossary, formulas). */
+.ref {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding-block: clamp(2rem, 5vw, 3.5rem) 3rem;
+}
+.ref-head {
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+.ref-head h1 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: var(--fs-xl);
+  line-height: 1.15;
+  margin: 0.6rem 0 0;
+}
+.ref-head .lede {
+  color: var(--ink-2);
+  max-width: 40em;
+  margin: 0.8rem 0 0;
+}
+.ref-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: center;
+  margin-top: 1.4rem;
+}
+.search {
+  flex: 1 1 18rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--ink);
+  background: var(--plate);
+  padding: 0 14px;
+  border-radius: 999px;
+  min-width: 0;
+}
+.search svg {
+  width: 18px;
+  height: 18px;
+  color: var(--ink-3);
+  flex: none;
+}
+.search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: var(--fs-base);
+  color: var(--ink);
+  padding: 10px 0;
+  outline: none;
+}
+.search:focus-within {
+  box-shadow: var(--focus);
+}
+.ref-count {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  margin: 0.9rem 0 0;
+}
+.ref-empty {
+  color: var(--ink-3);
+  padding: 2rem 0;
+}
+.gloss-ch {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.4rem 2.5rem;
+  padding: 1.4rem 0 1.6rem;
+  border-bottom: 1px solid var(--rule);
+}
+@media (min-width: 900px) {
+  .gloss-ch {
+    grid-template-columns: 15rem minmax(0, 1fr);
+  }
+}
+.gloss-ch-head {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+}
+.gloss-ch-head a {
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+.gloss-ch-head a:hover {
+  color: var(--engrave);
+}
+.gloss-ch-head .gn {
+  font-family: var(--font-numeral);
+  font-style: italic;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--engrave);
+}
+.gloss-ch-head .gp {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
+.gloss-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  gap: 0;
+  margin: 0;
+}
+.gloss-item {
+  padding: 0.75rem 1rem 0.85rem 0;
+  border-top: 1px solid var(--rule-2);
+  min-width: 0;
+}
+.gloss-item dt {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  align-items: baseline;
+}
+.gloss-item dt a {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.05rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+.gloss-item dt a:hover {
+  color: var(--engrave);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+.gloss-item dd {
+  margin: 0.25rem 0 0;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+.gloss-item:target {
+  background: var(--engrave-wash);
+  outline: 2px solid var(--engrave);
+  outline-offset: 2px;
+}
+mark {
+  background: var(--foil-soft);
+  color: inherit;
+  padding: 0 1px;
+}
+
+/* formulas */
+.fcards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+.fcard {
+  border: 1px solid var(--ink);
+  background: var(--plate);
+  padding: 1rem 1.1rem 1.1rem;
+  display: grid;
+  gap: 0.55rem;
+  align-content: start;
+  min-width: 0;
+}
+.fcard h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: baseline;
+}
+.fcard h3 a {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: var(--fs-2xs);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.fcard .formula-line {
+  text-align: left;
+  font-size: 1rem;
+  white-space: normal;
+  padding: 0.5rem 0.7rem;
+  background: var(--paper);
+  border: 1px solid var(--rule-2);
+}
+.fcard p {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  line-height: 1.7;
+}
+.fcard .ex {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--ink);
+  border-top: 1px dashed var(--rule);
+  padding-top: 0.5rem;
+}
+.fgroup {
+  margin-top: 2.6rem;
+}
+.fgroup > h2 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: var(--fs-lg);
+  margin: 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--ink);
+}
+.ref-tools .seg {
+  border-radius: 18px;
+}

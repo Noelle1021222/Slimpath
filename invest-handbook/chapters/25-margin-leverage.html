@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>融資融券與槓桿數學 · 讀通投資</title>
+<meta name="description" content="借錢買股票會把漲跌一起放大。把「融資漲 40% 翻倍、跌 22% 追繳」一步步算出來，並讀懂融資餘額與多殺多。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=LXGW+WenKai+TC:wght@400;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;900&amp;display=swap">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/handbook.css">
+<script>try{var d=document.documentElement,g=function(k){return JSON.parse(localStorage.getItem("hb."+k))},t=g("theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);if(g("quote")==="intl")d.setAttribute("data-quote","intl");if(g("size")==="lg")d.setAttribute("data-size","lg")}catch(e){}</script>
+<script src="../assets/js/curriculum.js" defer></script>
+<script src="../assets/js/data-plan.js" defer></script>
+<script src="../assets/js/glossary-data.js" defer></script>
+<script src="../assets/js/handbook.js" defer></script>
+<script src="../assets/js/widgets.js" defer></script>
+<script src="../assets/js/widgets-plan.js" defer></script>
+<script src="../assets/js/widgets-basics.js" defer></script>
+<script src="../assets/js/widgets-markets.js" defer></script>
+</head>
+<body data-chapter="25-margin-leverage">
+<div class="page">
+<div class="chapter-grid">
+<main class="chapter" id="main">
+
+<header class="opener">
+  <p class="eyebrow"></p>
+  <div class="opener-num" aria-hidden="true"></div>
+  <h1>融資融券與槓桿數學</h1>
+  <p class="lede">借錢買股票，漲的時候賺得快，跌的時候賠得更快，而且跌到一條線就會被券商強制賣掉。這一章把你計畫裡那句「漲約 40% 才翻倍、跌約 22% 就被追繳」親手算一遍，再讀懂「融資餘額 6,300 億」為什麼讓人緊張。</p>
+  <dl class="opener-meta"></dl>
+</header>
+
+<section class="objectives" aria-labelledby="obj-h">
+  <h2 id="obj-h">學完這章，你能夠</h2>
+  <ol>
+    <li>說清楚融資、融券各是誰借什麼給誰，以及它們的擔保品是什麼。</li>
+    <li>算出融資的槓桿倍數與擔保維持率，找到 130% 追繳線對應的股價跌幅。</li>
+    <li>自己驗證計畫第一節：「組合漲約 40% 才翻倍，跌約 22% 就碰到 130% 被追繳，本金剩不到一半」。</li>
+    <li>讀懂融資餘額、多殺多、去槓桿這些詞，知道它們為什麼常出現在急跌的新聞裡。</li>
+    <li>理解計畫的紀律「不融資、不當沖、不碰權證」背後的數學。</li>
+  </ol>
+</section>
+
+<article class="prose">
+
+<section id="leverage">
+  <h2><span class="sec-num">25.1</span>槓桿：用別人的錢放大結果</h2>
+  <p class="lead-in">假設你有 40 萬元，想買 100 萬元的股票。差的 60 萬向別人借。這就是<span class="term" data-term="槓桿">槓桿</span>：你只出一部分的錢，卻承擔整筆投資的漲跌。</p>
+  <p>槓桿的大小用「倍數」表示，算法是買進的總市值除以自己出的錢。上面的例子是 100 ÷ 40 ＝ 2.5 倍。倍數的意思很直接：股價動 1%，你的本金大約動 2.5%。</p>
+  <p>關鍵在於<strong>借來的錢不會跟著股價變</strong>。股價漲，多出來的市值全部歸你；股價跌，少掉的市值也全部從你的本金扣，借款一毛都不會少。下面這張圖把三種情況畫在一起。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 300" role="img" aria-label="槓桿骨架：借款固定 60 萬；股價跌 22% 時自有資金從 40 萬剩 18 萬，漲 40% 時從 40 萬變 80 萬">
+        <line x1="20" y1="22" x2="42" y2="22" class="s-3 s-15 s-dash"/>
+        <text x="50" y="27" class="t-sm t-3">借款線：60 萬，不管漲跌都一樣</text>
+        <line x1="20" y1="250" x2="380" y2="250" class="s-ink s-1"/>
+        <line x1="20" y1="166" x2="380" y2="166" class="s-3 s-15 s-dash"/>
+        <rect x="40" y="166" width="72" height="84" class="f-soft"/>
+        <rect x="40" y="110" width="72" height="56" class="f-accent"/>
+        <text x="76" y="213" class="ta-m t-2 t-sm">借款 60</text>
+        <text x="76" y="143" class="ta-m t-paper t-b">自有 40</text>
+        <text x="76" y="100" class="ta-m t-mono t-sm t-2">市值 100</text>
+        <text x="76" y="272" class="ta-m t-b">期初</text>
+        <text x="76" y="291" class="ta-m t-sm t-3">2.5 倍槓桿</text>
+        <rect x="164" y="166" width="72" height="84" class="f-soft"/>
+        <rect x="164" y="141" width="72" height="25" class="f-down"/>
+        <text x="200" y="213" class="ta-m t-2 t-sm">借款 60</text>
+        <text x="200" y="158" class="ta-m t-paper t-b t-sm">自有 18</text>
+        <text x="200" y="131" class="ta-m t-mono t-sm t-2">市值 78</text>
+        <text x="200" y="272" class="ta-m t-b">股價 −22%</text>
+        <text x="200" y="291" class="ta-m t-sm t-down t-b">本金 −55%</text>
+        <rect x="288" y="166" width="72" height="84" class="f-soft"/>
+        <rect x="288" y="54" width="72" height="112" class="f-up"/>
+        <text x="324" y="213" class="ta-m t-2 t-sm">借款 60</text>
+        <text x="324" y="115" class="ta-m t-paper t-b">自有 80</text>
+        <text x="324" y="44" class="ta-m t-mono t-sm t-2">市值 140</text>
+        <text x="324" y="272" class="ta-m t-b">股價 +40%</text>
+        <text x="324" y="291" class="ta-m t-sm t-up t-b">本金 +100%</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>以萬元為單位。借款那一段（灰色）高度永遠不變，所以股價的每一點漲跌都落在你的本金（彩色）上。股價跌 22%，本金就少了一半以上。</span></figcaption>
+  </figure>
+
+  <aside class="note">槓桿不會改變股票本身的漲跌，只改變<b>你</b>承受的漲跌。同一檔台積電，有人用現金買、有人用融資買，股價一樣，心情完全不同。</aside>
+
+  <div class="box key">
+    <div class="box-label"><span class="zh"></span><span class="lat">KEY IDEA</span></div>
+    <p>槓桿倍數 ＝ 買進總市值 ÷ 自有資金。倍數多大，本金的漲跌就被放大多少倍，<strong>上下兩個方向一樣大</strong>。</p>
+  </div>
+</section>
+
+<section id="margin-buy">
+  <h2><span class="sec-num">25.2</span>融資：向券商借錢買股票</h2>
+  <div class="box define" id="def-margin">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>融資</dfn><span class="en">Margin buying</span></p>
+    <p>向券商借錢買股票。買進的股票留在券商那裡當擔保品，你要付利息，賣出時先還借款，剩下的才是你的。融資和融券合稱<span class="term" data-term="信用交易">信用交易</span>，需要另外開立信用帳戶。</p>
+  </div>
+  <p>能借多少由<span class="term" data-term="融資成數">融資成數</span>決定。台股一般的上限是：</p>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>融資成數與隱含的槓桿（一般上限，個股可能被調降或暫停信用交易）</caption>
+      <thead><tr><th>市場</th><th class="r">融資成數</th><th class="r">自備比例</th><th class="r">槓桿倍數</th><th class="r">期初維持率</th></tr></thead>
+      <tbody>
+        <tr><th>上市股票</th><td class="r">60%</td><td class="r">40%</td><td class="r">2.5 倍</td><td class="r">166.7%</td></tr>
+        <tr><th>上櫃股票</th><td class="r">50%</td><td class="r">50%</td><td class="r">2.0 倍</td><td class="r">200.0%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>計畫第一節寫的「上市股約 2.5 倍槓桿」就是第一列：借 6 成、自備 4 成，1 ÷ 0.4 ＝ 2.5。</p>
+  <p>融資不是免費的。借款要付利息，利率由券商訂（常見大約年息 6% 上下，以你的券商公告為準），而且有期限，到期要還款或申請展延。用融資買進叫「融資買進」，賣掉股票還錢叫「融資賣出」或「資賣」。</p>
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>融資 5 個月，利息要多少？（假設年息 6%）</h4>
+    <ol class="calc">
+      <li>計畫持有期約 5 個月。用 100 萬本金上市融資，借款是 150 萬。<span class="eq">150 萬 × 6% × 5 ÷ 12 ＝ 37,500 元</span></li>
+      <li>換算成本金的報酬率：<span class="eq">37,500 ÷ 100 萬 ＝ 3.75%</span></li>
+    </ol>
+    <p class="answer">股價要先漲約 1.5%（3.75% ÷ 2.5 倍），才夠付利息；還沒算買賣的手續費和證交稅。</p>
+  </div>
+  <p>這筆利息不管股票漲跌都要付，等於讓起跑線往後退。持有越久、借得越多，退得越遠。</p>
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>融資只是「多買一點」，股票會漲，所以借錢買只會賺更多。</p></div>
+    <div class="myth-right"><p>融資放大的是<strong>結果</strong>，不是勝率。股票漲跌的機率完全沒變，但你承受虧損的能力變小了：跌到某條線就會被強制賣出，連等它漲回來的機會都沒有。</p></div>
+  </div>
+</section>
+
+<section id="maintenance">
+  <h2><span class="sec-num">25.3</span>維持率與追繳：130% 這條線</h2>
+  <p>券商借你錢，最怕的是股票跌到不夠還。所以它每天盯著一個比率：<span class="term" data-term="擔保維持率">擔保維持率</span>，簡稱維持率。</p>
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">維持率 ＝ <span class="frac"><span>股票市值</span><span>融資金額</span></span> × 100%</div>
+    <div class="where">剛買進時，市值 100、借款 60，維持率 ＝ 100 ÷ 60 ≈ 166.7%。股價越跌，分子越小，維持率就越低；分母（借款）不會變。</div>
+  </div>
+  <p>如果你同時有融資和融券部位，券商看的是把兩者合在一起的<strong>整戶擔保維持率</strong>，公式比較長，但道理相同：擔保品價值 ÷ 你欠券商的東西。</p>
+  <details class="deep">
+    <summary>整戶擔保維持率的完整公式</summary>
+    <div>
+      <p>整戶擔保維持率 ＝（融資擔保證券市值 ＋ 原融券擔保價款及保證金）÷（原融資金額 ＋ 融券證券市值）× 100%。</p>
+      <p>分子是券商手上可以處分的東西：你融資買的股票，以及你融券時交的保證金和賣股價款。分母是你欠的：融資借的錢，以及融券借的股票現在的市值。融券那檔股票上漲，分母就變大，維持率一樣會往下掉。</p>
+    </div>
+  </details>
+  <p>維持率跌破 130%，就會收到<span class="term" data-term="追繳">追繳</span>通知。依證交所的說明，流程大致如下：</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 252" role="img" aria-label="追繳時間軸：T 日收盤維持率低於 130% 收到通知，次日起兩日內補繳，期限後仍未回到 130% 則在 T+3 處分擔保品">
+        <rect x="124" y="52" width="152" height="36" class="f-wash"/>
+        <text x="200" y="40" class="ta-m t-sm t-accent">補繳期間（2 個營業日）</text>
+        <line x1="26" y1="70" x2="374" y2="70" class="s-ink s-15"/>
+        <circle cx="44" cy="70" r="9" class="f-o"/>
+        <circle cx="152" cy="70" r="7" class="f-plate s-ink s-15"/>
+        <circle cx="248" cy="70" r="7" class="f-plate s-ink s-15"/>
+        <circle cx="356" cy="70" r="9" class="f-r"/>
+        <text x="44" y="108" class="ta-m t-mono t-b">T 日</text>
+        <text x="152" y="108" class="ta-m t-mono t-b">T+1</text>
+        <text x="248" y="108" class="ta-m t-mono t-b">T+2</text>
+        <text x="356" y="108" class="ta-m t-mono t-b">T+3</text>
+        <text x="44" y="132" class="ta-m t-sm">收盤維持率</text>
+        <text x="44" y="150" class="ta-m t-sm">低於 130%</text>
+        <text x="44" y="168" class="ta-m t-sm t-3">收盤後通知</text>
+        <text x="152" y="132" class="ta-m t-sm">通知送達</text>
+        <text x="152" y="150" class="ta-m t-sm t-3">開始算期限</text>
+        <text x="248" y="132" class="ta-m t-sm">補繳期限</text>
+        <text x="248" y="150" class="ta-m t-sm t-3">補錢或賣股</text>
+        <text x="248" y="168" class="ta-m t-sm t-3">還款</text>
+        <text x="356" y="132" class="ta-m t-sm t-b">處分擔保品</text>
+        <text x="356" y="150" class="ta-m t-sm t-3">俗稱「斷頭」</text>
+        <line x1="26" y1="194" x2="374" y2="194" class="s-rule s-1"/>
+        <text x="200" y="218" class="ta-m t-sm t-2">處分前維持率回到 130% 以上：暫不處分</text>
+        <text x="200" y="240" class="ta-m t-sm t-2">回到 166% 以上：追繳紀錄才取消</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>追繳不是立刻斷頭，而是給你兩個營業日。但在急跌時，這兩天股價常常繼續下跌，補錢的壓力會越滾越大。細節以證交所與你的券商規定為準。</span></figcaption>
+  </figure>
+
+  <div class="box define" id="def-margin-call">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>追繳</dfn><span class="en">Margin call</span></p>
+    <p>維持率低於 130% 時，券商通知你在期限內補足擔保（補錢、賣股還款都可以）。期限到了還沒補足，券商可以把你的股票賣掉還款，這就是<dfn id="def-forced-sale">斷頭</dfn>（處分擔保品）。</p>
+  </div>
+  <p>追繳線對應的股價跌幅，可以從公式直接反推。設融資成數為 <i>r</i>，股價變動為 <i>x</i>：維持率 ＝ (1 ＋ <i>x</i>) ÷ <i>r</i>。令它等於 1.3，就得到：</p>
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">追繳跌幅 <i>x</i> ＝ 1.3 × 融資成數 − 1</div>
+    <div class="where">上市（60%）：1.3 × 0.6 − 1 ＝ −0.22，股價跌 22% 碰到追繳線。上櫃（50%）：1.3 × 0.5 − 1 ＝ −0.35，跌 35% 才碰到。</div>
+  </div>
+  <h3>收到追繳，要補多少錢？</h3>
+  <p>補繳最直接的方式是拿現金償還一部分融資，讓分母變小。用一個數字例子看看：</p>
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>市值剩 187.5 萬、融資 150 萬，維持率 125%</h4>
+    <ol class="calc">
+      <li>回到 130%，融資金額最多只能是：<span class="eq">187.5 萬 ÷ 1.3 ≈ 144.2 萬 → 要還約 5.8 萬</span></li>
+      <li>回到 166%（取消追繳紀錄），融資金額最多只能是：<span class="eq">187.5 萬 ÷ 1.66 ≈ 113.0 萬 → 要還約 37 萬</span></li>
+      <li>如果隔天股價再跌 5%，市值變 178.1 萬：<span class="eq">178.1 萬 ÷ 1.3 ≈ 137.0 萬 → 要還的錢變成約 13 萬</span></li>
+    </ol>
+    <p class="answer">剛跌破時補一點就能過關，但股價繼續跌，要補的錢會快速增加；手上沒有預備現金，就只能賣股。</p>
+  </div>
+  <p>另一種方式是賣掉部分股票還款。賣股會讓市值和融資一起減少，維持率也會回升，但等於在低點被迫減碼。這也是計畫保留 12% 現金、而且不融資的原因之一：<strong>現金給你選擇，槓桿拿走你的選擇</strong>。</p>
+  <aside class="note">背一個捷徑：<b>上市融資，跌兩成就要小心追繳。</b>台股過去幾年幾乎每年都有一次兩成左右的急跌，這條線並不遙遠。</aside>
+</section>
+
+<section id="plan-math">
+  <h2><span class="sec-num">25.4</span>把計畫裡的數字算一遍</h2>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §一</span></div>
+    <p class="quote">融資試算（上市股約2.5倍槓桿）：組合漲約40%才會翻倍；但只要跌約22%就會碰到130%維持率被追繳，本金剩不到一半。</p>
+    <p>這句話裡有三個數字：40%、22%、「剩不到一半」。下面用 100 萬本金一個一個驗證。</p>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>用 100 萬元本金、上市融資 6 成，買進一籃子股票</h4>
+    <ol class="calc">
+      <li>能買多少：本金是總市值的 40%，所以總市值 ＝ 100 萬 ÷ 0.4 ＝ 250 萬，向券商借 150 萬。<span class="eq">250 萬 × 60% ＝ 150 萬（借款）</span></li>
+      <li>期初維持率：<span class="eq">250 ÷ 150 ＝ 166.7%</span></li>
+      <li>跌 22%：市值 ＝ 250 × 0.78 ＝ 195 萬。<span class="eq">維持率 ＝ 195 ÷ 150 ＝ 130.0%　← 剛好碰到追繳線</span></li>
+      <li>這時你的淨值：<span class="eq">195 − 150 ＝ 45 萬，本金 −55%</span></li>
+      <li>漲 40%：市值 ＝ 250 × 1.4 ＝ 350 萬。<span class="eq">淨值 ＝ 350 − 150 ＝ 200 萬，本金 +100%</span></li>
+    </ol>
+    <p class="answer">三個數字都對：漲 40% 翻倍，跌 22% 追繳，追繳時本金只剩 45 萬（不到一半）。</p>
+  </div>
+
+  <p>注意這裡的不對稱：要翻倍需要漲 40%，要被追繳只需要跌 22%。而計畫第一節也提醒，光是 10/12–10/16 那一週，加權指數就跌了 2,022 點。若從約 49,100 點跌到 47,111 點，大約是 −4.1%；換成 2.5 倍槓桿，本金一週就少了約一成。</p>
+  <p>現在換你動手。拉動「股價變動」，看維持率與本金怎麼變；切換上市、上櫃，看追繳線怎麼移動。</p>
+
+  <div class="widget" data-widget="margin" data-own="1000000" data-ratio="60" data-move="-22" data-note="計算忽略融資利息與交易成本；實際維持率以券商整戶計算為準。"></div>
+
+  <p>翻倍需要的漲幅也有捷徑。要讓淨值變成兩倍，市值要多出「一份本金」。本金占市值的比例是 1 − <i>r</i>，所以：</p>
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">本金翻倍所需漲幅 ＝ 1 − 融資成數 ＝ 自備比例</div>
+    <div class="where">上市：1 − 0.6 ＝ 40%。上櫃：1 − 0.5 ＝ 50%。</div>
+  </div>
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>被追繳時賠 22%，之後漲回 22% 就回本了。</p></div>
+    <div class="myth-right"><p>本金已經從 100 萬變成 45 萬，要回到 100 萬得漲 122%。虧損越深，回本需要的漲幅越不成比例（第 1 章的「回本數學」）。更糟的是，若在低點被斷頭，連等它漲回來的機會都沒了。</p></div>
+  </div>
+</section>
+
+<section id="short-sell">
+  <h2><span class="sec-num">25.5</span>融券：借股票來賣</h2>
+  <div class="box define" id="def-short">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>融券</dfn><span class="en">Short selling on margin</span></p>
+    <p>向券商借股票來賣，等股價跌了再買回來還，賺中間的價差。這就是「放空」。借股票要先交保證金，賣股票拿到的錢也押在券商那裡當擔保。</p>
+  </div>
+  <p>融資借的是錢、看漲；融券借的是股票、看跌。兩者剛好相反，下圖把「誰借什麼給誰」畫出來。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 300" role="img" aria-label="融資與融券的借貸方向：融資時券商借錢給投資人、股票留作擔保；融券時券商借股票給投資人賣出，投資人交保證金與賣股價款">
+        <defs>
+          <marker id="ar25a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="f-ink"/></marker>
+          <marker id="ar25a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="f-accent"/></marker>
+        </defs>
+        <text x="16" y="24" class="t-serif t-md">融資（看漲）</text>
+        <rect x="16" y="40" width="100" height="70" class="f-plate s-ink s-1"/>
+        <text x="66" y="72" class="ta-m t-b">投資人</text>
+        <text x="66" y="94" class="ta-m t-sm t-3">出 4 成</text>
+        <rect x="284" y="40" width="100" height="70" class="f-soft s-ink s-1"/>
+        <text x="334" y="72" class="ta-m t-b">券商</text>
+        <text x="334" y="94" class="ta-m t-sm t-3">借出 6 成</text>
+        <line x1="280" y1="62" x2="122" y2="62" class="s-ink s-15" marker-end="url(#ar25a)"/>
+        <text x="200" y="54" class="ta-m t-sm">借錢（付利息）</text>
+        <line x1="122" y1="90" x2="280" y2="90" class="s-accent s-15" marker-end="url(#ar25a2)"/>
+        <text x="200" y="110" class="ta-m t-sm t-accent">股票留作擔保</text>
+        <text x="16" y="164" class="t-serif t-md">融券（看跌）</text>
+        <rect x="16" y="180" width="100" height="70" class="f-plate s-ink s-1"/>
+        <text x="66" y="212" class="ta-m t-b">投資人</text>
+        <text x="66" y="234" class="ta-m t-sm t-3">先賣後買</text>
+        <rect x="284" y="180" width="100" height="70" class="f-soft s-ink s-1"/>
+        <text x="334" y="212" class="ta-m t-b">券商</text>
+        <text x="334" y="234" class="ta-m t-sm t-3">借出股票</text>
+        <line x1="280" y1="202" x2="122" y2="202" class="s-ink s-15" marker-end="url(#ar25a)"/>
+        <text x="200" y="194" class="ta-m t-sm">借股票來賣</text>
+        <line x1="122" y1="230" x2="280" y2="230" class="s-accent s-15" marker-end="url(#ar25a2)"/>
+        <text x="200" y="250" class="ta-m t-sm t-accent">保證金＋價款作擔保</text>
+        <text x="200" y="286" class="ta-m t-sm t-3">日後買回股票還給券商：融券回補</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>融資與融券是鏡像：一個借錢、一個借股票。兩者都以擔保品和維持率控管風險。</span></figcaption>
+  </figure>
+
+  <p>融券的保證金成數一般是 90%，也就是放空 100 元的股票要先交 90 元保證金。融券最大的風險是虧損沒有上限：股票最多跌到 0，你最多賺 100%；但股票可以漲 2 倍、3 倍，你的虧損也跟著無限放大。</p>
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>融券賣出 1 張 100 元的股票（暫不計手續費與稅）</h4>
+    <ol class="calc">
+      <li>交給券商的擔保：賣股價款 10 萬，加上 90% 保證金 9 萬。<span class="eq">擔保合計 ＝ 10 萬 ＋ 9 萬 ＝ 19 萬</span></li>
+      <li>股價漲到 130 元，你欠的股票市值變成 13 萬。<span class="eq">維持率 ＝ 19 ÷ 13 ≈ 146%；帳面虧損 3 萬</span></li>
+      <li>維持率碰到 130% 的股價：<span class="eq">19 萬 ÷ 1.3 ≈ 14.6 萬 → 每股約 146 元（漲約 46%）</span></li>
+    </ol>
+    <p class="answer">放空的追繳線在股價上漲約 46% 時；而虧損在那之後還會繼續擴大。</p>
+  </div>
+  <p>空單最後一定要買回股票來還，這個動作叫<span class="term" data-term="回補">回補</span>。當很多空單同時被迫回補，買盤會把股價推得更高，這就是第 22 章的「軋空」。台股還有一個特有的時點：股東會或除權息前的停止過戶日之前，融券必須<span class="term" data-term="強制回補">強制回補</span>，因此那幾天有時會出現空單集中買回的現象。</p>
+  <p>新聞裡常看到的<span class="term" data-term="券資比">券資比</span>，是融券餘額除以融資餘額。券資比高，代表放空的人相對多，日後潛在的回補買盤也多。</p>
+  <details class="deep">
+    <summary>融券和「借券賣出」不是同一件事</summary>
+    <div>
+      <p>融券是一般投資人透過券商的信用帳戶借股票；<span class="term" data-term="借券">借券</span>（借券賣出）則是透過證交所借券系統或券商的借貸平台，參與者以外資、法人為主，條件和期限都不同。看籌碼時，兩者的餘額要分開看。</p>
+    </div>
+  </details>
+</section>
+
+<section id="margin-balance">
+  <h2><span class="sec-num">25.6</span>融資餘額：散戶情緒的溫度計</h2>
+  <p><span class="term" data-term="融資餘額">融資餘額</span>是全市場投資人目前還沒還的融資借款總額，證交所與櫃買中心每天收盤後公布。使用融資的主要是個人投資人，所以它常被當成散戶情緒的指標：大家越樂觀，越願意借錢買股票。</p>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §二、§八</span></div>
+    <p class="quote">融資餘額已回到 6,300 億元以上。</p>
+    <p class="quote">台股融資餘額從 2025 年高點約 3,434 億元，升到 2026 年 10 月的 6,300 億元以上。</p>
+    <p>不到兩年，借錢買股的金額接近翻倍。指數上漲時融資跟著增加很正常；需要提高警覺的是「指數已在高檔、融資還在快速堆高」的組合，這代表市場裡的槓桿越來越多。</p>
+  </div>
+  <p>槓桿多的市場，下跌時特別容易出現連鎖反應。這就是<span class="term" data-term="多殺多">多殺多</span>：</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 330" role="img" aria-label="多殺多循環：股價下跌使維持率跌破 130%，追繳與斷頭帶來被迫賣壓，賣單增加使股價再下跌">
+        <defs>
+          <marker id="ar25b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-ink"/></marker>
+          <marker id="ar25c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-r"/></marker>
+        </defs>
+        <text x="14" y="22" class="t-sm t-3">外部衝擊：CPI、信用事件</text>
+        <path d="M70 30 Q90 52 134 62" class="f-none s-3 s-15 s-dash" marker-end="url(#ar25b)"/>
+        <rect x="136" y="44" width="128" height="44" rx="22" class="f-plate s-ink s-15"/>
+        <text x="200" y="71" class="ta-m t-b">股價下跌</text>
+        <rect x="250" y="140" width="138" height="52" rx="26" class="f-plate s-ink s-15"/>
+        <text x="319" y="162" class="ta-m t-b t-sm">維持率跌破 130%</text>
+        <text x="319" y="181" class="ta-m t-sm t-3">追繳通知</text>
+        <rect x="136" y="246" width="128" height="52" rx="26" class="f-plate s-r s-2w"/>
+        <text x="200" y="268" class="ta-m t-b t-sm">補不了錢</text>
+        <text x="200" y="287" class="ta-m t-sm t-3">斷頭、被迫賣出</text>
+        <rect x="12" y="140" width="128" height="52" rx="26" class="f-plate s-ink s-15"/>
+        <text x="76" y="162" class="ta-m t-b t-sm">賣單湧出</text>
+        <text x="76" y="181" class="ta-m t-sm t-3">沒有人想接</text>
+        <path d="M262 76 Q312 92 318 134" class="f-none s-ink s-15" marker-end="url(#ar25b)"/>
+        <path d="M318 198 Q312 246 270 266" class="f-none s-r s-2w" marker-end="url(#ar25c)"/>
+        <path d="M130 266 Q86 246 80 198" class="f-none s-r s-2w" marker-end="url(#ar25c)"/>
+        <path d="M80 134 Q86 92 132 76" class="f-none s-ink s-15" marker-end="url(#ar25b)"/>
+        <text x="200" y="166" class="ta-m t-serif t-lg t-red">多殺多</text>
+        <text x="200" y="190" class="ta-m t-sm t-3">賣壓製造賣壓</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>一開始的下跌可能來自外部消息，但之後的下跌由槓桿本身推動：被迫賣出的人不在乎價格，只能賣。紅色那半圈是槓桿造成的部分。</span></figcaption>
+  </figure>
+
+  <p>融資餘額要搭配指數一起看。兩個方向交叉，會得到四種組合：</p>
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 330" role="img" aria-label="融資餘額增減與指數漲跌的四種組合：指數漲且融資增是追價升溫，指數漲且融資減是籌碼安定，指數跌且融資增是散戶接刀最危險，指數跌且融資減是去槓桿清洗">
+        <text x="210" y="22" class="ta-m t-sm t-b">指數上漲</text>
+        <text x="210" y="320" class="ta-m t-sm t-b">指數下跌</text>
+        <text x="92" y="176" class="ta-m t-sm t-3">融資增加 ←</text>
+        <text x="330" y="176" class="ta-m t-sm t-3">→ 融資減少</text>
+        <rect x="44" y="34" width="150" height="122" class="f-soft s-rule s-1"/>
+        <rect x="204" y="34" width="150" height="122" class="f-plate s-rule s-1"/>
+        <rect x="44" y="186" width="150" height="122" class="f-plate s-r s-2w"/>
+        <rect x="204" y="186" width="150" height="122" class="f-soft s-rule s-1"/>
+        <circle cx="62" cy="54" r="7" class="f-y"/>
+        <text x="76" y="59" class="t-b">追價升溫</text>
+        <text x="60" y="86" class="t-sm t-2">散戶借錢追漲</text>
+        <text x="60" y="106" class="t-sm t-2">槓桿慢慢堆高</text>
+        <text x="60" y="138" class="t-sm t-3">留意是否過熱</text>
+        <circle cx="222" cy="54" r="7" class="f-g"/>
+        <text x="236" y="59" class="t-b">籌碼安定</text>
+        <text x="220" y="86" class="t-sm t-2">漲勢由現金推動</text>
+        <text x="220" y="106" class="t-sm t-2">散戶獲利了結</text>
+        <text x="220" y="138" class="t-sm t-3">較健康的上漲</text>
+        <circle cx="62" cy="206" r="7" class="f-r"/>
+        <text x="76" y="211" class="t-b">散戶接刀</text>
+        <text x="60" y="238" class="t-sm t-2">越跌越借錢攤平</text>
+        <text x="60" y="258" class="t-sm t-2">斷頭賣壓還沒出</text>
+        <text x="60" y="290" class="t-sm t-3">最危險的組合</text>
+        <circle cx="222" cy="206" r="7" class="f-o"/>
+        <text x="236" y="211" class="t-b">去槓桿清洗</text>
+        <text x="220" y="238" class="t-sm t-2">追繳、斷頭出場</text>
+        <text x="220" y="258" class="t-sm t-2">跌勢猛但在清理</text>
+        <text x="220" y="290" class="t-sm t-3">止跌後籌碼變乾淨</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>融資餘額單獨看沒有意義，要和指數方向一起讀。左下（指數跌、融資還在增加）代表下跌途中仍有人借錢買進，潛在的斷頭賣壓還沒釋放。</span></figcaption>
+  </figure>
+  <p>還有一個相關指標叫「融資使用率」：融資餘額占可融資總額度的比例。使用率越高，代表借錢買股的人越多、市場越熱。不同券商與資料平台的算法略有差異，比較時要用同一個來源。</p>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §八</span></div>
+    <p class="quote">真正讓人賠大錢的是槓桿：7/17 崩跌的主因之一是融資多殺多與韓國槓桿 ETF 去槓桿。</p>
+    <p><span class="term" data-term="去槓桿">去槓桿</span>就是把借來的部位縮小。槓桿型 ETF 為了維持固定倍數，市場大跌時必須在收盤前賣出部位；當這類產品規模很大，它們的賣盤也會加入多殺多的循環。</p>
+  </div>
+  <aside class="note">看到「融資大減」的新聞不一定是壞事。急跌後融資快速下降，代表槓桿被清洗掉，籌碼反而變乾淨。<b>要一起看價格</b>：融資減少、股價卻止跌，常是賣壓被吸收的訊號。</aside>
+</section>
+
+<section id="discipline">
+  <h2><span class="sec-num">25.7</span>為什麼計畫寫「不融資、不當沖、不碰權證」</h2>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §六</span></div>
+    <p class="quote">不融資、不當沖、不碰權證。</p>
+  </div>
+  <p>這三件事有一個共同點：<strong>都會放大結果，而且容錯空間很小</strong>。</p>
+  <ul>
+    <li><b>不融資</b>：上一節算過，上市融資跌 22% 就碰追繳線。計畫第八節的歷史回顧顯示，2024 年 8 月、2025 年 4 月、2026 年 7 月都出現過單日大跌或兩成上下的急跌。持有 5 個月遇到一次的機會不低。</li>
+    <li><b>不當沖</b>：當日沖銷是同一天買進又賣出，不留部位過夜（第 3 章）。它把注意力放在盤中波動，和計畫「分批建倉、抱住停利」的節奏衝突。成本也會累積：每做一次就付兩次手續費和一次證交稅，一個月做 20 次，成本就可能吃掉好幾個百分點的報酬。</li>
+    <li><b>不碰權證</b>：權證是券商發行的一種選擇權（第 18 章），價格裡有「時間價值」，每過一天都會減少；槓桿又高，判斷對了方向也可能因為漲得太慢、或發行商調降隱含波動率而賠錢。對一個 5 個月的計畫來說，這些都是額外的不確定。</li>
+  </ul>
+  <div class="box warn">
+    <div class="box-label"><span class="zh"></span><span class="lat">RISK</span></div>
+    <p>計畫第一節的結論是：翻倍和分散幾乎不可能同時做到，而用融資追求翻倍，風險是不對稱的。以計畫的情境估計，加權期望報酬約 +10%；為了多賺而加上槓桿，換來的是「一次急跌就出局」的風險。</p>
+  </div>
+</section>
+
+</article>
+
+<section class="recap" id="recap">
+  <h2>本章重點</h2>
+  <ul>
+    <li>槓桿倍數 ＝ 買進總市值 ÷ 自有資金；上市融資借 6 成，槓桿 2.5 倍，股價動 1%、本金動約 2.5%。</li>
+    <li>維持率 ＝ 股票市值 ÷ 融資金額。期初約 166.7%，跌破 130% 收到追繳，兩個營業日內沒補足會在 T+3 被處分（斷頭）。</li>
+    <li>追繳跌幅 ＝ 1.3 × 融資成數 − 1（上市 −22%、上櫃 −35%）；翻倍漲幅 ＝ 自備比例（上市 40%、上櫃 50%）。</li>
+    <li>融券是借股票來賣，保證金一般 9 成，虧損理論上沒有上限；空單最終要回補，集中回補會造成軋空。</li>
+    <li>融資餘額是散戶槓桿的溫度計，要和指數方向一起看：指數跌、融資還在增加最危險；急跌後融資大減則是去槓桿清洗。</li>
+    <li>融資有利息成本：100 萬本金融資 5 個月、年息 6%，利息約 3.75 萬，股價要先漲約 1.5% 才打平。</li>
+  </ul>
+</section>
+
+<section class="quiz-set" id="quiz">
+  <h2>自我檢測</h2>
+  <p>每題選一個答案，選完會顯示解析。</p>
+
+  <div class="quiz" data-answer="b">
+    <p class="q">上市股票融資成數 60%，自備 40%。這樣的槓桿倍數是多少？</p>
+    <ol class="opts"><li>1.6 倍</li><li>2.5 倍</li><li>4 倍</li><li>6 倍</li></ol>
+    <div class="explain">槓桿倍數 ＝ 總市值 ÷ 自有資金 ＝ 1 ÷ 0.4 ＝ 2.5 倍。60% 是借的比例，不是倍數。</div>
+  </div>
+
+  <div class="quiz" data-answer="c">
+    <p class="q">用 100 萬本金上市融資，買進 250 萬股票。股價下跌 22% 後，維持率大約是多少？</p>
+    <ol class="opts"><li>166%</li><li>150%</li><li>130%</li><li>100%</li></ol>
+    <div class="explain">市值 250 × 0.78 ＝ 195 萬，借款仍是 150 萬，維持率 ＝ 195 ÷ 150 ＝ 130%，剛好碰到追繳線。這時淨值只剩 45 萬。</div>
+  </div>
+
+  <div class="quiz" data-answer="a">
+    <p class="q">收到追繳通知後，下列哪一個說法正確？</p>
+    <ol class="opts"><li>在處分前把維持率補回 130% 以上，就暫時不會被處分</li><li>收到通知當天券商就會立刻賣掉股票</li><li>只要股價隔天反彈 1%，追繳紀錄就會取消</li><li>追繳只會發生在融券，不會發生在融資</li></ol>
+    <div class="explain">依證交所說明，T 日跌破 130% 收盤後通知，次日起兩日內補繳；處分前維持率回到 130% 以上暫不處分，回到 166% 以上才取消追繳紀錄。融資、融券都看整戶維持率。</div>
+  </div>
+
+  <div class="quiz" data-answer="c">
+    <p class="q">融券放空一檔股票，理論上的最大虧損是多少？</p>
+    <ol class="opts"><li>保證金的金額</li><li>賣股價款的金額</li><li>沒有上限，股價漲越多虧越多</li><li>股價跌到 0 時的金額</li></ol>
+    <div class="explain">放空的獲利上限是股價跌到 0；但股價可以一直漲，所以虧損理論上沒有上限。這也是追繳和強制回補存在的原因。</div>
+  </div>
+
+  <div class="quiz" data-answer="d">
+    <p class="q">計畫寫「融資餘額已回到 6,300 億元以上」。在指數處於高檔時，這個數字最主要提醒你什麼？</p>
+    <ol class="opts"><li>散戶資金充沛，指數一定會再漲</li><li>券商的利息收入會增加，金融股可以買</li><li>融資越多代表法人越看好</li><li>市場槓桿堆高，一旦急跌，多殺多的力道可能更大</li></ol>
+    <div class="explain">融資餘額反映的是散戶借錢買股的規模，不是勝率。在高檔快速堆高，代表下跌時被迫賣出的潛在賣壓更多。計畫第八節把 7/17 崩跌的主因之一歸於融資多殺多。</div>
+  </div>
+</section>
+
+</main>
+</div>
+</div>
+</body>
+</html>
