@@ -106,6 +106,475 @@ HB.glossary = {
   "ch": 1,
   "anchor": "def-compound"
  },
+ "上市": {
+  "term": "上市",
+  "en": "Listed on TWSE",
+  "def": "在臺灣證券交易所掛牌交易；計入加權指數，單日漲跌幅 10%。",
+  "ch": 2,
+  "anchor": "def-listed"
+ },
+ "上櫃": {
+  "term": "上櫃",
+  "en": "Listed on TPEx",
+  "def": "在證券櫃檯買賣中心掛牌交易，門檻低於上市；計入櫃買指數，買賣方式與上市相同。",
+  "ch": 2,
+  "anchor": "def-otc"
+ },
+ "內外盤": {
+  "term": "內外盤",
+  "en": "Trades at bid / at ask",
+  "def": "成交在委賣價叫外盤（買方主動往上買），成交在委買價叫內盤（賣方主動往下賣）。",
+  "ch": 2,
+  "anchor": "def-inout"
+ },
+ "市值": {
+  "term": "市值",
+  "en": "Market capitalization",
+  "def": "股價 × 已發行股數，即用現價買下整家公司的金額；決定公司在市值加權指數中的份量。",
+  "ch": 2,
+  "anchor": "def-mcap"
+ },
+ "成交價": {
+  "term": "成交價",
+  "en": "Traded price",
+  "def": "買賣雙方實際成交的價格；逐筆交易時以委託簿上排隊那一方的價格成交。",
+  "ch": 2,
+  "anchor": "def-trade-price"
+ },
+ "有限責任": {
+  "term": "有限責任",
+  "en": "Limited liability",
+  "def": "股份有限公司的股東最多賠掉出資的錢，不必替公司償還債務。",
+  "ch": 2,
+  "anchor": "def-limited"
+ },
+ "供需": {
+  "term": "供需",
+  "en": "Supply and demand",
+  "def": "想買與想賣的力量對比；買方較急就往上吃賣單推高股價，賣方較急就壓低股價。",
+  "ch": 2,
+  "anchor": "def-supply-demand"
+ },
+ "委託簿": {
+  "term": "委託簿",
+  "en": "Order book",
+  "def": "所有未成交買賣單依價格排成的清單；看盤軟體顯示最接近成交的五個價位，稱最佳五檔。",
+  "ch": 2,
+  "anchor": "def-book"
+ },
+ "股本": {
+  "term": "股本",
+  "en": "Share capital",
+  "def": "面額 × 發行股數，即公司登記的資本額；面額 10 元時，股本 ÷ 10 元就是股數。",
+  "ch": 2,
+  "anchor": "def-capital"
+ },
+ "股利": {
+  "term": "股利",
+  "en": "Dividend",
+  "def": "公司把盈餘分給股東，分現金股利（配息）與股票股利（配股）兩種形式。",
+  "ch": 2,
+  "anchor": "def-dividend"
+ },
+ "股東": {
+  "term": "股東",
+  "en": "Shareholder",
+  "def": "持有公司股份的人，享有盈餘分配、表決與剩餘財產分配等權利，權利按持股比例計算。",
+  "ch": 2,
+  "anchor": "def-shareholder"
+ },
+ "股票": {
+  "term": "股票",
+  "en": "Stock / Share",
+  "def": "公司所有權切成的等分憑證；持有股票就是持有公司的一小部分，按持股比例分享獲利、承擔虧損。",
+  "ch": 2,
+  "anchor": "def-stock"
+ },
+ "股票股利": {
+  "term": "股票股利",
+  "en": "Stock dividend",
+  "def": "以新股代替現金發放，按面額 10 元換算配股率；每股 1 元等於每 1,000 股配 100 股。",
+  "ch": 2,
+  "anchor": "def-stock-div"
+ },
+ "股價": {
+  "term": "股價",
+  "en": "Stock price",
+  "def": "最近一筆成交價，隨每筆成交跳動；反映市場對公司未來獲利與折現率的預期。",
+  "ch": 2,
+  "anchor": "def-price"
+ },
+ "面額": {
+  "term": "面額",
+  "en": "Par value",
+  "def": "每股在公司帳上登記的金額；台灣上市櫃股票多為 10 元，非 10 元面額者簡稱加註「*」。",
+  "ch": 2,
+  "anchor": "def-par"
+ },
+ "除權息": {
+  "term": "除權息",
+  "en": "Ex-dividend / Ex-rights",
+  "def": "發放股利前把股價扣除股利的程序：參考價＝（前一日收盤價 − 現金股利）÷（1＋配股率）。",
+  "ch": 2,
+  "anchor": "def-exdiv"
+ },
+ "控股公司": {
+  "term": "控股公司",
+  "en": "Holding company",
+  "def": "主要業務是持有其他公司股份的公司，例如日月光投控、中信金（金融控股公司）。",
+  "ch": 2,
+  "anchor": "def-holding"
+ },
+ "現金股利": {
+  "term": "現金股利",
+  "en": "Cash dividend",
+  "def": "每股發給股東的現金，也叫股息；除息時股價會扣掉同樣的金額。",
+  "ch": 2,
+  "anchor": "def-cash-div"
+ },
+ "稀釋": {
+  "term": "稀釋",
+  "en": "Dilution",
+  "def": "公司發行新股使總股數增加，老股東的持股比例因而下降。",
+  "ch": 2,
+  "anchor": "def-dilution"
+ },
+ "貼息": {
+  "term": "貼息",
+  "en": "Unfilled dividend gap",
+  "def": "除息後股價一直低於除息參考價，等於股利從股價中挖出，加上稅費可能反而虧損。",
+  "ch": 2,
+  "anchor": "def-unfilled"
+ },
+ "填息": {
+  "term": "填息",
+  "en": "Dividend gap filled",
+  "def": "除權息後，股價漲回除權息前一日的收盤價；除權後漲回叫填權。",
+  "ch": 2,
+  "anchor": "def-fill"
+ },
+ "撮合": {
+  "term": "撮合",
+  "en": "Order matching",
+  "def": "交易所把買單和賣單配對成交，依價格優先、時間優先；台股盤中自 2020 年起採逐筆交易。",
+  "ch": 2,
+  "anchor": "def-match"
+ },
+ "興櫃": {
+  "term": "興櫃",
+  "en": "Emerging stock board",
+  "def": "櫃買中心管理的上市櫃預備市場，與推薦證券商議價成交、沒有漲跌幅限制，風險較高。",
+  "ch": 2,
+  "anchor": "def-emerging"
+ },
+ "IPO": {
+  "term": "IPO",
+  "en": "Initial public offering",
+  "def": "首次公開發行：公司第一次把股票賣給大眾並掛牌交易，募得的錢流進公司。",
+  "ch": 2,
+  "anchor": "def-ipo"
+ },
+ "KY股": {
+  "term": "KY股",
+  "en": "Foreign primary listing",
+  "def": "外國註冊公司在台第一上市櫃，簡稱加「-KY」（KY 是開曼群島代碼），例如世芯-KY。",
+  "ch": 2,
+  "anchor": "def-ky"
+ },
+ "一張": {
+  "term": "一張",
+  "en": "Round lot (1,000 shares)",
+  "def": "台股整股交易的單位，1 張＝1,000 股；買一張的金額＝股價×1,000。",
+  "ch": 3,
+  "anchor": "def-lot"
+ },
+ "升降單位": {
+  "term": "升降單位",
+  "en": "Tick size",
+  "def": "股價的最小跳動單位，依價位分六級，從未滿 10 元的 0.01 元到 1,000 元以上的 5 元。",
+  "ch": 3,
+  "anchor": "def-tick"
+ },
+ "手續費": {
+  "term": "手續費",
+  "en": "Brokerage commission",
+  "def": "券商在買進、賣出各收一次的費用，上限為成交金額 0.1425%，可打折、元以下捨去，並有最低收費。",
+  "ch": 3,
+  "anchor": "def-fee"
+ },
+ "市價單": {
+  "term": "市價單",
+  "en": "Market order",
+  "def": "不指定價格、立即與委託簿上的對手單成交，保證速度不保證價格；台股只能在盤中逐筆時段使用。",
+  "ch": 3,
+  "anchor": "def-market-order"
+ },
+ "交割帳戶": {
+  "term": "交割帳戶",
+  "en": "Settlement account",
+  "def": "與證券帳戶綁定的本人銀行帳戶：買進成交後從這裡扣款，賣出的款項匯進這裡。",
+  "ch": 3,
+  "anchor": "def-settle-acct"
+ },
+ "收盤價": {
+  "term": "收盤價",
+  "en": "Closing price",
+  "def": "13:25–13:30 收單、13:30 集合競價撮合出的價格；那一撮沒成交時，取當天最後一筆成交價。",
+  "ch": 3,
+  "anchor": "def-close"
+ },
+ "注意股": {
+  "term": "注意股",
+  "en": "Stocks under attention",
+  "def": "漲跌幅、成交量、週轉率等出現異常，被交易所在收盤後公布提醒的股票；本身不限制交易。",
+  "ch": 3,
+  "anchor": "def-attention"
+ },
+ "紅漲綠跌": {
+  "term": "紅漲綠跌",
+  "en": "Red-up, green-down",
+  "def": "台灣的報價慣例：成交價高於參考價顯示紅色、低於參考價顯示綠色；美股報價多半相反。",
+  "ch": 3,
+  "anchor": "def-redgreen"
+ },
+ "限價單": {
+  "term": "限價單",
+  "en": "Limit order",
+  "def": "指定價格的委託：買進設最高價、賣出設最低價，只在該價或更好的價格成交，不保證成交。",
+  "ch": 3,
+  "anchor": "def-limit-order"
+ },
+ "參考價": {
+  "term": "參考價",
+  "en": "Reference price",
+  "def": "計算當天漲跌與漲跌停的基準，通常是前一交易日收盤價，除權息日會調整；等於參考價叫平盤。",
+  "ch": 3,
+  "anchor": "def-ref"
+ },
+ "處置股": {
+  "term": "處置股",
+  "en": "Stocks under disposition",
+  "def": "多次被列注意股而受處置的股票：分盤約每 2 分鐘撮合、為期 5 個營業日，可能須預收款券。",
+  "ch": 3,
+  "anchor": "def-disposition"
+ },
+ "逐筆交易": {
+  "term": "逐筆交易",
+  "en": "Continuous trading",
+  "def": "委託一送到就和委託簿比對、能成交就立即成交的撮合方式；台股盤中 09:00–13:25 採用。",
+  "ch": 3,
+  "anchor": "def-continuous"
+ },
+ "開盤價": {
+  "term": "開盤價",
+  "en": "Opening price",
+  "def": "當天第一筆成交的價格；整股是 09:00 開盤集合競價撮合出來的價格。",
+  "ch": 3,
+  "anchor": "def-open"
+ },
+ "集合競價": {
+  "term": "集合競價",
+  "en": "Call auction",
+  "def": "累積一段時間的委託後一次撮合，選出讓成交張數最多的單一價格；台股開盤、收盤與零股都用它。",
+  "ch": 3,
+  "anchor": "def-call-auction"
+ },
+ "集保帳戶": {
+  "term": "集保帳戶",
+  "en": "Central depository account",
+  "def": "開在集保結算所、記錄你持有哪些股票與股數的帳戶；台股無實體，股票是其中的電子紀錄。",
+  "ch": 3,
+  "anchor": "def-depository"
+ },
+ "當沖": {
+  "term": "當沖",
+  "en": "Day trading",
+  "def": "當日沖銷：同一天買賣同一檔同數量、了結部位，只結算價差；需符合資格並簽約，證交稅 0.15%。",
+  "ch": 3,
+  "anchor": "def-daytrade"
+ },
+ "試撮": {
+  "term": "試撮",
+  "en": "Indicative matching",
+  "def": "開盤前與收盤前，交易所約每 5 秒用當下委託試算並揭露模擬成交價量；只是試算，不會成交。",
+  "ch": 3,
+  "anchor": "def-trial"
+ },
+ "違約交割": {
+  "term": "違約交割",
+  "en": "Settlement default",
+  "def": "成交後未在期限內備足款項或股票；可能被收最高 7% 違約金、5 年內不得開戶，情節重大有刑責。",
+  "ch": 3,
+  "anchor": "def-default"
+ },
+ "零股": {
+  "term": "零股",
+  "en": "Odd lot",
+  "def": "不到一張（1–999 股）的股數，在盤中零股或盤後零股時段以集合競價交易，只能用限價單。",
+  "ch": 3,
+  "anchor": "def-odd"
+ },
+ "漲跌停": {
+  "term": "漲跌停",
+  "en": "Daily price limit",
+  "def": "一般股票單日成交價以參考價 ±10% 為限，再依升降單位往內取；到上限叫漲停、到下限叫跌停。",
+  "ch": 3,
+  "anchor": "def-limit"
+ },
+ "盤中零股": {
+  "term": "盤中零股",
+  "en": "Intraday odd-lot trading",
+  "def": "09:00–13:30 的零股交易，09:10 起約每 5 秒集合競價一次；2026/12/7 起 08:30 收單、09:00 首撮。",
+  "ch": 3,
+  "anchor": "def-intraday-odd"
+ },
+ "盤後定價交易": {
+  "term": "盤後定價交易",
+  "en": "After-hours fixed-price trading",
+  "def": "14:00–14:30 接受整股委託、14:30 撮合，成交價固定為當天收盤價，只決定買賣與張數。",
+  "ch": 3,
+  "anchor": "def-afterhours"
+ },
+ "盤後零股": {
+  "term": "盤後零股",
+  "en": "After-hours odd-lot trading",
+  "def": "收盤後 13:40–14:30 接受零股委託，14:30 以集合競價撮合一次。",
+  "ch": 3,
+  "anchor": "def-afterhours-odd"
+ },
+ "證交稅": {
+  "term": "證交稅",
+  "en": "Securities transaction tax",
+  "def": "賣出時課徵、不能打折的證券交易稅：股票 0.3%、ETF 0.1%、現股當沖 0.15%（至 2027 年底）。",
+  "ch": 3,
+  "anchor": "def-tax"
+ },
+ "證券帳戶": {
+  "term": "證券帳戶",
+  "en": "Brokerage account",
+  "def": "在券商開立、用來下單買賣的帳戶；委託、成交與對帳都記在它名下，本身不放錢也不放股票。",
+  "ch": 3,
+  "anchor": "def-brokerage"
+ },
+ "FOK": {
+  "term": "FOK",
+  "en": "Fill or Kill",
+  "def": "全部成交否則取消：送出當下無法全部成交，就整筆取消。",
+  "ch": 3,
+  "anchor": "def-fok"
+ },
+ "IOC": {
+  "term": "IOC",
+  "en": "Immediate or Cancel",
+  "def": "立即成交否則取消：送出當下能成交的部分成交，其餘立刻取消。",
+  "ch": 3,
+  "anchor": "def-ioc"
+ },
+ "ROD": {
+  "term": "ROD",
+  "en": "Rest of Day",
+  "def": "當日有效：未成交的部分留在委託簿排隊，到當天收盤失效。",
+  "ch": 3,
+  "anchor": "def-rod"
+ },
+ "T+2交割": {
+  "term": "T+2交割",
+  "en": "T+2 settlement",
+  "def": "成交日 T 之後第 2 個營業日完成款券過戶；買方須在 T+2 上午 10 點前把款項放進交割帳戶。",
+  "ch": 3,
+  "anchor": "def-t2"
+ },
+ "台積電ADR": {
+  "term": "台積電ADR",
+  "en": "TSMC ADR (NYSE: TSM)",
+  "def": "台積電在紐約證交所掛牌的存託憑證，代號 TSM，1 單位代表 5 股普通股，常被視為「前一晚的台積電」。",
+  "ch": 4,
+  "anchor": "def-tsm"
+ },
+ "那斯達克交易所": {
+  "term": "那斯達克交易所",
+  "en": "The Nasdaq Stock Market",
+  "def": "1971 年開始運作的世界第一個電子化股票市場，科技公司多在此掛牌；和同名的 Nasdaq 指數是兩回事。",
+  "ch": 4,
+  "anchor": "def-nasdaq-ex"
+ },
+ "股票代號": {
+  "term": "股票代號",
+  "en": "Ticker symbol",
+  "def": "交易所給每檔股票的識別碼。台股普通股多為 4 位數字（2330），美股為英文字母（TSM、NVDA）。",
+  "ch": 4,
+  "anchor": "def-ticker"
+ },
+ "美東時間": {
+  "term": "美東時間",
+  "en": "Eastern Time (ET)",
+  "def": "紐約所在的時區。冬令為 UTC−5（EST），夏令為 UTC−4（EDT）；台灣比它快 13 或 12 小時。",
+  "ch": 4,
+  "anchor": "clock"
+ },
+ "夏令時間": {
+  "term": "夏令時間",
+  "en": "Daylight saving time (DST)",
+  "def": "夏天把時鐘撥快一小時。美國 2026 年為 3/8 至 11/1，期間台灣時間＝美東＋12 小時，其餘時間＋13 小時。",
+  "ch": 4,
+  "anchor": "def-dst"
+ },
+ "時差傳導": {
+  "term": "時差傳導",
+  "en": "Time-zone transmission",
+  "def": "美國交易時段（台灣的夜晚）發生的漲跌與消息，經 ADR、夜盤與電子盤接力，在台股開盤時一次反映。",
+  "ch": 4,
+  "anchor": "def-transmission"
+ },
+ "紐約證券交易所": {
+  "term": "紐約證券交易所",
+  "en": "New York Stock Exchange (NYSE)",
+  "def": "美國歷史最久的大型證券交易所，起源於 1792 年，簡稱紐交所；台積電 ADR（TSM）在此掛牌。",
+  "ch": 4,
+  "anchor": "def-nyse"
+ },
+ "熔斷機制": {
+  "term": "熔斷機制",
+  "en": "Market-wide circuit breaker",
+  "def": "指數急跌時全市場暫停交易。美股以 S&P 500 跌 7%、13% 暫停 15 分鐘，跌 20% 當天停止；台股沒有。",
+  "ch": 4,
+  "anchor": "def-circuit"
+ },
+ "盤前交易": {
+  "term": "盤前交易",
+  "en": "Pre-market trading",
+  "def": "美股正式開盤前的交易，美東 04:00–09:30（台灣 16:00 或 17:00 起）；成交量少、買賣價差大。",
+  "ch": 4,
+  "anchor": "def-premarket"
+ },
+ "盤後交易": {
+  "term": "盤後交易",
+  "en": "After-hours trading",
+  "def": "美股收盤後的交易，美東 16:00–20:00（台灣隔天 04:00–08:00 或 05:00–09:00）；財報常在此時公布。",
+  "ch": 4,
+  "anchor": "def-postmarket"
+ },
+ "瞬間價格穩定措施": {
+  "term": "瞬間價格穩定措施",
+  "en": "Intraday volatility interruption",
+  "def": "台股個股成交價將偏離前 5 分鐘加權平均價超過 3.5% 時，先延緩撮合約 2 分鐘的冷卻機制。",
+  "ch": 4,
+  "anchor": "circuit-breakers"
+ },
+ "ADR": {
+  "term": "ADR",
+  "en": "American Depositary Receipt",
+  "def": "美國存託憑證：存託銀行依外國公司存放的普通股，在美國發行、以美元交易的憑證，每單位代表固定股數。",
+  "ch": 4,
+  "anchor": "def-adr"
+ },
+ "ADR溢價": {
+  "term": "ADR溢價",
+  "en": "ADR premium",
+  "def": "ADR 換算成本地股價後高於本地收盤價的百分比：ADR÷換股比例×匯率÷本地收盤−1；為負時稱折價。",
+  "ch": 4,
+  "anchor": "def-adr-premium"
+ },
  "0050": {
   "term": "0050",
   "en": "Yuanta Taiwan Top 50 ETF",
@@ -351,6 +820,70 @@ HB.glossaryAlias = {
  "波動": "波動度",
  "通貨膨脹": "通膨",
  "分散投資": "分散",
+ "首次公開發行": "IPO",
+ "配息": "股利",
+ "股息": "現金股利",
+ "配股": "股票股利",
+ "除息": "除權息",
+ "除權": "除權息",
+ "填權": "填息",
+ "填權息": "填息",
+ "五檔": "委託簿",
+ "最佳五檔": "委託簿",
+ "買賣五檔": "委託簿",
+ "外盤": "內外盤",
+ "內盤": "內外盤",
+ "-KY": "KY股",
+ "KY 股": "KY股",
+ "金控": "控股公司",
+ "投控": "控股公司",
+ "金融控股公司": "控股公司",
+ "證券戶": "證券帳戶",
+ "集保存摺": "集保帳戶",
+ "張": "一張",
+ "整股": "一張",
+ "盤後定價": "盤後定價交易",
+ "試算揭示": "試撮",
+ "試撮價": "試撮",
+ "平盤價": "參考價",
+ "平盤": "參考價",
+ "漲停": "漲跌停",
+ "跌停": "漲跌停",
+ "漲停板": "漲跌停",
+ "跌停板": "漲跌停",
+ "跳動單位": "升降單位",
+ "限價": "限價單",
+ "市價": "市價單",
+ "交割": "T+2交割",
+ "T+2": "T+2交割",
+ "T+2 交割": "T+2交割",
+ "證券交易稅": "證交稅",
+ "當日沖銷": "當沖",
+ "現股當沖": "當沖",
+ "處置": "處置股",
+ "注意股票": "注意股",
+ "NYSE": "紐約證券交易所",
+ "紐交所": "紐約證券交易所",
+ "Nasdaq交易所": "那斯達克交易所",
+ "Nasdaq 交易所": "那斯達克交易所",
+ "ticker": "股票代號",
+ "代號": "股票代號",
+ "ET": "美東時間",
+ "EST": "美東時間",
+ "EDT": "美東時間",
+ "日光節約時間": "夏令時間",
+ "DST": "夏令時間",
+ "Pre-market": "盤前交易",
+ "After-hours": "盤後交易",
+ "美國存託憑證": "ADR",
+ "ADS": "ADR",
+ "存託憑證": "ADR",
+ "TSM": "台積電ADR",
+ "台積電 ADR": "台積電ADR",
+ "ADR 溢價": "ADR溢價",
+ "ADR折價": "ADR溢價",
+ "熔斷": "熔斷機制",
+ "circuit breaker": "熔斷機制",
  "股價指數": "指數",
  "台股加權指數": "加權指數",
  "TAIEX": "加權指數",

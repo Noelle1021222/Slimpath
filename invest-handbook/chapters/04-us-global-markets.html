@@ -1,0 +1,903 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>美股與全球市場：時差、ADR 與夜盤 · 讀通投資</title>
+<meta name="description" content="台股開盤前，美國已經交易了一整晚。學會美東與台灣時間換算、夏令時間、盤前盤後、台積電 ADR 溢價、熔斷與漲跌停，看懂 GCFIE 為什麼在 07:45 出報告。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=LXGW+WenKai+TC:wght@400;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;900&amp;display=swap">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/handbook.css">
+<script>try{var d=document.documentElement,g=function(k){return JSON.parse(localStorage.getItem("hb."+k))},t=g("theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);if(g("quote")==="intl")d.setAttribute("data-quote","intl");if(g("size")==="lg")d.setAttribute("data-size","lg")}catch(e){}</script>
+<script src="../assets/js/curriculum.js" defer></script>
+<script src="../assets/js/data-plan.js" defer></script>
+<script src="../assets/js/glossary-data.js" defer></script>
+<script src="../assets/js/handbook.js" defer></script>
+<script src="../assets/js/widgets.js" defer></script>
+<script src="../assets/js/widgets-plan.js" defer></script>
+<script src="../assets/js/widgets-basics.js" defer></script>
+<script src="../assets/js/widgets-markets.js" defer></script>
+</head>
+<body data-chapter="04-us-global-markets">
+<div class="page">
+<div class="chapter-grid">
+<main class="chapter" id="main">
+
+<header class="opener">
+  <p class="eyebrow"></p>
+  <div class="opener-num" aria-hidden="true"></div>
+  <h1>美股與全球市場：時差、ADR 與夜盤</h1>
+  <p class="lede">你早上醒來的時候，紐約剛收盤；台股 09:00 開盤時，美國人已經睡了。這段時差決定了每天開盤前資訊抵達的順序。這一章教你換算美東與台灣時間、讀懂台積電 ADR 的溢價、分辨熔斷與漲跌停，也看懂 GCFIE 為什麼在 07:45 出報告。</p>
+  <dl class="opener-meta"></dl>
+</header>
+
+<section class="objectives" aria-labelledby="obj-h">
+  <h2 id="obj-h">學完這章，你能夠</h2>
+  <ol>
+    <li>說出紐約證券交易所、那斯達克交易所與股票代號的差別，以及美股和台股在交易單位、漲跌限制、交割、顏色上的不同。</li>
+    <li>用「＋12 或＋13 小時」把美東時間換算成台灣時間，知道 2026 年 11 月 1 日起美股改成台灣 22:30 開盤。</li>
+    <li>解釋時差傳導：美股收盤後的消息怎麼經過 ADR、期貨夜盤與電子盤，在 09:00 一次進入台股；並說明 GCFIE 為何在 07:45 出報告、週日不產出。</li>
+    <li>自己算出台積電 ADR 的換算價與溢價，知道判斷隔天開盤要看溢價的「變化」，不是溢價的高低。</li>
+    <li>比較美股熔斷與台股漲跌停這兩種煞車，說出它們對隔天開盤的不同影響。</li>
+    <li>讀懂 GCFIE 資料時間軸對「正式收盤」「電子盤報價」「前一日結算價」的規定。</li>
+  </ol>
+</section>
+
+<article class="prose">
+
+<section id="exchanges">
+  <h2><span class="sec-num">4.1</span>美股在哪裡交易：交易所與股票代號</h2>
+  <p class="lead-in">台灣的<span class="term" data-term="股票">股票</span>在<span class="term" data-term="證交所">證交所</span>與櫃買中心交易；美國的股票主要在紐約的兩個交易所掛牌。GCFIE 第 2 章開頭那一串美股<span class="term" data-term="指數">指數</span>，背後就是這兩個市場裡的幾千家公司。</p>
+
+  <div class="box define" id="def-nyse">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>紐約證券交易所</dfn><span class="en">New York Stock Exchange (NYSE)</span></p>
+    <p>美國歷史最久的大型證券交易所，起源可以追溯到 1792 年華爾街上的《梧桐樹協議》，簡稱「紐交所」。現在絕大部分交易已經電子化，但仍保留交易大廳。掛牌公司以歷史悠久的大型企業居多；台積電在美國發行的憑證（代號 TSM）就在這裡掛牌。</p>
+  </div>
+
+  <div class="box define" id="def-nasdaq-ex">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>那斯達克交易所</dfn><span class="en">The Nasdaq Stock Market</span></p>
+    <p>1971 年開始運作，是世界第一個電子化的股票市場，沒有傳統交易大廳。科技公司特別多，輝達（NVDA）、微軟（MSFT）都在這裡掛牌。「Nasdaq」這個字也被拿來稱呼指數，本節最後的誤解框會把它們分清楚。</p>
+  </div>
+
+  <p>在台灣，你用一串數字找股票；在美國，用的是一串英文字母。</p>
+
+  <div class="box define" id="def-ticker">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>股票代號</dfn><span class="en">Ticker symbol</span></p>
+    <p>交易所給每一檔股票的簡短識別碼，下單、查報價都靠它。台股普通股多是 4 位數字，例如台積電 2330；美股是 1 到 5 個英文字母，例如輝達 NVDA、台積電 ADR 是 TSM。同一家公司在兩地掛牌，就會有兩個代號。</p>
+  </div>
+
+  <p>你的兩份文件提到好幾家在美國掛牌的公司，先把代號對起來，看英文報價才不會找錯：</p>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>兩份文件提到的美國掛牌公司（代號與交易所）</caption>
+      <thead><tr><th>公司</th><th>代號</th><th>交易所</th><th>在文件裡出現的地方</th></tr></thead>
+      <tbody>
+        <tr><th>台積電（ADR）</th><td class="mono">TSM</td><td>NYSE</td><td>台股權值最大的公司在美國的分身（本章 4.5）；計畫權重 12%</td></tr>
+        <tr><th>日月光投控（ADR）</th><td class="mono">ASX</td><td>NYSE</td><td>計畫核心持股 3711 在美國的憑證</td></tr>
+        <tr><th>輝達 NVIDIA</th><td class="mono">NVDA</td><td>Nasdaq</td><td>計畫 §五、§九：11 月下旬與 2 月下旬兩次財報</td></tr>
+        <tr><th>美光 Micron</th><td class="mono">MU</td><td>Nasdaq</td><td>計畫 §十：HBM 供給受限到 2028 年</td></tr>
+        <tr><th>甲骨文 Oracle</th><td class="mono">ORCL</td><td>NYSE</td><td>計畫 §九：10/8 一則 OpenAI 營收報導後下跌</td></tr>
+        <tr><th>CoreWeave</th><td class="mono">CRWV</td><td>Nasdaq</td><td>計畫 §七：AI 信用風險的觀察對象</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>美股和台股，規則不一樣的地方</h3>
+  <p>同樣是買股票，兩地的制度有幾個關鍵差別。最容易讓新手出錯的，是交易單位、漲跌限制和顏色：</p>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>台股與美股的交易制度對照（以各交易所與券商公告為準）</caption>
+      <thead><tr><th>項目</th><th>台股</th><th>美股</th></tr></thead>
+      <tbody>
+        <tr><th>代號</th><td>數字（2330）</td><td>英文字母（TSM）</td></tr>
+        <tr><th>計價</th><td>新台幣</td><td>美元</td></tr>
+        <tr><th>交易單位</th><td><span class="term" data-term="一張">一張</span>＝1,000 股；1–999 股是<span class="term" data-term="零股">零股</span></td><td>以 1 股為單位</td></tr>
+        <tr><th>正式交易時間</th><td>09:00–13:30</td><td>美東 09:30–16:00（4.2 節換算成台灣時間）</td></tr>
+        <tr><th>每日漲跌限制</th><td>個股 ±10%（<span class="term" data-term="漲跌停">漲跌停</span>）</td><td>沒有每日漲跌幅限制，改用熔斷與個股暫停交易（4.6 節）</td></tr>
+        <tr><th>交割</th><td><span class="term" data-term="T+2交割">T+2</span></td><td>T+1（2024 年 5 月 28 日起）</td></tr>
+        <tr><th>顏色慣例</th><td><span class="term" data-term="紅漲綠跌">紅漲綠跌</span></td><td>綠漲紅跌</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <aside class="note">顏色相反是真的會讓人看錯的事。打開英文報價網站，一片綠色代表大漲，一片紅色代表大跌。這本書預設紅漲綠跌，你可以在頂列切換成國際慣例。</aside>
+
+  <h3>新聞與 GCFIE 裡的美國機構</h3>
+  <p>美股不只有交易所。GCFIE 把資料來源分成三層，第一層（Tier 1）指定的官方機構裡，一大半在美國：</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第二十七節</span></div>
+    <p class="quote">Tier 1｜官方：CFTC、Cboe、CME、U.S. Treasury、BLS、Federal Reserve、TWSE、TAIFEX、公司IR。</p>
+    <p>逐一翻譯：<span class="term" data-term="CFTC">CFTC</span> 是美國商品期貨交易委員會，每週公布期貨部位報告（第 21 章）；<span class="term" data-term="Cboe">Cboe</span> 是芝加哥選擇權交易所，VIX 與 Put/Call 資料的來源（第 19、20 章）；<span class="term" data-term="CME">CME</span> 是芝加哥商業交易所，美股指數期貨 ES、NQ 在這裡交易（4.7 節、第 17 章）；U.S. Treasury 是美國財政部，公布公債殖利率（第 13 章）；BLS 是美國勞工統計局，公布 <span class="term" data-term="CPI">CPI</span>（第 12 章）；Federal Reserve 就是<span class="term" data-term="聯準會">聯準會</span>。TWSE、TAIFEX 是台灣的證交所與<span class="term" data-term="期交所">期交所</span>，公司 IR 是各公司的投資人關係網頁。</p>
+  </div>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>「Nasdaq 今天跌 2%」，意思是在那斯達克交易所掛牌的每一檔股票都跌了 2%。</p></div>
+    <div class="myth-right"><p>「Nasdaq」至少指三樣東西：那斯達克<strong>交易所</strong>（掛牌的地方）、<span class="term" data-term="那斯達克綜合指數">那斯達克綜合指數</span>（所有在這裡掛牌的普通股，市值加權）、<span class="term" data-term="Nasdaq-100">Nasdaq-100</span>（其中最大的 100 家非金融公司）。新聞說的「Nasdaq 跌 2%」是<strong>指數</strong>跌 2%，是大公司影響最大的加權平均，個股有漲有跌。GCFIE 第 2 章名單裡的 Nasdaq 指綜合指數，第 4 章追蹤的是 Nasdaq-100 的期貨（第 5 章）。</p></div>
+  </div>
+
+</section>
+
+<section id="clock">
+  <h2><span class="sec-num">4.2</span>美股幾點開盤：時區與夏令時間</h2>
+  <p class="lead-in">想知道美股「現在」開著沒有，先要會換算時間。全世界的時鐘都以<b>協調世界時</b>（UTC，可以想成過去常說的格林威治時間）為基準，往前或往後加減幾個小時。台灣是 UTC＋8，一年到頭都不變。</p>
+  <p>紐約使用<b>美東時間</b>（Eastern Time，簡寫 ET）。它一年裡有兩種：冬天是美東標準時間（EST），等於 UTC−5；夏天是美東夏令時間（EDT），等於 UTC−4。兩地相減，台灣比紐約快 13 小時（冬天）或 12 小時（夏天）。所以當紐約是早上，台灣已經是同一天的晚上；紐約下午收盤時，台灣已經是隔天清晨。</p>
+
+  <div class="box define" id="def-dst">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>夏令時間</dfn><span class="en">Daylight saving time (DST)</span></p>
+    <p>夏天把時鐘撥快一小時，讓傍晚多一小時日照。美國從每年 3 月第二個星期日開始、11 月第一個星期日結束：2026 年是 3 月 8 日到 11 月 1 日，2027 年從 3 月 14 日再開始。台灣不實施夏令時間，所以台美的時差一年會變兩次，美股在台灣的開盤時間也跟著變。</p>
+  </div>
+
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">台灣時間 ＝ 美東時間 ＋ 12 小時（夏令）或 ＋ 13 小時（冬令）</div>
+    <div class="where">加完超過 24:00，就是台灣的「隔天」。例如冬令的美東 16:00：16 ＋ 13 ＝ 29，29 − 24 ＝ 5，也就是台灣隔天清晨 05:00。</div>
+  </div>
+
+  <p>美股的正式交易時間是美東 09:30 到 16:00，一共六個半小時，比台股的四個半小時長。把它和幾個常見的美國事件一起換算：</p>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>美國時間換算成台灣時間（美東時間以交易所、聯準會、BLS 公告為準）</caption>
+      <thead><tr><th>事件</th><th class="r">美東時間</th><th class="r">台灣（夏令，到 10/30）</th><th class="r">台灣（冬令，11/2 起）</th></tr></thead>
+      <tbody>
+        <tr><th>美股開盤</th><td class="r">09:30</td><td class="r">21:30</td><td class="r">22:30</td></tr>
+        <tr><th>美股收盤</th><td class="r">16:00</td><td class="r">隔天 04:00</td><td class="r">隔天 05:00</td></tr>
+        <tr><th>CPI 等經濟數據</th><td class="r">08:30</td><td class="r">20:30</td><td class="r">21:30</td></tr>
+        <tr><th>聯準會利率決議</th><td class="r">14:00</td><td class="r">隔天 02:00</td><td class="r">隔天 03:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>把一天攤成 24 小時的圓，就能一眼看出台灣幾點、哪些市場開著。下圖用冬令時間，因為那是計畫持有期的大部分時間。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+<!--FIG:clock-->
+<svg viewBox="0 0 400 510" role="img" aria-label="台灣時間 24 小時環形時鐘（冬令時間）：美股正式交易 22:30 到隔天 05:00，盤前 17:00 起、盤後到 09:00；CME 美股期貨除 06:00 到 07:00 外全天交易；歐洲 16:00 到 00:30；台指期日盤 08:45 到 13:45、夜盤 15:00 到 05:00；台股 09:00 到 13:30。07:45 GCFIE 出報告時，只有美股盤後與美股期貨在交易">
+<circle cx="200" cy="196" r="150" class="f-none s-rule s-1"/>
+<circle cx="200" cy="196" r="132" class="f-none s-rule s-1"/>
+<circle cx="200" cy="196" r="114" class="f-none s-rule s-1"/>
+<circle cx="200" cy="196" r="96" class="f-none s-rule s-1"/>
+<circle cx="200" cy="196" r="78" class="f-none s-rule s-1"/>
+<line x1="200" y1="37" x2="200" y2="29" class="s-3 s-1"/>
+<line x1="241.2" y1="42.4" x2="242.4" y2="37.6" class="s-3 s-1"/>
+<line x1="279.5" y1="58.3" x2="282" y2="54" class="s-3 s-1"/>
+<line x1="312.4" y1="83.6" x2="318.1" y2="77.9" class="s-3 s-1"/>
+<line x1="337.7" y1="116.5" x2="342" y2="114" class="s-3 s-1"/>
+<line x1="353.6" y1="154.8" x2="358.4" y2="153.6" class="s-3 s-1"/>
+<line x1="359" y1="196" x2="367" y2="196" class="s-3 s-1"/>
+<line x1="353.6" y1="237.2" x2="358.4" y2="238.4" class="s-3 s-1"/>
+<line x1="337.7" y1="275.5" x2="342" y2="278" class="s-3 s-1"/>
+<line x1="312.4" y1="308.4" x2="318.1" y2="314.1" class="s-3 s-1"/>
+<line x1="279.5" y1="333.7" x2="282" y2="338" class="s-3 s-1"/>
+<line x1="241.2" y1="349.6" x2="242.4" y2="354.4" class="s-3 s-1"/>
+<line x1="200" y1="355" x2="200" y2="363" class="s-3 s-1"/>
+<line x1="158.8" y1="349.6" x2="157.6" y2="354.4" class="s-3 s-1"/>
+<line x1="120.5" y1="333.7" x2="118" y2="338" class="s-3 s-1"/>
+<line x1="87.6" y1="308.4" x2="81.9" y2="314.1" class="s-3 s-1"/>
+<line x1="62.3" y1="275.5" x2="58" y2="278" class="s-3 s-1"/>
+<line x1="46.4" y1="237.2" x2="41.6" y2="238.4" class="s-3 s-1"/>
+<line x1="41" y1="196" x2="33" y2="196" class="s-3 s-1"/>
+<line x1="46.4" y1="154.8" x2="41.6" y2="153.6" class="s-3 s-1"/>
+<line x1="62.3" y1="116.5" x2="58" y2="114" class="s-3 s-1"/>
+<line x1="87.6" y1="83.6" x2="81.9" y2="77.9" class="s-3 s-1"/>
+<line x1="120.5" y1="58.3" x2="118" y2="54" class="s-3 s-1"/>
+<line x1="158.8" y1="42.4" x2="157.6" y2="37.6" class="s-3 s-1"/>
+<text x="200" y="22" class="ta-m t-xs t-mono t-3">00</text>
+<text x="325.9" y="74.1" class="ta-m t-xs t-mono t-3">03</text>
+<text x="378" y="200" class="ta-m t-xs t-mono t-3">06</text>
+<text x="325.9" y="325.9" class="ta-m t-xs t-mono t-3">09</text>
+<text x="200" y="378" class="ta-m t-xs t-mono t-3">12</text>
+<text x="74.1" y="325.9" class="ta-m t-xs t-mono t-3">15</text>
+<text x="22" y="200" class="ta-m t-xs t-mono t-3">18</text>
+<text x="74.1" y="74.1" class="ta-m t-xs t-mono t-3">21</text>
+<path d="M49.3 236.4A156.0 156.0 0 0 1 140.3 51.9L144.9 63A144.0 144.0 0 0 0 60.9 233.3Z" class="f-accent-soft s-accent s-1"/>
+<path d="M140.3 51.9A156.0 156.0 0 0 1 350.7 155.6L339.1 158.7A144.0 144.0 0 0 0 144.9 63Z" class="f-accent"/>
+<path d="M350.7 155.6A156.0 156.0 0 0 1 310.3 306.3L301.8 297.8A144.0 144.0 0 0 0 339.1 158.7Z" class="f-accent-soft s-accent s-1"/>
+<path d="M333.3 231.7A138.0 138.0 0 1 1 338 196L326 196A126.0 126.0 0 1 0 321.7 228.6Z" class="f-c1"/>
+<path d="M96.1 256A120.0 120.0 0 0 1 215.7 77L214.1 88.9A108.0 108.0 0 0 0 106.5 250Z" class="f-3"/>
+<path d="M276.7 263.3A102.0 102.0 0 0 1 154.9 287.5L160.2 276.7A90.0 90.0 0 0 0 267.7 255.3Z" class="f-c2"/>
+<path d="M127.9 268.1A102.0 102.0 0 1 1 298.5 169.6L286.9 172.7A90.0 90.0 0 1 0 136.4 259.6Z" class="f-c2"/>
+<path d="M272.7 238A84.0 84.0 0 0 1 148.9 262.6L156.2 253.1A72.0 72.0 0 0 0 262.4 232Z" class="f-foil-soft s-foil s-1"/>
+<path d="M259.4 255.4A84.0 84.0 0 0 1 167.9 273.6L172.4 262.5A72.0 72.0 0 0 0 250.9 246.9Z" class="f-foil"/>
+<line x1="259.2" y1="225.2" x2="352.5" y2="271.2" class="s-ink s-2w"/>
+<circle cx="352.5" cy="271.2" r="4" class="f-ink"/>
+<text x="200" y="182" class="ta-m t-sm t-3">台灣時間</text>
+<text x="200" y="204" class="ta-m t-serif t-md">24 小時</text>
+<text x="200" y="224" class="ta-m t-xs t-3">冬令 11/2 起</text>
+<text x="360.5" y="265.2" class="t-sm t-b t-mono">07:45</text>
+<line x1="14" y1="386" x2="386" y2="386" class="s-rule s-1"/>
+<text x="14" y="404" class="t-xs t-3">由外圈到內圈</text>
+<rect x="14" y="416" width="16" height="11" class="f-accent"/>
+<text x="36" y="426" class="t-sm">美股正式交易</text>
+<rect x="214" y="416" width="16" height="11" class="f-accent-soft s-accent s-1"/>
+<text x="236" y="426" class="t-sm">美股盤前、盤後</text>
+<rect x="14" y="440" width="16" height="11" class="f-c1"/>
+<text x="36" y="450" class="t-sm">美股期貨（CME）</text>
+<rect x="214" y="440" width="16" height="11" class="f-3"/>
+<text x="236" y="450" class="t-sm">歐洲（倫敦）</text>
+<rect x="14" y="464" width="16" height="11" class="f-c2"/>
+<text x="36" y="474" class="t-sm">台指期日盤、夜盤</text>
+<rect x="214" y="464" width="16" height="11" class="f-foil"/>
+<text x="236" y="474" class="t-sm">台股現貨</text>
+<rect x="14" y="488" width="16" height="11" class="f-foil-soft s-foil s-1"/>
+<text x="36" y="498" class="t-sm">日韓現貨</text>
+<line x1="214" y1="494" x2="230" y2="494" class="s-ink s-2w"/>
+<text x="236" y="498" class="t-sm">07:45 GCFIE 出報告</text>
+</svg>
+<!--/FIG:clock-->
+    </div>
+    <figcaption><span class="fig-n"></span><span>以台灣時間畫成的 24 小時鐘，00 在正上方，順時針走。從圓心伸出的那條線是 GCFIE 出報告的 07:45：這一刻各地現貨的正式交易全部關著，只剩美股的盤後交易和 CME 的美股期貨還在動。夏令時間時，外面兩圈美股的時段整段提早一小時。歐洲依倫敦冬令時間示意。</span></figcaption>
+  </figure>
+
+  <p>順著 07:45 那條線往外走：亞洲現貨還沒開，台指期夜盤 05:00 已收、日盤 08:45 才開，歐洲早就收了。還在交易的只有最外圈的美股盤後，和第二圈的美股期貨；GCFIE 對這兩樣各有一條規定（4.3、4.7 節）。</p>
+
+  <p>夏令與冬令切換時，什麼會變、什麼不會變？下圖把兩種時間上下對齊：</p>
+
+  <figure class="fig wide">
+    <div class="fig-plate">
+      <div class="fig-scroll" style="--fig-min:600px">
+<!--FIG:dst-->
+<svg viewBox="0 0 720 330" role="img" aria-label="夏令與冬令的對照：美股現貨的盤前、正式交易、盤後整段晚一小時，冬令時正式交易收盤 05:00 剛好碰上台指期夜盤收盤；CME 美股期貨的每日休息從 05:00 到 06:00 移到 06:00 到 07:00；台灣這邊的 05:00、07:45、09:00 都不變">
+<defs><marker id="ar04a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-ink"/></marker></defs>
+<line x1="526.5" y1="40" x2="526.5" y2="300" class="s-3 s-1 s-dash"/>
+<line x1="615.9" y1="40" x2="615.9" y2="300" class="s-ink s-15 s-dash"/>
+<line x1="656.5" y1="40" x2="656.5" y2="300" class="s-3 s-1 s-dash"/>
+<text x="526.5" y="34" class="ta-m t-sm t-2">05:00 夜盤收盤</text>
+<text x="615.9" y="16" class="ta-m t-sm t-b">07:45 GCFIE 報告</text>
+<text x="656.5" y="34" class="ta-m t-sm t-2">09:00 開盤</text>
+<text x="14" y="62" class="t-b t-sm">夏令時間</text>
+<text x="14" y="78" class="t-xs t-3">到 10/30（週五）</text>
+<text x="14" y="100" class="t-sm t-2">美股現貨</text>
+<text x="14" y="128" class="t-sm t-2">美股期貨</text>
+<rect x="104" y="86" width="178.8" height="22" class="f-accent-soft s-accent s-1"/>
+<text x="193.4" y="101" class="ta-m t-sm t-accent">盤前 16:00–21:30</text>
+<rect x="282.8" y="86" width="211.2" height="22" class="f-accent"/>
+<text x="388.4" y="101" class="ta-m t-sm t-paper t-b">正式交易 21:30–04:00</text>
+<rect x="494" y="86" width="130" height="22" class="f-accent-soft s-accent s-1"/>
+<text x="559" y="101" class="ta-m t-sm t-accent">盤後 04:00–08:00</text>
+<rect x="104" y="118" width="422.5" height="14" class="f-c1"/>
+<rect x="559" y="118" width="130" height="14" class="f-c1"/>
+<text x="112" y="129" class="t-xs t-paper">CME 電子盤：幾乎全天交易</text>
+<text x="542.8" y="146" class="ta-m t-xs t-3">休息</text>
+<text x="14" y="184" class="t-b t-sm">冬令時間</text>
+<text x="14" y="200" class="t-xs t-3">11/2（週一）起</text>
+<text x="14" y="222" class="t-sm t-2">美股現貨</text>
+<text x="14" y="250" class="t-sm t-2">美股期貨</text>
+<rect x="136.5" y="208" width="178.8" height="22" class="f-accent-soft s-accent s-1"/>
+<text x="225.9" y="223" class="ta-m t-sm t-accent">盤前 17:00–22:30</text>
+<rect x="315.2" y="208" width="211.2" height="22" class="f-accent"/>
+<text x="420.9" y="223" class="ta-m t-sm t-paper t-b">正式交易 22:30–05:00</text>
+<rect x="526.5" y="208" width="130" height="22" class="f-accent-soft s-accent s-1"/>
+<text x="591.5" y="223" class="ta-m t-sm t-accent">盤後 05:00–09:00</text>
+<rect x="104" y="240" width="455" height="14" class="f-c1"/>
+<rect x="591.5" y="240" width="97.5" height="14" class="f-c1"/>
+<text x="112" y="251" class="t-xs t-paper">CME 電子盤：幾乎全天交易</text>
+<text x="575.2" y="268" class="ta-m t-xs t-3">休息</text>
+<line x1="282.8" y1="160" x2="311.2" y2="160" class="s-ink s-15" marker-end="url(#ar04a)"/>
+<text x="321.2" y="164" class="t-sm t-b">整段晚 1 小時</text>
+<line x1="104" y1="300" x2="689" y2="300" class="s-ink s-1"/>
+<line x1="104" y1="300" x2="104" y2="305" class="s-ink s-1"/>
+<text x="104" y="320" class="ta-m t-xs t-mono t-3">16:00</text>
+<line x1="169" y1="300" x2="169" y2="305" class="s-ink s-1"/>
+<text x="169" y="320" class="ta-m t-xs t-mono t-3">18:00</text>
+<line x1="234" y1="300" x2="234" y2="305" class="s-ink s-1"/>
+<text x="234" y="320" class="ta-m t-xs t-mono t-3">20:00</text>
+<line x1="299" y1="300" x2="299" y2="305" class="s-ink s-1"/>
+<text x="299" y="320" class="ta-m t-xs t-mono t-3">22:00</text>
+<line x1="364" y1="300" x2="364" y2="305" class="s-ink s-1"/>
+<text x="364" y="320" class="ta-m t-xs t-mono t-3">00:00</text>
+<line x1="429" y1="300" x2="429" y2="305" class="s-ink s-1"/>
+<text x="429" y="320" class="ta-m t-xs t-mono t-3">02:00</text>
+<line x1="494" y1="300" x2="494" y2="305" class="s-ink s-1"/>
+<text x="494" y="320" class="ta-m t-xs t-mono t-3">04:00</text>
+<line x1="559" y1="300" x2="559" y2="305" class="s-ink s-1"/>
+<text x="559" y="320" class="ta-m t-xs t-mono t-3">06:00</text>
+<line x1="624" y1="300" x2="624" y2="305" class="s-ink s-1"/>
+<text x="624" y="320" class="ta-m t-xs t-mono t-3">08:00</text>
+<line x1="689" y1="300" x2="689" y2="305" class="s-ink s-1"/>
+<text x="689" y="320" class="ta-m t-xs t-mono t-3">10:00</text>
+<text x="14" y="320" class="t-xs t-3">台灣時間</text>
+</svg>
+<!--/FIG:dst-->
+      </div>
+    </div>
+    <figcaption><span class="fig-n"></span><span>美國換季時，美股與 CME 期貨的時段在台灣時間上整段平移一小時；台灣這邊的時刻（虛線）不動。冬令時，美股收盤（05:00）剛好碰上台指期夜盤收盤；夏令時，夜盤在美股收盤後還多交易一小時。</span></figcaption>
+  </figure>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §五</span></div>
+    <p class="quote">聯準會會議 @October 28, 2026（台灣時間 10/29 凌晨公布）</p>
+    <p class="quote">聯準會會議 @December 9, 2026（台灣時間 12/10 凌晨）</p>
+    <p>計畫的時間軸特別把美國日期換成台灣時間。用上面的公式驗證一次，順便看見夏令與冬令的差別。</p>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>聯準會兩次決議，台灣幾點看得到？</h4>
+    <ol class="calc">
+      <li>聯準會的 <span class="term" data-term="FOMC">FOMC</span> 會議在第二天美東下午 2:00 公布決議，2:30 主席開記者會。10/28 美國還在夏令時間：<span class="eq">14:00 ＋ 12 ＝ 26:00 → 10/29（週四）02:00</span></li>
+      <li>11/1 換季之後，12/9 已經是冬令時間：<span class="eq">14:00 ＋ 13 ＝ 27:00 → 12/10（週四）03:00</span></li>
+      <li>台股現貨要等 09:00 才能反應，中間隔了：<span class="eq">10/29：09:00 − 02:00 ＝ 7 小時；12/10：09:00 − 03:00 ＝ 6 小時</span></li>
+    </ol>
+    <p class="answer">計畫寫的「10/29 凌晨」「12/10 凌晨」都對，只是一個是 02:00、一個是 03:00。決議公布時台股在睡覺，但<span class="term" data-term="台指期">台指期</span>的<span class="term" data-term="夜盤">夜盤</span>（15:00 到 05:00）和美股期貨都還開著，它們會先替台股反應。</p>
+  </div>
+
+  <aside class="note">計畫的持有期是 10/19 到 3 月上旬。除了最前面兩週，整段都在美國冬令時間：美股在台灣是 22:30 開盤、05:00 收盤。2027 年 3 月 14 日美國才再換回夏令，那時計畫已經出場完畢。</aside>
+
+</section>
+
+<section id="extended-hours">
+  <h2><span class="sec-num">4.3</span>盤前與盤後交易：正式收盤之外的價格</h2>
+  <p class="lead-in">美股的一天不只六個半小時。正式交易之前和之後，各還有一段可以買賣的時間。價格會動，但參與的人和規則都不一樣，所以它的價格要打折看。</p>
+
+  <div class="box define" id="def-premarket">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>盤前交易</dfn><span class="en">Pre-market trading</span></p>
+    <p>正式開盤前的交易時段。以那斯達克交易所為例，是美東 04:00 到 09:30，換成台灣是 16:00 到 21:30（夏令）或 17:00 到 22:30（冬令）。各交易所與券商開放的時段不完全相同。</p>
+  </div>
+
+  <div class="box define" id="def-postmarket">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>盤後交易</dfn><span class="en">After-hours trading</span></p>
+    <p>正式收盤後的交易時段，美東 16:00 到 20:00，換成台灣是隔天 04:00 到 08:00（夏令）或 05:00 到 09:00（冬令）。所以 GCFIE 07:45 出報告時，美股的盤後交易其實還在進行。</p>
+  </div>
+
+  <p>盤前盤後和正式交易，有三個重要的不同：</p>
+  <ul>
+    <li><b>人少</b>：大部分機構投資人在正式時段交易，盤前盤後的成交量通常小很多，<span class="term" data-term="流動性">流動性</span>差。</li>
+    <li><b>價差大</b>：買方願意出的最高價，和賣方願意接受的最低價，中間差得比較遠。一筆不大的單，就可能讓成交價跳一大格。</li>
+    <li><b>限制多</b>：很多券商在這兩段只接受<span class="term" data-term="限價單">限價單</span>，也就是一定要寫明願意成交的價格；部分委託方式不能用。</li>
+  </ul>
+
+  <aside class="note">名字很像、東西不同：台股的<span class="term" data-term="盤後定價交易">盤後定價交易</span>（14:00–14:30）只能用當天的收盤價成交，價格不會動（第 3 章）；美股的盤後交易是真的在競價，價格可以大漲大跌。</aside>
+
+  <h3>為什麼盤後特別重要：財報都在收盤後公布</h3>
+  <p>美國的大公司習慣在美東收盤後公布財報（第 11 章的<span class="term" data-term="盤後財報">盤後財報</span>），讓投資人有一個晚上消化。對台灣來說，這代表財報在清晨公布，第一個價格反應出現在美股盤後交易，接著傳到期貨，最後在 09:00 進入台股。</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §九</span></div>
+    <p class="quote">持有期內最重要的需求驗證：1 月底至 2 月初 CSP 公布 2027 年資本支出指引（剛好在封關前），以及 11 月下旬、2 月下旬兩次輝達財報。</p>
+    <p>這三個事件都發生在美國。<span class="term" data-term="輝達">輝達</span>與<span class="term" data-term="CSP">雲端大廠（CSP）</span>通常在美東收盤後公布；換成冬令時間，就是台灣清晨 05:00 之後。台股在財報公布當天早上就要反應，而盤後交易與美股期貨的走勢，是 GCFIE 早上能看到的第一手價格證據。「剛好在封關前」的意思是：如果財報落在台股<span class="term" data-term="封關">封關</span>前一晚，台股只有一個交易日可以反應，之後就是一整週的長假（4.4 節）。</p>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第三節 第 1 條</span></div>
+    <p class="quote">1. 美股現貨：使用最近一個完成交易日的正式收盤資料。</p>
+    <p>「正式收盤」指美東 16:00 那一刻的收盤價，不是盤後交易的最後一筆。07:45 出報告時，盤後交易可能正在大漲或大跌，GCFIE 仍然要求用 16:00 的價格，理由有兩個。第一，盤後成交稀少，價格容易被幾筆單推遠，不能代表市場共識。第二，每天用同一個時點的價格，前一天的預警和今天的價格才能用同一把尺比較（第 36 章的<span class="term" data-term="預警驗證">預警驗證</span>）。盤後的消息沒有被丟掉：它會反映在美股期貨的電子盤報價裡，那是第三節第 2 條管的事（4.7 節）。</p>
+  </div>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>輝達財報公布後，盤後大漲 8%，所以美股明天開盤、台股今天開盤，都會跟著大漲 8% 左右。</p></div>
+    <div class="myth-right"><p>盤後的 8% 是少數人在少量成交下給出的價格（假設的數字）。到美東 09:30 正式開盤前，還有一整段盤前交易、分析師的解讀、當天的經濟數據；好財報之後股價下跌的情況並不少見（第 11 章的「利多出盡」）。盤後價格是<strong>第一個反應</strong>，不是最後的答案。台股的 AI 供應鏈會參考它，但開盤後怎麼走，還要看台股自己的買賣盤。</p></div>
+  </div>
+
+  <h3>交易時間還在變長</h3>
+  <p>那斯達克交易所已規劃把交易延長為一天 23 小時，在美東 21:00 到隔天 04:00 加開夜間時段，目標 2026 年 12 月上線，實際日期以交易所公告為準。換成冬令的台灣時間是 10:00 到 17:00：上線後，台股盤中也看得到美股在交易，但夜間的流動性一樣要打折看。</p>
+
+</section>
+
+<section id="transmission">
+  <h2><span class="sec-num">4.4</span>時差傳導：從紐約收盤到台北開盤</h2>
+  <p class="lead-in">美股收盤時，台灣是清晨 04:00 或 05:00；台股要到 09:00 才開盤。這中間的四、五個小時，台股的現貨投資人什麼都不能做，只能看著美國剛發生的事，等開盤時一次反映。</p>
+
+  <div class="box define" id="def-transmission">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>時差傳導</dfn><span class="en">Time-zone transmission</span></p>
+    <p>因為時區不同，美國晚上（台灣時間）發生的漲跌、利率與匯率變化，要等到台股開盤才進入台股的價格。前一晚累積的消息會集中在開盤那一刻反映，所以台股的開盤價常常「跳」一大段。傳導的路線依序是：美股現貨收盤、台積電 ADR 與費半、期貨的夜盤和電子盤、台股開盤。</p>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第一節、第二十二節</span></div>
+    <p class="quote">4. 美股的風險是否正在向台股 AI／半導體供應鏈傳導？</p>
+    <p class="quote">所有全球訊號最後必須落到台股。</p>
+    <p>GCFIE 要回答的五個核心問題裡，第四個就是傳導。第二十二節把它寫成規則：不管前面分析了多少美國資料，最後都要說清楚對台股的哪一個環節有什麼影響（第 35 章的<span class="term" data-term="跨市場傳導">跨市場傳導</span>）。時差決定了這份「翻譯」必須在台股開盤前完成。</p>
+  </div>
+
+  <p>下面這張圖把一個晚上的接力畫出來。左邊是冬令時間，括號裡是夏令時間：</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+<!--FIG:relay-->
+<svg viewBox="0 0 400 496" role="img" aria-label="時差傳導的接力順序（台灣時間，冬令）：22:30 美股開盤，05:00 美股收盤與台指期夜盤收盤，07:00 CME 美股期貨恢復交易，07:45 GCFIE 出報告，08:30 台股開始收單試撮，08:45 台指期日盤開盤，09:00 台股開盤；美股收盤到台股開盤相隔 4 小時，夏令時為 5 小時">
+<text x="14" y="22" class="t-b t-sm">冬令時間</text>
+<text x="14" y="40" class="t-sm t-3">（夏令）</text>
+<text x="134" y="22" class="t-sm t-3">台灣時間，由上往下</text>
+<rect x="8" y="52" width="384" height="106" class="f-wash"/>
+<text x="386" y="68" class="ta-e t-xs t-accent">美國的白天</text>
+<line x1="112" y1="78" x2="112" y2="456" class="s-2 s-15 draw"/>
+<circle cx="112" cy="78" r="6" class="f-accent s-paper s-2w"/>
+<text x="94" y="79" class="ta-e t-mono t-b">22:30</text>
+<text x="94" y="96" class="ta-e t-xs t-mono t-3">（21:30）</text>
+<text x="132" y="79" class="t-b t-sm">美股開盤</text>
+<text x="132" y="97" class="t-sm t-2">費半、台積電 ADR 開始交易</text>
+<circle cx="112" cy="132" r="6" class="f-accent s-paper s-2w"/>
+<text x="94" y="133" class="ta-e t-mono t-b">05:00</text>
+<text x="94" y="150" class="ta-e t-xs t-mono t-3">（04:00）</text>
+<text x="132" y="133" class="t-b t-sm">美股收盤</text>
+<text x="132" y="151" class="t-sm t-2">正式收盤價確定</text>
+<circle cx="112" cy="186" r="6" class="f-c2 s-paper s-2w"/>
+<text x="94" y="187" class="ta-e t-mono t-b">05:00</text>
+<text x="132" y="187" class="t-b t-sm">台指期夜盤收盤</text>
+<text x="132" y="205" class="t-sm t-2">台股期貨的第一個反應</text>
+<circle cx="112" cy="240" r="6" class="f-c1 s-paper s-2w"/>
+<text x="94" y="241" class="ta-e t-mono t-b">07:00</text>
+<text x="94" y="258" class="ta-e t-xs t-mono t-3">（06:00）</text>
+<text x="132" y="241" class="t-b t-sm">CME 恢復交易</text>
+<text x="132" y="259" class="t-sm t-2">ES、NQ 重新報價</text>
+<circle cx="112" cy="294" r="8" class="f-ink s-paper s-2w"/>
+<text x="94" y="295" class="ta-e t-mono t-b">07:45</text>
+<text x="132" y="295" class="t-b">GCFIE 盤前報告</text>
+<text x="132" y="313" class="t-sm t-2">把整晚的證據排好</text>
+<circle cx="112" cy="348" r="6" class="f-foil s-paper s-2w"/>
+<text x="94" y="349" class="ta-e t-mono t-b">08:30</text>
+<text x="132" y="349" class="t-b t-sm">台股開始收單</text>
+<text x="132" y="367" class="t-sm t-2">試撮價透露開盤方向</text>
+<circle cx="112" cy="402" r="6" class="f-c2 s-paper s-2w"/>
+<text x="94" y="403" class="ta-e t-mono t-b">08:45</text>
+<text x="132" y="403" class="t-b t-sm">台指期日盤開盤</text>
+<text x="132" y="421" class="t-sm t-2">期貨先交易 15 分鐘</text>
+<circle cx="112" cy="456" r="8" class="f-foil s-paper s-2w"/>
+<text x="94" y="457" class="ta-e t-mono t-b">09:00</text>
+<text x="132" y="457" class="t-b">台股開盤</text>
+<text x="132" y="475" class="t-sm t-2">一次消化整晚的消息</text>
+<path d="M364 132 H372 V456 H364" class="f-none s-foil s-15"/>
+<rect x="358" y="260.0" width="28" height="68" class="f-plate"/>
+<text x="372" y="280.0" class="ta-m t-serif t-lg t-foil">4</text>
+<text x="372" y="298.0" class="ta-m t-xs t-foil">小時</text>
+<text x="372" y="314.0" class="ta-m t-xs t-3">（夏5）</text>
+</svg>
+<!--/FIG:relay-->
+    </div>
+    <figcaption><span class="fig-n"></span><span>時差傳導的接力順序（台灣時間）。加底色的區塊是美國的白天、台灣的晚上；美股收盤到台股開盤之間的空檔，冬令 4 小時、夏令 5 小時。08:30 的試撮與開盤集合競價見第 3 章。</span></figcaption>
+  </figure>
+
+  <h3>一個真實的例子：10/14 的 CPI 與 10/15 的大跌</h3>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §二</span></div>
+    <p class="quote">加權指數收 47,111 點；10/15 因美國 CPI 高於預期、加上 AI 資料中心融資的信用風險疑慮，大跌 1,656 點，為史上第六大跌點。</p>
+    <p>美國的消息，為什麼是台灣「10/15」大跌？用時差傳導把日期對起來。</p>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>美國的 CPI 怎麼走到台股的開盤</h4>
+    <ol class="calc">
+      <li>依美國勞工統計局（BLS）的發布排程，9 月 CPI 在美東 10/14（週三）08:30 公布。10 月中還是夏令時間：<span class="eq">08:30 ＋ 12 ＝ 20:30 → 台灣 10/14 晚上 8 點半</span></li>
+      <li>那時台股 13:30 早已收盤，還開著的是台指期夜盤（15:00 開始）和美股期貨，它們最先反應。<span class="eq">20:30 落在夜盤 15:00–05:00 之內</span></li>
+      <li>一小時後美股開盤，現貨接手反應；收盤在台灣 10/15 清晨。<span class="eq">21:30 開盤 → 10/15 04:00 收盤</span></li>
+      <li>台股現貨第一次能反應，是 10/15（週四）09:00。<span class="eq">20:30 → 隔天 09:00，相隔 12.5 小時</span></li>
+    </ol>
+    <p class="answer">消息在台灣 10/14 晚上出來，台股的大跌落在 10/15，是時差造成的，不是台股反應慢。看新聞時把日期對齊，才不會把原因和結果的順序弄反。</p>
+  </div>
+
+  <h3>為什麼是 07:45？</h3>
+  <p>GCFIE 的執行時間寫在規格書的第一張表上。對照前面的時鐘，就能看出這個時刻的道理：</p>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>台灣早上 07:45，哪些事已經發生、哪些還沒有</caption>
+      <thead><tr><th>事件</th><th class="r">冬令</th><th class="r">夏令</th><th>07:45 時的狀態</th></tr></thead>
+      <tbody>
+        <tr><th>美股正式收盤</th><td class="r">05:00</td><td class="r">04:00</td><td>已確定</td></tr>
+        <tr><th>台指期夜盤收盤</th><td class="r">05:00</td><td class="r">05:00</td><td>已確定</td></tr>
+        <tr><th>CME 美股期貨恢復交易</th><td class="r">07:00</td><td class="r">06:00</td><td>已有即時報價</td></tr>
+        <tr><th>美股盤後交易</th><td class="r">到 09:00</td><td class="r">到 08:00</td><td>還在進行（不採用）</td></tr>
+        <tr><th>台股開始收單、試撮</th><td class="r">08:30</td><td class="r">08:30</td><td>還沒開始</td></tr>
+        <tr><th>台指期日盤、台股開盤</th><td class="r">08:45、09:00</td><td class="r">08:45、09:00</td><td>還沒開始</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>可以這樣理解：07:45 落在「前一晚的證據到齊」和「台灣的委託開始進來」之間。再早，冬令時 CME 期貨還沒恢復交易；再晚，就來不及在 08:30 試撮前讀完。</p>
+
+  <h3>週六有報告、週日沒有</h3>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 版本表、第三節第 4 條</span></div>
+    <p class="quote">執行時間　台北時間每日 07:45｜週六　休市觀察版與下週預備版｜週日　不產出</p>
+    <p class="quote">週一使用上週五；休市後使用最近交易日。這不是舊資料，也不得標示為 DATA GAP。</p>
+    <p>這個排班完全是跟著美國的時鐘走。把每一天早上 07:45 時，前一晚美國發生了什麼列出來就懂了：</p>
+  </div>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>GCFIE 一週的產出，和前一晚的美國市場</caption>
+      <thead><tr><th>台灣早上</th><th>前一晚美國發生了什麼</th><th>GCFIE 產出</th></tr></thead>
+      <tbody>
+        <tr><th>週二～週五</th><td>美股前一天正常交易</td><td>正常盤前報告</td></tr>
+        <tr><th>週六</th><td>美股週五交易，在台灣週六清晨收盤；<span class="term" data-term="CFTC">CFTC</span> 也在週五美東 15:30 公布<span class="term" data-term="COT報告">部位報告</span></td><td>休市觀察版與下週預備版</td></tr>
+        <tr><th>週日</th><td>美國週六休市，沒有新價格</td><td>不產出</td></tr>
+        <tr><th>週一</th><td>美國週日沒有現貨交易；CME 期貨在美東週日傍晚恢復，是台灣週一 07:00（夏令 06:00）</td><td>正常報告：美股現貨用上週五收盤，台股法人資料用上週五</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>週一早上用的是上週五的資料，對 GCFIE 來說這就是「最近一個完成交易日」，不能叫過期，也不能標成<span class="term" data-term="資料不足">資料不足</span>。</p>
+
+  <h3>長假：一週的美股，擠進一個開盤</h3>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §五</span></div>
+    <p class="quote">春節 @February 6, 2027 初一，休市約一週，美股照常交易</p>
+    <p class="quote">連假期間美股平穩可回補部分</p>
+    <p>平常的時差傳導只累積一個晚上；<span class="term" data-term="春節休市">春節休市</span>時，美股照常交易約一週，這一週的漲跌全部要在<span class="term" data-term="開紅盤">開紅盤</span>那天反映。如果美股連假期間大跌，台股開紅盤每檔最多跌 10%（4.6 節），剩下的延到之後幾天，而你在休市期間無法調整部位。這是計畫封關前「節前降碼」到約 60% 的原因之一；「美股平穩」則是開紅盤後回補的條件。</p>
+  </div>
+
+  <aside class="note">時差傳導不是一比一的複製。前一晚費半漲 3%，台積電不一定開高 3%：匯率、外資的買賣、台股自己的消息都會加進來。GCFIE 第三十三節說「最後的裁判永遠是 Price」：美國的訊號是開盤前的劇本，台股開盤後怎麼走，才是答案。</aside>
+
+</section>
+
+<section id="adr">
+  <h2><span class="sec-num">4.5</span>ADR：台積電在紐約的分身</h2>
+  <p class="lead-in">台積電同時在兩個地方交易：台北的 2330，和紐約的 TSM。紐約那一份不是另一家公司，而是一種「憑證」。它在台股睡覺的時候交易，所以是台股開盤前最重要的線索之一。</p>
+
+  <div class="box define" id="def-adr">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>ADR</dfn><span class="en">American Depositary Receipt（美國存託憑證）</span></p>
+    <p>讓外國公司的股票能在美國交易的憑證。公司的普通股存放在本國的保管機構，美國的<b>存託銀行</b>據此發行憑證，每一單位代表固定股數的普通股，用美元在美國的交易所買賣。憑證的每一單位也常叫 ADS（American Depositary Share）。反過來，外國公司在台灣發行的叫台灣存託憑證（TDR）。</p>
+  </div>
+
+  <div class="box define" id="def-tsm">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>台積電ADR</dfn><span class="en">TSMC ADR (NYSE: TSM)</span></p>
+    <p>台積電在紐約證券交易所掛牌的存託憑證，代號 TSM，1997 年上市，是第一家在 NYSE 掛牌的台灣公司。<strong>每 1 單位代表 5 股</strong>台積電普通股。它是<span class="term" data-term="費城半導體指數">費半</span>的<span class="term" data-term="成分股">成分股</span>，美國的基金與 ETF 大量持有，所以常被當成「前一晚的台積電」。</p>
+  </div>
+
+  <figure class="fig">
+    <div class="fig-plate">
+<!--FIG:adr-->
+<svg viewBox="0 0 400 322" role="img" aria-label="ADR 的結構：5 股台積電普通股存放在台灣，美國的存託銀行據此發行 1 單位 ADR，代號 TSM，以美元在紐約證交所交易；兩地各自定價，換算後的差距就是溢價或折價">
+  <defs>
+    <marker id="ar04b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-accent"/></marker>
+  </defs>
+  <text x="100" y="26" class="ta-m t-serif t-md">台灣</text>
+  <text x="300" y="26" class="ta-m t-serif t-md">美國</text>
+  <line x1="200" y1="40" x2="200" y2="244" class="s-rule s-1 s-dash"/>
+  <rect x="34" y="58" width="24" height="34" class="f-foil-soft s-foil s-1"/>
+  <rect x="62" y="58" width="24" height="34" class="f-foil-soft s-foil s-1"/>
+  <rect x="90" y="58" width="24" height="34" class="f-foil-soft s-foil s-1"/>
+  <rect x="118" y="58" width="24" height="34" class="f-foil-soft s-foil s-1"/>
+  <rect x="146" y="58" width="24" height="34" class="f-foil-soft s-foil s-1"/>
+  <text x="46" y="80" class="ta-m t-sm">股</text>
+  <text x="74" y="80" class="ta-m t-sm">股</text>
+  <text x="102" y="80" class="ta-m t-sm">股</text>
+  <text x="130" y="80" class="ta-m t-sm">股</text>
+  <text x="158" y="80" class="ta-m t-sm">股</text>
+  <text x="102" y="116" class="ta-m t-sm t-b">台積電普通股 × 5</text>
+  <text x="102" y="134" class="ta-m t-sm t-2">代號 2330・新台幣</text>
+  <line x1="176" y1="75" x2="252" y2="75" class="s-accent s-2w" marker-end="url(#ar04b)"/>
+  <text x="214" y="98" class="ta-m t-xs t-accent">存託銀行</text>
+  <rect x="258" y="52" width="84" height="46" class="f-accent"/>
+  <text x="300" y="72" class="ta-m t-paper t-b">ADR</text>
+  <text x="300" y="90" class="ta-m t-paper t-mono t-sm">TSM</text>
+  <text x="300" y="116" class="ta-m t-sm t-b">1 單位 ＝ 5 股</text>
+  <text x="300" y="134" class="ta-m t-sm t-2">代號 TSM・美元</text>
+  <line x1="102" y1="144" x2="102" y2="164" class="s-3 s-1"/>
+  <line x1="300" y1="144" x2="300" y2="164" class="s-3 s-1"/>
+  <rect x="22" y="164" width="160" height="56" class="f-plate s-ink s-1"/>
+  <text x="102" y="187" class="ta-m t-b t-sm">台灣證交所</text>
+  <text x="102" y="208" class="ta-m t-sm t-mono t-2">09:00–13:30</text>
+  <rect x="220" y="164" width="160" height="56" class="f-plate s-ink s-1"/>
+  <text x="300" y="187" class="ta-m t-b t-sm">紐約證交所 NYSE</text>
+  <text x="300" y="208" class="ta-m t-sm t-mono t-2">美東 09:30–16:00</text>
+  <line x1="22" y1="252" x2="378" y2="252" class="s-rule s-1"/>
+  <text x="200" y="278" class="ta-m t-sm t-b">同一家公司，兩個市場各自定價</text>
+  <text x="200" y="302" class="ta-m t-sm t-accent">換算後的差距＝ADR 溢價（或折價）</text>
+</svg>
+<!--/FIG:adr-->
+    </div>
+    <figcaption><span class="fig-n"></span><span>ADR 的結構。普通股留在台灣，存託銀行在美國發行代表它的憑證；台積電是 5 股換 1 單位。兩地的價格各自由買賣決定，所以換算後不一定相等。</span></figcaption>
+  </figure>
+
+  <p>同一家公司、同一份獲利，只是包裝和交易地點不同。要把兩邊的價格放在一起比，得先處理兩件事：<b>單位</b>（1 單位 ADR 是 5 股）和<b>幣別</b>（美元換成新台幣，用的是第 14 章的<span class="term" data-term="匯率">匯率</span>）。</p>
+
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">ADR 換算台股價 ＝ ADR 價格 ÷ 5 × 匯率</div>
+    <div class="formula-line">ADR 溢價 ＝ <span class="frac"><span>ADR 換算台股價</span><span>台股收盤價</span></span> − 1</div>
+    <div class="where">匯率用「1 美元換多少新台幣」。「÷ 5」是台積電專用的比例，其他公司的 ADR 換算比例不同，要查公司公告。溢價是正的，表示 ADR 比台股貴；是負的，叫折價。</div>
+  </div>
+
+  <div class="box define" id="def-adr-premium">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>ADR溢價</dfn><span class="en">ADR premium</span></p>
+    <p>ADR 價格換算成本地股價後，比本地收盤價高出的百分比；低於本地價格時叫折價。它反映兩地買家、換股限制與交易時間的差異，可以長期維持在正值。</p>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>台積電 ADR 的溢價，以及它對隔天開盤的意義（ADR 價格與匯率為假設）</h4>
+    <ol class="calc">
+      <li>台積電 10/16 收盤 2,420 元（計畫的參考價）。假設當晚 TSM 收 460 美元，換成每 1 股：<span class="eq">460 ÷ 5 ＝ 92 美元</span></li>
+      <li>假設匯率是 1 美元換 30.0 元新台幣：<span class="eq">92 × 30.0 ＝ 2,760 元</span></li>
+      <li>溢價：<span class="eq">2,760 ÷ 2,420 − 1 ＝ 0.1405 → 約 14.0%</span></li>
+      <li>隔一晚，TSM 跌 3%，匯率不變：<span class="eq">460 × 0.97 ＝ 446.2 美元 → 446.2 ÷ 5 × 30.0 ＝ 2,677.2 元</span></li>
+      <li>如果溢價維持 14.0%，台股的「對應價」是：<span class="eq">2,677.2 ÷ 1.1405 ≈ 2,347 元，也就是 2,420 × 0.97</span></li>
+    </ol>
+    <p class="answer">溢價 14% 這個<strong>水準</strong>，不告訴你明天漲跌；ADR 一晚的<strong>漲跌幅</strong>（在溢價大致不變時）才是台積電開盤方向的參考。這一晚 TSM 跌 3%，暗示 2330 開盤附近的參考位置在 2,347 元上下，實際開盤仍由台股自己的買賣盤決定。</p>
+  </div>
+
+  <figure class="fig">
+    <div class="fig-plate">
+<!--FIG:premium-->
+<svg viewBox="0 0 400 334" role="img" aria-label="ADR 溢價計算（假設數字）：ADR 收盤 460 美元除以 5 得每股 92 美元，乘以匯率 30.0 得換算台股價 2,760 元，比台股收盤 2,420 元高 340 元，溢價約 14.0%">
+  <defs>
+    <marker id="ar04c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-ink"/></marker>
+  </defs>
+  <rect x="8" y="18" width="100" height="46" class="f-accent-soft s-accent s-1"/>
+  <text x="58" y="35" class="ta-m t-xs t-2">ADR 收盤</text>
+  <text x="58" y="55" class="ta-m t-mono t-b">460 美元</text>
+  <line x1="110" y1="41" x2="144" y2="41" class="s-ink s-15" marker-end="url(#ar04c)"/>
+  <text x="127" y="33" class="ta-m t-sm t-b">÷ 5</text>
+  <rect x="148" y="18" width="100" height="46" class="f-accent-soft s-accent s-1"/>
+  <text x="198" y="35" class="ta-m t-xs t-2">每 1 股</text>
+  <text x="198" y="55" class="ta-m t-mono t-b">92 美元</text>
+  <line x1="250" y1="41" x2="288" y2="41" class="s-ink s-15" marker-end="url(#ar04c)"/>
+  <text x="269" y="33" class="ta-m t-sm t-b">× 30</text>
+  <rect x="292" y="18" width="100" height="46" class="f-accent s-accent s-1"/>
+  <text x="342" y="35" class="ta-m t-xs t-paper">換算台股價</text>
+  <text x="342" y="55" class="ta-m t-mono t-b t-paper">2,760 元</text>
+  <line x1="50" y1="296" x2="350" y2="296" class="s-ink s-1"/>
+  <rect x="70" y="141.6" width="90" height="154.4" class="f-foil-soft s-foil s-1"/>
+  <rect x="200" y="141.6" width="90" height="154.4" class="f-accent-soft s-accent s-1"/>
+  <rect x="200" y="119.9" width="90" height="21.7" class="f-accent"/>
+  <line x1="56" y1="141.6" x2="300" y2="141.6" class="s-ink s-1 s-dash"/>
+  <text x="115" y="132" class="ta-m t-mono t-b">2,420</text>
+  <text x="245" y="111" class="ta-m t-mono t-b">2,760</text>
+  <text x="115" y="226" class="ta-m t-sm t-2">台股收盤</text>
+  <text x="245" y="226" class="ta-m t-sm t-2">ADR 換算</text>
+  <path d="M296 119.9 H304 V141.6 H296" class="f-none s-accent s-15"/>
+  <text x="310" y="126" class="t-sm t-b t-accent">＋340 元</text>
+  <text x="310" y="144" class="t-sm t-b t-accent">溢價 14.0%</text>
+  <text x="200" y="318" class="ta-m t-sm t-3">2,760 ÷ 2,420 − 1 ≈ 14.0%（單位：新台幣元）</text>
+</svg>
+<!--/FIG:premium-->
+    </div>
+    <figcaption><span class="fig-n"></span><span>上一題第 1 到第 3 步的圖解（假設數字）。兩根柱子都從 0 開始畫，右邊柱頂用括號標出的那一截就是溢價：ADR 換算後比台股貴 340 元，約 14.0%。</span></figcaption>
+  </figure>
+
+  <p>匯率也會動。假設 TSM 收盤價不變，但新台幣從 30.0 升值到 29.7（1 美元換到的新台幣變少，<span class="term" data-term="新台幣升值">新台幣升值</span>約 1%）：換算價變成 92 × 29.7 ＝ 2,732.4 元，溢價從 14.0% 降到 12.9%。ADR 和台積電都沒動，溢價卻少了約 1.1 個百分點。所以看溢價時，要先分清楚是 ADR 動了、台股動了，還是匯率動了。</p>
+
+  <h3>溢價為什麼可以一直存在？</h3>
+  <p>ADR 一直比台股貴，為什麼沒人買台股、轉成 ADR 到紐約賣掉？主要有三個原因：</p>
+  <ul>
+    <li><b>換股受限</b>：把台股普通股轉成 ADR，要依法規與發行額度辦理，不是想換就能換，所以兩邊的價差無法被套利迅速抹平。</li>
+    <li><b>買家不同</b>：很多美國基金只買在美國掛牌的股票，追蹤費半的資金也必須持有 TSM；台股的買家則以台灣投資人與外資為主。兩群人願意付的價格不一樣。</li>
+    <li><b>時間不同步</b>：ADR 的收盤在台灣清晨，台股的收盤在前一天 13:30，兩個價格相隔 14.5 小時（冬令 15.5 小時）。這段時間裡發生的新消息，全部算進了「溢價」。</li>
+  </ul>
+
+  <aside class="note">真實的溢價有多大？台灣財經媒體的報導可以參考：2024 年 6 月，台積電 ADR 的溢價創下 2009 年以來新高，押「價差會收斂」而買台股、放空 ADR 的套利交易反而虧損（<a href="https://finance.technews.tw/2024/06/17/popular-arbitrage-trade-backfires-as-tsmc-frenzy-grows-in-us/">科技新報</a>）；2025 年 10 月的一篇評論，用 ADR 收盤 294.03 美元換算出每股約 1,794.8 元，對照台股收盤 1,415 元，溢價約 26.8%（<a href="https://www.businesstoday.com.tw/article/category/183008/post/202510080065/">今周刊</a>）。溢價會在很大的範圍內變動。</aside>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §三、§四</span></div>
+    <p class="quote">核心權值　台積電 2330　12%　2,420　2,250–2,420　2,080　2,800　3,300</p>
+    <p class="quote">法人估 2027 年 EPS 約 150 元，以 2,420 元計約 16 倍，是組合的壓艙石。</p>
+    <p>台積電占計畫 12%，是單一最大的持股；它也是<span class="term" data-term="加權指數">加權指數</span>裡權重最大的<span class="term" data-term="權值股">權值股</span>。所以每天早上，TSM 前一晚的漲跌幅，同時是你最大一檔持股與整個大盤的開盤線索。GCFIE 第 10 章「台股供應鏈映射」把「台積電／Foundry」列為固定項目，ADR 正是把美國訊號落到這一格的橋。</p>
+  </div>
+
+  <p>台積電不是唯一的例子。計畫的核心持股日月光投控（3711），也在 NYSE 有 ADR，代號 ASX；聯電（UMC）、中華電信（CHT）也都在 NYSE 掛牌。每家的換算比例不同，換算前要先查清楚。</p>
+
+</section>
+
+<section id="circuit-breakers">
+  <h2><span class="sec-num">4.6</span>兩種煞車：美股熔斷與台股漲跌停</h2>
+  <p class="lead-in">市場急跌時，交易所會踩煞車。美國和台灣的煞車設計完全不同：美國是「全場先暫停，冷靜一下再繼續」，台灣是「每一檔今天最多就跌到這裡」。這個差別，會直接影響美股大跌後台股的開盤。</p>
+
+  <div class="box define" id="def-circuit">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>熔斷機制</dfn><span class="en">Market-wide circuit breaker</span></p>
+    <p>指數急跌時，讓全市場暫停交易的規則。美股以 <span class="term" data-term="標普500">S&amp;P 500</span> 相對前一日收盤的跌幅為準：跌 7%（第一級）或 13%（第二級），全市場暫停 15 分鐘，但美東 15:25 以後才觸發就不暫停；跌 20%（第三級），當天停止交易。熔斷只對下跌啟動，上漲沒有熔斷。</p>
+  </div>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>美股熔斷的三個級別（觸發點位用假設的前一日收盤 6,600 點計算）</caption>
+      <thead><tr><th>級別</th><th class="r">跌幅</th><th class="r">觸發點位（假設）</th><th>結果</th></tr></thead>
+      <tbody>
+        <tr><th>第一級</th><td class="r">7%</td><td class="r">6,600 × 0.93 ＝ 6,138</td><td>暫停 15 分鐘（美東 15:25 前觸發才暫停）</td></tr>
+        <tr><th>第二級</th><td class="r">13%</td><td class="r">6,600 × 0.87 ＝ 5,742</td><td>暫停 15 分鐘（同上）</td></tr>
+        <tr><th>第三級</th><td class="r">20%</td><td class="r">6,600 × 0.80 ＝ 5,280</td><td>當天剩下的時間停止交易</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>美東 15:25 換成台灣時間，是清晨 03:25（夏令）或 04:25（冬令），也就是你熟睡的時候。熔斷很少發生：現行制度下，2020 年 3 月新冠疫情爆發時，兩週內觸發了四次第一級（3 月 9、12、16、18 日），之後就沒有再出現過第二級以上的熔斷。</p>
+
+  <details class="deep">
+    <summary>個股也有煞車：Limit Up-Limit Down</summary>
+    <div>
+      <p>美股沒有每日漲跌幅限制，但個股有一套「價格帶」規則，叫 Limit Up-Limit Down（LULD）。以 S&amp;P 500、Russell 1000 成分股等大型股（股價 3 美元以上）為例，價格帶是前 5 分鐘平均價的上下 5%，收盤前最後 25 分鐘加倍。價格碰到帶子邊緣、15 秒內回不來，這檔股票就暫停交易 5 分鐘。它上漲和下跌都會啟動，細節以美國證管會核准的規則為準。</p>
+    </div>
+  </details>
+
+  <h3>台股沒有熔斷，用的是漲跌停</h3>
+  <p>台股的煞車裝在每一檔股票上。第一道是第 3 章的<a href="03-tw-trading.html#limits">漲跌停</a>：每一檔股票，一天最多漲或跌<span class="term" data-term="參考價">參考價</span>的 10%。第二道是<a href="03-tw-trading.html#auction">瞬間價格穩定措施</a>：盤中成交價將偏離前 5 分鐘加權平均價超過 3.5% 時，這檔股票先延緩撮合約 2 分鐘。2026 年 8 月，證交所回應立委提議時表示，目前沒有考慮導入熔斷，理由是美國沒有漲跌幅限制、韓國的漲跌幅是 30%，台灣只有 10%，制度本來就不同（<a href="https://www.ctee.com.tw/news/20260809700013-430201">工商時報</a>）。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+<!--FIG:brake-->
+<svg viewBox="0 0 400 340" role="img" aria-label="兩種煞車的比較（示意）：美股在 S&amp;P 500 跌 7% 時全市場暫停 15 分鐘，恢復後同一天可以繼續下跌；台股個股跌到 −10% 跌停後當天價格不能再低，賣單排隊，沒跌完的部分延到隔天">
+<text x="14" y="22" class="t-b t-sm">美股：熔斷（全市場暫停）</text>
+<text x="386" y="22" class="ta-e t-xs t-3">S&amp;P 500，示意</text>
+<rect x="113.5" y="44" width="12.6" height="105" class="f-wash"/>
+<text x="132.1" y="69.2" class="t-xs t-accent">← 暫停 15 分鐘</text>
+<line x1="58" y1="58" x2="386" y2="58" class="s-rule s-1"/>
+<line x1="58" y1="107" x2="386" y2="107" class="s-o s-1 s-dash"/>
+<line x1="58" y1="149" x2="386" y2="149" class="s-r s-1 s-dash"/>
+<text x="52" y="62" class="ta-e t-xs t-mono t-3">0%</text>
+<text x="52" y="111" class="ta-e t-xs t-mono t-3">−7%</text>
+<text x="52" y="153" class="ta-e t-xs t-mono t-3">−13%</text>
+<text x="386" y="102" class="ta-e t-xs t-2">第一級</text>
+<text x="386" y="144" class="ta-e t-xs t-2">第二級</text>
+<polyline points="58,58 70.6,66.4 83.2,81.8 98.4,94.4 113.5,107 126.1,107 138.7,118.2 153.9,123.8 174.1,132.2 199.3,125.2 229.6,134.3 264.9,128.7 300.2,136.4 340.6,127.3 386,123.1" class="f-none s-down s-2w s-round draw"/>
+<circle cx="113.5" cy="107" r="4" class="f-o"/>
+<text x="239.7" y="87.4" class="ta-m t-sm t-down">恢復後，同一天還能繼續跌</text>
+<text x="58" y="167" class="t-xs t-mono t-3">09:30</text>
+<text x="386" y="167" class="ta-e t-xs t-mono t-3">16:00 美東</text>
+<text x="200" y="167" class="ta-m t-xs t-red">−20%（第三級）：當天停止交易</text>
+<line x1="14" y1="172" x2="386" y2="172" class="s-rule s-1"/>
+<text x="14" y="194" class="t-b t-sm">台股：跌停（每檔單日最多 −10%）</text>
+<text x="386" y="194" class="ta-e t-xs t-3">個股，示意</text>
+<line x1="58" y1="214" x2="386" y2="214" class="s-rule s-1"/>
+<line x1="58" y1="284" x2="386" y2="284" class="s-r s-1 s-dash"/>
+<text x="52" y="218" class="ta-e t-xs t-mono t-3">0%</text>
+<text x="52" y="288" class="ta-e t-xs t-mono t-3">−10%</text>
+<polyline points="58,214 72.6,226.6 90.8,243.4 109,256.7 127.2,272.1 141.8,284" class="f-none s-down s-2w s-round draw"/>
+<line x1="141.8" y1="284" x2="386" y2="284" class="s-down s-3w"/>
+<circle cx="141.8" cy="284" r="4" class="f-r"/>
+<text x="262.1" y="258" class="ta-m t-sm t-b">跌停鎖住：價格不能再低</text>
+<text x="262.1" y="275" class="ta-m t-xs t-2">賣單排隊，想賣不一定賣得掉</text>
+<text x="58" y="302" class="t-xs t-mono t-3">09:00</text>
+<text x="386" y="302" class="ta-e t-xs t-mono t-3">13:30</text>
+<text x="200" y="324" class="ta-m t-sm t-red">沒跌完的部分，延到隔天以新的參考價繼續</text>
+</svg>
+<!--/FIG:brake-->
+    </div>
+    <figcaption><span class="fig-n"></span><span>同樣是急跌（示意走勢）。美股碰到 −7% 暫停 15 分鐘，恢復後同一天還能繼續跌，價格可以在當天一次反映完；台股一檔股票跌到 −10% 就停住，當天不能再低，剩下的跌幅延到隔天。</span></figcaption>
+  </figure>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §八（最大急跌欄）</span></div>
+    <p class="quote">8/5 單日 −1,807 點（−8.35%）</p>
+    <p class="quote">4/7 單日 −2,066 點（−9.7%）</p>
+    <p class="quote">7/17 單日 −2,954 點（−6.47%，史上最大）</p>
+    <p>這三天分別是 2024、2025、2026 年的單日最大跌點。看 2025 年 4/7 的 −9.7%：<span class="term" data-term="加權指數">加權指數</span>是成分股的加權平均，每一檔最多只能跌 10%，平均卻跌了 9.7%，代表權重大的股票幾乎都跌到或接近跌停。漲跌停沒有讓跌勢消失，只是把它切成好幾天。另外注意 7/17 的 −2,954 點是「史上最大<span class="term" data-term="跌點">跌點</span>」，跌幅卻只有 −6.47%，因為指數的點位比以前高很多（第 5 章的<a href="05-indices-breadth.html#points-pct">點數與百分比</a>）。</p>
+  </div>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>台股有漲跌停，美股沒有，所以台股比較安全，一天不會賠太多。</p></div>
+    <div class="myth-right"><p>漲跌停限制的是「一天」，不是「總共」。前一晚美股重挫，台股隔天開盤可能直接跌停鎖住，你掛賣單排隊卻賣不掉；隔天以新的參考價再跌一次。連續兩天跌停，累積是 1 − 0.9 × 0.9 ＝ 19% 的跌幅。美股雖然一天能跌更深，但至少價格當天就反映完，想賣的人賣得掉。</p></div>
+  </div>
+
+</section>
+
+<section id="night-futures">
+  <h2><span class="sec-num">4.7</span>夜盤與電子盤：市場幾乎不睡覺</h2>
+  <p class="lead-in">現貨市場會收盤，<span class="term" data-term="期貨">期貨</span>市場幾乎不睡覺。台股收盤後還有台指期的夜盤，美股收盤後還有 CME 的電子盤。早上 07:45，它們是唯一「正在跳動」的價格。期貨本身怎麼運作，第 17 章會從頭講；這一節只看它們的時間表。</p>
+
+  <h3>台指期夜盤：15:00 到隔天 05:00</h3>
+  <p>期交所在一般交易時段（08:45–13:45）之外，另開一個盤後交易時段，大家習慣叫<span class="term" data-term="夜盤">夜盤</span>：從 15:00 交易到隔天清晨 05:00。<span class="term" data-term="台指期">台指期</span>就在夜盤交易，而且夜盤的成交在結算與交易資料上，算進<strong>下一個交易日</strong>。對照圖 4.2：夏令時，美股的正式交易（21:30–04:00）整段落在夜盤裡；冬令時，美股 05:00 收盤，夜盤也在 05:00 收盤。所以台指期夜盤的收盤價，可以看成台股期貨對「整個美股交易日」的第一個回答。</p>
+
+  <h3>CME 電子盤：一週只休週末</h3>
+  <p>美股指數期貨在 <span class="term" data-term="CME">CME</span> 的電子交易平台交易（<span class="term" data-term="電子盤">電子盤</span>，平台叫 Globex）。最重要的兩個是追蹤 S&amp;P 500 的 <span class="term" data-term="ES">ES</span>，和追蹤 Nasdaq-100 的 <span class="term" data-term="NQ">NQ</span>。它們從美東週日 18:00 交易到週五 17:00，每天 17:00 到 18:00 休息一小時。換成台灣時間：</p>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>CME 美股指數期貨（ES、NQ）的交易時間，換算成台灣時間（以 CME 公告為準）</caption>
+      <thead><tr><th>項目</th><th class="r">美東時間</th><th class="r">台灣（夏令）</th><th class="r">台灣（冬令）</th></tr></thead>
+      <tbody>
+        <tr><th>每天休息</th><td class="r">17:00–18:00</td><td class="r">05:00–06:00</td><td class="r">06:00–07:00</td></tr>
+        <tr><th>一週開始</th><td class="r">週日 18:00</td><td class="r">週一 06:00</td><td class="r">週一 07:00</td></tr>
+        <tr><th>一週結束</th><td class="r">週五 17:00</td><td class="r">週六 05:00</td><td class="r">週六 06:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>注意冬令的那一欄：CME 在台灣 07:00 才恢復交易，到 07:45 只交易了 45 分鐘。這就是 GCFIE 第三節第 2 條為什麼要加上一個條件：</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第三節 第 2 條</span></div>
+    <p class="quote">2. 美股期貨：若 07:45 已有可靠電子盤報價，可納入即時盤前資訊；不得拿前一日結算價冒充今晨即時報價。</p>
+    <p>這句話有兩個關鍵詞。<b>「可靠電子盤報價」</b>：07:45 時電子盤已經恢復交易，報價是「現在」的價格，可以用；但剛恢復交易時成交可能還很稀少，所以要加上「若……可靠」的條件。<b>「前一日結算價」</b>：期貨每天交易結束後，交易所會公布一個官方的<span class="term" data-term="結算價">結算價</span>，用來計算保證金和損益（第 17 章）。它是昨天就定下來的價格。有些報價頁面在電子盤恢復前顯示的仍是結算價，看起來像最新數字，其實是好幾個小時前的價格。把它當成今晨報價寫進報告，就是規格書說的「冒充」。</p>
+  </div>
+
+  <h3>07:45 的資料拼圖</h3>
+  <p>把這一章學到的時間表拼在一起，就能說出 GCFIE 報告裡每一個數字「是哪一刻的」。以最容易搞混的週一早上（冬令）為例：</p>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>週一 07:45（冬令）的報告，每一類資料是哪一刻的</caption>
+      <thead><tr><th>資料</th><th>是哪一刻的價格或部位</th><th>規格書</th></tr></thead>
+      <tbody>
+        <tr><th>美股現貨：指數、費半、TSM</th><td>上週五美東 16:00 的正式收盤（台灣週六 05:00）</td><td>第三節第 1 條</td></tr>
+        <tr><th>美股期貨：ES、NQ</th><td>週一 07:00 恢復交易後的即時報價</td><td>第三節第 2 條</td></tr>
+        <tr><th>台指期</th><td>上週五夜盤，在週六 05:00 收盤</td><td>—</td></tr>
+        <tr><th>台股法人與期貨籌碼</th><td>上週五收盤後公布的官方資料</td><td>第三節第 4 條</td></tr>
+        <tr><th>CFTC 部位</th><td>上週二的部位（<span class="term" data-term="Position date">Position date</span>），上週五公布（<span class="term" data-term="Release date">Release date</span>）</td><td>第三節第 3 條</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>同一份報告裡，時間戳記從「上週二」到「此刻」都有。這就是 GCFIE 的<span class="term" data-term="資料時間軸">資料時間軸</span>（第 35 章）：每個數字都要標清楚是哪一刻的，才不會把舊消息當新消息。</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第二十八節 第 8 條</span></div>
+    <p class="quote">8. 把盤前期貨漲跌直接當成當日收盤預測。</p>
+    <p>這是禁止事項。從時差的角度看，理由很清楚：假設 07:45 時 NQ 漲 0.8%，這只反映到 07:45 為止的資訊。冬令時，從 07:45 到美股收盤（隔天 05:00）還有 21 小時又 15 分鐘，中間有台股一整天、歐洲開盤、美國 21:30 公布的經濟數據，以及美股六個半小時的交易。早上的期貨漲跌是起點，不是終點。第 3 章從台股試撮的角度講過同一件事。</p>
+  </div>
+
+  <div class="box key">
+    <div class="box-label"><span class="zh"></span><span class="lat">KEY IDEA</span></div>
+    <p>盤前看美國，要分清楚三種價格：<strong>正式收盤價</strong>（昨天 16:00，美股現貨用它）、<strong>即時電子盤報價</strong>（現在，可以用但要可靠）、<strong>前一日結算價</strong>（昨天的期貨價，不能冒充今天）。時間戳記比數字本身更重要。</p>
+  </div>
+
+</section>
+
+</article>
+
+<section class="recap" id="recap">
+  <h2>本章重點</h2>
+  <ul>
+    <li>美股主要在紐約證券交易所（NYSE）與那斯達克交易所掛牌，用英文字母代號（台積電 ADR 是 TSM）。和台股相比：以 1 股為單位、沒有每日漲跌幅限制、T+1 交割、綠漲紅跌。</li>
+    <li>台灣時間 ＝ 美東時間 ＋ 12 小時（夏令）或 ＋ 13 小時（冬令）。2026/11/1 起是冬令：美股在台灣 22:30 開盤、05:00 收盤，聯準會決議在台灣 03:00；2027/3/14 才換回夏令。</li>
+    <li>盤前（美東 04:00–09:30）與盤後（16:00–20:00）人少、價差大。財報多在盤後公布，盤後價格是第一個反應，不是答案；GCFIE 的美股現貨只用 16:00 正式收盤價。</li>
+    <li>時差傳導：美股收盤 → ADR 與費半 → 台指期夜盤、CME 電子盤 → 07:45 報告 → 09:00 台股開盤。週六出觀察版、週日不產出、週一用上週五資料，都是跟著美國的交易日走。</li>
+    <li>ADR 換算台股價 ＝ ADR 價格 ÷ 5 × 匯率；溢價 ＝ 換算價 ÷ 台股收盤 − 1。溢價可以長期存在；判斷開盤看 ADR 一晚的漲跌，不是溢價的高低。</li>
+    <li>美股熔斷看 S&amp;P 500：跌 7%、13% 全市場暫停 15 分鐘，跌 20% 當天停止交易。台股沒有熔斷，靠個股 ±10% 漲跌停與瞬間價格穩定措施，跌勢會被切到隔天。</li>
+    <li>07:45 只有美股盤後與 CME 電子盤在交易：可靠的即時電子盤報價可以用，前一日結算價不能冒充今晨報價，盤前期貨漲跌也不能當成收盤預測。</li>
+  </ul>
+</section>
+
+<section class="quiz-set" id="quiz">
+  <h2>自我檢測</h2>
+  <p>每題選一個答案，選完會顯示解析。</p>
+
+  <div class="quiz" data-answer="c">
+    <p class="q">聯準會 2026 年 12 月 9 日（美國已是冬令時間）美東下午 2:00 公布利率決議。換成台灣時間是？</p>
+    <ol class="opts"><li>12/9 下午 14:00</li><li>12/10 凌晨 02:00</li><li>12/10 凌晨 03:00</li><li>12/9 晚上 22:00</li></ol>
+    <div class="explain">冬令時間要加 13 小時：14:00 ＋ 13 ＝ 27:00，超過 24 就是隔天，27 − 24 ＝ 03:00。選 02:00 是誤用了夏令的＋12；10 月 28 日那一次才是夏令，台灣 10/29 02:00。</div>
+  </div>
+
+  <div class="quiz" data-answer="b">
+    <p class="q">假設 TSM 收盤 450 美元、匯率 1 美元兌 31.0 元新台幣、台積電台股收盤 2,500 元。ADR 溢價大約是多少？</p>
+    <ol class="opts"><li>3.6%</li><li>11.6%</li><li>18.0%</li><li>458%</li></ol>
+    <div class="explain">先除以 5：450 ÷ 5 ＝ 90 美元；再乘匯率：90 × 31.0 ＝ 2,790 元；溢價 ＝ 2,790 ÷ 2,500 − 1 ＝ 11.6%。如果忘了除以 5，會算出 450 × 31 ÷ 2,500 − 1 ≈ 458% 這種不可能的數字，這正是「1 單位 ＝ 5 股」要記牢的原因。</div>
+  </div>
+
+  <div class="quiz" data-answer="a">
+    <p class="q">GCFIE 07:45 的報告裡，「美股現貨」的數字應該用哪一個價格？</p>
+    <ol class="opts"><li>最近一個完成交易日，美東 16:00 的正式收盤價</li><li>07:45 當下，盤後交易的最後一筆成交價</li><li>美股期貨的前一日結算價</li><li>用台指期夜盤收盤價反推的價格</li></ol>
+    <div class="explain">GCFIE 第三節第 1 條：美股現貨使用最近一個完成交易日的正式收盤資料。盤後交易成交稀少、容易被少數幾筆單推遠；結算價是期貨的價格，而且是昨天的。盤後的新消息，改由第 2 條的「可靠電子盤報價」來反映。</div>
+  </div>
+
+  <div class="quiz" data-answer="d">
+    <p class="q">GCFIE 週六出「休市觀察版」，週日卻「不產出」。最主要的原因是什麼？</p>
+    <ol class="opts"><li>台灣週日放假，週六不放假</li><li>CFTC 的部位報告在週日公布，需要多一天整理</li><li>台指期週日晚上有夜盤，要等它收盤</li><li>美股週五的交易在台灣週六清晨收盤，有新資料；美國週六不交易，週日清晨沒有新價格</li></ol>
+    <div class="explain">GCFIE 的排班跟著美國的時鐘走。週六清晨剛有美股週五的收盤（CFTC 報告也在週五美東 15:30 公布），但台股要等到週一，所以是觀察版加下週預備版。美國週六休市，週日清晨沒有任何新的美股價格，所以不產出。</div>
+  </div>
+
+  <div class="quiz" data-answer="c">
+    <p class="q">前一晚 S&amp;P 500 盤中跌 8%，觸發第一級熔斷。下列哪個說法正確？</p>
+    <ol class="opts"><li>美股當天剩下的時間全部停止交易</li><li>觸發熔斷代表跌勢已經結束，不會再跌</li><li>美股暫停 15 分鐘後恢復，同一天仍可能繼續下跌；台股隔天每檔最多只能跌 10%</li><li>台股隔天也會觸發同樣的全市場熔斷</li></ol>
+    <div class="explain">第一級（7%）只暫停 15 分鐘，恢復後同一天還能繼續跌，20% 才會當天停止交易。台股沒有全市場熔斷，個股單日最多跌 10%；沒跌完的部分會延到之後的交易日。</div>
+  </div>
+
+  <div class="quiz" data-answer="d">
+    <p class="q">冬令時間的早上 07:45，GCFIE 出報告的那一刻，下列哪一個市場正在交易？</p>
+    <ol class="opts"><li>台指期夜盤</li><li>美股的正式交易時段</li><li>歐洲股市</li><li>CME 的美股指數期貨電子盤</li></ol>
+    <div class="explain">冬令時，台指期夜盤 05:00 收盤、美股正式交易 05:00 收盤、歐洲前一晚就收了。CME 電子盤在台灣 07:00 恢復交易，所以 07:45 有「現在」的期貨報價（美股盤後交易也還在進行）。這就是 GCFIE 第三節第 2 條允許納入「可靠電子盤報價」的原因。</div>
+  </div>
+</section>
+
+</main>
+</div>
+</div>
+</body>
+</html>

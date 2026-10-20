@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>台股交易實務 · 讀通投資</title>
+<meta name="description" content="開戶、交易時間、張與零股、漲跌停、委託種類、T+2 交割與交易成本：把台股的遊戲規則從頭走一遍，並驗證計畫「用盤中零股加限價單、來回成本約 0.4–0.6%」。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=LXGW+WenKai+TC:wght@400;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;900&amp;display=swap">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/handbook.css">
+<script>try{var d=document.documentElement,g=function(k){return JSON.parse(localStorage.getItem("hb."+k))},t=g("theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);if(g("quote")==="intl")d.setAttribute("data-quote","intl");if(g("size")==="lg")d.setAttribute("data-size","lg")}catch(e){}</script>
+<script src="../assets/js/curriculum.js" defer></script>
+<script src="../assets/js/data-plan.js" defer></script>
+<script src="../assets/js/glossary-data.js" defer></script>
+<script src="../assets/js/handbook.js" defer></script>
+<script src="../assets/js/widgets.js" defer></script>
+<script src="../assets/js/widgets-plan.js" defer></script>
+<script src="../assets/js/widgets-basics.js" defer></script>
+<script src="../assets/js/widgets-markets.js" defer></script>
+</head>
+<body data-chapter="03-tw-trading">
+<div class="page">
+<div class="chapter-grid">
+<main class="chapter" id="main">
+
+<header class="opener">
+  <p class="eyebrow"></p>
+  <div class="opener-num" aria-hidden="true"></div>
+  <h1>台股交易實務：時間、單位、成本與規則</h1>
+  <p class="lede">下第一張單之前，先弄懂交易所的遊戲規則：幾點開盤、一次買多少、一天最多漲跌多少、錢什麼時候扣、每次進出付多少成本。這一章把台股的交易制度從頭走一遍，最後你能自己驗證計畫第六節那句「用盤中零股加限價單；來回手續費加證交稅約 0.4–0.6%」。</p>
+  <dl class="opener-meta"></dl>
+</header>
+
+<section class="objectives" aria-labelledby="obj-h">
+  <h2 id="obj-h">學完這章，你能夠</h2>
+  <ol>
+    <li>說出開戶時的證券帳戶、交割帳戶與集保帳戶各管什麼，以及錢和股票存在哪裡。</li>
+    <li>畫出台股一天的時間表，分辨集合競價與逐筆交易，說明開盤價、收盤價怎麼產生。</li>
+    <li>用「張」與「零股」換算部位，解釋為什麼 100 萬元的 20 檔計畫，每一檔都得用零股買。</li>
+    <li>算出漲跌停價與升降單位，看懂紅漲綠跌，知道注意股、處置股會受到哪些限制。</li>
+    <li>依情況選擇限價或市價、ROD／IOC／FOK，並掌握 T+2 交割的期限與違約交割的後果。</li>
+    <li>算出手續費、證交稅與損益兩平賣價，驗證計畫的「來回約 0.4–0.6%」，並說明頻繁進出的代價。</li>
+  </ol>
+</section>
+
+<article class="prose">
+
+<section id="accounts">
+  <h2><span class="sec-num">3.1</span>開戶：證券帳戶、交割帳戶與集保帳戶</h2>
+  <p class="lead-in">想買台股，你沒辦法直接打電話給證交所。交易所只接受會員送來的委託，這些會員就是證券商，簡稱券商。所以第一步是挑一家券商開戶，而開戶時其實會一次開好三個帳戶，各管一件事。</p>
+
+  <div class="box define" id="def-brokerage">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>證券帳戶</dfn><span class="en">Brokerage account</span></p>
+    <p>在券商開立、用來下單買賣的帳戶，有一組專屬帳號。你在 App 送出的每一筆委託，都透過這個帳戶送進交易所；成交紀錄、對帳單也記在它名下。</p>
+  </div>
+
+  <p>證券帳戶負責「下單」，但它本身不放錢，也不放股票。錢放在另一個帳戶：<dfn id="def-settle-acct">交割帳戶</dfn>（Settlement account），也就是開在銀行、和證券帳戶綁在一起的存款帳戶。買進成交後，股款從這裡扣；賣出成交後，股款匯進這裡。它必須是你本人的帳戶，通常開在券商指定的往來銀行。</p>
+  <p>股票則放在第三個帳戶：<dfn id="def-depository">集保帳戶</dfn>（Central depository account），開在臺灣集中保管結算所（簡稱集保結算所），由券商代為開立。台股早就沒有紙本股票，你持有的每一股都是集保帳戶裡的一筆電子紀錄，可以用集保的 App 或存摺查到餘額。</p>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>開戶時的三個帳戶</caption>
+      <thead><tr><th>帳戶</th><th>開在哪裡</th><th>管什麼</th><th>在哪裡查</th></tr></thead>
+      <tbody>
+        <tr><th>證券帳戶</th><td>券商</td><td>下單、成交、對帳</td><td>下單 App</td></tr>
+        <tr><th>交割帳戶</th><td>銀行</td><td>錢：扣款與入帳</td><td>存摺、網銀</td></tr>
+        <tr><th>集保帳戶</th><td>集保結算所</td><td>股票：每檔幾股</td><td>集保 App</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>這樣分工有一個好處：股票登記在集保、錢留在你自己的銀行帳戶，兩者都在你的名下。券商負責傳遞委託與辦理交割，你的資產不放在券商的口袋裡。</p>
+  <p>開戶的條件不複雜。年滿 18 歲（成年）可以自己開戶，未成年需要法定代理人同意；準備身分證與第二證件，現在多數券商都能線上開戶。開戶時可以順便問清楚<span class="term" data-term="手續費">手續費</span>的折扣與零股的最低收費，3.8 節會算給你看這兩個數字有多重要。</p>
+  <p>用自己的現金買賣<span class="term" data-term="上市">上市</span>、<span class="term" data-term="上櫃">上櫃</span><span class="term" data-term="股票">股票</span>，有這三個帳戶就夠了。借錢買股的<span class="term" data-term="融資">融資</span>、借股票來賣的<span class="term" data-term="融券">融券</span>要再開信用帳戶（<a href="25-margin-leverage.html#margin-buy">第 25 章</a>），當沖要另外簽約（3.8 節），買美股則要申請「複委託」。</p>
+
+  <aside class="note">計畫寫明「不融資、不當沖」，照計畫操作只需要這三個基本帳戶。帳戶越單純，急跌時越不會被規則逼著做決定。</aside>
+
+</section>
+
+<section id="timetable">
+  <h2><span class="sec-num">3.2</span>台股的一天：從 07:45 到 14:30</h2>
+  <p class="lead-in">整股交易的正式時間是週一到週五 09:00 到 13:30，一共四個半小時。交易所的一天其實開始得更早、結束得更晚；而 <span class="term" data-term="GCFIE">GCFIE</span> 的<span class="term" data-term="盤前報告">盤前報告</span>，在開盤前一個多小時就已經寫好。</p>
+  <p>交易日是週一到週五，遇到國定假日休市。每年最後一個交易日叫<span class="term" data-term="封關">封關</span>，農曆年後的第一個交易日叫<span class="term" data-term="開紅盤">開紅盤</span>（第 33 章）。哪些日子休市，由<span class="term" data-term="證交所">證交所</span>每年公告，所以計畫第五節在「節前降碼」那一列特別註明：封關日以證交所公告為準。</p>
+  <p>下面這張圖把一個交易日攤開。橫軸是台北時間，每一列是一種交易方式。</p>
+
+  <figure class="fig wide">
+    <div class="fig-plate">
+      <div class="fig-scroll" style="--fig-min:660px">
+      <svg viewBox="0 0 720 336" role="img" aria-label="台股一個交易日的時間表：07:45 GCFIE 盤前報告；整股 08:30 開始收單並試撮，09:00 開盤集合競價，之後逐筆交易到 13:25，13:25 到 13:30 收盤集合競價；盤中零股 09:00 到 13:30，09:10 第一次撮合後約每 5 秒撮合一次，2026/12/7 起改為 08:30 收單、09:00 首撮；盤後零股 13:40 到 14:30；盤後定價 14:00 到 14:30 以收盤價成交；台指期一般交易時段 08:45 到 13:45">
+        <line x1="125" y1="30" x2="125" y2="306" class="s-ink s-1 s-dash"/>
+        <circle cx="125" cy="30" r="5" class="f-foil"/>
+        <text x="134" y="35" class="t-sm t-b">07:45 GCFIE 盤前報告</text>
+        <line x1="230" y1="64" x2="230" y2="306" class="s-rule s-1"/>
+        <line x1="608" y1="64" x2="608" y2="306" class="s-rule s-1"/>
+
+        <text x="12" y="86" class="t-sm t-b">整股</text>
+        <text x="232" y="58" class="t-sm">09:00 開盤集合競價</text>
+        <text x="612" y="58" class="ta-e t-sm">收盤集合競價 13:25–13:30</text>
+        <rect x="188" y="66" width="42" height="30" class="f-accent-soft"/>
+        <text x="209" y="86" class="ta-m t-sm t-accent t-b">試撮</text>
+        <rect x="230" y="66" width="371" height="30" class="f-accent"/>
+        <text x="415" y="86" class="ta-m t-sm t-paper t-b">逐筆交易：委託一進來就撮合</text>
+        <rect x="601" y="66" width="7" height="30" class="f-foil"/>
+        <circle cx="230" cy="81" r="5" class="f-foil s-paper s-15"/>
+        <circle cx="608" cy="81" r="5" class="f-foil s-paper s-15"/>
+
+        <text x="12" y="140" class="t-sm t-b">盤中零股</text>
+        <rect x="188" y="124" width="42" height="24" class="f-none s-foil s-15 s-dash"/>
+        <rect x="230" y="124" width="378" height="24" class="f-foil-soft s-foil s-1"/>
+        <circle cx="244" cy="136" r="4.5" class="f-foil"/>
+        <text x="254" y="140" class="t-sm">09:10 首次撮合，之後約每 5 秒集合競價一次</text>
+        <text x="188" y="166" class="t-sm t-3">虛線：2026/12/7 起 08:30 收單、09:00 首次撮合</text>
+
+        <text x="12" y="200" class="t-sm t-b">盤後零股</text>
+        <rect x="622" y="184" width="70" height="24" class="f-foil-soft s-foil s-1"/>
+        <circle cx="692" cy="196" r="4.5" class="f-foil"/>
+        <text x="614" y="200" class="ta-e t-sm">13:40 收單，14:30 撮合一次</text>
+
+        <text x="12" y="240" class="t-sm t-b">盤後定價</text>
+        <rect x="650" y="224" width="42" height="24" class="f-accent-soft s-accent s-1"/>
+        <circle cx="692" cy="236" r="4.5" class="f-accent"/>
+        <text x="642" y="240" class="ta-e t-sm">14:00 收單，14:30 以收盤價成交（整股）</text>
+
+        <text x="12" y="280" class="t-sm t-2">台指期</text>
+        <rect x="209" y="266" width="420" height="20" class="f-soft s-3 s-1 s-dash"/>
+        <text x="419" y="280" class="ta-m t-sm t-2">台指期一般交易時段 08:45–13:45（第 17 章）</text>
+
+        <line x1="104" y1="306" x2="713" y2="306" class="s-ink s-1"/>
+        <line x1="146" y1="306" x2="146" y2="311" class="s-ink s-1"/>
+        <line x1="188" y1="306" x2="188" y2="311" class="s-ink s-1"/>
+        <line x1="230" y1="306" x2="230" y2="311" class="s-ink s-1"/>
+        <line x1="314" y1="306" x2="314" y2="311" class="s-ink s-1"/>
+        <line x1="398" y1="306" x2="398" y2="311" class="s-ink s-1"/>
+        <line x1="482" y1="306" x2="482" y2="311" class="s-ink s-1"/>
+        <line x1="566" y1="306" x2="566" y2="311" class="s-ink s-1"/>
+        <line x1="608" y1="306" x2="608" y2="311" class="s-ink s-1"/>
+        <line x1="650" y1="306" x2="650" y2="311" class="s-ink s-1"/>
+        <line x1="692" y1="306" x2="692" y2="311" class="s-ink s-1"/>
+        <text x="146" y="325" class="ta-m t-xs t-mono t-3">08:00</text>
+        <text x="188" y="325" class="ta-m t-xs t-mono t-3">08:30</text>
+        <text x="230" y="325" class="ta-m t-xs t-mono t-b">09:00</text>
+        <text x="314" y="325" class="ta-m t-xs t-mono t-3">10:00</text>
+        <text x="398" y="325" class="ta-m t-xs t-mono t-3">11:00</text>
+        <text x="482" y="325" class="ta-m t-xs t-mono t-3">12:00</text>
+        <text x="566" y="325" class="ta-m t-xs t-mono t-3">13:00</text>
+        <text x="608" y="325" class="ta-m t-xs t-mono t-b">13:30</text>
+        <text x="650" y="325" class="ta-m t-xs t-mono t-3">14:00</text>
+        <text x="692" y="325" class="ta-m t-xs t-mono t-3">14:30</text>
+      </svg>
+      </div>
+    </div>
+    <figcaption><span class="fig-n"></span><span>台股一個交易日的時間表（2026/10 現行制度）。藍色是整股，金色是零股；圓點是「一次撮合」的時刻。收盤集合競價只有 5 分鐘，在圖上是一條細細的金色。時間以證交所公告為準。</span></figcaption>
+  </figure>
+
+  <p>把圖上的時段整理成一張表，之後查起來比較方便：</p>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>台股的交易時段（上市、上櫃相同；除零股外都是整股；以證交所、櫃買中心公告為準）</caption>
+      <thead><tr><th>時段</th><th>收單時間</th><th>怎麼撮合</th><th>產生的價格</th></tr></thead>
+      <tbody>
+        <tr><th>開盤前</th><td>08:30–09:00</td><td>只試撮；09:00 集合競價一次</td><td>開盤價</td></tr>
+        <tr><th>盤中</th><td>09:00–13:25</td><td>逐筆交易，隨到隨撮</td><td>一筆筆成交價</td></tr>
+        <tr><th>收盤前</th><td>13:25–13:30</td><td>13:30 集合競價一次</td><td>收盤價</td></tr>
+        <tr><th>盤中零股</th><td>09:00–13:30</td><td>09:10 起約每 5 秒集合競價</td><td>每撮一個價格</td></tr>
+        <tr><th>盤後零股</th><td>13:40–14:30</td><td>14:30 集合競價一次</td><td>一個價格</td></tr>
+        <tr><th>盤後定價</th><td>14:00–14:30</td><td>14:30 撮合</td><td>當天收盤價</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>最後一列的<dfn id="def-afterhours">盤後定價交易</dfn>（After-hours fixed-price trading）比較特別：收盤後 14:00 到 14:30 接受整股委託，價格不能自己填，一律是當天的收盤價，你只決定買或賣、幾張，14:30 一次撮合。它適合「收盤價已經出來，只想用這個價格成交」的情況，但不保證成交。</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 封面規格表、第三節</span></div>
+    <p class="quote">執行時間　台北時間每日 07:45<br>週六　休市觀察版與下週預備版<br>週日　不產出</p>
+    <p class="quote">台股法人與期貨：永久採用前一個台股交易日收盤後已公布的 TWSE／TAIFEX 官方資料。週一使用上週五；休市後使用最近交易日。這不是舊資料，也不得標示為 DATA GAP。</p>
+    <p>對照時間表就懂了。07:45 比 08:30 開始收單還早 45 分鐘，當天還沒有任何成交。<span class="term" data-term="三大法人">三大法人</span>買賣超、<span class="term" data-term="台指期">台指期</span>部位，都在前一個交易日收盤後才公布，所以 07:45 能拿到最新的台股官方資料，本來就是「昨天的」，週一則是上週五的。GCFIE 規定這不算過期，因為那個時刻沒有更新的版本。週六休市，報告改出「休市觀察版」，也是同樣的道理。</p>
+  </div>
+
+  <aside class="note"><b>盤中零股新制：</b>證交所公告 2026/12/7 起，盤中零股提前到 08:30 開始收單，09:00 和整股同步第一次撮合，08:30 到 09:00 每 5 秒試算揭示一次。計畫的加碼期（11/5–12/10）剛好跨過這一天：12/7 以前，零股要等到 09:10 才第一次撮合。</aside>
+
+</section>
+
+<section id="auction">
+  <h2><span class="sec-num">3.3</span>集合競價與逐筆交易：開盤價、收盤價怎麼來</h2>
+  <p class="lead-in">交易所把買單和賣單配對成交，這個動作叫<span class="term" data-term="撮合">撮合</span>（<a href="02-what-is-a-stock.html#def-match">第 2 章</a>）。台股用兩種撮合方式：開盤與收盤用集合競價，盤中用逐筆交易。兩種方式產生的價格，用途很不一樣。</p>
+
+  <div class="box define" id="def-call-auction">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>集合競價</dfn><span class="en">Call auction</span></p>
+    <p>先把一段時間內的買賣委託全部收集起來，時間到了一次撮合，找出能讓最多張數成交的那一個價格，所有成交都用這個價格。台股的開盤、收盤、盤中零股和盤後零股，都用集合競價。</p>
+  </div>
+
+  <p>用一個小例子看它怎麼運作。假設某檔股票在開盤前收到這些委託（<span class="term" data-term="委託簿">委託簿</span>的內容，示意）：</p>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>開盤前累積的委託（示意，單位：張）</caption>
+      <thead><tr><th class="r">價格（元）</th><th class="r">買進委託</th><th class="r">賣出委託</th></tr></thead>
+      <tbody>
+        <tr><td class="r">102</td><td class="r">5</td><td class="r">25</td></tr>
+        <tr><td class="r">101</td><td class="r">10</td><td class="r">20</td></tr>
+        <tr><td class="r">100</td><td class="r">20</td><td class="r">15</td></tr>
+        <tr><td class="r">99</td><td class="r">20</td><td class="r">10</td></tr>
+        <tr><td class="r">98</td><td class="r">10</td><td class="r">5</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>09:00 的開盤價是多少？</h4>
+    <ol class="calc">
+      <li>在每個價格，算「願意用這個價或更高價買」的總張數。掛 102、101、100 元買的人，都願意用 100 元買：<span class="eq">100 元的累計買進 ＝ 5 ＋ 10 ＋ 20 ＝ 35 張</span></li>
+      <li>再算「願意用這個價或更低價賣」的總張數。掛 98、99、100 元賣的人，都願意用 100 元賣：<span class="eq">100 元的累計賣出 ＝ 5 ＋ 10 ＋ 15 ＝ 30 張</span></li>
+      <li>能成交的張數，是兩邊比較小的那一個：<span class="eq">100 元：min(35, 30) ＝ 30 張</span></li>
+      <li>每個價格都算一次：<span class="eq">98 元 5 張、99 元 15 張、100 元 30 張、101 元 15 張、102 元 5 張</span></li>
+    </ol>
+    <p class="answer">開盤價是 100 元，成交 30 張。掛 102、101 元買的人也用 100 元成交；在 100 元掛買的 20 張只成交 15 張，剩下 5 張留在委託簿，等盤中再成交。</p>
+  </div>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 316" role="img" aria-label="集合競價示意：價格 98 到 102 元，累計買進由 65 張遞減到 5 張，累計賣出由 5 張遞增到 75 張；兩者較小值在 100 元最大，為 30 張，所以開盤價是 100 元">
+        <rect x="8" y="133" width="388" height="26" class="f-wash"/>
+        <rect x="64" y="13" width="10" height="10" class="f-c1"/>
+        <text x="78" y="23" class="t-sm t-b">累計買進（張）</text>
+        <text x="200" y="23" class="ta-m t-sm t-b">價格</text>
+        <rect x="232" y="13" width="10" height="10" class="f-c2"/>
+        <text x="246" y="23" class="t-sm t-b">累計賣出（張）</text>
+        <text x="372" y="23" class="ta-m t-sm t-b">可成交</text>
+        <text x="122" y="43" class="ta-m t-sm t-3">這價或更高願意買</text>
+        <text x="290" y="43" class="ta-m t-sm t-3">這價或更低願意賣</text>
+        <text x="372" y="43" class="ta-m t-sm t-3">取較小者</text>
+        <line x1="8" y1="54" x2="392" y2="54" class="s-rule s-1"/>
+
+        <rect x="169" y="67" width="7" height="22" class="f-c1"/>
+        <rect x="155" y="101" width="21" height="22" class="f-c1"/>
+        <rect x="127" y="135" width="49" height="22" class="f-c1"/>
+        <rect x="99" y="169" width="77" height="22" class="f-c1"/>
+        <rect x="85" y="203" width="91" height="22" class="f-c1"/>
+        <text x="165" y="83" class="ta-e t-sm t-mono">5</text>
+        <text x="151" y="117" class="ta-e t-sm t-mono">15</text>
+        <text x="123" y="151" class="ta-e t-sm t-mono t-b">35</text>
+        <text x="95" y="185" class="ta-e t-sm t-mono">55</text>
+        <text x="81" y="219" class="ta-e t-sm t-mono">65</text>
+
+        <text x="200" y="83" class="ta-m t-mono">102</text>
+        <text x="200" y="117" class="ta-m t-mono">101</text>
+        <text x="200" y="151" class="ta-m t-mono t-b t-accent">100</text>
+        <text x="200" y="185" class="ta-m t-mono">99</text>
+        <text x="200" y="219" class="ta-m t-mono">98</text>
+
+        <rect x="224" y="67" width="105" height="22" class="f-c2"/>
+        <rect x="224" y="101" width="70" height="22" class="f-c2"/>
+        <rect x="224" y="135" width="42" height="22" class="f-c2"/>
+        <rect x="224" y="169" width="21" height="22" class="f-c2"/>
+        <rect x="224" y="203" width="7" height="22" class="f-c2"/>
+        <text x="333" y="83" class="t-sm t-mono">75</text>
+        <text x="298" y="117" class="t-sm t-mono">50</text>
+        <text x="270" y="151" class="t-sm t-mono t-b">30</text>
+        <text x="249" y="185" class="t-sm t-mono">15</text>
+        <text x="235" y="219" class="t-sm t-mono">5</text>
+
+        <text x="372" y="83" class="ta-m t-mono t-3">5</text>
+        <text x="372" y="117" class="ta-m t-mono t-3">15</text>
+        <text x="372" y="152" class="ta-m t-mono t-md t-b t-accent">30</text>
+        <text x="372" y="185" class="ta-m t-mono t-3">15</text>
+        <text x="372" y="219" class="ta-m t-mono t-3">5</text>
+        <text x="14" y="151" class="t-sm t-b t-accent">開盤價</text>
+
+        <line x1="8" y1="244" x2="392" y2="244" class="s-rule s-1"/>
+        <text x="200" y="268" class="ta-m t-sm">在 100 元：願買 35 張、願賣 30 張，成交 30 張</text>
+        <text x="200" y="290" class="ta-m t-sm t-2">價格往上，願買的變少；往下，願賣的變少</text>
+        <text x="200" y="310" class="ta-m t-sm t-b">讓成交張數最多的價格，就是開盤價</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意數字。藍色是各價位的累計買進，價格越高越少；橘色是累計賣出，價格越高越多。兩者的較小值在 100 元最大，那就是開盤價。</span></figcaption>
+  </figure>
+
+  <p>集合競價有一個對新手很友善的性質：<strong>一次撮合只有一個價格</strong>。你掛得比較積極（買價掛高、賣價掛低），只會讓你排在比較前面、比較容易成交，成交價還是大家共用的那一個。上例裡願意出 102 元的人，最後只付了 100 元。</p>
+  <p>08:30 到 09:00 之間，交易所每隔約 5 秒就用當下的委託簿試算一次，公布「如果現在撮合，會是什麼價格、多少量」，以及最佳五檔買賣價量，這叫<dfn id="def-trial">試撮</dfn>（Indicative matching）。試撮只是試算，不會成交，09:00 以前任何人都可以改單、刪單，直到 09:00 那一撮才算數。收盤前 13:25 到 13:30 也有同樣的試算揭示。</p>
+  <p>09:00 那一撮決定了<dfn id="def-open">開盤價</dfn>（Opening price），也就是當天第一筆成交的價格。開盤之後到 13:25，改用<dfn id="def-continuous">逐筆交易</dfn>（Continuous trading）：每一筆新委託一送進來，就立刻和委託簿比對，價格對得上就馬上成交，按「價格優先、時間優先」排隊。台股從 2020 年 3 月 23 日起全面採用這個方式。</p>
+
+  <div class="box define" id="def-close">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>收盤價</dfn><span class="en">Closing price</span></p>
+    <p>13:25 到 13:30 收集委託、13:30 以集合競價撮合出來的價格；如果這一撮沒有成交，以當天最後一筆成交價為收盤價。它是隔天計算漲跌的基準，也是新聞、指數與各種報表引用的「今天的價格」。</p>
+  </div>
+
+  <p>為什麼收盤價這麼重要？盤中逐筆交易時，一筆急著成交的大單就可能讓價格瞬間跳一下；收盤價則是 5 分鐘內所有委託一起決定的單一價格，比較不容易被一筆單左右。所以兩份文件在判斷「有沒有跌破」時，看的都是收盤價。</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §三、GCFIE 第十九節</span></div>
+    <p class="quote">使用規則：買進區分 2–3 筆掛單；停損以收盤價判斷、隔日執行；到目標1賣 1/3，到目標2再賣 1/3。</p>
+    <p class="quote">45,800支撐→收盤跌破＝失守確認。</p>
+    <p>計畫的<span class="term" data-term="停損">停損</span>和 GCFIE 的價格驗證用同一把尺：13:30 撮合出來的收盤價。盤中跌破、收盤站回，兩份文件都不算數。收盤價 13:30 才出來，當天整股交易已經結束，所以計畫寫「隔日執行」（<span class="term" data-term="收盤價停損">收盤價停損</span>的做法見第 32 章）。</p>
+  </div>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>台積電的停損價是 2,080 元。今天盤中最低到 2,060 元，所以停損已經觸發了。</p></div>
+    <div class="myth-right"><p>計畫用收盤價判斷。如果今天收盤是 2,110 元，停損就沒有觸發；要等到某一天收盤低於 2,080 元，才在隔天執行。用收盤價判斷，是為了不被盤中短暫的急殺洗出場，代價是真正跌破時，賣出的價格可能比停損價更低。</p></div>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第二十八節</span></div>
+    <p class="quote">8. 把盤前期貨漲跌直接當成當日收盤預測。</p>
+    <p>這是 GCFIE 的禁止事項之一。盤前的<span class="term" data-term="期貨">期貨</span>報價、08:30 之後的試撮價格，都只描述「開盤前那一刻」大家想用什麼價格成交。從 09:00 到 13:30 還有四個半小時，收盤價可能完全是另一回事。</p>
+  </div>
+
+  <details class="deep">
+    <summary>盤中的「瞬間價格穩定措施」</summary>
+    <div>
+      <p>逐筆交易讓一筆大單更容易把價格瞬間推遠，所以證交所設了一道煞車：盤中如果成交價將偏離前 5 分鐘的量價加權平均價超過 3.5%，這檔股票會先延緩撮合約 2 分鐘，期間揭示試算價量，2 分鐘後用集合競價撮合一次，再恢復逐筆交易，讓大家有時間反應。細節以證交所公告為準。</p>
+    </div>
+  </details>
+
+</section>
+
+<section id="lots">
+  <h2><span class="sec-num">3.4</span>一張與零股：為什麼 20 檔都要用零股買</h2>
+  <p class="lead-in">台股的報價是「每一股」多少錢，但整股交易一次至少要買 1,000 股。這個單位的落差，讓高價股成了新手的第一道門檻。</p>
+
+  <div class="box define" id="def-lot">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>一張</dfn><span class="en">Round lot (1,000 shares)</span></p>
+    <p>台股整股交易的單位，1 張 ＝ 1,000 股。報價是每股價格，所以買一張要準備的錢 ＝ 股價 × 1,000（還沒加手續費）。新聞說「<span class="term" data-term="外資">外資</span><span class="term" data-term="賣超">賣超</span> 3 萬張」，就是 3,000 萬股。</p>
+  </div>
+
+  <p>不到 1,000 股的部分叫<dfn id="def-odd">零股</dfn>（Odd lot），也就是 1 到 999 股。零股有兩個交易時段：09:00 到 13:30 的<dfn id="def-intraday-odd">盤中零股</dfn>（Intraday odd-lot trading），以及收盤後 13:40 到 14:30 的<dfn id="def-afterhours-odd">盤後零股</dfn>（After-hours odd-lot trading）。兩者都用集合競價，差別在盤中零股一天撮合很多次，盤後零股只在 14:30 撮合一次。</p>
+  <p>先算一下計畫裡幾檔高價股，一張要多少錢：</p>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>一張的金額（以計畫第三節的參考價計算，未含手續費）</caption>
+      <thead><tr><th>股票</th><th class="r">參考價</th><th class="r">一張</th><th class="r">配置（權重）</th></tr></thead>
+      <tbody>
+        <tr><th>台光電</th><td class="r">5,165</td><td class="r">516.5 萬</td><td class="r">6 萬（6%）</td></tr>
+        <tr><th>聯發科</th><td class="r">4,250</td><td class="r">425.0 萬</td><td class="r">5 萬（5%）</td></tr>
+        <tr><th>台積電</th><td class="r">2,420</td><td class="r">242.0 萬</td><td class="r">12 萬（12%）</td></tr>
+        <tr><th>鴻海</th><td class="r">244</td><td class="r">24.4 萬</td><td class="r">4 萬（4%）</td></tr>
+        <tr><th>兆豐金</th><td class="r">53.7</td><td class="r">5.37 萬</td><td class="r">3 萬（3%）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §三、§六</span></div>
+    <p class="quote">三、20檔配置表（總資金100萬，1%＝1萬元）</p>
+    <p class="quote">高價股一張要數百萬，用盤中零股加限價單</p>
+    <p>「1%＝1萬元」是換算的鑰匙：<span class="term" data-term="權重">權重</span>幾 %，這一檔就配置幾萬元。台積電 12% 是 12 萬，可是一張要 242 萬，是整個組合的 2.4 倍。不只高價股，連表上最便宜的兆豐金，一張 5.37 萬也超過它的 3 萬配置。下面這張圖把 20 檔全部畫出來。</p>
+  </div>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 440" role="img" aria-label="20 檔股票的計畫配置金額與一張金額對照（對數刻度）：每一檔的配置金額都在一張金額的左邊，也就是都買不起一張；台光電、聯發科、世芯、奇鋐、台積電、智邦、緯穎、台達電、南電、欣興這 10 檔，一張的價格甚至超過整個組合的 100 萬">
+        <circle cx="16" cy="18" r="4.5" class="f-accent"/>
+        <text x="26" y="23" class="t-sm">計畫配置金額</text>
+        <circle cx="132" cy="18" r="4.5" class="f-plate s-ink s-15"/>
+        <text x="142" y="23" class="t-sm">買一張要的錢</text>
+        <rect x="300" y="64" width="92" height="322" class="f-accent-soft o-50"/>
+        <line x1="120" y1="64" x2="120" y2="386" class="s-rule s-1 s-dash"/>
+        <line x1="210" y1="64" x2="210" y2="386" class="s-rule s-1 s-dash"/>
+        <line x1="300" y1="56" x2="300" y2="386" class="s-accent s-15"/>
+        <text x="296" y="52" class="ta-e t-sm t-b t-accent">整個組合 100 萬</text>
+        <text x="306" y="52" class="t-sm t-3">更貴 →</text>
+
+        <g>
+          <text x="108" y="78.5" class="ta-e t-sm">台光電</text>
+          <line x1="190" y1="74" x2="364.2" y2="74" class="s-rule s-15"/>
+          <circle cx="190" cy="74" r="4.5" class="f-accent"/><circle cx="364.2" cy="74" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="94.5" class="ta-e t-sm">聯發科</text>
+          <line x1="182.9" y1="90" x2="356.6" y2="90" class="s-rule s-15"/>
+          <circle cx="182.9" cy="90" r="4.5" class="f-accent"/><circle cx="356.6" cy="90" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="110.5" class="ta-e t-sm">世芯-KY</text>
+          <line x1="174.2" y1="106" x2="351" y2="106" class="s-rule s-15"/>
+          <circle cx="174.2" cy="106" r="4.5" class="f-accent"/><circle cx="351" cy="106" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="126.5" class="ta-e t-sm">奇鋐</text>
+          <line x1="174.2" y1="122" x2="346.8" y2="122" class="s-rule s-15"/>
+          <circle cx="174.2" cy="122" r="4.5" class="f-accent"/><circle cx="346.8" cy="122" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="142.5" class="ta-e t-sm t-b t-accent">台積電</text>
+          <line x1="217.1" y1="138" x2="334.5" y2="138" class="s-accent s-15"/>
+          <circle cx="217.1" cy="138" r="5" class="f-accent"/><circle cx="334.5" cy="138" r="5" class="f-plate s-ink s-2w"/>
+          <text x="108" y="158.5" class="ta-e t-sm">智邦</text>
+          <line x1="182.9" y1="154" x2="326.7" y2="154" class="s-rule s-15"/>
+          <circle cx="182.9" cy="154" r="4.5" class="f-accent"/><circle cx="326.7" cy="154" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="174.5" class="ta-e t-sm">緯穎</text>
+          <line x1="162.9" y1="170" x2="323.9" y2="170" class="s-rule s-15"/>
+          <circle cx="162.9" cy="170" r="4.5" class="f-accent"/><circle cx="323.9" cy="170" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="190.5" class="ta-e t-sm">台達電</text>
+          <line x1="182.9" y1="186" x2="319.2" y2="186" class="s-rule s-15"/>
+          <circle cx="182.9" cy="186" r="4.5" class="f-accent"/><circle cx="319.2" cy="186" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="206.5" class="ta-e t-sm">南電</text>
+          <line x1="182.9" y1="202" x2="311.9" y2="202" class="s-rule s-15"/>
+          <circle cx="182.9" cy="202" r="4.5" class="f-accent"/><circle cx="311.9" cy="202" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="222.5" class="ta-e t-sm">欣興</text>
+          <line x1="162.9" y1="218" x2="303.4" y2="218" class="s-rule s-15"/>
+          <circle cx="162.9" cy="218" r="4.5" class="f-accent"/><circle cx="303.4" cy="218" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="238.5" class="ta-e t-sm">日月光投控</text>
+          <line x1="174.2" y1="234" x2="284.4" y2="234" class="s-rule s-15"/>
+          <circle cx="174.2" cy="234" r="4.5" class="f-accent"/><circle cx="284.4" cy="234" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="254.5" class="ta-e t-sm">華城</text>
+          <line x1="174.2" y1="250" x2="283.9" y2="250" class="s-rule s-15"/>
+          <circle cx="174.2" cy="250" r="4.5" class="f-accent"/><circle cx="283.9" cy="250" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="270.5" class="ta-e t-sm">華星光</text>
+          <line x1="169" y1="266" x2="274.4" y2="266" class="s-rule s-15"/>
+          <circle cx="169" cy="266" r="4.5" class="f-accent"/><circle cx="274.4" cy="266" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="286.5" class="ta-e t-sm">南亞科</text>
+          <line x1="169" y1="282" x2="271.3" y2="282" class="s-rule s-15"/>
+          <circle cx="169" cy="282" r="4.5" class="f-accent"/><circle cx="271.3" cy="282" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="302.5" class="ta-e t-sm">廣達</text>
+          <line x1="147.1" y1="298" x2="255.5" y2="298" class="s-rule s-15"/>
+          <circle cx="147.1" cy="298" r="4.5" class="f-accent"/><circle cx="255.5" cy="298" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="318.5" class="ta-e t-sm">鴻海</text>
+          <line x1="174.2" y1="314" x2="244.9" y2="314" class="s-rule s-15"/>
+          <circle cx="174.2" cy="314" r="4.5" class="f-accent"/><circle cx="244.9" cy="314" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="334.5" class="ta-e t-sm">中興電</text>
+          <line x1="162.9" y1="330" x2="229.6" y2="330" class="s-rule s-15"/>
+          <circle cx="162.9" cy="330" r="4.5" class="f-accent"/><circle cx="229.6" cy="330" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="350.5" class="ta-e t-sm">台塑化</text>
+          <line x1="174.2" y1="346" x2="217.1" y2="346" class="s-rule s-15"/>
+          <circle cx="174.2" cy="346" r="4.5" class="f-accent"/><circle cx="217.1" cy="346" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="366.5" class="ta-e t-sm">中信金</text>
+          <line x1="182.9" y1="362" x2="198" y2="362" class="s-rule s-15"/>
+          <circle cx="182.9" cy="362" r="4.5" class="f-accent"/><circle cx="198" cy="362" r="4.5" class="f-plate s-ink s-15"/>
+          <text x="108" y="382.5" class="ta-e t-sm">兆豐金</text>
+          <line x1="162.9" y1="378" x2="185.7" y2="378" class="s-rule s-15"/>
+          <circle cx="162.9" cy="378" r="4.5" class="f-accent"/><circle cx="185.7" cy="378" r="4.5" class="f-plate s-ink s-15"/>
+        </g>
+
+        <line x1="114" y1="392" x2="396" y2="392" class="s-ink s-1"/>
+        <line x1="120" y1="392" x2="120" y2="397" class="s-ink s-1"/>
+        <line x1="210" y1="392" x2="210" y2="397" class="s-ink s-1"/>
+        <line x1="300" y1="392" x2="300" y2="397" class="s-ink s-1"/>
+        <line x1="390" y1="392" x2="390" y2="397" class="s-ink s-1"/>
+        <text x="120" y="411" class="ta-m t-xs t-mono t-3">1 萬</text>
+        <text x="210" y="411" class="ta-m t-xs t-mono t-3">10 萬</text>
+        <text x="300" y="411" class="ta-m t-xs t-mono t-3">100 萬</text>
+        <text x="396" y="411" class="ta-e t-xs t-mono t-3">1,000 萬</text>
+        <text x="255" y="432" class="ta-m t-sm t-3">對數刻度：每一格差 10 倍</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>依計畫第三節的權重與參考價計算（總資金 100 萬）。實心點是配置金額，空心點是一張的金額；20 檔的實心點全在空心點左邊，沒有一檔買得起一張。淡藍底色是「一張比整個組合還貴」的區域，有 10 檔落在這裡。</span></figcaption>
+  </figure>
+
+  <p>所以計畫說「用盤中零股」並不只是針對高價股。在 100 萬的規模下，20 檔<strong>全部</strong>都得用零股建倉，整個計畫其實是一份零股操作計畫。</p>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>台積電配置 12%，用零股要買幾股？</h4>
+    <ol class="calc">
+      <li>配置金額：<span class="eq">100 萬 × 12% ＝ 120,000 元</span></li>
+      <li>以參考價 2,420 元換算股數，只能取整數，而且要無條件捨去（多 1 股就超過預算）：<span class="eq">120,000 ÷ 2,420 ≈ 49.6 → 49 股</span></li>
+      <li>實際動用：<span class="eq">49 × 2,420 ＝ 118,580 元，剩 1,420 元</span></li>
+      <li>計畫要「分 2–3 筆掛單」。分 3 筆：<span class="eq">49 ÷ 3 ＝ 16 餘 1 → 16 股、16 股、17 股</span></li>
+      <li>到<span class="term" data-term="目標1">目標1</span>要「賣 1/3」：<span class="eq">49 ÷ 3 ≈ 16 股</span></li>
+    </ol>
+    <p class="answer">49 股，分三筆約 16、16、17 股。如果只能整張交易，這 12% 根本無法執行，更不用說分批和分段停利。</p>
+  </div>
+
+  <p>下面的工具預設是台積電。換成其他股票或改變總資金，看看哪些部位能湊到整張、哪些只能用零股。</p>
+  <div class="widget" data-widget="sizing" data-code="2330" data-capital="1000000" data-note="以計畫第三節的參考價與權重計算；實際股數依下單時價格而定，手續費最低收費依券商規定。"></div>
+
+  <p>零股讓小資金也能照比例配置，但它和整股是兩個分開的市場，規則有幾點不同：</p>
+  <ul>
+    <li><b>價格各自決定。</b>同一檔股票，零股和整股的成交價可能不一樣。參與零股的人比較少，買賣價差通常比較大，<span class="term" data-term="流動性">流動性</span>也比較差。</li>
+    <li><b>不是每一刻都成交。</b>盤中零股是一撮一撮的集合競價（目前約每 5 秒一次），不像整股盤中逐筆即時成交。</li>
+    <li><b>只能用限價、當日有效的委託</b>（3.6 節的「限價 ROD」），也不能用融資融券。</li>
+    <li><b>盤中沒成交的零股委託，不會自動延續到盤後零股</b>，要另外下單。</li>
+  </ul>
+
+  <div class="box warn">
+    <div class="box-label"><span class="zh"></span><span class="lat">RISK</span></div>
+    <p>下單時看清楚單位是「股」還是「張」。想買 49 股台積電，卻在整股畫面輸入 49，委託就變成 49 張，金額是 49 × 242 萬 ＝ 1 億 1,858 萬元。券商通常有額度控管會擋下來，但只要成交，就要在兩天後付出這筆錢（3.7 節的違約交割）。</p>
+  </div>
+
+</section>
+
+<section id="limits">
+  <h2><span class="sec-num">3.5</span>參考價、漲跌停與交易所的煞車</h2>
+  <p class="lead-in">每檔股票每天都有一個起點價格，當天所有的漲跌都從它算起；交易所也用它畫出這一天最遠能走到哪裡。</p>
+
+  <div class="box define" id="def-ref">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>參考價</dfn><span class="en">Reference price</span></p>
+    <p>交易所計算當天漲跌與漲跌停的基準，一般就是前一個交易日的收盤價；遇到<span class="term" data-term="除權息">除權息</span>那天，會先扣掉發放的股利再重新計算（<a href="02-what-is-a-stock.html#def-exdiv">第 2 章</a>）。成交價等於參考價，叫做「平盤」，所以參考價也叫平盤價。</p>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §三</span></div>
+    <p class="quote">參考價多為 10/16 收盤；標「約」者為 10/16 盤中價（廣達、南亞科、台塑化）或 10/13 收盤（華城、中興電）。</p>
+    <p>計畫表格的「參考價」和交易所的參考價同名，用途不同。計畫的參考價固定在整理資料那一刻，用來畫買進區、停損與目標價；交易所的參考價每天都換。10/16 是週五，所以 10/19（週一）的交易所參考價就是 10/16 收盤，表上用 10/16 收盤的那幾檔，兩者在 10/19 相同（沒有除權息的話），之後就分開了（第 37 章）。</p>
+  </div>
+
+  <div class="box define" id="def-limit">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>漲跌停</dfn><span class="en">Daily price limit (limit up / limit down)</span></p>
+    <p>一般股票一天的成交價，不能超過參考價的上下 10%（2015 年 6 月起）。漲到上限叫漲停，跌到下限叫跌停。漲跌停價仍然可以成交，只是不能再往外。</p>
+  </div>
+
+  <p>價格也不能隨便填。股價的最小跳動單位叫<dfn id="def-tick">升降單位</dfn>（Tick size），依價格高低分成六級：</p>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>股票的升降單位（以證交所公告為準）</caption>
+      <thead><tr><th>股價</th><th class="r">升降單位</th><th>計畫裡的例子</th></tr></thead>
+      <tbody>
+        <tr><td>未滿 10 元</td><td class="r">0.01 元</td><td>—</td></tr>
+        <tr><td>10 元至未滿 50 元</td><td class="r">0.05 元</td><td>兆豐金停損 47.3</td></tr>
+        <tr><td>50 元至未滿 100 元</td><td class="r">0.1 元</td><td>中信金 73.6、兆豐金 53.7</td></tr>
+        <tr><td>100 元至未滿 500 元</td><td class="r">0.5 元</td><td>鴻海 244、南亞科約 480</td></tr>
+        <tr><td>500 元至未滿 1,000 元</td><td class="r">1 元</td><td>日月光投控 671、華星光 520</td></tr>
+        <tr><td>1,000 元以上</td><td class="r">5 元</td><td>台積電 2,420、台光電 5,165</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>參考價乘上 1.1 或 0.9，算出來的數字不一定剛好落在升降單位上。規則是不准超過 10%，所以漲停價往下取到最近的合法價格，跌停價往上取。</p>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>台積電與兆豐金的漲跌停價</h4>
+    <ol class="calc">
+      <li>台積電參考價 2,420 元，1,000 元以上每格 5 元：<span class="eq">2,420 × 1.1 ＝ 2,662 → 往下取 → 漲停 2,660（+9.92%）</span></li>
+      <li><span class="eq">2,420 × 0.9 ＝ 2,178 → 往上取 → 跌停 2,180（−9.92%）</span></li>
+      <li>兆豐金參考價 53.7 元。漲停那一側還在 50 元以上，每格 0.1 元：<span class="eq">53.7 × 1.1 ＝ 59.07 → 漲停 59.0（+9.87%）</span></li>
+      <li>跌停那一側掉到 50 元以下，升降單位變成 0.05 元：<span class="eq">53.7 × 0.9 ＝ 48.33 → 往上取 → 跌停 48.35（−9.96%）</span></li>
+    </ol>
+    <p class="answer">漲跌停很少剛好是 ±10%，要先乘、再對齊升降單位。價格跨過 50、100、500、1,000 元這些級距時，兩側的升降單位可能不同。</p>
+  </div>
+
+  <p>漲跌停把一天的波動關在一個框裡。把計畫給台積電的價位放進這個框，會看到一件事：停損價和目標價，都在一天能走的範圍之外。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 352" role="img" aria-label="台積電一天的漲跌停範圍與計畫價位：參考價 2,420 時，當天只能在 2,180 到 2,660 之間成交；計畫的停損 2,080 與目標1 2,800 都在範圍外。若第 1 天收在跌停 2,180，第 2 天的範圍變成 1,965 到 2,395，停損才可能觸發">
+        <text x="110" y="18" class="ta-m t-sm t-b">第 1 天</text>
+        <text x="110" y="36" class="ta-m t-sm t-3">參考價 2,420</text>
+        <text x="216" y="18" class="ta-m t-sm t-b">第 2 天</text>
+        <text x="216" y="36" class="ta-m t-sm t-3">若第 1 天收跌停</text>
+        <line x1="52" y1="50" x2="52" y2="320" class="s-ink s-1"/>
+        <line x1="52" y1="65" x2="56" y2="65" class="s-ink s-1"/>
+        <line x1="52" y1="95" x2="56" y2="95" class="s-ink s-1"/>
+        <line x1="52" y1="125" x2="56" y2="125" class="s-ink s-1"/>
+        <line x1="52" y1="155" x2="56" y2="155" class="s-ink s-1"/>
+        <line x1="52" y1="185" x2="56" y2="185" class="s-ink s-1"/>
+        <line x1="52" y1="215" x2="56" y2="215" class="s-ink s-1"/>
+        <line x1="52" y1="245" x2="56" y2="245" class="s-ink s-1"/>
+        <line x1="52" y1="275" x2="56" y2="275" class="s-ink s-1"/>
+        <line x1="52" y1="305" x2="56" y2="305" class="s-ink s-1"/>
+        <text x="46" y="69" class="ta-e t-xs t-mono t-3">2,800</text>
+        <text x="46" y="99" class="ta-e t-xs t-mono t-3">2,700</text>
+        <text x="46" y="129" class="ta-e t-xs t-mono t-3">2,600</text>
+        <text x="46" y="159" class="ta-e t-xs t-mono t-3">2,500</text>
+        <text x="46" y="189" class="ta-e t-xs t-mono t-3">2,400</text>
+        <text x="46" y="219" class="ta-e t-xs t-mono t-3">2,300</text>
+        <text x="46" y="249" class="ta-e t-xs t-mono t-3">2,200</text>
+        <text x="46" y="279" class="ta-e t-xs t-mono t-3">2,100</text>
+        <text x="46" y="309" class="ta-e t-xs t-mono t-3">2,000</text>
+
+        <rect x="70" y="107" width="80" height="72" class="f-up-soft"/>
+        <rect x="70" y="179" width="80" height="72" class="f-down-soft"/>
+        <text x="110" y="126" class="ta-m t-sm t-b t-up">漲停 2,660</text>
+        <text x="110" y="145" class="ta-m t-sm t-mono t-up">+9.92%</text>
+        <text x="110" y="203" class="ta-m t-sm t-mono t-down">−9.92%</text>
+        <text x="110" y="246" class="ta-m t-sm t-b t-down">跌停 2,180</text>
+
+        <line x1="150" y1="251" x2="176" y2="251" class="s-3 s-1 s-dash"/>
+        <rect x="176" y="186.5" width="80" height="64.5" class="f-up-soft"/>
+        <rect x="176" y="251" width="80" height="64.5" class="f-down-soft"/>
+        <line x1="176" y1="251" x2="256" y2="251" class="s-ink s-1"/>
+        <text x="216" y="207" class="ta-m t-sm t-b t-up">漲停 2,395</text>
+        <text x="216" y="309" class="ta-m t-sm t-b t-down">跌停 1,965</text>
+
+        <line x1="56" y1="65" x2="262" y2="65" class="s-up s-15 s-dash"/>
+        <line x1="56" y1="179" x2="262" y2="179" class="s-ink s-15"/>
+        <line x1="56" y1="230" x2="262" y2="230" class="s-accent s-15 s-dot"/>
+        <line x1="56" y1="281" x2="262" y2="281" class="s-down s-15 s-dash"/>
+        <circle cx="216" cy="281" r="5" class="f-down"/>
+        <line x1="266" y1="179" x2="266" y2="230" class="s-accent s-2w"/>
+        <text x="272" y="69.5" class="t-sm t-up t-b">目標1 2,800</text>
+        <text x="272" y="183.5" class="t-sm t-b">參考價 2,420</text>
+        <text x="272" y="211" class="t-sm t-accent">買進區</text>
+        <text x="272" y="228" class="t-sm t-accent">2,250–2,420</text>
+        <text x="272" y="285.5" class="t-sm t-down t-b">停損 2,080</text>
+
+        <line x1="8" y1="328" x2="392" y2="328" class="s-rule s-1"/>
+        <text x="200" y="346" class="ta-m t-sm t-2">一天最多 ±10%：停損與目標都不會在同一天被碰到</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>以計畫第三節的台積電價位計算。第 1 天只能在 2,180–2,660 之間成交，停損 2,080（−14%）和目標1 2,800（+16%）都在框外。假設第 1 天收在跌停 2,180，它就成為第 2 天的參考價，框往下移到 1,965–2,395，停損線才落進框內。</span></figcaption>
+  </figure>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>有了停損價，跌到那裡就一定能用那個價格賣掉。</p></div>
+    <div class="myth-right"><p>急跌時常出現「跌停鎖死」：跌停價上排了大量賣單，願意買的人很少，大部分賣單當天根本成交不了，隔天還可能直接開在更低的價格。計畫的停損用收盤價判斷、隔日執行，執行那天的價格本來就可能比停損價低，<span class="term" data-term="部位">部位</span>大小（第 31 章）要把這一段滑落也算進去。</p></div>
+  </div>
+
+  <h3>紅漲綠跌：顏色比的是參考價</h3>
+  <p>台灣的報價畫面用<dfn id="def-redgreen">紅漲綠跌</dfn>（Red-up, green-down）：成交價高於參考價顯示紅色，低於參考價顯示綠色，等於參考價是平盤。美國的報價網站與 App 多半相反，綠色是漲、紅色是跌。本書預設紅漲綠跌，頁面上方「目錄與設定」裡的「漲跌顏色」可以切換。</p>
+  <p>容易混淆的是：報價的紅綠，比的是<strong>參考價</strong>；<span class="term" data-term="K線">K 棒</span>的紅黑，比的是當天的<strong>開盤價</strong>（第 6 章）。一檔股票開盤大漲 5%、之後一路走低、收盤只剩 +1%，報價是紅的（比昨天收盤高），K 棒卻是<span class="term" data-term="黑K">黑 K</span>（收盤比開盤低）。這種走勢叫「開高走低」。</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第十八節</span></div>
+    <p class="quote">例如外資 +400～700 億、期貨淨空下降，但指數開高走低，不得再寫「法人買超，因此偏多」，而應寫：價格正在拒絕籌碼利多。</p>
+    <p>「開高走低」就是用開盤價和收盤價講故事：開盤時大家很樂觀，價格卻撐不住，一路被賣下來。即使收盤還是紅字，GCFIE 也把它讀成警訊，因為<span class="term" data-term="外資">外資</span>的<span class="term" data-term="買超">買超</span>沒能把價格留在高處（第 24 章的「<span class="term" data-term="價格優先於籌碼">價格優先於籌碼</span>」）。</p>
+  </div>
+
+  <h3>交易所的煞車：注意股與處置股</h3>
+  <p>漲跌停限制的是單日幅度。如果一檔股票連續幾天漲跌很猛、成交量暴增，交易所還有第二道煞車。第一步是<dfn id="def-attention">注意股</dfn>（Stocks under attention）：交易所發現某檔股票的漲跌幅、<span class="term" data-term="成交量">成交量</span>、週轉率、當沖比例等出現異常，就在收盤後公布為注意股，提醒投資人留意，本身不限制交易。</p>
+
+  <div class="box define" id="def-disposition">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>處置股</dfn><span class="en">Stocks under disposition</span></p>
+    <p>一段期間內多次被列為注意股（例如連續三個營業日）的股票，交易所會加以「處置」：改成分盤集合競價，約每 2 分鐘才撮合一次；處置期間 5 個營業日（因當沖比例過高而延長的情況為 7 個營業日）；委託達一定張數時，券商要先收足款項或股票（預收款券），也可能限制信用交易與當沖。以上為 2026 年 8 月 10 日起的新制，細節以證交所、櫃買中心公告為準。</p>
+  </div>
+  <p>處置股不代表公司不好，只代表最近交易太熱；但它會讓成交變慢、下單要先備款。波動大的題材股比較常進入名單，下單前在證交所或券商 App 查一下是否正在處置，可以少一些意外。</p>
+
+</section>
+
+<section id="orders">
+  <h2><span class="sec-num">3.6</span>下單：限價、市價與 ROD／IOC／FOK</h2>
+  <p class="lead-in">每送出一筆委託，你都在回答兩個問題：價格怎麼定，以及沒成交的部分怎麼辦。第一個問題的答案是限價或市價，第二個是 ROD、IOC 或 FOK。</p>
+
+  <div class="box define" id="def-limit-order">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>限價單</dfn><span class="en">Limit order</span></p>
+    <p>指定價格的委託：買進時是「最多願意付多少」，賣出時是「最少願意收多少」。只會在這個價格或更好的價格成交，保證價格，但不保證成交。</p>
+  </div>
+  <p>相對的是<dfn id="def-market-order">市價單</dfn>（Market order）：不指定價格，直接和委託簿上現有的對手單成交，保證速度，但不保證價格。賣方掛單一薄，市價買單就會一路往上吃，成交在比你預期更高的價位。台股的市價單只能在盤中逐筆交易時段（09:00–13:25）使用。</p>
+  <p>沒成交的部分怎麼處理，由三種委託條件決定：</p>
+  <ul>
+    <li><dfn id="def-rod">ROD</dfn>（Rest of Day，當日有效）：沒成交的部分留在委託簿排隊，直到當天收盤失效。台股沒有跨日有效的委託，隔天要重新下單。</li>
+    <li><dfn id="def-ioc">IOC</dfn>（Immediate or Cancel，立即成交否則取消）：送出當下能成交多少就成交多少，剩下的立刻取消。</li>
+    <li><dfn id="def-fok">FOK</dfn>（Fill or Kill，全部成交否則取消）：必須當下全部成交，只要有一張成交不了，整筆取消。</li>
+  </ul>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>各時段能用的委託（以證交所公告與券商下單介面為準）</caption>
+      <thead><tr><th>時段</th><th>能用的委託</th><th>為什麼</th></tr></thead>
+      <tbody>
+        <tr><th>開盤前、收盤前</th><td>限價 ROD</td><td>集合競價：委託要留到撮合時刻，IOC、FOK 沒有意義</td></tr>
+        <tr><th>盤中</th><td>限價或市價，搭配 ROD、IOC、FOK，共六種</td><td>逐筆交易：委託一進來就比對</td></tr>
+        <tr><th>零股</th><td>限價 ROD</td><td>盤中、盤後零股每一撮都是集合競價</td></tr>
+        <tr><th>盤後定價</th><td>不填價格</td><td>固定用收盤價，只決定買賣與張數</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>把它們放進同一個委託簿裡比較，差別就很清楚。假設某檔股票盤中的<span class="term" data-term="委託簿">最佳五檔</span>是這樣（示意，單位：張）：</p>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>盤中的最佳五檔（示意）</caption>
+      <thead><tr><th class="r">委買價</th><th class="r">張數</th><th class="r">委賣價</th><th class="r">張數</th></tr></thead>
+      <tbody>
+        <tr><td class="r">100.0</td><td class="r">6</td><td class="r">100.5</td><td class="r">2</td></tr>
+        <tr><td class="r">99.5</td><td class="r">9</td><td class="r">101.0</td><td class="r">3</td></tr>
+        <tr><td class="r">99.0</td><td class="r">12</td><td class="r">101.5</td><td class="r">5</td></tr>
+        <tr><td class="r">98.5</td><td class="r">15</td><td class="r">102.0</td><td class="r">8</td></tr>
+        <tr><td class="r">98.0</td><td class="r">20</td><td class="r">102.5</td><td class="r">10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>想買 8 張，四種下法的結果</h4>
+    <ol class="calc">
+      <li>市價買 8 張：從最低的賣價往上吃，2 張 100.5、3 張 101、3 張 101.5。<span class="eq">平均成本 ＝ (2×100.5 ＋ 3×101 ＋ 3×101.5) ÷ 8 ＝ 808.5 ÷ 8 ≈ 101.06 元</span></li>
+      <li>和畫面上的最佳賣價 100.5 元相比，多付了：<span class="eq">101.06 ÷ 100.5 − 1 ≈ +0.56%</span></li>
+      <li>限價 101 元、ROD：100.5 的 2 張和 101 的 3 張馬上成交，剩下 3 張在 101 元排隊，等有人願意用 101 元賣，或收盤失效。<span class="eq">立即成交 5 張，3 張留在委託簿</span></li>
+      <li>限價 101 元、IOC：一樣立即成交 5 張，剩下 3 張馬上取消。<span class="eq">成交 5 張，3 張取消</span></li>
+      <li>限價 101 元、FOK：101 元以內只買得到 5 張，湊不滿 8 張，整筆取消。<span class="eq">成交 0 張</span></li>
+    </ol>
+    <p class="answer">市價單的 +0.56%，比 3.8 節算出的一趟來回手續費加證交稅（6 折約 0.47%）還多。掛單越薄，市價單付出的代價越大。</p>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §三、§六</span></div>
+    <p class="quote">使用規則：買進區分 2–3 筆掛單</p>
+    <p class="quote">高價股一張要數百萬，用盤中零股加限價單</p>
+    <p>兩句合起來，就是在<span class="term" data-term="買進區">買進區</span>裡掛幾筆限價 ROD 的零股買單。以台積電為例，買進區 2,250–2,420，可以在 2,420、2,335、2,250 各掛約 16 股（示意），價格回落到哪裡，就買到哪幾筆。沒買到的價位隔天要重掛；部分券商的「長效單」會每天替你重送，那是券商的服務，不是交易所的委託種類。</p>
+  </div>
+
+  <p>停損的執行也和委託種類有關。隔天 09:00 以前只收限價 ROD，而集合競價的成交價是大家共用的撮合價：賣單限價掛得越低，越優先成交，成交價仍是那一撮的價格。很多人因此把停損賣單的限價掛低一些，換取成交順位；但遇到跌停鎖死，掛再低也排不到。</p>
+
+  <aside class="note">照計畫操作，用得最多的組合只有一個：<b>限價 ROD</b>。它在每一個時段都能用，價格由你決定，成交不了也只是當天作廢。市價單與 IOC、FOK，是給「現在就一定要成交」的情況用的工具。</aside>
+
+</section>
+
+<section id="settlement">
+  <h2><span class="sec-num">3.7</span>T+2 交割與違約交割</h2>
+  <p class="lead-in">按下「買進」、看到「成交」，交易其實還沒完成。成交只代表雙方說定了價格與數量；錢和股票真正換手，要再等兩個營業日。</p>
+
+  <div class="box define" id="def-t2">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>T+2 交割</dfn><span class="en">T+2 settlement</span></p>
+    <p>成交那天記為 T，在之後第 2 個營業日（T+2）完成交割，也就是錢與股票正式過戶。買方要在 T+2 上午 10 點前，把應付款項放進交割帳戶（實際截止時間依券商規定）；同一天，股票轉進買方的集保帳戶，賣方的款項匯進賣方的交割帳戶。週末與休市日不算營業日。</p>
+  </div>
+
+  <p>以計畫加碼期的第一天為例：11/5 是週四，T+1 是 11/6 週五，接著是週末，所以 T+2 落在 11/9 週一。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 330" role="img" aria-label="T+2 交割示意：11/5 週四成交為 T 日，11/6 週五為 T+1，跳過週末，11/9 週一為 T+2；T+2 當天買方交割帳戶扣款 118,681 元、集保帳戶增加 49 股，賣方集保帳戶減少 49 股、交割帳戶收到價款">
+        <defs>
+          <marker id="ar03a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-accent"/></marker>
+          <marker id="ar03b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-foil"/></marker>
+        </defs>
+        <text x="60" y="24" class="ta-m t-sm t-3">11/5（四）</text>
+        <text x="170" y="24" class="ta-m t-sm t-3">11/6（五）</text>
+        <text x="338" y="24" class="ta-m t-sm t-3">11/9（一）</text>
+        <line x1="24" y1="50" x2="222" y2="50" class="s-ink s-15"/>
+        <line x1="286" y1="50" x2="376" y2="50" class="s-ink s-15"/>
+        <rect x="222" y="40" width="64" height="20" class="f-soft"/>
+        <text x="254" y="54.5" class="ta-m t-sm t-3">週末不算</text>
+        <circle cx="60" cy="50" r="8" class="f-accent"/>
+        <circle cx="170" cy="50" r="6" class="f-plate s-ink s-15"/>
+        <circle cx="338" cy="50" r="8" class="f-foil"/>
+        <text x="60" y="82" class="ta-m t-mono t-b">T</text>
+        <text x="170" y="82" class="ta-m t-mono t-b">T+1</text>
+        <text x="338" y="82" class="ta-m t-mono t-b">T+2</text>
+        <text x="60" y="104" class="ta-m t-sm">成交</text>
+        <text x="60" y="122" class="ta-m t-sm t-3">買 49 股台積電</text>
+        <text x="170" y="104" class="ta-m t-sm">補足交割款</text>
+        <text x="170" y="122" class="ta-m t-sm t-3">建議這天存好</text>
+        <text x="338" y="104" class="ta-m t-sm">上午 10 點前扣款</text>
+        <text x="338" y="122" class="ta-m t-sm t-3">股票進集保</text>
+
+        <line x1="8" y1="140" x2="392" y2="140" class="s-rule s-1"/>
+        <text x="200" y="164" class="ta-m t-sm t-b">T+2 當天：錢和股票一起過戶</text>
+        <text x="70" y="186" class="ta-m t-sm t-b">你（買方）</text>
+        <text x="200" y="186" class="ta-m t-sm t-2">集保結算所</text>
+        <text x="330" y="186" class="ta-m t-sm t-b">對方（賣方）</text>
+        <rect x="160" y="194" width="80" height="94" class="f-soft s-rule s-1"/>
+
+        <rect x="14" y="196" width="112" height="40" class="f-plate s-ink s-1"/>
+        <text x="70" y="212" class="ta-m t-sm t-b">交割帳戶</text>
+        <text x="70" y="229" class="ta-m t-sm t-mono t-down">−118,681 元</text>
+        <rect x="14" y="246" width="112" height="40" class="f-plate s-ink s-1"/>
+        <text x="70" y="262" class="ta-m t-sm t-b">集保帳戶</text>
+        <text x="70" y="279" class="ta-m t-sm t-mono t-up">＋49 股</text>
+
+        <rect x="274" y="196" width="112" height="40" class="f-plate s-ink s-1"/>
+        <text x="330" y="212" class="ta-m t-sm t-b">交割帳戶</text>
+        <text x="330" y="229" class="ta-m t-sm t-up">＋價款</text>
+        <rect x="274" y="246" width="112" height="40" class="f-plate s-ink s-1"/>
+        <text x="330" y="262" class="ta-m t-sm t-b">集保帳戶</text>
+        <text x="330" y="279" class="ta-m t-sm t-mono t-down">−49 股</text>
+
+        <line x1="128" y1="216" x2="270" y2="216" class="s-accent s-2w" marker-end="url(#ar03a)"/>
+        <text x="200" y="210" class="ta-m t-sm t-accent t-b">錢</text>
+        <line x1="272" y1="266" x2="130" y2="266" class="s-foil s-2w" marker-end="url(#ar03b)"/>
+        <text x="200" y="260" class="ta-m t-sm t-foil t-b">股票</text>
+
+        <text x="200" y="314" class="ta-m t-sm t-2">成交在 T 日，過戶在 T+2，中間要把錢準備好</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>以 6 折手續費計算：49 股 × 2,420 元 ＝ 118,580 元，加買進手續費 101 元，交割帳戶要扣 118,681 元。賣方收到的價款會先扣掉他自己的手續費與證交稅。實際作業由雙方的券商和集保結算所完成。</span></figcaption>
+  </figure>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>帳戶裡錢不夠，券商就不會讓我下單；能成交，就代表錢一定夠。</p></div>
+    <div class="myth-right"><p>台股的一般現股帳戶，下單時不會先扣錢。券商只檢查它給你的「交易額度」，額度可能比你交割帳戶裡的存款多。成交之後，錢要到 T+2 才扣。所以完全可能買到超過自己付得起的金額，到了 T+2 扣不到款，就是違約交割。</p></div>
+  </div>
+
+  <p><dfn id="def-default">違約交割</dfn>（Settlement default）是成交以後，在交割期限內沒有備足款項（或賣出時交不出股票）。它的後果很重，依證交所與券商的規定，大致是：</p>
+  <ul>
+    <li>券商可以處分你的部位，並向你收取違約金（上限為成交金額的 7%），價差損失與相關費用也由你負擔。</li>
+    <li>券商會向證交所申報違約。未了結以前，5 年內不能在任何券商開戶或買賣。</li>
+    <li>情節重大、足以影響市場秩序的，還可能觸犯證券交易法，負擔刑事責任。</li>
+  </ul>
+  <p>預防的方法很樸素：下單前先確認交割帳戶的錢夠，最晚在 T+1 存好，不要等到 T+2 早上才轉帳。同一天有買有賣的話，交割時會先互相抵銷，只收付淨額。賣出股票的錢也是 T+2 才進帳，不是成交當下就能提領。</p>
+  <p>處置股的「預收款券」，可以想成把交割提前：在下單前就先把錢（或股票）交給券商，讓違約的可能性降到零。</p>
+
+</section>
+
+<section id="costs">
+  <h2><span class="sec-num">3.8</span>交易成本與當沖：每一次進出要付多少</h2>
+  <p class="lead-in">每一次買進和賣出，都要付兩種錢：給券商的手續費，以及給政府的證交稅。單看只有千分之幾，進出一多，就會變成報酬裡最穩定的一筆支出。</p>
+
+  <div class="box define" id="def-fee">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>手續費</dfn><span class="en">Brokerage commission</span></p>
+    <p>券商替你下單、辦理交割所收的費用，買進、賣出各收一次。上限是成交金額的 0.1425%，券商常給折扣（例如 6 折、2.8 折）。計算後不足 1 元的部分捨去，而且有最低收費：整股常見 20 元，零股不少券商是 1 元，依各券商規定。</p>
+  </div>
+
+  <div class="box define" id="def-tax">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>證交稅</dfn><span class="en">Securities transaction tax</span></p>
+    <p>證券交易稅，只在賣出時課徵，由券商代扣，不能打折。股票是賣出金額的 0.3%，股票型 <span class="term" data-term="ETF">ETF</span> 是 0.1%；現股當沖的賣出稅率減半為 0.15%（目前適用到 2027 年 12 月 31 日）。不足 1 元的部分捨去。</p>
+  </div>
+
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">來回成本率 ≈ 0.1425% × 折數 × 2 ＋ 0.3%</div>
+    <div class="where">「來回」是買一次加賣一次。手續費收兩次，證交稅收一次。不打折：0.285% ＋ 0.3% ＝ 0.585%；6 折：0.171% ＋ 0.3% ＝ 0.471%；2.8 折：0.0798% ＋ 0.3% ≈ 0.380%。這裡假設買賣價格相同，也還沒算最低收費。</div>
+  </div>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 326" role="img" aria-label="一趟來回的成本組成：股票不打折 0.585%、6 折 0.471%、2.8 折 0.380%，三者都落在計畫說的約 0.4 到 0.6% 附近；證交稅 0.3% 固定不變，是成本的地板。對照 ETF 6 折 0.271%、現股當沖 6 折 0.321%">
+        <rect x="8" y="9" width="10" height="10" class="f-c2"/>
+        <text x="22" y="18" class="t-sm">證交稅（賣出才收）</text>
+        <rect x="158" y="9" width="10" height="10" class="f-c1"/>
+        <text x="172" y="18" class="t-sm">買進手續費</text>
+        <rect x="250" y="9" width="10" height="10" class="f-c1 o-50"/>
+        <text x="264" y="18" class="t-sm">賣出手續費</text>
+
+        <rect x="262.7" y="52" width="83.3" height="122" class="f-accent-soft o-50"/>
+        <text x="304" y="45" class="ta-m t-sm t-b t-accent">計畫：約 0.4–0.6%</text>
+        <line x1="221" y1="52" x2="221" y2="178" class="s-3 s-1 s-dash"/>
+        <text x="216" y="45" class="ta-e t-sm t-3">0.3% 地板</text>
+
+        <text x="88" y="74.5" class="ta-e t-sm">股票 不打折</text>
+        <rect x="96" y="58" width="125" height="24" class="f-c2"/>
+        <rect x="221" y="58" width="59.4" height="24" class="f-c1"/>
+        <rect x="280.4" y="58" width="59.4" height="24" class="f-c1 o-50"/>
+        <text x="345" y="75" class="t-sm t-mono t-b">0.585%</text>
+
+        <text x="88" y="118.5" class="ta-e t-sm">股票 6 折</text>
+        <rect x="96" y="102" width="125" height="24" class="f-c2"/>
+        <rect x="221" y="102" width="35.6" height="24" class="f-c1"/>
+        <rect x="256.6" y="102" width="35.6" height="24" class="f-c1 o-50"/>
+        <text x="298" y="119" class="t-sm t-mono t-b">0.471%</text>
+
+        <text x="88" y="162.5" class="ta-e t-sm">股票 2.8 折</text>
+        <rect x="96" y="146" width="125" height="24" class="f-c2"/>
+        <rect x="221" y="146" width="16.6" height="24" class="f-c1"/>
+        <rect x="237.6" y="146" width="16.6" height="24" class="f-c1 o-50"/>
+        <text x="260" y="163" class="t-sm t-mono t-b">0.380%</text>
+
+        <line x1="8" y1="186" x2="392" y2="186" class="s-rule s-1"/>
+
+        <text x="88" y="214.5" class="ta-e t-sm t-2">ETF 6 折</text>
+        <rect x="96" y="198" width="41.7" height="24" class="f-c2"/>
+        <rect x="137.7" y="198" width="35.6" height="24" class="f-c1"/>
+        <rect x="173.3" y="198" width="35.6" height="24" class="f-c1 o-50"/>
+        <text x="215" y="215" class="t-sm t-mono">0.271%</text>
+
+        <text x="88" y="254.5" class="ta-e t-sm t-2">當沖 6 折</text>
+        <rect x="96" y="238" width="62.5" height="24" class="f-c2"/>
+        <rect x="158.5" y="238" width="35.6" height="24" class="f-c1"/>
+        <rect x="194.1" y="238" width="35.6" height="24" class="f-c1 o-50"/>
+        <text x="236" y="255" class="t-sm t-mono">0.321%</text>
+
+        <line x1="96" y1="276" x2="350" y2="276" class="s-ink s-1"/>
+        <line x1="96" y1="276" x2="96" y2="281" class="s-ink s-1"/>
+        <line x1="137.7" y1="276" x2="137.7" y2="281" class="s-ink s-1"/>
+        <line x1="179.3" y1="276" x2="179.3" y2="281" class="s-ink s-1"/>
+        <line x1="221" y1="276" x2="221" y2="281" class="s-ink s-1"/>
+        <line x1="262.7" y1="276" x2="262.7" y2="281" class="s-ink s-1"/>
+        <line x1="304.3" y1="276" x2="304.3" y2="281" class="s-ink s-1"/>
+        <line x1="346" y1="276" x2="346" y2="281" class="s-ink s-1"/>
+        <text x="96" y="295" class="ta-m t-xs t-mono t-3">0</text>
+        <text x="137.7" y="295" class="ta-m t-xs t-mono t-3">0.1%</text>
+        <text x="179.3" y="295" class="ta-m t-xs t-mono t-3">0.2%</text>
+        <text x="221" y="295" class="ta-m t-xs t-mono t-3">0.3%</text>
+        <text x="262.7" y="295" class="ta-m t-xs t-mono t-3">0.4%</text>
+        <text x="304.3" y="295" class="ta-m t-xs t-mono t-3">0.5%</text>
+        <text x="346" y="295" class="ta-m t-xs t-mono t-3">0.6%</text>
+        <text x="200" y="318" class="ta-m t-sm t-2">證交稅不打折：手續費折得再低，股票來回也低不到 0.3%</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>一趟來回（買一次、賣一次）的成本占成交金額的比例，假設買賣價格相同、沒有碰到最低收費。上面三列是一般股票，淡藍底色是計畫寫的「約 0.4–0.6%」；下面兩列換成 ETF（證交稅 0.1%）與現股當沖（0.15%）對照。</span></figcaption>
+  </figure>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §六</span></div>
+    <p class="quote">高價股一張要數百萬，用盤中零股加限價單；來回手續費加證交稅約 0.4–0.6%，避免頻繁進出。</p>
+    <p>0.4–0.6% 這個範圍就是上圖的前三列：手續費打到 2.8 折，來回約 0.38%；完全不打折，約 0.585%。兩端分別四捨五入，就是「約 0.4–0.6%」。範圍的寬度全部來自手續費折扣，0.3% 的證交稅誰都一樣。</p>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>49 股台積電，手續費 6 折：成本多少？賣多少才打平？</h4>
+    <ol class="calc">
+      <li>成交金額：<span class="eq">49 × 2,420 ＝ 118,580 元</span></li>
+      <li>買進手續費（6 折，元以下捨去）：<span class="eq">118,580 × 0.1425% × 0.6 ≈ 101.39 → 101 元</span></li>
+      <li>如果用同樣價格賣出，賣出手續費 101 元，證交稅：<span class="eq">118,580 × 0.3% ≈ 355.74 → 355 元</span></li>
+      <li>來回成本：<span class="eq">101 ＋ 101 ＋ 355 ＝ 557 元，約成交金額的 0.47%</span></li>
+      <li>損益兩平：賣出所得扣掉手續費與證交稅，要等於當初付出的 118,681 元。<span class="eq">118,681 ÷ [49 × (1 − 0.0855% − 0.3%)] ≈ 2,431.4 元</span></li>
+      <li>1,000 元以上每格 5 元，2,431.4 不是合法價格。賣 2,430 元還虧 69 元，要賣到 2,435 元才賺 175 元。<span class="eq">2,435 ÷ 2,420 − 1 ≈ +0.62%</span></li>
+    </ol>
+    <p class="answer">來回成本約 0.47%，但因為升降單位，台積電至少要漲 3 格（+0.62%）才真正打平。</p>
+  </div>
+
+  <p>最低收費是另一個陷阱，對零股特別重要。6 折時，成交金額要有 20 ÷ 0.0855% ≈ 23,392 元，手續費才會達到 20 元。計畫的兆豐金配置 3 萬元，一次買 558 股（29,965 元）手續費 25 元；照「分 3 筆掛單」每筆 186 股、約 9,988 元，按費率只要 8 元，碰到最低收 20 元的券商，三筆就是 60 元，買進成本從約 0.08% 變成約 0.20%。零股最低收 1 元還是 20 元，對這份計畫影響很大。</p>
+  <p>現在換你試。工具預設是上面的台積電例子；把股數改成 186、價格改成 53.7，再切換最低手續費，看看成本比例怎麼跳。</p>
+
+  <div class="widget" data-widget="tradecost" data-price="2420" data-shares="49" data-discount="6" data-kind="stock" data-minfee="1" data-note="費率以券商與證交所公告為準；手續費與證交稅都是元以下捨去。損益兩平價會再對齊升降單位。"></div>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>手續費打 2.8 折，交易成本就只剩原本的 28%。</p></div>
+    <div class="myth-right"><p>折扣只打在手續費上。不打折時來回 0.585%，2.8 折後是約 0.380%，只少了約 35%。這時證交稅 0.3% 占了來回成本的約 79%，再怎麼殺價也動不了它。</p></div>
+  </div>
+
+  <p>計畫說「避免頻繁進出」，原因用乘法就看得出來。假設手續費 6 折，每一趟來回約 0.47%。如果一個月來回 4 次，5 個月就是 20 次，成本累積約 20 × 0.47% ≈ 9.4%。計畫第十一節估的加權<span class="term" data-term="期望報酬">期望報酬</span>約 +10%，幾乎全被交易成本吃掉。這還沒算市價單的滑價，以及頻繁換股可能賣在低點、買在高點的代價。</p>
+
+  <div class="box define" id="def-daytrade">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>當沖</dfn><span class="en">Day trading</span></p>
+    <p>當日沖銷的簡稱：同一天內買進又賣出（或先賣後買）同一檔股票、同樣數量，當天把部位了結，交割時只結算買賣價差。要開戶滿 3 個月且最近一年成交 10 筆以上（已開立信用帳戶者不受此限），並簽署風險預告書與概括授權同意書。現股當沖的證交稅減半為 0.15%。</p>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §六</span></div>
+    <p class="quote">不融資、不當沖、不碰權證。</p>
+    <p>當沖的稅比較低，次數卻多：6 折時每趟約 0.32%，一個月 20 個交易日天天做一趟，就是約 6.4%。規則面的風險更大：當沖的前提是當天一定能反向了結，若漲跌停鎖死沖不掉，部位就變成一般現股，T+2 要付全額價款；先賣後買的人還可能要負擔借券費用與強制買回的價差。這和計畫「分批建倉、抱住<span class="term" data-term="停利">停利</span>」的節奏相反。計畫同時排除<span class="term" data-term="融資">融資</span>與<span class="term" data-term="權證">權證</span>的理由，見<a href="25-margin-leverage.html#discipline">第 25 章</a>。</p>
+  </div>
+
+</section>
+
+</article>
+
+<section class="recap" id="recap">
+  <h2>本章重點</h2>
+  <ul>
+    <li>開戶等於開三個帳戶：證券帳戶負責下單，交割帳戶（銀行）放錢，集保帳戶放股票；錢和股票都在你自己名下。</li>
+    <li>整股 08:30 收單試撮、09:00 開盤集合競價、逐筆交易到 13:25、13:25–13:30 收盤集合競價；盤中零股 09:10 起約每 5 秒撮合一次（2026/12/7 起提前到 09:00），盤後零股 13:40–14:30，盤後定價 14:00–14:30 以收盤價成交。</li>
+    <li>集合競價選「讓成交張數最多」的單一價格。收盤價由 13:30 那一撮決定，是隔天的參考價，也是計畫停損與 GCFIE 價格驗證所用的那一把尺。</li>
+    <li>1 張 ＝ 1,000 股。100 萬元的 20 檔計畫，沒有一檔的配置買得起一張，全部要用盤中零股與限價單執行；台積電 12% 只能買 49 股。</li>
+    <li>漲跌停 ＝ 參考價 ±10%，再依升降單位往內取：台積電 2,420 → 2,180–2,660。跌停可能鎖死賣不掉，計畫的停損（−14%）至少要兩天才碰得到。</li>
+    <li>限價保價格、市價保速度；ROD 留到收盤，IOC 剩下取消，FOK 不能全成交就整筆取消。成交後 T+2 上午扣款，錢不夠就是違約交割。</li>
+    <li>來回成本 ≈ 0.1425% × 折數 × 2 ＋ 0.3%：不打折 0.585%、6 折 0.471%、2.8 折 0.380%。證交稅不打折，零股要留意最低收費，頻繁進出會吃掉報酬。</li>
+  </ul>
+</section>
+
+<section class="quiz-set" id="quiz">
+  <h2>自我檢測</h2>
+  <p>每題選一個答案，選完會顯示解析。</p>
+  <div class="quiz" data-answer="c">
+    <p class="q">中信金的停損價是 64.8 元。某天盤中最低跌到 64.0 元，收盤 65.2 元。照計畫「停損以收盤價判斷、隔日執行」，應該怎麼解讀？</p>
+    <ol class="opts"><li>盤中已跌破，停損已觸發，當天就要賣</li><li>停損已觸發，隔天開盤執行</li><li>停損沒有觸發，因為收盤價 65.2 元仍高於 64.8 元</li><li>應該在 64.0 元附近攤平加碼</li></ol>
+    <div class="explain">計畫用收盤價判斷，而收盤價是 13:25–13:30 集合競價撮合出來的單一價格。盤中短暫跌破、收盤站回，不算觸發。若某天收盤低於 64.8 元，才在下一個交易日執行。計畫第六節也寫明，跌破停損的股票不攤平。</div>
+  </div>
+
+  <div class="quiz" data-answer="a">
+    <p class="q">09:00 的開盤集合競價，交易所怎麼決定開盤價？</p>
+    <ol class="opts"><li>找出能讓成交張數最多的那一個價格，所有成交都用它</li><li>用最早送出的那一筆委託的價格</li><li>取最高買價與最低賣價的平均</li><li>直接沿用前一天的收盤價</li></ol>
+    <div class="explain">集合競價先把委託累積起來，在每個價格算出「願買」與「願賣」的累計張數，取較小值作為可成交量，可成交量最大的價格就是開盤價。掛得比較積極的人優先成交，但成交價是大家共用的同一個。</div>
+  </div>
+
+  <div class="quiz" data-answer="b">
+    <p class="q">總資金 100 萬元，台積電權重 12%，參考價 2,420 元。照計畫用零股買進，最多能買幾股？</p>
+    <ol class="opts"><li>1 張</li><li>49 股</li><li>50 股</li><li>120 股</li></ol>
+    <div class="explain">配置 12 萬元，120,000 ÷ 2,420 ≈ 49.6，股數只能無條件捨去，所以是 49 股（118,580 元）。買 50 股要 121,000 元，超過預算。一張要 242 萬元，比整個組合還多。</div>
+  </div>
+
+  <div class="quiz" data-answer="d">
+    <p class="q">兆豐金的參考價是 53.7 元，它的跌停價是多少？</p>
+    <ol class="opts"><li>48.33 元</li><li>48.30 元</li><li>48.40 元</li><li>48.35 元</li></ol>
+    <div class="explain">53.7 × 0.9 ＝ 48.33 元。跌停價已經低於 50 元，升降單位是 0.05 元，48.33 不是合法價格；跌停價要往上取（不能跌超過 10%），所以是 48.35 元，約 −9.96%。48.30 元跌幅超過 10%，不被允許。</div>
+  </div>
+
+  <div class="quiz" data-answer="c">
+    <p class="q">最佳五檔的賣方是 100.5 元 2 張、101 元 3 張、101.5 元 5 張。你送出「限價 101 元、IOC」買 8 張，結果是？</p>
+    <ol class="opts"><li>8 張全部成交</li><li>整筆取消，一張都沒成交</li><li>成交 5 張，其餘 3 張立刻取消</li><li>成交 5 張，其餘 3 張在 101 元排隊到收盤</li></ol>
+    <div class="explain">101 元以內能立刻買到 100.5 元 2 張與 101 元 3 張，共 5 張。IOC 是「能成交多少就成交，剩下立刻取消」。選項 d 是 ROD 的結果，選項 b 是 FOK 的結果。</div>
+  </div>
+
+  <div class="quiz" data-answer="a">
+    <p class="q">手續費 6 折、買賣一般股票，一趟來回的成本大約是成交金額的多少？</p>
+    <ol class="opts"><li>0.471%</li><li>0.585%</li><li>0.171%</li><li>0.300%</li></ol>
+    <div class="explain">手續費 0.1425% × 0.6 ＝ 0.0855%，買賣各一次是 0.171%，再加賣出時的證交稅 0.3%，合計 0.471%。0.585% 是不打折的情況；0.3% 只是證交稅，手續費再低，來回成本也不會低於它。</div>
+  </div>
+</section>
+
+</main>
+</div>
+</div>
+</body>
+</html>

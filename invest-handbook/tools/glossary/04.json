@@ -1,0 +1,18 @@
+{
+  "chapter": 4,
+  "terms": [
+    { "term": "紐約證券交易所", "en": "New York Stock Exchange (NYSE)", "def": "美國歷史最久的大型證券交易所，起源於 1792 年，簡稱紐交所；台積電 ADR（TSM）在此掛牌。", "anchor": "def-nyse", "aliases": ["NYSE", "紐交所"] },
+    { "term": "那斯達克交易所", "en": "The Nasdaq Stock Market", "def": "1971 年開始運作的世界第一個電子化股票市場，科技公司多在此掛牌；和同名的 Nasdaq 指數是兩回事。", "anchor": "def-nasdaq-ex", "aliases": ["Nasdaq交易所", "Nasdaq 交易所"] },
+    { "term": "股票代號", "en": "Ticker symbol", "def": "交易所給每檔股票的識別碼。台股普通股多為 4 位數字（2330），美股為英文字母（TSM、NVDA）。", "anchor": "def-ticker", "aliases": ["ticker", "代號"] },
+    { "term": "美東時間", "en": "Eastern Time (ET)", "def": "紐約所在的時區。冬令為 UTC−5（EST），夏令為 UTC−4（EDT）；台灣比它快 13 或 12 小時。", "anchor": "clock", "aliases": ["ET", "EST", "EDT"] },
+    { "term": "夏令時間", "en": "Daylight saving time (DST)", "def": "夏天把時鐘撥快一小時。美國 2026 年為 3/8 至 11/1，期間台灣時間＝美東＋12 小時，其餘時間＋13 小時。", "anchor": "def-dst", "aliases": ["日光節約時間", "DST"] },
+    { "term": "盤前交易", "en": "Pre-market trading", "def": "美股正式開盤前的交易，美東 04:00–09:30（台灣 16:00 或 17:00 起）；成交量少、買賣價差大。", "anchor": "def-premarket", "aliases": ["Pre-market"] },
+    { "term": "盤後交易", "en": "After-hours trading", "def": "美股收盤後的交易，美東 16:00–20:00（台灣隔天 04:00–08:00 或 05:00–09:00）；財報常在此時公布。", "anchor": "def-postmarket", "aliases": ["After-hours"] },
+    { "term": "時差傳導", "en": "Time-zone transmission", "def": "美國交易時段（台灣的夜晚）發生的漲跌與消息，經 ADR、夜盤與電子盤接力，在台股開盤時一次反映。", "anchor": "def-transmission" },
+    { "term": "ADR", "en": "American Depositary Receipt", "def": "美國存託憑證：存託銀行依外國公司存放的普通股，在美國發行、以美元交易的憑證，每單位代表固定股數。", "anchor": "def-adr", "aliases": ["美國存託憑證", "ADS", "存託憑證"] },
+    { "term": "台積電ADR", "en": "TSMC ADR (NYSE: TSM)", "def": "台積電在紐約證交所掛牌的存託憑證，代號 TSM，1 單位代表 5 股普通股，常被視為「前一晚的台積電」。", "anchor": "def-tsm", "aliases": ["TSM", "台積電 ADR"] },
+    { "term": "ADR溢價", "en": "ADR premium", "def": "ADR 換算成本地股價後高於本地收盤價的百分比：ADR÷換股比例×匯率÷本地收盤−1；為負時稱折價。", "anchor": "def-adr-premium", "aliases": ["ADR 溢價", "ADR折價"] },
+    { "term": "熔斷機制", "en": "Market-wide circuit breaker", "def": "指數急跌時全市場暫停交易。美股以 S&P 500 跌 7%、13% 暫停 15 分鐘，跌 20% 當天停止；台股沒有。", "anchor": "def-circuit", "aliases": ["熔斷", "circuit breaker"] },
+    { "term": "瞬間價格穩定措施", "en": "Intraday volatility interruption", "def": "台股個股成交價將偏離前 5 分鐘加權平均價超過 3.5% 時，先延緩撮合約 2 分鐘的冷卻機制。", "anchor": "circuit-breakers" }
+  ]
+}

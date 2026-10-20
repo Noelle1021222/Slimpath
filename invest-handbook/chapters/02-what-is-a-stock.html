@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>股票是什麼：從一張股票到一個股價 · 讀通投資</title>
+<meta name="description" content="一張股票是公司的一小份所有權。從面額、股東權利、股利與除權息，到市值、委託簿與撮合，一步步看懂一個股價怎麼來，並讀懂計畫表裡的「世芯-KY 3661」。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=LXGW+WenKai+TC:wght@400;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;900&amp;display=swap">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/handbook.css">
+<script>try{var d=document.documentElement,g=function(k){return JSON.parse(localStorage.getItem("hb."+k))},t=g("theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);if(g("quote")==="intl")d.setAttribute("data-quote","intl");if(g("size")==="lg")d.setAttribute("data-size","lg")}catch(e){}</script>
+<script src="../assets/js/curriculum.js" defer></script>
+<script src="../assets/js/data-plan.js" defer></script>
+<script src="../assets/js/glossary-data.js" defer></script>
+<script src="../assets/js/handbook.js" defer></script>
+<script src="../assets/js/widgets.js" defer></script>
+<script src="../assets/js/widgets-plan.js" defer></script>
+<script src="../assets/js/widgets-basics.js" defer></script>
+<script src="../assets/js/widgets-markets.js" defer></script>
+</head>
+<body data-chapter="02-what-is-a-stock">
+<div class="page">
+<div class="chapter-grid">
+<main class="chapter" id="main">
+
+<header class="opener">
+  <p class="eyebrow"></p>
+  <div class="opener-num" aria-hidden="true"></div>
+  <h1>股票是什麼：從一張股票到一個股價</h1>
+  <p class="lede">計畫表上寫著「台積電 2330，參考價 2,420」「世芯-KY 3661」。這些字和數字背後是什麼？這一章從一家公司為什麼要發股票講起，說清楚股東擁有什麼、股利與除權息怎麼算、市值和股價差在哪裡，再走進委託簿，親眼看一個股價怎麼被買賣雙方撮合出來。</p>
+  <dl class="opener-meta"></dl>
+</header>
+
+<section class="objectives" aria-labelledby="obj-h">
+  <h2 id="obj-h">學完這章，你能夠</h2>
+  <ol>
+    <li>說明公司為什麼發行股票，並算出面額、股本與股數之間的關係。</li>
+    <li>列出股東的三項基本權利，說明股東為什麼排在債權人後面，卻能分到「剩下的全部」。</li>
+    <li>用除權息參考價公式算出除息、除權後的價格，解釋配息本身為什麼不會讓你變有錢，以及填息的意思。</li>
+    <li>用「股價 × 股數」算市值，分辨股價高低、公司大小與貴不貴是三個不同的問題。</li>
+    <li>讀懂委託簿的買賣五檔，推演一筆買單怎麼改變成交價，並說明股價為什麼反映的是對未來的預期。</li>
+    <li>分辨上市、上櫃、興櫃與 KY 股，解碼計畫表裡「世芯-KY 3661」「日月光投控 3711」這類名稱。</li>
+  </ol>
+</section>
+
+<article class="prose">
+
+<section id="why-shares">
+  <h2><span class="sec-num">2.1</span>公司為什麼要發股票</h2>
+  <p class="lead-in">假設你想開一家手搖飲料店，算一算要 100 萬元：租店面、買封口機、進茶葉。你自己只有 20 萬，剩下的 80 萬從哪裡來？只有兩條路：借錢，或者找人一起當老闆。</p>
+  <p>借錢的話，不管店賺不賺錢，每個月都要付利息，到期還要還本金。找人一起當老闆就不同：對方出錢，換到店的一部分所有權。店賺錢，大家按出資比例分；店虧錢，大家一起承擔，沒有人欠誰一筆要還的錢。第二條路就是股票的原型。</p>
+
+  <div class="box define" id="def-stock">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>股票</dfn><span class="en">Stock / Share</span></p>
+    <p>把一家公司的所有權切成很多等份，每一份叫一「股」，股票就是持有這些股份的憑證。持有股票，就是持有這家公司的一小部分，按持股比例分享它的獲利，也承擔它的虧損。</p>
+  </div>
+
+  <p>把飲料店改成股份有限公司：100 萬元的資本切成 10 萬股，每股 10 元。你出 20 萬，拿到 2 萬股；朋友們出 80 萬，拿到 8 萬股。你的持股比例是 2 萬 ÷ 10 萬 ＝ 20%，店裡每賺 100 元，有 20 元屬於你。</p>
+  <p>這個「每股 10 元」有正式名稱：</p>
+
+  <div class="box define" id="def-par">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>面額</dfn><span class="en">Par value</span></p>
+    <p>每一股在公司帳上登記的金額。台灣的公開發行公司長年統一採每股新臺幣 10 元，所以絕大多數上市櫃股票的面額是 10 元；少數公司改用 1 元等其他面額，股票簡稱會加註「*」提醒（例如 2019 年改為 1 元面額的長科*）。</p>
+  </div>
+
+  <p>面額乘上發行的股數，叫做<dfn id="def-capital">股本</dfn>（Share capital），也就是公司登記的資本額。飲料店的股本是 10 元 × 10 萬股 ＝ 100 萬元。反過來，知道股本就能算股數：股本 ÷ 10 元。新聞說某家公司「股本 50 億元」，意思大約是發行了 5 億股。台積電發行約 259 億股，股本約 2,593 億元。</p>
+  <p>面額只是帳上的刻度，和股價幾乎無關。台積電的面額是 10 元，計畫表的參考價卻是 2,420 元。中間那 2,410 元，是市場願意為這家公司未來的賺錢能力多付的錢（2.6 節會回來談）。</p>
+  <aside class="note">台股的買賣單位是「張」，<span class="term" data-term="一張">一張</span>等於 1,000 股。計畫第六節說「高價股一張要數百萬」，就是股價乘上 1,000。不足一張的叫<span class="term" data-term="零股">零股</span>，<a href="03-tw-trading.html#def-odd">第 3 章</a>會教怎麼買。</aside>
+
+  <h3>第一次賣股票：IPO</h3>
+  <p>公司剛成立時，股東通常只有創辦人、員工和創投。當公司需要更多錢、也願意公開財務資訊，就可以申請把股票賣給一般大眾，然後在交易所掛牌，讓任何人都能買賣。第一次公開賣股票叫<dfn id="def-ipo">IPO</dfn>（Initial Public Offering，首次公開發行）。之後如果還需要錢，可以再發行新股，叫<span class="term" data-term="現金增資">現金增資</span>。</p>
+  <p>這裡有一個很多新手沒想過的區別：<strong>只有發行新股的那一刻，錢才會流進公司</strong>。掛牌之後，你在券商軟體按下買進，錢是付給另一位想賣股票的股東，公司一毛也拿不到。下面這張圖把兩個市場分開畫。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 364" role="img" aria-label="發行市場與交易市場：IPO 或增資時，投資人的錢流進公司、公司交出新股；掛牌後股東之間買賣，股票從賣方移到買方、錢從買方付給賣方，公司不經手">
+        <defs>
+          <marker id="ar02a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="f-ink"/></marker>
+          <marker id="ar02b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="f-accent"/></marker>
+        </defs>
+        <text x="16" y="24" class="t-serif t-md">① 發行市場</text>
+        <text x="120" y="24" class="t-sm t-3">IPO、現金增資</text>
+        <rect x="16" y="40" width="108" height="78" class="f-soft s-ink s-1"/>
+        <text x="70" y="74" class="ta-m t-b">公司</text>
+        <text x="70" y="96" class="ta-m t-sm t-3">發行新股</text>
+        <rect x="276" y="40" width="108" height="78" class="f-plate s-ink s-1"/>
+        <text x="330" y="74" class="ta-m t-b">投資人</text>
+        <text x="330" y="96" class="ta-m t-sm t-3">成為新股東</text>
+        <line x1="272" y1="62" x2="130" y2="62" class="s-accent s-2w" marker-end="url(#ar02b)"/>
+        <text x="200" y="54" class="ta-m t-sm t-accent t-b">錢流進公司</text>
+        <line x1="128" y1="98" x2="270" y2="98" class="s-ink s-15" marker-end="url(#ar02a)"/>
+        <text x="200" y="116" class="ta-m t-sm">新股</text>
+        <text x="200" y="146" class="ta-m t-sm t-2">公司拿這筆錢蓋廠、研發、還債</text>
+        <line x1="16" y1="166" x2="384" y2="166" class="s-rule s-1"/>
+        <text x="16" y="192" class="t-serif t-md">② 交易市場</text>
+        <text x="120" y="192" class="t-sm t-3">掛牌後每天的買賣</text>
+        <rect x="16" y="208" width="100" height="60" class="f-plate s-ink s-1"/>
+        <text x="66" y="234" class="ta-m t-b t-sm">賣方股東</text>
+        <text x="66" y="254" class="ta-m t-sm t-3">想換現金</text>
+        <rect x="146" y="208" width="108" height="60" class="f-wash s-accent s-1"/>
+        <text x="200" y="234" class="ta-m t-b t-sm">證交所／櫃買</text>
+        <text x="200" y="254" class="ta-m t-sm t-accent">撮合買賣</text>
+        <rect x="284" y="208" width="100" height="60" class="f-plate s-ink s-1"/>
+        <text x="334" y="234" class="ta-m t-b t-sm">買方投資人</text>
+        <text x="334" y="254" class="ta-m t-sm t-3">想當股東</text>
+        <path d="M58 270 V292 H326 V276" class="f-none s-ink s-15" marker-end="url(#ar02a)"/>
+        <text x="200" y="286" class="ta-m t-sm">股票</text>
+        <path d="M350 270 V318 H42 V276" class="f-none s-accent s-2w" marker-end="url(#ar02b)"/>
+        <text x="200" y="312" class="ta-m t-sm t-accent t-b">錢付給賣方</text>
+        <text x="200" y="348" class="ta-m t-sm t-3">公司不收這筆錢，只是股東名冊換了人</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>股票市場其實有兩層。上層只在 IPO 或增資時發生，錢進公司；下層是我們每天看到的股價跳動，錢在股東之間移轉。計畫裡的 20 檔股票，你買到的都是下層的舊股。</span></figcaption>
+  </figure>
+
+  <p>那公司為什麼還在乎掛牌後的股價？因為股價決定了它下一次增資能募到多少錢、員工股票值多少，也決定了股東對經營團隊滿不滿意。股價也是市場對這家公司前景的即時評分。</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §七、§九</span></div>
+    <p class="quote">AI 實驗室融資：OpenAI 新一輪募資、Anthropic IPO（最快 11 月）</p>
+    <p class="quote">Alphabet 甚至在 2026 年 6 月增資 847.5 億美元。</p>
+    <p>兩句話講的都是上層的「發行市場」。Anthropic 還沒有公開掛牌，IPO 就是它第一次把股票賣給大眾，募到的錢會拿去買算力。Alphabet 早已上市，增資是再發行新股向投資人拿錢。計畫把它們列進追蹤清單，是因為 AI 的資本支出要靠這些錢支撐：募資順利，晶片、伺服器的訂單就有著落（第 9、26 章）。</p>
+  </div>
+
+  <p>增資有一個代價：股數變多，每位老股東的持股比例會變小，這叫<dfn id="def-dilution">稀釋</dfn>（Dilution）。回到飲料店，你有 2 萬股、占 20%。如果店再發行 2.5 萬股賣給新朋友，總股數變成 12.5 萬股，你的比例變成 2 萬 ÷ 12.5 萬 ＝ 16%。如果新募到的錢能讓店賺更多，稀釋可能划算；如果只是填補虧損，老股東就吃虧了。</p>
+</section>
+
+<section id="shareholder">
+  <h2><span class="sec-num">2.2</span>當股東，你擁有什麼</h2>
+  <div class="box define" id="def-shareholder">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>股東</dfn><span class="en">Shareholder</span></p>
+    <p>持有公司股份的人。持有 1 股或 1 億股都是股東，權利按持股數量比例計算。用零股買進 50 股台積電，你就是台積電的股東。</p>
+  </div>
+  <p>股東的權利很多，最基本的有三項：</p>
+  <ul>
+    <li><b>盈餘分配權</b>：公司賺錢以後，可以把一部分獲利發給股東，這就是股利（下一節）。發不發、發多少，由董事會提案、股東會通過。</li>
+    <li><b>表決權</b>：公司每年至少開一次股東常會，股東在會上選董事、承認財報、表決重大事項。原則上一股一票，所以持股越多，影響力越大。</li>
+    <li><b>剩餘財產分配權</b>：公司解散清算時，先還清所有債務，剩下的財產再按股份分給股東。</li>
+  </ul>
+  <p>台灣上市櫃公司都是「股份有限公司」，股東享有<dfn id="def-limited">有限責任</dfn>：你最多賠掉買股票的錢。公司欠銀行再多錢，銀行也不能找股東個人討債。</p>
+
+  <h3>排在最後，拿走剩下的全部</h3>
+  <p>股東和借錢給公司的<b>債權人</b>（銀行、買<span class="term" data-term="公司債">公司債</span>的人）最大的差別，在於拿錢的順序與方式。用一家公司一年的帳來看：</p>
+  <ol>
+    <li><span class="term" data-term="營收">營收</span>先扣掉進貨、薪水、租金等成本與費用，剩下的叫<span class="term" data-term="營業利益">營業利益</span>。</li>
+    <li>營業利益先付利息給債權人。利息在借款時就談好，公司賺多賺少都一樣。</li>
+    <li>剩下的再繳稅給政府（台灣營利事業所得稅率 20%）。</li>
+    <li>最後剩下的叫<span class="term" data-term="稅後淨利">稅後淨利</span>，全部屬於股東。</li>
+  </ol>
+  <p>股東排在最後，聽起來吃虧；但「最後」的意思是<strong>前面的人拿完固定的份，剩下多少都是股東的</strong>。下圖用同一家公司的壞年、普通年、好年比較。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 336" role="img" aria-label="營業利益在壞年、普通年、好年分別是 8、15、20 億元；債權人每年都拿 2.5 億利息，股東的稅後淨利卻從 4.4、10 到 14 億元，變動幅度比營業利益更大">
+        <text x="16" y="22" class="t-sm t-b">營業利益怎麼分（示意，億元）</text>
+        <rect x="16" y="36" width="12" height="12" class="f-accent"/>
+        <text x="34" y="47" class="t-sm">股東：淨利</text>
+        <rect x="124" y="36" width="12" height="12" class="f-foil-soft s-3 s-1"/>
+        <text x="142" y="47" class="t-sm">政府：稅 20%</text>
+        <rect x="250" y="36" width="12" height="12" class="f-soft s-3 s-1"/>
+        <text x="268" y="47" class="t-sm">債權人：利息</text>
+        <line x1="36" y1="282" x2="364" y2="282" class="s-ink s-1"/>
+        <rect x="50" y="257" width="70" height="25" class="f-soft s-3 s-1"/>
+        <rect x="50" y="246" width="70" height="11" class="f-foil-soft s-3 s-1"/>
+        <rect x="50" y="202" width="70" height="44" class="f-accent"/>
+        <text x="85" y="274" class="ta-m t-sm t-mono t-2">2.5</text>
+        <text x="85" y="222" class="ta-m t-sm t-mono t-paper t-b">4.4</text>
+        <text x="85" y="239" class="ta-m t-sm t-mono t-paper">−56%</text>
+        <text x="85" y="194" class="ta-m t-sm t-2">營業利益 8</text>
+        <text x="125" y="256" class="t-sm t-mono t-3">1.1</text>
+        <rect x="165" y="257" width="70" height="25" class="f-soft s-3 s-1"/>
+        <rect x="165" y="232" width="70" height="25" class="f-foil-soft s-3 s-1"/>
+        <rect x="165" y="132" width="70" height="100" class="f-accent"/>
+        <text x="200" y="274" class="ta-m t-sm t-mono t-2">2.5</text>
+        <text x="200" y="249" class="ta-m t-sm t-mono t-2">2.5</text>
+        <text x="200" y="180" class="ta-m t-md t-mono t-paper t-b">10</text>
+        <text x="200" y="199" class="ta-m t-sm t-paper">基準</text>
+        <text x="200" y="124" class="ta-m t-sm t-2">營業利益 15</text>
+        <rect x="280" y="257" width="70" height="25" class="f-soft s-3 s-1"/>
+        <rect x="280" y="222" width="70" height="35" class="f-foil-soft s-3 s-1"/>
+        <rect x="280" y="82" width="70" height="140" class="f-accent"/>
+        <text x="315" y="274" class="ta-m t-sm t-mono t-2">2.5</text>
+        <text x="315" y="244" class="ta-m t-sm t-mono t-2">3.5</text>
+        <text x="315" y="150" class="ta-m t-md t-mono t-paper t-b">14</text>
+        <text x="315" y="169" class="ta-m t-sm t-mono t-paper">+40%</text>
+        <text x="315" y="74" class="ta-m t-sm t-2">營業利益 20</text>
+        <text x="85" y="302" class="ta-m t-b">壞年</text>
+        <text x="200" y="302" class="ta-m t-b">普通年</text>
+        <text x="315" y="302" class="ta-m t-b">好年</text>
+        <text x="200" y="326" class="ta-m t-sm t-3">利息每年一樣；股東的淨利跟著景氣大起大落</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意數字。營業利益從 15 億變 8 億（−47%）或 20 億（+33%），債權人的利息都是 2.5 億；股東的淨利卻變成 4.4 億（−56%）或 14 億（+40%）。淨利的起伏比營業利益更大，這就是當股東的風險與機會。</span></figcaption>
+  </figure>
+
+  <p>如果這家公司有 5 億股，普通年的淨利 10 億元分到每一股是 2 元，這個數字叫<span class="term" data-term="EPS">EPS</span>（每股盈餘），第 8 章會詳細算。好年 EPS 變成 2.8 元，壞年只剩 0.88 元。</p>
+  <p>這張圖解釋了一件很根本的事：股票的報酬比債券高、也比債券不穩，原因就在排隊的位置。債權人用「固定但有上限」換安全，股東用「不固定、沒有上限」換機會。股東承擔了比較大的不確定，所以長期要求比較高的報酬，這就是第 1 章的<a href="01-first-principles.html#def-premium">風險溢酬</a>。</p>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>公司倒閉時，股東要幫公司還債；或者反過來，股東至少能拿回一部分錢。</p></div>
+    <div class="myth-right"><p>兩個都不對。有限責任讓你最多賠光投入的錢，不會倒欠；但清算時債權人先拿，公司倒閉通常就是資產不夠還債，輪到股東時往往一毛不剩。買股票的最壞情況是歸零。</p></div>
+  </div>
+  <aside class="note">股票還分<b>普通股</b>和<b>特別股</b>。特別股通常優先領固定股利、但沒有表決權，代號會多一個英文字母，例如中信金的乙種特別股是 2891B。計畫的 20 檔全部是普通股，本書說的「股票」也都指普通股。</aside>
+</section>
+
+<section id="dividends">
+  <h2><span class="sec-num">2.3</span>股利、除權息與填息</h2>
+  <div class="box define" id="def-dividend">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>股利</dfn><span class="en">Dividend</span></p>
+    <p>公司把賺到的盈餘（有時也動用過去累積的公積）分給股東，口語叫「配息」或「配股」。有兩種形式：發現金，或發新股票。</p>
+  </div>
+  <p><dfn id="def-cash-div">現金股利</dfn>（Cash dividend）是每股發多少元現金，也叫股息。例如台積電 2026 年第 1 季的股利是每股 7 元，持有 1 張（1,000 股）就領 7,000 元。<dfn id="def-stock-div">股票股利</dfn>（Stock dividend）則是用新股票代替現金，以面額 10 元換算：每股配 1 元股票股利，等於每 10 股送 1 股，配股率 10%，持有 1,000 股會多出 100 股。發股票股利時公司沒有付出現金，只是把盈餘轉成股本，股數變多。</p>
+  <p>台灣過去多半一年配一次，近年越來越多公司改成半年配或季配；台積電從 2019 年起每季配息。</p>
+
+  <h3>除權息：股價為什麼會「少掉」股利</h3>
+  <p>想像股價 100 元的公司宣布每股配 5 元現金。如果配息後股價還是 100 元，大家都會在配息前一天買進、領完 5 元馬上賣掉，白賺 5 元。這不合理：公司把 5 元從帳上發出去，公司本身就少了 5 元的價值。所以交易所在配息前會選一天，把股價先扣掉股利，這一天叫<b>除息交易日</b>；發股票股利的那一天叫<b>除權交易日</b>。</p>
+
+  <div class="box define" id="def-exdiv">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>除權息</dfn><span class="en">Ex-dividend / Ex-rights</span></p>
+    <p>發放股利前，交易所把股價扣除股利、重新計算當天<span class="term" data-term="參考價">參考價</span>的程序。扣現金股利叫除息，扣股票股利叫除權。要領到股利，必須在除權息交易日的<strong>前一個交易日（含）以前</strong>買進；除權息當天才買的人領不到。</p>
+  </div>
+
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">除權息參考價 ＝ <span class="frac"><span>前一日收盤價 − 現金股利</span><span>1 ＋ 配股率</span></span></div>
+    <div class="where">配股率 ＝ 股票股利（元）÷ 面額 10 元。只配息時分母是 1，參考價就是收盤價減股利；只配股時分子不減。計算結果會依股價的升降單位取到最接近的價位。</div>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>持有 1 張，除權息前後你有多少錢？（假設數字）</h4>
+    <ol class="calc">
+      <li>只配息：前一日收盤 100 元，現金股利 5 元。<span class="eq">參考價 ＝ (100 − 5) ÷ 1 ＝ 95 元</span></li>
+      <li>除息前你有 1,000 股 × 100 元。除息後股票剩 95 元，另外有一筆股息要入帳。<span class="eq">95,000 ＋ 5,000 ＝ 100,000 元（不變）</span></li>
+      <li>息、權都配：前一日收盤 100 元，現金股利 3 元、股票股利 1 元（配股率 10%）。<span class="eq">參考價 ＝ (100 − 3) ÷ 1.1 ≈ 88.18 元</span></li>
+      <li>股數變成 1,100 股，再加上股息。<span class="eq">1,100 × 88.18 ＋ 3,000 ≈ 97,000 ＋ 3,000 ＝ 100,000 元（不變）</span></li>
+    </ol>
+    <p class="answer">除權息只是把公司的錢換個口袋放：股價少掉的部分，剛好等於你拿到的現金或股票。除權息當下，你的總財富沒有變。</p>
+  </div>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 300" role="img" aria-label="除息當下股票從 100 元變 95 元，加上 5 元現金，合計仍是 100 元；之後若股價漲回前一日收盤 100 元叫填息，跌到 95 元以下叫貼息">
+        <text x="16" y="22" class="t-sm t-b">① 除息當下：總值不變</text>
+        <text x="16" y="42" class="t-sm t-3">每股配息 5 元（假設）</text>
+        <line x1="26" y1="82" x2="154" y2="82" class="s-ink s-1 s-dash"/>
+        <text x="90" y="72" class="ta-m t-sm t-2">合計都是 100</text>
+        <rect x="30" y="82" width="50" height="180" class="f-accent"/>
+        <text x="55" y="170" class="ta-m t-sm t-paper">股票</text>
+        <text x="55" y="190" class="ta-m t-mono t-paper t-b">100</text>
+        <rect x="100" y="91" width="50" height="171" class="f-accent"/>
+        <rect x="100" y="82" width="50" height="9" class="f-foil"/>
+        <text x="125" y="175" class="ta-m t-sm t-paper">股票</text>
+        <text x="125" y="195" class="ta-m t-mono t-paper t-b">95</text>
+        <text x="156" y="92" class="t-sm t-b">現金 5</text>
+        <line x1="22" y1="262" x2="164" y2="262" class="s-ink s-1"/>
+        <text x="55" y="282" class="ta-m t-sm">除息前一日</text>
+        <text x="125" y="282" class="ta-m t-sm">除息當天</text>
+        <line x1="200" y1="14" x2="200" y2="290" class="s-rule s-1"/>
+        <text x="212" y="22" class="t-sm t-b">② 之後的兩種走法</text>
+        <text x="212" y="42" class="t-sm t-3">示意走勢</text>
+        <line x1="236" y1="102" x2="388" y2="102" class="s-3 s-1 s-dash"/>
+        <text x="236" y="95" class="t-sm t-3">前一日收盤</text>
+        <text x="230" y="106" class="ta-e t-xs t-mono t-3">100</text>
+        <text x="230" y="186" class="ta-e t-xs t-mono t-3">95</text>
+        <polyline points="236 102 243.2 102" class="f-none s-ink s-2w"/>
+        <line x1="243.2" y1="102" x2="250" y2="182" class="s-2 s-15 s-dot"/>
+        <text x="241" y="148" class="ta-e t-sm t-b t-2">−5</text>
+        <polyline points="250 182 263.6 188.4 277.2 183.6 290.8 198 304.4 207.6 318 201.2 331.6 214 345.2 220.4 358.8 215.6 372.4 224.8 386 230" class="f-none s-down s-2w s-round draw"/>
+        <polyline points="250 182 263.6 169.2 277.2 151.6 290.8 140.4 304.4 126 318 111.6 331.6 100.4 345.2 95.6 358.8 89.2 372.4 92.4 386 86" class="f-none s-up s-2w s-round draw"/>
+        <circle cx="250" cy="182" r="4" class="f-ink"/>
+        <circle cx="329.6" cy="102" r="5" class="f-plate s-up s-2w"/>
+        <text x="386" y="76" class="ta-e t-sm t-up t-b">填息</text>
+        <text x="386" y="250" class="ta-e t-sm t-down t-b">貼息</text>
+        <line x1="236" y1="262" x2="388" y2="262" class="s-ink s-1"/>
+        <text x="250" y="282" class="ta-m t-sm">除息日</text>
+        <text x="388" y="282" class="ta-e t-sm">第 20 天</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>左：除息當天，股價少掉的 5 元變成你帳上的現金，總值不變。右（示意）：之後股價漲回前一日收盤價叫填息，圓圈是填息完成的那一刻；一直回不去叫貼息。</span></figcaption>
+  </figure>
+
+  <div class="box define" id="def-fill">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>填息</dfn><span class="en">Dividend gap filled</span></p>
+    <p>除權息後，股價漲回除權息前一日的收盤價。填了息，代表領到的股利是「多出來」的；相反地，股價一直低於除息參考價，叫<dfn id="def-unfilled">貼息</dfn>，等於股利是從股價裡挖出來的，再加上稅，可能反而虧。除權後漲回原價叫填權。</p>
+  </div>
+
+  <p>看一個真實的例子。2026 年 9 月 16 日台積電除息 7 元：前一日收盤 2,385 元，除息參考價 ＝ 2,385 − 7 ＝ 2,378 元。當天開低後回升，開盤約半小時就回到 2,385 元，完成填息。依當天新聞的統計，這是台積電改為季配息以來，第 23 次在除息當天就填息。</p>
+  <p>填不填息取決於市場對公司的看法，和配多少股利無關。公司持續賺錢、前景被看好，股價自然會漲回去；前景轉差，配再多也會貼息。</p>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>配息 5 元，我就賺了 5 元；所以要挑配息多的股票，在除息前買進。</p></div>
+    <div class="myth-right"><p>除息當下你的總值不變，股息只是從股價搬到現金。股利還要計入所得報稅，單次領 2 萬元以上還會先被扣 2.11% 的二代健保補充保費（例如領 5 萬元扣 1,055 元）。真正的報酬要看填息之後的股價，也就是第 1 章「含股利的總報酬」。稅費規定以國稅局、健保署公告為準。</p></div>
+  </div>
+
+  <aside class="note">每逢權值股除息，加權指數會跟著「蒸發」幾十點，那是現金從股價流到股東手上，指數並沒有真的下跌（第 5 章<a href="05-indices-breadth.html#what-index">指數與除息</a>）。</aside>
+
+  <h3>計畫持有期間的除息日</h3>
+  <p>台積電董事會已決議 2026 年第 2 季股利每股 7 元，除息交易日是 12 月 10 日，剛好落在計畫的「② 加碼」階段（11/5–12/10）。那天的參考價會比前一日收盤少 7 元，約是 2,420 元的 0.3%。看盤時要記得：這 7 元不是下跌。計畫表的買進區 2,250–2,420 元與停損 2,080 元是固定數字，不會跟著除息自動調整；以 7 元相對兩千多元的股價來說，影響很小；如果是股利占股價比例較高、又剛好在持有期間除息的股票，這個差距就要留意。</p>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §五</span></div>
+    <p class="quote">聯準會會議 @December 9, 2026（台灣時間 12/10 凌晨）</p>
+    <p>同一天還有聯準會的利率決議。12 月 10 日台積電的股價變化，會同時混著「除息 7 元」與「市場對利率決議的反應」兩件事。判斷當天真正的漲跌，要拿收盤價和<strong>除息參考價</strong>（12 月 9 日收盤價減 7 元）比，報價軟體顯示的漲跌也是這樣算的。</p>
+  </div>
+</section>
+
+<section id="market-cap">
+  <h2><span class="sec-num">2.4</span>市值：股價乘以股數</h2>
+  <p class="lead-in">計畫表裡最貴的一股是台光電的 5,165 元，最便宜的是兆豐金的 53.7 元。這代表台光電是比較大的公司嗎？比較貴嗎？兩個答案都是：光看股價看不出來。</p>
+
+  <div class="box define" id="def-mcap">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>市值</dfn><span class="en">Market capitalization</span></p>
+    <p>股價 × 已發行股數，也就是「用現在的價格，把整家公司的股份全部買下來要多少錢」。股價每跳動一次，市值就跟著變。</p>
+  </div>
+
+  <p>股價只是「一份」的價格，一家公司切成幾份是它自己決定的。同樣一塊披薩，切 8 片和切 80 片，每片價格差 10 倍，整塊披薩一樣大。下面把股價畫成高度、股數畫成寬度，長方形的面積就是市值。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 300" role="img" aria-label="市值等於股價乘以股數：甲公司股價 3,000 元、0.8 億股，市值 2,400 億；乙公司股價 600 元、20 億股，市值 1.2 兆，股價只有甲的五分之一，市值卻是甲的 5 倍">
+        <text x="16" y="24" class="t-sm t-b">長方形面積 ＝ 股價 × 股數 ＝ 市值</text>
+        <text x="16" y="54" class="t-sm t-3">股價（元）</text>
+        <line x1="56" y1="190" x2="376" y2="190" class="s-rule s-1"/>
+        <line x1="56" y1="130" x2="376" y2="130" class="s-rule s-1"/>
+        <line x1="56" y1="70" x2="376" y2="70" class="s-rule s-1"/>
+        <rect x="56" y="214" width="320" height="36" class="f-c1 o-50"/>
+        <rect x="56" y="214" width="320" height="36" class="f-none s-c1 s-15"/>
+        <rect x="56" y="70" width="12.8" height="180" class="f-c2"/>
+        <line x1="56" y1="250" x2="376" y2="250" class="s-ink s-1"/>
+        <line x1="56" y1="70" x2="56" y2="250" class="s-ink s-1"/>
+        <text x="50" y="254" class="ta-e t-xs t-mono t-3">0</text>
+        <text x="50" y="194" class="ta-e t-xs t-mono t-3">1,000</text>
+        <text x="50" y="134" class="ta-e t-xs t-mono t-3">2,000</text>
+        <text x="50" y="74" class="ta-e t-xs t-mono t-3">3,000</text>
+        <text x="56" y="268" class="ta-m t-xs t-mono t-3">0</text>
+        <text x="136" y="268" class="ta-m t-xs t-mono t-3">5</text>
+        <text x="216" y="268" class="ta-m t-xs t-mono t-3">10</text>
+        <text x="296" y="268" class="ta-m t-xs t-mono t-3">15</text>
+        <text x="376" y="268" class="ta-m t-xs t-mono t-3">20</text>
+        <text x="376" y="290" class="ta-e t-sm t-3">股數（億股）</text>
+        <text x="78" y="88" class="t-sm t-b">甲：股價 3,000 元</text>
+        <text x="78" y="106" class="t-sm">× 0.8 億股</text>
+        <text x="78" y="124" class="t-sm t-b">＝ 市值 2,400 億</text>
+        <text x="226" y="237" class="ta-m t-sm t-b">乙：股價 600 元 × 20 億股</text>
+        <text x="376" y="206" class="ta-e t-sm t-b">＝ 市值 1.2 兆</text>
+        <text x="376" y="152" class="ta-e t-sm t-2">乙的股價只有甲的 1/5，</text>
+        <text x="376" y="172" class="ta-e t-sm t-2">市值卻是甲的 5 倍</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意數字。甲又高又瘦，乙又矮又寬；比公司大小要比面積，不能只比高度。台股裡股價最高的公司，往往不是市值最大的公司。</span></figcaption>
+  </figure>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>台積電和世芯，誰比較大？（以計畫參考價粗估）</h4>
+    <ol class="calc">
+      <li>台積電：發行約 259 億股，參考價 2,420 元。<span class="eq">259 億 × 2,420 ≈ 62.7 兆元</span></li>
+      <li>世芯-KY：股本 8 億多元，以面額 10 元換算不到 1 億股，參考價 3,685 元。<span class="eq">不到 1 億 × 3,685 ＝ 不到 3,685 億元</span></li>
+      <li>相除：<span class="eq">62.7 兆 ÷ 0.3685 兆 ≈ 170 倍以上</span></li>
+    </ol>
+    <p class="answer">世芯的股價比台積電高約五成，市值卻不到台積電的 1/170。股數以公司最新公告為準，這裡只取數量級。</p>
+  </div>
+
+  <p>市值決定一家公司在指數裡的份量。加權指數按市值計算，台積電一檔股票就能左右大盤的方向，第 5 章的<a href="05-indices-breadth.html#weighting">市值加權</a>會詳細說明。新聞說「台積電市值蒸發 2 兆」，算法也很簡單：股價跌的金額 × 股數。以 259 億股來看，股價每跌 10 元，市值少約 2,590 億元。</p>
+
+  <h3>股價高低決定的是「一張要多少錢」</h3>
+  <p>股價高低真正影響的，是買一張要準備多少錢。計畫的總資金是 100 萬元，看看幾檔高價股與低價股：</p>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>計畫參考價換算一張金額；配置 ＝ 100 萬 × 權重，可買股數未計手續費</caption>
+      <thead><tr><th>股票</th><th class="r">參考價</th><th class="r">一張金額</th><th class="r">配置</th><th class="r">可買</th></tr></thead>
+      <tbody>
+        <tr><th>台光電</th><td class="r">5,165</td><td class="r">516.5 萬</td><td class="r">6 萬</td><td class="r">11 股</td></tr>
+        <tr><th>聯發科</th><td class="r">4,250</td><td class="r">425 萬</td><td class="r">5 萬</td><td class="r">11 股</td></tr>
+        <tr><th>世芯-KY</th><td class="r">3,685</td><td class="r">368.5 萬</td><td class="r">4 萬</td><td class="r">10 股</td></tr>
+        <tr><th>台積電</th><td class="r">2,420</td><td class="r">242 萬</td><td class="r">12 萬</td><td class="r">49 股</td></tr>
+        <tr><th>鴻海</th><td class="r">244</td><td class="r">24.4 萬</td><td class="r">4 萬</td><td class="r">163 股</td></tr>
+        <tr><th>中信金</th><td class="r">73.6</td><td class="r">7.36 萬</td><td class="r">5 萬</td><td class="r">679 股</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>台光電一張 516.5 萬元，是整個組合的五倍多；連一張 7.36 萬元的中信金，配置的 5 萬元也買不到一張。這就是計畫第六節「高價股一張要數百萬，用盤中零股加限價單」的原因：用零股，才能照權重把 100 萬分到 20 檔（<a href="03-tw-trading.html#def-intraday-odd">第 3 章</a>）。</p>
+
+  <div class="box key">
+    <div class="box-label"><span class="zh"></span><span class="lat">KEY IDEA</span></div>
+    <p>三個問題要分開問：<strong>股價高低</strong>決定一張多少錢；<strong>市值大小</strong>決定公司多大；<strong>貴不貴</strong>要拿價格和公司賺的錢比，這是<span class="term" data-term="本益比">本益比</span>的工作（第 10 章）。</p>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §四</span></div>
+    <p class="quote">ASIC 選世芯而非創意：依 FactSet 預估，世芯 2027 年本益比約 22 倍，創意約 68 倍。</p>
+    <p>計畫在兩家同類型公司之間做選擇時，比的是本益比：花同樣的錢，買到的未來獲利有多少。22 倍的意思是股價約等於 22 年的（預估）每股獲利，68 倍則是 68 年。股價 3,685 元的世芯，在計畫眼中反而是「比較便宜」的那一個。</p>
+  </div>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>50 元的股票比 2,000 元的便宜，漲到 100 元比較容易，上漲空間比較大。</p></div>
+    <div class="myth-right"><p>股價會漲多少，取決於公司價值會增加多少，和起點的數字無關。50 元漲到 100 元，代表整家公司的市值要翻倍；2,000 元漲到 4,000 元也是翻倍，難度一樣。百分比才是公平的尺。</p></div>
+  </div>
+</section>
+
+<section id="order-book">
+  <h2><span class="sec-num">2.5</span>股價從哪裡來：委託簿與撮合</h2>
+  <p class="lead-in">股價不是公司訂的，也不是交易所訂的。它是最近一筆交易裡，一位買方和一位賣方都同意的價格。要看懂它怎麼動，得先看懂一張表：委託簿。</p>
+
+  <div class="box define" id="def-book">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>委託簿</dfn><span class="en">Order book</span></p>
+    <p>所有還沒成交的買單和賣單，按價格排成的清單。買單（委買）由高到低排，賣單（委賣）由低到高排。看盤軟體顯示最接近成交的五個價位和各自的委託張數，叫「最佳五檔」或「買賣五檔」。最高的委買價叫最佳買價，最低的委賣價叫最佳賣價，兩者之間的距離叫買賣價差。</p>
+  </div>
+
+  <p>股價也不能隨便喊。台股規定每個價格區間的最小跳動單位，股價 100 元到未滿 500 元時，每一檔差 0.5 元，所以 244 元上面一檔是 244.5 元（各區間見第 3 章的<a href="03-tw-trading.html#def-tick">升降單位表</a>）。</p>
+  <p>下單之後，交易所的電腦負責配對：</p>
+
+  <div class="box define" id="def-match">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>撮合</dfn><span class="en">Order matching</span></p>
+    <p>交易所把買單和賣單配對成交的過程。規則是<strong>價格優先、時間優先</strong>：出價高的買單、要價低的賣單先成交；同一個價位，先送出的先成交。2020 年 3 月 23 日起，台股盤中改為逐筆交易，每一筆委託一送到就立刻比對，能成交的馬上成交；開盤與收盤則仍用<span class="term" data-term="集合競價">集合競價</span>（<a href="03-tw-trading.html#def-call-auction">第 3 章</a>）。</p>
+  </div>
+
+  <p>用一個例子把整個過程走一遍。假設某檔股價在 244 元附近的股票（例如計畫裡參考價 244 元的鴻海），某一刻的委託簿長得像下圖左邊。這時有人送出一筆<span class="term" data-term="限價單">限價</span>買單：買 15 張，最高願意付 245.0 元。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 364" role="img" aria-label="委託簿成交前後：買 15 張限價 245.0 元的買單，先吃掉 244.5 元的 6 張，再吃掉 245.0 元 12 張中的 9 張，最新成交價從 244.0 元變成 245.0 元，245.0 元只剩 3 張">
+        <text x="16" y="24" class="t-serif t-md">成交前</text>
+        <text x="72" y="24" class="t-sm t-3">最近成交 244.0</text>
+        <text x="220" y="24" class="t-serif t-md">成交後</text>
+        <text x="276" y="24" class="t-sm t-3">最近成交 245.0</text>
+        <line x1="200" y1="8" x2="200" y2="356" class="s-rule s-1"/>
+        <text x="50" y="54" class="ta-m t-sm t-2">委買張數</text>
+        <text x="98" y="54" class="ta-m t-sm t-2">價格</text>
+        <text x="150" y="54" class="ta-m t-sm t-2">委賣張數</text>
+        <text x="254" y="54" class="ta-m t-sm t-2">委買張數</text>
+        <text x="302" y="54" class="ta-m t-sm t-2">價格</text>
+        <text x="354" y="54" class="ta-m t-sm t-2">委賣張數</text>
+        <line x1="8" y1="62" x2="192" y2="62" class="s-ink s-1"/>
+        <line x1="208" y1="62" x2="392" y2="62" class="s-ink s-1"/>
+        <rect x="78" y="198" width="40" height="17" rx="2" class="f-accent-soft"/>
+        <rect x="282" y="154" width="40" height="17" rx="2" class="f-accent-soft"/>
+        <text x="98" y="78" class="ta-m t-sm t-mono t-3">247.0</text>
+        <text x="98" y="100" class="ta-m t-sm t-mono">246.5</text>
+        <text x="98" y="122" class="ta-m t-sm t-mono">246.0</text>
+        <text x="98" y="144" class="ta-m t-sm t-mono">245.5</text>
+        <text x="98" y="166" class="ta-m t-sm t-mono">245.0</text>
+        <text x="98" y="188" class="ta-m t-sm t-mono">244.5</text>
+        <text x="98" y="210" class="ta-m t-sm t-mono t-b">244.0</text>
+        <text x="98" y="232" class="ta-m t-sm t-mono">243.5</text>
+        <text x="98" y="254" class="ta-m t-sm t-mono">243.0</text>
+        <text x="98" y="276" class="ta-m t-sm t-mono">242.5</text>
+        <text x="98" y="298" class="ta-m t-sm t-mono">242.0</text>
+        <rect x="122" y="89" width="42" height="14" class="f-soft s-3 s-1"/>
+        <rect x="122" y="111" width="21.6" height="14" class="f-soft s-3 s-1"/>
+        <rect x="122" y="133" width="24" height="14" class="f-soft s-3 s-1"/>
+        <rect x="122" y="155" width="10.8" height="14" class="f-up"/>
+        <rect x="132.8" y="155" width="3.6" height="14" class="f-soft s-3 s-1"/>
+        <rect x="122" y="177" width="7.2" height="14" class="f-up"/>
+        <text x="168" y="100" class="t-sm t-mono t-2">35</text>
+        <text x="147.6" y="122" class="t-sm t-mono t-2">18</text>
+        <text x="150" y="144" class="t-sm t-mono t-2">20</text>
+        <text x="140.4" y="166" class="t-sm t-mono t-up t-b">12</text>
+        <text x="133.2" y="188" class="t-sm t-mono t-up t-b">6</text>
+        <line x1="8" y1="195" x2="192" y2="195" class="s-3 s-1 s-dash"/>
+        <rect x="63.2" y="199" width="10.8" height="14" class="f-accent-soft s-accent s-1"/>
+        <rect x="56" y="221" width="18" height="14" class="f-accent-soft s-accent s-1"/>
+        <rect x="44" y="243" width="30" height="14" class="f-accent-soft s-accent s-1"/>
+        <rect x="57.2" y="265" width="16.8" height="14" class="f-accent-soft s-accent s-1"/>
+        <rect x="26" y="287" width="48" height="14" class="f-accent-soft s-accent s-1"/>
+        <text x="59.2" y="210" class="ta-e t-sm t-mono t-2">9</text>
+        <text x="52" y="232" class="ta-e t-sm t-mono t-2">15</text>
+        <text x="40" y="254" class="ta-e t-sm t-mono t-2">25</text>
+        <text x="53.2" y="276" class="ta-e t-sm t-mono t-2">14</text>
+        <text x="22" y="298" class="ta-e t-sm t-mono t-2">40</text>
+        <text x="302" y="78" class="ta-m t-sm t-mono">247.0</text>
+        <text x="302" y="100" class="ta-m t-sm t-mono">246.5</text>
+        <text x="302" y="122" class="ta-m t-sm t-mono">246.0</text>
+        <text x="302" y="144" class="ta-m t-sm t-mono">245.5</text>
+        <text x="302" y="166" class="ta-m t-sm t-mono t-b">245.0</text>
+        <text x="302" y="188" class="ta-m t-sm t-mono t-3">244.5</text>
+        <text x="302" y="210" class="ta-m t-sm t-mono">244.0</text>
+        <text x="302" y="232" class="ta-m t-sm t-mono">243.5</text>
+        <text x="302" y="254" class="ta-m t-sm t-mono">243.0</text>
+        <text x="302" y="276" class="ta-m t-sm t-mono">242.5</text>
+        <text x="302" y="298" class="ta-m t-sm t-mono">242.0</text>
+        <rect x="326" y="67" width="33.6" height="14" class="f-soft s-3 s-1"/>
+        <rect x="326" y="89" width="42" height="14" class="f-soft s-3 s-1"/>
+        <rect x="326" y="111" width="21.6" height="14" class="f-soft s-3 s-1"/>
+        <rect x="326" y="133" width="24" height="14" class="f-soft s-3 s-1"/>
+        <rect x="326" y="155" width="3.6" height="14" class="f-soft s-3 s-1"/>
+        <text x="363.6" y="78" class="t-sm t-mono t-2">28</text>
+        <text x="372" y="100" class="t-sm t-mono t-2">35</text>
+        <text x="351.6" y="122" class="t-sm t-mono t-2">18</text>
+        <text x="354" y="144" class="t-sm t-mono t-2">20</text>
+        <text x="333.6" y="166" class="t-sm t-mono t-b">3</text>
+        <rect x="267.2" y="199" width="10.8" height="14" class="f-accent-soft s-accent s-1"/>
+        <rect x="260" y="221" width="18" height="14" class="f-accent-soft s-accent s-1"/>
+        <rect x="248" y="243" width="30" height="14" class="f-accent-soft s-accent s-1"/>
+        <rect x="261.2" y="265" width="16.8" height="14" class="f-accent-soft s-accent s-1"/>
+        <rect x="230" y="287" width="48" height="14" class="f-accent-soft s-accent s-1"/>
+        <text x="263.2" y="210" class="ta-e t-sm t-mono t-2">9</text>
+        <text x="256" y="232" class="ta-e t-sm t-mono t-2">15</text>
+        <text x="244" y="254" class="ta-e t-sm t-mono t-2">25</text>
+        <text x="257.2" y="276" class="ta-e t-sm t-mono t-2">14</text>
+        <text x="226" y="298" class="ta-e t-sm t-mono t-2">40</text>
+        <text x="16" y="330" class="t-sm t-b">買 15 張，限價 245.0</text>
+        <text x="16" y="350" class="t-sm t-up">紅色：被吃掉的賣單</text>
+        <text x="220" y="330" class="t-sm t-b">成交價 244.0 → 245.0</text>
+        <text x="220" y="350" class="t-sm t-3">第 6 檔 247.0 浮上來</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意的委託張數。左邊虛線以上是委賣、以下是委買，藍底價格是最近一筆成交價。買單從最便宜的賣單往上吃：244.5 元的 6 張全部成交，245.0 元的 12 張吃掉 9 張。成交後最佳賣價變成 245.0 元，股價往上跳了一元。</span></figcaption>
+  </figure>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>這筆 15 張的買單，成交在什麼價格？</h4>
+    <ol class="calc">
+      <li>價格優先：先和最便宜的賣單成交，244.5 元有 6 張，全部吃掉，還差 9 張。<span class="eq">6 張 × 244.5 元</span></li>
+      <li>往上一檔，245.0 元有 12 張，吃掉 9 張就滿足了，剩 3 張留在委託簿上。<span class="eq">9 張 × 245.0 元</span></li>
+      <li>平均成交價：<span class="eq">(6 × 244.5 ＋ 9 × 245.0) ÷ 15 ＝ 3,672 ÷ 15 ＝ 244.8 元</span></li>
+      <li>最後一筆成交在 245.0 元，所以看盤軟體上的股價從 244.0 元變成 245.0 元。<span class="eq">(245.0 − 244.0) ÷ 244.0 ≈ +0.41%</span></li>
+      <li>換一個比較「薄」的委託簿：假設賣方只掛 244.5 元 2 張、245.0 元 3 張、245.5 元 4 張、246.0 元 6 張，同樣買 15 張、限價改成 246.0 元，就要一路吃到 246.0 元。<span class="eq">股價從 244.0 跳到 246.0，+0.82%</span></li>
+    </ol>
+    <p class="answer">同一筆買單，委託簿越薄，股價被推得越遠。成交價取決於當下有多少人願意在哪個價位賣，這就是第 1 章說的<a href="01-first-principles.html#def-liquidity">流動性</a>。</p>
+  </div>
+
+  <div class="box define" id="def-trade-price">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>成交價</dfn><span class="en">Traded price</span></p>
+    <p>買賣雙方實際成交的價格。逐筆交易下，新進的委託和委託簿上已經排隊的委託成交時，用的是排隊那一方的價格，所以上例的前 6 張成交在 244.5 元，而不是買方出的 245.0 元。</p>
+  </div>
+
+  <p>我們平常說的<dfn id="def-price">股價</dfn>，就是最近一筆成交價。它一整天隨著每筆成交跳動，收盤時的最後成交價就是<span class="term" data-term="收盤價">收盤價</span>。看盤軟體還會告訴你每一筆是怎麼成交的：成交在委賣價，代表買方主動往上買，叫<dfn id="def-inout">外盤</dfn>成交；成交在委買價，代表賣方主動往下賣，叫內盤成交。上例的 15 張都是外盤。</p>
+
+  <h3>供需：誰比較急</h3>
+  <p>把上面的例子放大到整個市場，就是<dfn id="def-supply-demand">供需</dfn>：想買的力量和想賣的力量對比。當願意往上吃賣單的買方比較多、比較急，股價就一檔一檔往上墊高；當急著往下賣的人比較多，股價就一檔一檔往下掉。好消息讓買方變急，壞消息讓賣方變急，委託簿就是這場拉鋸的戰場。</p>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>今天股價上漲，是因為買股票的人比賣股票的人多。</p></div>
+    <div class="myth-right"><p>每一筆成交都有一買一賣，買進的張數永遠等於賣出的張數：上例買了 15 張，就有人賣了 15 張。股價上漲的原因是買方<strong>比較急</strong>，願意接受賣方開的價格，一路往上吃。看漲跌要看「誰主動」，數人頭沒有意義。</p></div>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第三十三節</span></div>
+    <p class="quote">Price 告訴我們誰真正贏了。</p>
+    <p class="quote">最後的裁判永遠是 Price。</p>
+    <p>現在你知道為什麼了。新聞、法人買賣超、期貨部位都是「有人想做什麼」的線索，但只有成交價記錄了買賣雙方真正用錢投票的結果。GCFIE 把價格放在所有資料的最後一關，原因就在這裡：籌碼再好，如果買方不願意往上吃，股價就漲不上去。</p>
+  </div>
+</section>
+
+<section id="expectations">
+  <h2><span class="sec-num">2.6</span>股價反映的是未來</h2>
+  <p class="lead-in">委託簿說明了股價「怎麼」動；這一節回答買賣雙方心裡的那個數字從哪裡來。為什麼有人願意花 2,420 元，買一張面額 10 元的股份？</p>
+  <p>因為買下一股，買到的是這家公司<strong>未來每一年</strong>獲利的一小份。過去賺多少已經發生了，買方真正在估的是未來還能賺多少、這些錢在今天值多少。先用一個極度簡化的模型抓直覺：</p>
+
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">股價 ≈ <span class="frac"><span>預期每股每年獲利</span><span>投資人要求的年報酬率</span></span></div>
+    <div class="where">假設獲利每年固定、永遠不變、全部發給股東的簡化模型。每年 10 元、要求 5% 的報酬，股價 ≈ 10 ÷ 0.05 ＝ 200 元：花 200 元，每年拿回 10 元，剛好是 5%。分母就是第 13 章的<span class="term" data-term="折現率">折現率</span>。</div>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>同一家公司，今天的獲利沒變，股價卻可以差很多（示意）</h4>
+    <ol class="calc">
+      <li>起點：預期每年賺 10 元，投資人要求 5%。<span class="eq">10 ÷ 0.05 ＝ 200 元</span></li>
+      <li>法說會讓市場相信，未來每年可以賺 12 元：<span class="eq">12 ÷ 0.05 ＝ 240 元（+20%）</span></li>
+      <li>利率上升，投資人改要求 6%（定存都變高了，股票要給更多才有人買）：<span class="eq">10 ÷ 0.06 ≈ 166.7 元（−16.7%）</span></li>
+      <li>兩件事同時發生：<span class="eq">12 ÷ 0.06 ＝ 200 元（0%）</span></li>
+    </ol>
+    <p class="answer">股價由兩股力量決定：對未來獲利的預期，以及把未來的錢換算成今天的折現率。第 4 步的獲利預期上調了兩成，股價卻原地不動，因為利率上升剛好抵銷。</p>
+  </div>
+
+  <p>真實世界的公司會成長、會衰退，第 10、13 章會用更完整的方法估算；但這兩股力量不會變。GCFIE 第三十三節說「Rates 告訴我們估值的折現壓力」，它同時追蹤 AI 基本面和美債殖利率，就是一個管分子，一個管分母。</p>
+  <p>把公式倒過來，股價 ÷ 每股獲利 ＝ 1 ÷ 要求報酬率。上例是 200 ÷ 10 ＝ 20 倍，這個「倍數」就是<span class="term" data-term="本益比">本益比</span>。市場用本益比當速記：股價 ＝ 每股獲利 × 市場願意給的倍數。</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §四</span></div>
+    <p class="quote">台積電：Q4 美元營收財測 523–543 億美元，續創單季新高；法人估 2027 年 EPS 約 150 元，以 2,420 元計約 16 倍，是組合的壓艙石。</p>
+    <p>注意它用的是 <strong>2027 年</strong>的 EPS，也就是還沒發生的獲利：2,420 ÷ 150 ≈ 16.1 倍。計畫評估股價，看的是未來。</p>
+  </div>
+
+  <div class="widget" data-widget="pe" data-part="1" data-eps="150" data-pe="16" data-note="EPS 150 元是計畫引用的法人 2027 年預估，倍數為教學用；實際本益比會因採用過去或預估 EPS 而不同。"></div>
+  <p>試著做兩件事：先把本益比拉到 20 倍，看股價從 2,400 元變成 3,000 元；再把 EPS 改成 120 元、本益比留在 20 倍，股價又回到 2,400 元。獲利預期和倍數任一個改變，股價都會跟著動。</p>
+
+  <h3>預期一改變，股價就先動</h3>
+  <p>既然股價反映的是預期，它就會在「預期改變的那一刻」反應，用不著等獲利真的入帳。下圖是一家公司的示意：第 2 個月法說會上修財測，第 6 個月財報公布、獲利真的增加了兩成五。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 300" role="img" aria-label="示意：法說會上修財測當天股價跳升約 17%，之後慢慢墊高；四個月後財報公布、實際獲利才增加 25%，股價反而小跌，因為好消息早已反映">
+        <defs>
+          <marker id="ar02c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="f-2"/></marker>
+        </defs>
+        <text x="119.4" y="22" class="ta-m t-sm t-b">① 法說會上修財測</text>
+        <text x="270.2" y="22" class="ta-m t-sm t-b">② 財報公布</text>
+        <line x1="119.4" y1="30" x2="119.4" y2="262" class="s-3 s-1 s-dash"/>
+        <line x1="270.2" y1="30" x2="270.2" y2="262" class="s-3 s-1 s-dash"/>
+        <line x1="124" y1="50" x2="266" y2="50" class="s-2 s-1" marker-start="url(#ar02c)" marker-end="url(#ar02c)"/>
+        <text x="194.8" y="44" class="ta-m t-sm t-2">股價先走，獲利後到</text>
+        <line x1="44" y1="262" x2="384" y2="262" class="s-ink s-1"/>
+        <line x1="44" y1="234" x2="384" y2="234" class="s-rule s-1"/>
+        <line x1="44" y1="94" x2="384" y2="94" class="s-rule s-1"/>
+        <text x="38" y="238" class="ta-e t-xs t-mono t-3">100</text>
+        <text x="38" y="98" class="ta-e t-xs t-mono t-3">125</text>
+        <polyline points="44 234 270.2 234 270.2 94 383.3 94" class="f-none s-foil s-3w s-dash"/>
+        <polyline points="44 234 62.85 230.64 81.7 235.12 100.55 231.76 119.4 232.88 121.3 138.8 138.25 127.6 157.1 113.6 175.95 117.52 194.8 105.2 213.65 108 232.5 96.8 251.35 92.88 270.2 89.52 272.1 101.84 289.05 106.32 307.9 99.6 326.75 102.4 345.6 94 364.45 96.24 383.3 91.76" class="f-none s-accent s-2w s-round draw"/>
+        <text x="126" y="190" class="t-sm t-up t-b">一天 +17%</text>
+        <text x="384" y="128" class="ta-e t-sm t-2">獲利真的增加時，</text>
+        <text x="384" y="146" class="ta-e t-sm t-2">股價反而小跌</text>
+        <line x1="290" y1="196" x2="312" y2="196" class="s-accent s-2w"/>
+        <text x="318" y="200" class="t-sm">股價</text>
+        <line x1="290" y1="218" x2="312" y2="218" class="s-foil s-3w s-dash"/>
+        <text x="318" y="222" class="t-sm">實際獲利</text>
+        <text x="44" y="280" class="ta-m t-xs t-mono t-3">0</text>
+        <text x="157.1" y="280" class="ta-m t-xs t-mono t-3">3</text>
+        <text x="270.2" y="280" class="ta-m t-xs t-mono t-3">6</text>
+        <text x="383.3" y="280" class="ta-m t-xs t-mono t-3">9</text>
+        <text x="214" y="296" class="ta-m t-sm t-3">月（起點皆 ＝ 100）</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意走勢。股價在預期改變的那天就跳上去，之後隨著市場越來越有信心慢慢墊高；四個月後獲利真的入帳，對市場已經不是新聞。「消息來的時候」比「錢來的時候」重要。</span></figcaption>
+  </figure>
+
+  <p>這張圖解釋了計畫裡反覆出現的一個現象：</p>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §八 · GCFIE 第一、十五節</span></div>
+    <p class="quote">利多出盡反覆出現：2026 年 7 月與 10 月台積電法說都交出好成績，前後幾天股價仍重挫 → 高檔時的好消息常是調節時點，不是追價訊號。</p>
+    <p class="quote">最高原則：不是數利多與利空，而是觀察價格是否願意對利多／利空做出應有反應。</p>
+    <p>好成績如果早就在大家的預期裡，公布時就沒有新的買方被說服，反而給了早買的人賣出的理由，這叫<span class="term" data-term="利多出盡">利多出盡</span>。GCFIE 第十五節規定，「財報優於預期、財測上修，股價卻下跌」不能直接讀成產業轉差，要讀成預期或估值飽和（<span class="term" data-term="Expectation Saturation">Expectation Saturation</span>）。所以 GCFIE 看的是價格對消息的<strong>反應</strong>，好消息有幾個是次要的：反應比消息本身更能說明市場原本期待什麼。第 11 章會專門談這件事。</p>
+  </div>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>公司獲利創新高，股價就應該上漲；好公司就是好股票。</p></div>
+    <div class="myth-right"><p>股價漲跌取決於結果和<strong>預期</strong>的差距。獲利創新高但低於市場預期，股價照樣會跌；好公司如果價格已經反映了所有好消息，買進後也可能很久不賺錢。好公司和好價格是兩件事。</p></div>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §十一</span></div>
+    <p class="quote">2027 年台股 EPS 估增約 30%，若本益比由約 26 倍降到約 20 倍，指數就只會原地踏步。</p>
+    <p>用「股價 ＝ 獲利 × 倍數」驗算：獲利變成 1.3 倍，倍數變成 20 ÷ 26 ≈ 0.77 倍，相乘 1.3 × 20 ÷ 26 ＝ 1.00。獲利成長三成，全被倍數下降吃掉，這就是例題第 4 步的真實版本，第 10 章稱為<span class="term" data-term="本益比壓縮">本益比壓縮</span>。</p>
+  </div>
+</section>
+
+<section id="boards">
+  <h2><span class="sec-num">2.7</span>上市、上櫃、興櫃與 KY 股</h2>
+  <p>台灣的股票依掛牌的地方分成三層。<dfn id="def-listed">上市</dfn>是在臺灣證券交易所（證交所）掛牌；<dfn id="def-otc">上櫃</dfn>是在證券櫃檯買賣中心（櫃買中心）掛牌，門檻比上市低一些；<dfn id="def-emerging">興櫃</dfn>也歸櫃買中心管，是公司上市櫃之前的預備市場，申請上市櫃前原則上要先在興櫃交易滿六個月。</p>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>三個市場比一比（家數為 2025 年的約略規模，每月變動）</caption>
+      <thead><tr><th></th><th>上市</th><th>上櫃</th><th>興櫃</th></tr></thead>
+      <tbody>
+        <tr><th>主管</th><td>證交所</td><td>櫃買中心</td><td>櫃買中心</td></tr>
+        <tr><th>家數</th><td>一千多家</td><td>八百多家</td><td>三百多家</td></tr>
+        <tr><th>成交</th><td>電腦撮合</td><td>電腦撮合</td><td>與推薦券商議價</td></tr>
+        <tr><th>漲跌幅</th><td>10%</td><td>10%</td><td>沒有限制</td></tr>
+        <tr><th>指數</th><td>加權指數</td><td>櫃買指數</td><td>兩者都不含</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>對投資人來說，上市和上櫃的買法幾乎一樣：同一個<span class="term" data-term="證券帳戶">證券帳戶</span>、同樣的交易時間、同樣看委託簿下單。興櫃就不同了：沒有漲跌幅限制，成交量也小，單日大漲大跌好幾成都可能發生，新手最好先避開。</p>
+  <p>計畫的 20 檔裡，只有華星光（4979）是上櫃股，其餘 19 檔都在證交所上市；候補名單的台燿、聯亞也是上櫃股。這有兩個實際影響：華星光的漲跌不會算進<span class="term" data-term="加權指數">加權指數</span>，而且上櫃股的融資成數上限比上市低（第 25 章<a href="25-margin-leverage.html#margin-buy">融資成數表</a>）。</p>
+
+  <div class="box define" id="def-ky">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>KY股</dfn><span class="en">Foreign primary listing</span></p>
+    <p>在台灣以外註冊、第一次掛牌就選在台灣的外國公司，股票簡稱後面加「-KY」。KY 是開曼群島（Cayman Islands）的國家代碼，因為這類公司多數註冊在那裡；註冊在其他地方的外國公司也一樣加註 -KY。</p>
+  </div>
+  <p>計畫裡的世芯-KY（3661）就是一例：公司註冊在開曼群島，2014 年在證交所上市，做的是客製化 AI 晶片的設計服務。KY 股的股東權益受註冊地法律保障，和台灣公司不完全相同，過去也發生過財報或經營者爭議，金管會因此對 KY 公司的治理與資訊揭露要求得比較嚴。這不代表 KY 股都有問題，但買之前要多看一眼公司的治理與公告。</p>
+</section>
+
+<section id="names-codes">
+  <h2><span class="sec-num">2.8</span>讀懂計畫表上的股票名稱與代號</h2>
+  <p class="lead-in">最後，把計畫配置表的一整列從左讀到右。這一章負責「股票」那一欄，其他欄位先知道意思，後面的章節會一一展開。</p>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>20 檔計畫 §三 · 世芯-KY 那一列逐欄解碼</caption>
+      <thead><tr><th>欄位</th><th>原文</th><th>意思</th></tr></thead>
+      <tbody>
+        <tr><th>分組</th><td>AI成長</td><td>計畫把 20 檔分成核心權值、AI 成長、高彈性、分散／避險四組（第 31 章）</td></tr>
+        <tr><th>股票</th><td>世芯-KY 3661</td><td>簡稱「世芯」，外國公司（-KY），股票代號 3661</td></tr>
+        <tr><th>權重</th><td class="r">4%</td><td>100 萬資金中放約 4 萬元，即這檔的<span class="term" data-term="權重">權重</span>（第 31 章）</td></tr>
+        <tr><th>參考價</th><td class="r">3,685</td><td>計畫採用的基準價，多為 10/16 收盤（第 37 章）</td></tr>
+        <tr><th>分批買進區</th><td class="r">3,320–3,685</td><td>分 2–3 筆掛單的價格範圍，下緣約是參考價 −10%（第 32 章）</td></tr>
+        <tr><th>停損</th><td class="r">3,020</td><td>收盤跌破就出場的<span class="term" data-term="停損">停損</span>價，約是參考價 −18%（第 32 章）</td></tr>
+        <tr><th>目標1／目標2</th><td class="r">4,420／5,100</td><td>到價各賣出 1/3 的<span class="term" data-term="目標1">目標價</span>，約是參考價 +20%、+38%（第 32 章）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>−10% 與 −18% 剛好對上計畫使用規則裡「成長股 −10%／−18%」：3,685 × 0.9 ≈ 3,317，3,685 × 0.82 ≈ 3,022，取到整十元，就是表上的 3,320 和 3,020。</p>
+
+  <h3>代號：四位數字</h3>
+  <p><span class="term" data-term="股票代號">股票代號</span>是下單時最不會出錯的識別方式。早年掛牌的公司，前兩碼大致代表產業：11 字頭是水泥、12 字頭是食品、23 字頭多是電子、28 字頭是金融保險。計畫裡的兆豐金 2886、中信金 2891 都在 28 字頭，中興電 1513、華城 1519 則在 15 字頭的電機機械。2023 年 2 月 13 日起，新掛牌公司改為依序編號，代號不再代表產業。<span class="term" data-term="ETF">ETF</span> 的代號以 00 開頭，例如 0050。</p>
+  <p>代號也看不出上市或上櫃：8 字頭的南電 8046 是上市股，4 字頭的華星光 4979 是上櫃股。要確認，可以查證交所、櫃買中心或公開資訊觀測站；有些報價網站會在代號後面加 .TW（上市）或 .TWO（上櫃）。</p>
+
+  <h3>名稱裡的小字</h3>
+  <ul>
+    <li><b>-KY</b>：外國公司在台第一上市櫃（2.7 節）。</li>
+    <li><b>投控、金</b>：<dfn id="def-holding">控股公司</dfn>，本身主要持有其他公司的股份。日月光投控是 2018 年 4 月 30 日由日月光與矽品以股份轉換組成，同日以 3711 上市，兩家原公司則下市；中信金、兆豐金是金融控股公司（金控），旗下有銀行、證券、保險等子公司。</li>
+    <li><b>*</b>：面額不是 10 元（2.1 節的長科*）。</li>
+  </ul>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §三</span></div>
+    <p class="quote">參考價多為 10/16 收盤；標「約」者為 10/16 盤中價（廣達、南亞科、台塑化）或 10/13 收盤（華城、中興電）。</p>
+    <p>讀完 2.5 節，你知道一檔股票一天有很多個成交價。計畫多用收盤價當基準，因為那是一天結束時買賣雙方最後的共識，計畫的停損也是「以收盤價判斷」。標「約」的幾檔用的是盤中某一刻的價格或更早的收盤價，所以下單前要以當時的報價為準，必要時照計畫的「同比例重算」調整買進區與停損。</p>
+  </div>
+</section>
+
+</article>
+
+<section class="recap" id="recap">
+  <h2>本章重點</h2>
+  <ul>
+    <li>股票是公司所有權的等分。面額多為 10 元，股本 ＝ 面額 × 股數；只有 IPO 或增資時錢才進公司，掛牌後的買賣是股東之間換手。</li>
+    <li>股東有盈餘分配、表決與剩餘財產分配三項基本權利，負有限責任；排在債權人與政府之後，拿走剩下的全部，所以報酬起伏比較大。</li>
+    <li>除權息參考價 ＝（前一日收盤價 − 現金股利）÷（1 ＋ 配股率）。除權息當下總值不變，漲回前一日收盤價叫填息；台積電 2026/12/10 除息 7 元，落在計畫持有期間。</li>
+    <li>市值 ＝ 股價 × 股數。股價高低決定一張多少錢，市值決定公司多大，貴不貴要看本益比；台積電股價比世芯低，市值卻大上 170 倍以上。</li>
+    <li>股價是最近一筆成交價。委託簿依價格優先、時間優先撮合，買方主動往上吃賣單，股價就上漲；每筆成交的買賣張數永遠相等，差別在誰比較急。</li>
+    <li>股價反映對未來獲利的預期與折現率，會在預期改變時先動；好消息若早在預期內，就可能利多出盡。這是 GCFIE「看價格反應」的根據。</li>
+    <li>計畫 20 檔中只有華星光是上櫃股；-KY 是外國公司、「投控」「金」是控股公司，代號看不出上市或上櫃。</li>
+  </ul>
+</section>
+
+<section class="quiz-set" id="quiz">
+  <h2>自我檢測</h2>
+  <p>每題選一個答案，選完會顯示解析。</p>
+
+  <div class="quiz" data-answer="c">
+    <p class="q">某股票前一日收盤 80 元，只配發現金股利 4 元。除息交易日的參考價是多少？</p>
+    <ol class="opts"><li>84 元</li><li>80 元</li><li>76 元</li><li>72.7 元</li></ol>
+    <div class="explain">只配息時配股率是 0，參考價 ＝ (80 − 4) ÷ 1 ＝ 76 元。72.7 元是把 4 元誤當成配股率 10% 的除權算法（80 ÷ 1.1）。除息當下，76 元的股價加上 4 元股息，總值仍是 80 元。</div>
+  </div>
+
+  <div class="quiz" data-answer="b">
+    <p class="q">你持有 1,000 股，公司配發每股 1.5 元的股票股利（面額 10 元）。除權後你有多少股？</p>
+    <ol class="opts"><li>1,015 股</li><li>1,150 股</li><li>1,500 股</li><li>2,500 股</li></ol>
+    <div class="explain">配股率 ＝ 1.5 ÷ 10 ＝ 15%，1,000 股 × 15% ＝ 150 股，合計 1,150 股。股票股利以面額換算，不是以股價換算。股數變多，但除權參考價會同比例調低，總值不變。</div>
+  </div>
+
+  <div class="quiz" data-answer="d">
+    <p class="q">甲公司股價 2,000 元、發行 1 億股；乙公司股價 200 元、發行 20 億股。下列哪一個說法正確？</p>
+    <ol class="opts"><li>甲的股價比較高，所以甲是比較大的公司</li><li>乙的股價比較低，所以乙比較便宜、比較值得買</li><li>兩家公司一樣大</li><li>乙的市值 4,000 億元，是甲 2,000 億元的兩倍</li></ol>
+    <div class="explain">市值 ＝ 股價 × 股數：甲 2,000 × 1 億 ＝ 2,000 億元，乙 200 × 20 億 ＝ 4,000 億元。股價高低只決定一股（一張）多少錢；公司大小看市值，貴不貴則要拿價格和獲利比（本益比）。</div>
+  </div>
+
+  <div class="quiz" data-answer="a">
+    <p class="q">委託簿上，委賣 50.5 元有 3 張、51.0 元有 10 張。你送出買 5 張、限價 51.0 元的委託。成交後看盤軟體顯示的最新成交價是多少？</p>
+    <ol class="opts"><li>51.0 元</li><li>50.5 元</li><li>50.7 元</li><li>51.5 元</li></ol>
+    <div class="explain">價格優先：先吃 50.5 元的 3 張，再吃 51.0 元的 2 張。最後一筆成交在 51.0 元，所以股價顯示 51.0 元。50.7 元是你的平均成交價：(3 × 50.5 ＋ 2 × 51.0) ÷ 5 ＝ 50.7。</div>
+  </div>
+
+  <div class="quiz" data-answer="c">
+    <p class="q">某天股價大漲 5%。關於那天的成交，下列哪一個描述正確？</p>
+    <ol class="opts"><li>買進的張數比賣出的張數多</li><li>交易所調高了這家公司的價格</li><li>買賣張數相等，但買方比較急，願意一路往上吃賣單</li><li>公司在那天發行了新股</li></ol>
+    <div class="explain">每一筆成交都是一買一賣，買進張數永遠等於賣出張數。股價上漲代表主動的買方比較多，接受賣方開的價格，一檔一檔往上成交。交易所只負責撮合，不決定價格；掛牌後的買賣也和公司發行新股無關。</div>
+  </div>
+
+  <div class="quiz" data-answer="b">
+    <p class="q">一家公司法說會後公布財報，獲利創新高也優於去年，股價卻連跌三天。依 GCFIE 與本章的觀點，最合理的解讀是？</p>
+    <ol class="opts"><li>財報一定造假，公司基本面轉差</li><li>好消息可能早已反映在股價裡，市場原本期待更多，價格的反應比消息本身更有資訊</li><li>股價和獲利沒有關係，財報不用看</li><li>股價下跌代表賣出的張數比買進多</li></ol>
+    <div class="explain">股價反映的是預期。獲利創新高若不如市場預期，或早在股價裡，就可能出現利多出盡。GCFIE 第十五節要求把這種情況讀成預期或估值飽和，不能直接解讀成產業轉差；它的最高原則就是看價格對消息的反應。D 的錯誤和上一題一樣：買賣張數永遠相等。</div>
+  </div>
+</section>
+
+</main>
+</div>
+</div>
+</body>
+</html>

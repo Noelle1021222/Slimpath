@@ -1,0 +1,864 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>K 線、均線與趨勢 · 讀通投資</title>
+<meta name="description" content="一根 K 棒裝著開高低收四個價格，一條均線是一段時間的平均成本。從零學會讀 K 線、成交量、均線、支撐壓力與趨勢，讀懂計畫的「月線下彎、49,000 點遇壓」與 GCFIE 的價格確認線。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=LXGW+WenKai+TC:wght@400;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;900&amp;display=swap">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/handbook.css">
+<script>try{var d=document.documentElement,g=function(k){return JSON.parse(localStorage.getItem("hb."+k))},t=g("theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);if(g("quote")==="intl")d.setAttribute("data-quote","intl");if(g("size")==="lg")d.setAttribute("data-size","lg")}catch(e){}</script>
+<script src="../assets/js/curriculum.js" defer></script>
+<script src="../assets/js/data-plan.js" defer></script>
+<script src="../assets/js/glossary-data.js" defer></script>
+<script src="../assets/js/handbook.js" defer></script>
+<script src="../assets/js/widgets.js" defer></script>
+<script src="../assets/js/widgets-plan.js" defer></script>
+<script src="../assets/js/widgets-basics.js" defer></script>
+<script src="../assets/js/widgets-markets.js" defer></script>
+</head>
+<body data-chapter="06-candles-trends">
+<div class="page">
+<div class="chapter-grid">
+<main class="chapter" id="main">
+
+<header class="opener">
+  <p class="eyebrow"></p>
+  <div class="opener-num" aria-hidden="true"></div>
+  <h1>K 線、均線與趨勢：讀懂價格的語言</h1>
+  <p class="lede">看盤軟體上那一根根紅綠柱子和幾條彎曲的線，是市場最常用的語言。這一章從一根 K 棒的四個價格講起，親手算出均線、找出支撐與壓力，最後讀懂計畫那句「10 日線與月線下彎，反彈到 49,000 點附近容易遇壓」，以及 GCFIE 為什麼每天都要設一條價格確認線。</p>
+  <dl class="opener-meta"></dl>
+</header>
+
+<section class="objectives" aria-labelledby="obj-h">
+  <h2 id="obj-h">學完這章，你能夠</h2>
+  <ol>
+    <li>看一根 K 棒說出開高低收，分辨紅K 與黑K，並說明它和報價的紅字綠字差在哪裡。</li>
+    <li>從 K 棒的實體、影線與成交量，讀出那一天買賣雙方誰占上風，也知道單根 K 棒的極限。</li>
+    <li>親手算出 5 日均線，用「扣抵」判斷均線會上彎還是下彎，說出週線、月線、季線、年線各是幾天。</li>
+    <li>用前高前低、均線、整數關卡找出支撐與壓力，分辨趨勢、突破、跌破、回測與缺口。</li>
+    <li>讀懂計畫的「月線下彎、49,000 點遇壓」「站回月線」「10 日線移動停利」與 GCFIE 的「45,800 支撐→收盤跌破＝失守確認」，知道它們是驗證用的條件，不是預言。</li>
+  </ol>
+</section>
+
+<article class="prose">
+
+<section id="candle">
+  <h2><span class="sec-num">6.1</span>一根 K 棒裝了四個價格</h2>
+  <p class="lead-in">一檔熱門股一天會成交上萬筆，價格上上下下。如果每天只准你記四個數字，你會記哪四個？市場的答案是：開盤、最高、最低、收盤。</p>
+  <p>台股 09:00 開盤，第一筆成交的價格是<span class="term" data-term="開盤價">開盤價</span>；13:30 用<span class="term" data-term="集合競價">集合競價</span>撮合出來的是<span class="term" data-term="收盤價">收盤價</span>（第 3 章）。中間這四個半小時，價格碰到的最高點叫最高價，最低點叫最低價。這四個數字合稱<dfn id="def-ohlc">開高低收</dfn>（OHLC：Open、High、Low、Close）。把它們畫成一根柱子，就是一根 K 棒。</p>
+
+  <div class="box define" id="def-kline">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>K線</dfn><span class="en">Candlestick chart</span></p>
+    <p>把一段時間的開盤價、最高價、最低價、收盤價畫成一根「K 棒」，再把一根根 K 棒按時間排起來的圖。一根 K 棒可以代表一天（日K）、一週（週K）、一個月（月K），也可以只代表 5 分鐘。英文叫 candlestick（蠟燭圖），因為它的形狀像一根帶著燭芯的蠟燭。一般認為它源自日本米市記錄行情的方法。</p>
+  </div>
+
+  <p>一根 K 棒分成粗、細兩個部分。粗的那一段叫<dfn id="def-body">實體</dfn>（Real body），上下兩端是開盤價和收盤價。細的那條叫影線（Shadow），就是蠟燭的燭芯：實體上方那一段是<dfn id="def-upper">上影線</dfn>（Upper shadow），頂端是最高價；實體下方那一段是<dfn id="def-lower">下影線</dfn>（Lower shadow），底端是最低價。</p>
+  <p>實體的顏色告訴你這一天從開盤走到收盤，價格是往上還是往下：</p>
+
+  <div class="box define" id="def-red-k">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>紅K</dfn><span class="en">Bullish candle</span></p>
+    <p>收盤價高於開盤價的 K 棒，實體畫成紅色，代表這一天從開盤到收盤價格往上走。收盤價低於開盤價的叫<dfn id="def-black-k">黑K</dfn>（Bearish candle），台灣的看盤軟體多半把它畫成綠色，也有畫成黑色的，名稱都叫黑K。開盤價剛好等於收盤價時，實體縮成一條橫線。</p>
+  </div>
+
+  <p>下面這張圖把兩個交易日「壓扁」成兩根 K 棒。左邊是盤中價格的走法，右邊是它變成的 K 棒。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 412" role="img" aria-label="K 棒解剖：上排一天從開盤 100 下探 96、衝上 108、收在 105，壓縮成實體 5、上影線 3、下影線 4 的紅K；下排從 105 開盤、最高 107、最低 95、收 97，壓縮成實體 8 的黑K">
+        <text x="16" y="22" class="t-b t-up">紅K</text>
+        <text x="52" y="22" class="t-sm t-2">收盤 105 高於開盤 100</text>
+        <line x1="163" y1="49" x2="258" y2="49" class="s-3 s-1 s-dot"/>
+        <line x1="206" y1="76" x2="258" y2="76" class="s-3 s-1 s-dot"/>
+        <line x1="206" y1="121" x2="258" y2="121" class="s-3 s-1 s-dot"/>
+        <line x1="99" y1="157" x2="258" y2="157" class="s-3 s-1 s-dot"/>
+        <polyline points="50,121 61,112 72,130 84,148 93,157 104,139 115,130 126,103 137,94 148,67 157,49 168,62 178,76 189,71 200,76" class="f-none s-2 s-15 s-round draw"/>
+        <circle cx="50" cy="121" r="3.5" class="f-ink"/>
+        <circle cx="200" cy="76" r="3.5" class="f-ink"/>
+        <circle cx="157" cy="49" r="3" class="f-plate s-ink s-15"/>
+        <circle cx="93" cy="157" r="3" class="f-plate s-ink s-15"/>
+        <text x="44" y="125" class="ta-e t-sm">開 <tspan class="t-mono">100</tspan></text>
+        <text x="157" y="40" class="ta-m t-sm">高 <tspan class="t-mono">108</tspan></text>
+        <text x="93" y="173" class="ta-m t-sm">低 <tspan class="t-mono">96</tspan></text>
+        <text x="200" y="96" class="ta-m t-sm">收 <tspan class="t-mono">105</tspan></text>
+        <line x1="50" y1="181" x2="200" y2="181" class="s-rule s-1"/>
+        <text x="50" y="195" class="ta-m t-xs t-3">09:00</text>
+        <text x="200" y="195" class="ta-m t-xs t-3">13:30</text>
+        <line x1="275" y1="49" x2="275" y2="157" class="s-up s-2w"/>
+        <rect x="260" y="76" width="30" height="45" class="f-up"/>
+        <path d="M296 50.5H300V75H296" class="f-none s-3 s-1"/>
+        <path d="M296 77H300V120H296" class="f-none s-3 s-1"/>
+        <path d="M296 122H300V155.5H296" class="f-none s-3 s-1"/>
+        <text x="306" y="67" class="t-sm t-2">上影線 <tspan class="t-mono t-b">3</tspan></text>
+        <text x="306" y="103" class="t-sm t-b">實體 <tspan class="t-mono">5</tspan></text>
+        <text x="306" y="143" class="t-sm t-2">下影線 <tspan class="t-mono t-b">4</tspan></text>
+
+        <line x1="16" y1="208" x2="384" y2="208" class="s-rule s-1"/>
+
+        <text x="16" y="232" class="t-b t-down">黑K</text>
+        <text x="52" y="232" class="t-sm t-2">收盤 97 低於開盤 105</text>
+        <line x1="89" y1="258" x2="258" y2="258" class="s-3 s-1 s-dot"/>
+        <line x1="206" y1="276" x2="258" y2="276" class="s-3 s-1 s-dot"/>
+        <line x1="206" y1="348" x2="258" y2="348" class="s-3 s-1 s-dot"/>
+        <line x1="172" y1="366" x2="258" y2="366" class="s-3 s-1 s-dot"/>
+        <polyline points="50,276 61,267 72,271 83,258 93,269 104,285 115,280 126,303 137,321 148,316 157,344 166,366 177,353 187,359 200,348" class="f-none s-2 s-15 s-round draw"/>
+        <circle cx="50" cy="276" r="3.5" class="f-ink"/>
+        <circle cx="200" cy="348" r="3.5" class="f-ink"/>
+        <circle cx="83" cy="258" r="3" class="f-plate s-ink s-15"/>
+        <circle cx="166" cy="366" r="3" class="f-plate s-ink s-15"/>
+        <text x="44" y="280" class="ta-e t-sm">開 <tspan class="t-mono">105</tspan></text>
+        <text x="83" y="249" class="ta-m t-sm">高 <tspan class="t-mono">107</tspan></text>
+        <text x="166" y="383" class="ta-m t-sm">低 <tspan class="t-mono">95</tspan></text>
+        <text x="204" y="335" class="ta-m t-sm">收 <tspan class="t-mono">97</tspan></text>
+        <line x1="50" y1="391" x2="200" y2="391" class="s-rule s-1"/>
+        <text x="50" y="405" class="ta-m t-xs t-3">09:00</text>
+        <text x="200" y="405" class="ta-m t-xs t-3">13:30</text>
+        <line x1="275" y1="258" x2="275" y2="366" class="s-down s-2w"/>
+        <rect x="260" y="276" width="30" height="72" class="f-down"/>
+        <path d="M296 259.5H300V275H296" class="f-none s-3 s-1"/>
+        <path d="M296 277H300V347H296" class="f-none s-3 s-1"/>
+        <path d="M296 349H300V364.5H296" class="f-none s-3 s-1"/>
+        <text x="306" y="271" class="t-sm t-2">上影線 <tspan class="t-mono t-b">2</tspan></text>
+        <text x="306" y="317" class="t-sm t-b">實體 <tspan class="t-mono">8</tspan></text>
+        <text x="306" y="361" class="t-sm t-2">下影線 <tspan class="t-mono t-b">2</tspan></text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意。左邊是一天之內的價格走勢，右邊是把它壓縮成的 K 棒：實體兩端是開盤與收盤，影線兩端是最高與最低。K 棒保留了四個價格，卻丟掉了順序：光看上面那根紅K，你分不出那天是先跌到 96 還是先漲到 108。若你在設定裡把漲跌顏色切成國際慣例，紅K 會改畫成綠色。</span></figcaption>
+  </figure>
+
+  <p>紅K、黑K 比的是<strong>同一天的開盤價與收盤價</strong>。報價畫面上的紅字、綠字比的卻是<span class="term" data-term="參考價">參考價</span>，通常就是昨天的收盤價（第 3 章的<span class="term" data-term="紅漲綠跌">紅漲綠跌</span>）。兩把尺不一樣，所以會出現「報價收紅、K 棒卻是黑K」的日子。用一個例子算清楚：</p>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>昨收 100 元；今天開 104、最高 106、最低 100.5、收 101。報價是紅字還是綠字？K 棒長什麼樣子？</h4>
+    <ol class="calc">
+      <li>報價看收盤價對參考價（昨收）：<span class="eq">101 − 100 ＝ +1 元（+1.0%）→ 紅字</span></li>
+      <li>K 棒看收盤價對開盤價：收盤比開盤低，所以是黑K。<span class="eq">實體 ＝ 104 − 101 ＝ 3 元</span></li>
+      <li>上影線是最高價減實體上緣（開盤 104）：<span class="eq">106 − 104 ＝ 2 元</span></li>
+      <li>下影線是實體下緣（收盤 101）減最低價：<span class="eq">101 − 100.5 ＝ 0.5 元</span></li>
+      <li>這一天最高和最低差多少，習慣除以昨收，叫<span class="term" data-term="振幅">振幅</span>：<span class="eq">(106 − 100.5) ÷ 100 ＝ 5.5%</span></li>
+    </ol>
+    <p class="answer">報價收紅 1%，K 棒卻是一根實體 3 元的黑K：開盤時大家搶著買，收盤前一路被賣回來。這種走勢叫「開高走低」，兩種顏色要分開讀。</p>
+  </div>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>紅K 就是今天漲，黑K 就是今天跌。</p></div>
+    <div class="myth-right"><p>K 棒的顏色只比同一天的開盤與收盤。開高走低會出現「收漲的黑K」；開低走高也會出現「收跌的紅K」：昨收 100、開 95、收 98，報價跌 2%，K 棒卻是一根實體 3 元的紅K。今天比昨天漲還是跌，要看收盤價和昨收。</p></div>
+  </div>
+
+  <p>美股的習慣和台灣不同。美國的看盤網站多半用綠色代表收盤高於開盤、紅色代表收盤低於開盤，有些圖還用空心實體表示收高、實心表示收低。GCFIE 會引用美股的圖表與資料，看國外的圖之前先確認圖例，別把顏色讀反了。</p>
+
+  <aside class="note">四個價格裡，<b>收盤價最重要</b>。它是一整天買賣雙方吵完之後的結論，均線用它算，漲跌用它算，你的計畫「停損看收盤價」，GCFIE「收盤跌破＝失守確認」也都看它。這一章會一再回到這一點。</aside>
+</section>
+
+<section id="shapes">
+  <h2><span class="sec-num">6.2</span>K 棒的形狀與時間尺度</h2>
+  <p>把一天的交易想成一場拔河。實體是比分：從開盤到收盤，哪一方把繩子拉過去多少。影線是盤中的拉鋸：有一方曾經把繩子拉到那裡，最後又被拉了回來。記住這個比喻，常見的形狀就不必死背。</p>
+  <ul>
+    <li><b>長紅K</b>：實體很長、影線很短。開在當天低點附近，收在當天高點附近，買方從頭贏到尾。</li>
+    <li><b>長黑K</b>：反過來，開在高點附近、收在低點附近，賣方從頭贏到尾。</li>
+    <li><b>長上影線</b>：盤中衝得很高，收盤卻被賣了回來。代表高處有人等著賣，市場說法是「上方有賣壓」。</li>
+    <li><b>長下影線</b>：盤中跌得很深，收盤又被買了回來。代表低處有人願意接，說法是「下方有買盤承接」。</li>
+  </ul>
+
+  <div class="box define" id="def-doji">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>十字線</dfn><span class="en">Doji</span></p>
+    <p>開盤價和收盤價相同或非常接近，實體縮成一條橫線、上下帶著影線的 K 棒，形狀像一個「十」字。代表這一天買賣雙方打成平手。如果連影線都沒有，四個價格完全相同，就叫「一字線」，台股常見於一開盤就鎖住<span class="term" data-term="漲跌停">漲停或跌停</span>的股票。</p>
+  </div>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 334" role="img" aria-label="六種常見 K 棒形狀：長紅K 收在高點附近、長黑K 收在低點附近、十字線開盤約等於收盤、長上影線衝高被賣回、長下影線急跌被買回、一字線四個價格相同">
+        <line x1="133" y1="8" x2="133" y2="326" class="s-rule s-1"/>
+        <line x1="267" y1="8" x2="267" y2="326" class="s-rule s-1"/>
+        <line x1="8" y1="170" x2="392" y2="170" class="s-rule s-1"/>
+
+        <line x1="67" y1="30.8" x2="67" y2="95.2" class="s-up s-2w"/>
+        <rect x="56" y="35" width="22" height="56" class="f-up"/>
+        <text x="67" y="124" class="ta-m t-b">長紅K</text>
+        <text x="67" y="144" class="ta-m t-sm t-2">收在最高點附近</text>
+        <text x="67" y="161" class="ta-m t-sm t-2">買方從頭強到尾</text>
+
+        <line x1="200" y1="30.8" x2="200" y2="95.2" class="s-down s-2w"/>
+        <rect x="189" y="35" width="22" height="56" class="f-down"/>
+        <text x="200" y="124" class="ta-m t-b">長黑K</text>
+        <text x="200" y="144" class="ta-m t-sm t-2">收在最低點附近</text>
+        <text x="200" y="161" class="ta-m t-sm t-2">賣方從頭強到尾</text>
+
+        <line x1="333" y1="32.2" x2="333" y2="93.8" class="s-2 s-2w"/>
+        <line x1="321" y1="63" x2="345" y2="63" class="s-2 s-3w"/>
+        <text x="333" y="124" class="ta-m t-b">十字線</text>
+        <text x="333" y="144" class="ta-m t-sm t-2">收盤約等於開盤</text>
+        <text x="333" y="161" class="ta-m t-sm t-2">雙方打成平手</text>
+
+        <line x1="67" y1="190.8" x2="67" y2="252.4" class="s-up s-2w"/>
+        <rect x="56" y="235.6" width="22" height="11.9" class="f-up"/>
+        <text x="67" y="284" class="ta-m t-b">長上影線</text>
+        <text x="67" y="304" class="ta-m t-sm t-2">衝高後被賣回</text>
+        <text x="67" y="321" class="ta-m t-sm t-2">上方有賣壓</text>
+
+        <line x1="200" y1="193.6" x2="200" y2="255.2" class="s-down s-2w"/>
+        <rect x="189" y="197.8" width="22" height="11.2" class="f-down"/>
+        <text x="200" y="284" class="ta-m t-b">長下影線</text>
+        <text x="200" y="304" class="ta-m t-sm t-2">急跌後被買回</text>
+        <text x="200" y="321" class="ta-m t-sm t-2">下方有買盤承接</text>
+
+        <line x1="321" y1="202" x2="345" y2="202" class="s-up s-3w"/>
+        <text x="333" y="284" class="ta-m t-b">一字線</text>
+        <text x="333" y="304" class="ta-m t-sm t-2">四個價格相同</text>
+        <text x="333" y="321" class="ta-m t-sm t-2">常見於開盤鎖漲停</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意。實體越長，開盤到收盤那一方贏得越徹底；影線越長，價格曾經去過卻沒守住的距離越遠。第四、五根刻意用了相反的顏色：長上影線即使收紅、長下影線即使收黑，影線透露的訊息仍然成立。</span></figcaption>
+  </figure>
+
+  <p>形狀只是第一步。同一根長下影線，出現在連跌十天之後，可能代表恐慌賣壓終於被接住；出現在連漲十天的高檔，可能只是有人趁盤中下殺撿便宜，隔天照樣下跌。所以讀一根 K 棒，要同時問三個問題：</p>
+  <ol>
+    <li><b>位置</b>：它出現在一段漲勢的高處、一段跌勢的低處，還是區間中間？</li>
+    <li><b>成交量</b>：那天的量比平常大還是小？量大代表很多人參與了這場拔河（下一節）。</li>
+    <li><b>確認</b>：隔天、後天的 K 棒有沒有接著往同一個方向走？</li>
+  </ol>
+  <p>一根 K 棒是一天的證據，不是判決。下面的工具讓你親手調四個價格，看形狀和判讀怎麼變。試著做三件事：把收盤價拉到 100，和開盤一樣，看它變成十字線；把四個價格設成開 100、高 112、低 99、收 103，看長上影線出現；再把收盤拉到開盤之下，看 K 棒的顏色翻過來。</p>
+
+  <div class="widget" data-widget="candle" data-open="100" data-high="108" data-low="96" data-close="105"></div>
+
+  <h3>同一套規則，換一把時間尺</h3>
+  <p>一根 K 棒代表多長的時間由你選。日K 一天一根，<dfn id="def-weekly-k">週K</dfn>（Weekly candle）一週一根，月K 一個月一根；做<span class="term" data-term="當沖">當沖</span>的人看 1 分鐘、5 分鐘 K。不管多長，規則都一樣：開盤是這段時間的第一個價格，收盤是最後一個，最高與最低是這段期間的極值。</p>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>示意：一週五根日K 合成一根週K（單位：元）</caption>
+      <thead><tr><th>日期</th><th class="r">開</th><th class="r">高</th><th class="r">低</th><th class="r">收</th><th>K 棒</th></tr></thead>
+      <tbody>
+        <tr><th>週一</th><td class="r">100</td><td class="r">103</td><td class="r">99</td><td class="r">102</td><td><span class="up">紅K</span></td></tr>
+        <tr><th>週二</th><td class="r">102</td><td class="r"><b>104</b></td><td class="r">101</td><td class="r">103.5</td><td><span class="up">紅K</span></td></tr>
+        <tr><th>週三</th><td class="r">103</td><td class="r">103.5</td><td class="r">97</td><td class="r">98</td><td><span class="down">黑K</span></td></tr>
+        <tr><th>週四</th><td class="r">98</td><td class="r">99</td><td class="r">95</td><td class="r">96</td><td><span class="down">黑K</span></td></tr>
+        <tr><th>週五</th><td class="r">96</td><td class="r">98</td><td class="r"><b>94.5</b></td><td class="r">97</td><td><span class="up">紅K</span></td></tr>
+        <tr><th>週K</th><td class="r"><b>100</b></td><td class="r"><b>104</b></td><td class="r"><b>94.5</b></td><td class="r"><b>97</b></td><td><span class="down">黑K</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>把上表五根日K 合成一根週K</h4>
+    <ol class="calc">
+      <li>開盤：一週的第一個價格，就是週一的開盤。<span class="eq">開 ＝ 100</span></li>
+      <li>最高：五天的最高價取最大的那個（週二）。<span class="eq">max(103, 104, 103.5, 99, 98) ＝ 104</span></li>
+      <li>最低：五天的最低價取最小的那個（週五）。<span class="eq">min(99, 101, 97, 95, 94.5) ＝ 94.5</span></li>
+      <li>收盤：一週的最後一個價格，就是週五的收盤。<span class="eq">收 ＝ 97</span></li>
+      <li>收盤 97 低於開盤 100，是黑K。<span class="eq">實體 3、上影線 104 − 100 ＝ 4、下影線 97 − 94.5 ＝ 2.5</span></li>
+    </ol>
+    <p class="answer">週一、週二、週五都收紅，整週卻是一根黑K：週K 把每天的來回濾掉，只留下「這一週誰贏了」。</p>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §一、§十二</span></div>
+    <p class="quote">光是 10/12–10/16 這一週，加權指數就跌了2,022點，因此不建議用融資追求翻倍。</p>
+    <p class="quote">時報資訊：10/16 盤後解析（週線跌 2,022 點）</p>
+    <p>資料來源那一行的「週線跌 2,022 點」，指的是<span class="term" data-term="加權指數">加權指數</span>這一週的週K 收盤比上一週的收盤少了 2,022 點。漲跌一律是收盤對收盤，日K、週K 都一樣。反推回去，上一週收盤大約是 47,111 ＋ 2,022 ＝ 49,133 點，一週跌幅約 2,022 ÷ 49,133 ≈ 4.1%。這個 49,133 點，6.6 節會再用到。</p>
+  </div>
+  <aside class="note">「週線」在台股有兩個意思：一是週K，二是 5 日均線（6.4 節）。新聞寫「週線跌 2,022 點」是前者，分析師說「跌破週線」通常是後者，看上下文判斷。</aside>
+</section>
+
+<section id="volume">
+  <h2><span class="sec-num">6.3</span>成交量：價格背後有多少人</h2>
+  <p class="lead-in">K 棒告訴你價格去了哪裡，卻沒告訴你有多少人參與。同樣漲 3%，一天成交 500 張和成交 5 萬張，份量完全不同。</p>
+
+  <div class="box define" id="def-volume">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>成交量</dfn><span class="en">Volume</span></p>
+    <p>一段時間內成交的數量。台股個股以「張」計算（1 張＝1,000 股，見<span class="term" data-term="一張">一張</span>）；整個市場（大盤）習慣看成交金額，也叫成交值，單位是億元。看盤軟體通常把每天的成交量畫成 K 線圖下方的一排柱子。</p>
+  </div>
+
+  <p>讀成交量之前，先記住一個最基本的事實：<strong>每一筆成交都有一個買方和一個賣方</strong>。今天成交 1 萬張，就是有人買進 1 萬張，同時有人賣出 1 萬張。所以「量大代表買的人多」是錯的。量大的意思是：在這個價格附近，很多人對價值的看法不同，一邊急著進場、一邊願意出場。誰比較急，要看價格往哪裡走。</p>
+  <p>量的大小要和自己比。一檔股票平常一天成交 2 萬張，今天成交 6 萬張，是平常的 3 倍；另一檔平常就成交 50 萬張，6 萬張反而很冷清。最常用的比較基準是過去 5 天或 20 天的平均成交量，叫「均量」。成交量突然放大到均量的好幾倍，叫<dfn id="def-burst">爆量</dfn>（Volume spike）；明顯低於均量，叫<dfn id="def-shrink">量縮</dfn>（Shrinking volume）。比前幾天多，就說「量增」。</p>
+
+  <div class="box define" id="def-pv">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>價量關係</dfn><span class="en">Price–volume relationship</span></p>
+    <p>把價格的方向和成交量的大小放在一起讀。量是力道的佐證：價格在大量中移動，代表很多人用真金白銀表態；在小量中移動，代表參與的人少，走勢比較容易被推翻。</p>
+  </div>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>四種價量組合的常見讀法（是線索，不是定律）</caption>
+      <thead><tr><th>組合</th><th>常見的讀法</th><th>要小心的地方</th></tr></thead>
+      <tbody>
+        <tr><th><span class="up">價漲</span>量增</th><td>上漲吸引越來越多人參與，走勢比較紮實</td><td>大漲一段之後才爆量，可能是最後一批追價的人進場</td></tr>
+        <tr><th><span class="up">價漲</span>量縮</th><td>還在漲，但跟進的人變少</td><td>追價意願減弱，留意漲勢能不能延續</td></tr>
+        <tr><th><span class="down">價跌</span>量增</th><td>很多人搶著賣，賣壓沉重</td><td>急跌後爆量又收長下影線，可能是恐慌賣盤被接住</td></tr>
+        <tr><th><span class="down">價跌</span>量縮</th><td>還在跌，但賣的人變少</td><td>賣壓也許在減輕，但沒有買盤進來也不會漲</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>把 K 棒和量合起來看，訊息會清楚很多。一根長上影線如果伴隨爆量，代表高處真的有大量賣單成交，賣壓是實打實的；如果量很小，可能只是少數幾筆單子把價格拉上去又掉下來。6.6 節的圖會示範「帶量突破」：價格越過壓力的那一天，成交量明顯放大。</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第六節</span></div>
+    <p class="quote">同時觀察市場廣度、成交量、指數是否創高／跌破、大型股與小型股是否背離。不得只列漲跌幅；必須回答市場是全面上漲／下跌，還是只有權值股撐盤。</p>
+    <p>GCFIE 的第 2 章（全球市場）要求不能只寫「指數漲 1%」。成交量回答「這 1% 有多少人參與」，<span class="term" data-term="市場廣度">市場廣度</span>回答「是多數股票一起漲，還是少數<span class="term" data-term="權值股">權值股</span>撐盤」（第 5 章）。句子裡的<span class="term" data-term="創高">創高</span>與跌破，就是本章 6.7 節的詞彙。</p>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §二</span></div>
+    <p class="quote">外資 10/15 賣超 3,025 億元創紀錄，且已連續 8 個交易日站賣方。</p>
+    <p>這個數字不是成交量。<span class="term" data-term="賣超">賣超</span>是<span class="term" data-term="外資">外資</span>「賣出金額減買進金額」的差額，只描述一群人的淨方向。外資淨賣出 3,025 億元的那一天，每一張被賣出的股票都有人買走，買方是誰、全市場成交多少，要另外看成交量與其他法人的資料（第 23 章）。</p>
+  </div>
+  <aside class="note">大盤的成交金額和指數的高低有關：指數翻倍後，成交同樣張數的股票，金額也差不多翻倍。比較不同年份的「天量」時，記得考慮這一點。</aside>
+</section>
+
+<section id="moving-average">
+  <h2><span class="sec-num">6.4</span>均線：一條會移動的平均成本</h2>
+  <p class="lead-in">每天的收盤價跳來跳去，很難一眼看出方向。把最近幾天的收盤價平均起來，雜訊就被磨平了。這就是均線。</p>
+
+  <div class="box define" id="def-ma">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>均線</dfn><span class="en">Moving average (MA)</span></p>
+    <p>移動平均線的簡稱。N 日均線＝最近 N 個交易日收盤價的平均。每過一天，就加入最新一天的收盤、移出最舊一天的收盤，平均值跟著「移動」；把每天算出來的平均值連起來，就是一條線。</p>
+  </div>
+
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">N 日均線 ＝ <span class="frac"><span>最近 N 個交易日的收盤價總和</span><span>N</span></span></div>
+    <div class="where">只用收盤價，只算有交易的日子（週末與休市日不算）。這是簡單移動平均（SMA），台股看盤軟體預設的均線就是這一種。</div>
+  </div>
+
+  <p>拿七天的收盤價實際算一次。前五天的收盤是 100、102、101、104、103 元，加起來 510，除以 5，第 5 天的 5 日均線是 102.0。第 6 天收 98：窗口往右移一格，加入 98、移出第 1 天的 100，總和變成 508，均線是 101.6。第 7 天收 97：加入 97、移出 102，總和 503，均線 100.6。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 348" role="img" aria-label="5 日均線計算：七天收盤 100、102、101、104、103、98、97；第 1 到 5 天平均 102.0，第 2 到 6 天平均 101.6，第 3 到 7 天平均 100.6，均線往下彎">
+        <text x="16" y="22" class="t-sm t-2">5 日均線：每天加入最新一天、移出最舊一天</text>
+        <rect x="16" y="34" width="49" height="44" class="f-soft s-rule s-1"/>
+        <rect x="69" y="34" width="49" height="44" class="f-soft s-rule s-1"/>
+        <rect x="122" y="34" width="49" height="44" class="f-soft s-rule s-1"/>
+        <rect x="175" y="34" width="49" height="44" class="f-soft s-rule s-1"/>
+        <rect x="228" y="34" width="49" height="44" class="f-soft s-rule s-1"/>
+        <rect x="281" y="34" width="49" height="44" class="f-down-soft s-rule s-1"/>
+        <rect x="334" y="34" width="49" height="44" class="f-down-soft s-rule s-1"/>
+        <text x="40.5" y="50" class="ta-m t-xs t-3">第1天</text>
+        <text x="93.5" y="50" class="ta-m t-xs t-3">第2天</text>
+        <text x="146.5" y="50" class="ta-m t-xs t-3">第3天</text>
+        <text x="199.5" y="50" class="ta-m t-xs t-3">第4天</text>
+        <text x="252.5" y="50" class="ta-m t-xs t-3">第5天</text>
+        <text x="305.5" y="50" class="ta-m t-xs t-3">第6天</text>
+        <text x="358.5" y="50" class="ta-m t-xs t-3">第7天</text>
+        <text x="40.5" y="70" class="ta-m t-mono t-b">100</text>
+        <text x="93.5" y="70" class="ta-m t-mono t-b">102</text>
+        <text x="146.5" y="70" class="ta-m t-mono t-b">101</text>
+        <text x="199.5" y="70" class="ta-m t-mono t-b">104</text>
+        <text x="252.5" y="70" class="ta-m t-mono t-b">103</text>
+        <text x="305.5" y="70" class="ta-m t-mono t-b">98</text>
+        <text x="358.5" y="70" class="ta-m t-mono t-b">97</text>
+
+        <path d="M17 86V92H276V86" class="f-none s-2 s-15"/>
+        <text x="146.5" y="109" class="ta-m t-sm t-2">第 1–5 天平均 <tspan class="t-mono t-b">102.0</tspan></text>
+        <path d="M70 116V122H329V116" class="f-none s-accent s-15"/>
+        <text x="199.5" y="139" class="ta-m t-sm t-accent">第 2–6 天平均 <tspan class="t-mono t-b">101.6</tspan></text>
+        <path d="M123 146V152H382V146" class="f-none s-accent s-15"/>
+        <text x="252.5" y="169" class="ta-m t-sm t-accent">第 3–7 天平均 <tspan class="t-mono t-b">100.6</tspan></text>
+
+        <line x1="16" y1="196" x2="34" y2="196" class="s-accent s-2w"/>
+        <text x="40" y="200" class="t-sm t-accent">5 日均線</text>
+        <line x1="120" y1="196" x2="138" y2="196" class="s-2 s-15"/>
+        <text x="144" y="200" class="t-sm t-2">每天收盤</text>
+        <polyline points="40.5,258 93.5,239 146.5,248.5 199.5,220 252.5,229.5 305.5,277 358.5,286.5" class="f-none s-2 s-15 s-round"/>
+        <circle cx="40.5" cy="258" r="3.5" class="f-plate s-2 s-15"/>
+        <circle cx="93.5" cy="239" r="3.5" class="f-plate s-2 s-15"/>
+        <circle cx="146.5" cy="248.5" r="3.5" class="f-plate s-2 s-15"/>
+        <circle cx="199.5" cy="220" r="3.5" class="f-plate s-2 s-15"/>
+        <circle cx="252.5" cy="229.5" r="3.5" class="f-plate s-2 s-15"/>
+        <circle cx="305.5" cy="277" r="3.5" class="f-plate s-2 s-15"/>
+        <circle cx="358.5" cy="286.5" r="3.5" class="f-plate s-2 s-15"/>
+        <polyline points="252.5,239 305.5,242.8 358.5,252.3" class="f-none s-accent s-3w s-round draw"/>
+        <circle cx="252.5" cy="239" r="4" class="f-accent"/>
+        <circle cx="305.5" cy="242.8" r="4" class="f-accent"/>
+        <circle cx="358.5" cy="252.3" r="4" class="f-accent"/>
+        <text x="236" y="257" class="ta-e t-sm t-mono t-accent">102.0</text>
+        <text x="305.5" y="262" class="ta-m t-sm t-mono t-accent">101.6</text>
+        <text x="358.5" y="271" class="ta-m t-sm t-mono t-accent">100.6</text>
+
+        <line x1="16" y1="302" x2="384" y2="302" class="s-rule s-1"/>
+        <text x="16" y="322" class="t-sm">第 6 天：加入 98、移出 100 → 均線 <tspan class="t-down t-b">−0.4</tspan></text>
+        <text x="16" y="341" class="t-sm">第 7 天：加入 97、移出 102 → 均線 <tspan class="t-down t-b">−1.0</tspan></text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意。每往前走一天，平均的窗口就往右移一格。被移出的那個價格叫「扣抵價」（6.5 節）。新加入的收盤比扣抵價低，均線就往下彎；變化量是兩者的差除以 5。</span></figcaption>
+  </figure>
+
+  <h3>常用的均線：週線、月線、季線、年線</h3>
+  <p>台股一週有 5 個交易日，一個月大約 20 個，一季大約 60 個，所以均線的天數和俗稱是這樣對應的：</p>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>台股常用均線（天數指交易日）</caption>
+      <thead><tr><th>均線</th><th class="r">天數</th><th>俗稱</th><th>常見用途</th></tr></thead>
+      <tbody>
+        <tr><th><dfn id="def-ma5">5日線</dfn></th><td class="r">5</td><td>週線</td><td>最靈敏，看極短線的力道</td></tr>
+        <tr><th><dfn id="def-ma10">10日線</dfn></th><td class="r">10</td><td>雙週線</td><td>短線趨勢；計畫用它做移動停利</td></tr>
+        <tr><th>20 日線</th><td class="r">20</td><td><dfn id="def-ma20">月線</dfn></td><td>短中期多空分界，最常被引用</td></tr>
+        <tr><th>60 日線</th><td class="r">60</td><td><dfn id="def-ma60">季線</dfn></td><td>中期趨勢，法人常看</td></tr>
+        <tr><th>120 日線</th><td class="r">120</td><td>半年線</td><td>中長期</td></tr>
+        <tr><th>240 日線</th><td class="r">240</td><td><dfn id="def-ma240">年線</dfn></td><td>長期趨勢；一年實際約有 240 多個交易日，有些軟體用 250 日</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>均線最直觀的讀法是「平均成本」。如果過去 20 天每天都有一批人用收盤價買進，月線大約就是這群人的平均成本。這只是粗略的比喻：真實的成本要按成交量加權，而且盤中還有許多不同的成交價。但它很好用：股價在月線之上，最近一個月進場的人平均是賺錢的；在月線之下，平均是賠錢的。</p>
+  <p>收盤價在某條均線（或某個價位）之上，叫<dfn id="def-stand">站上</dfn>；跌到下面叫跌破（6.7 節）；跌破之後再回到上面，叫「站回」。計畫寫的「站回月線」，就是指數收盤重新回到 20 日均線之上。</p>
+  <p>天數越短的均線越靈敏，越長越平滑。原因很簡單：新的一天在 5 日線裡占 1/5，也就是 20% 的份量；在年線裡只占 1/240，大約 0.4%。所以一天大跌，5 日線馬上往下拐，年線幾乎不動。代價是：<strong>均線永遠落後價格</strong>，因為它是用過去的價格算出來的。短均線落後得少、但常被一兩天的波動騙；長均線不容易被騙、但轉向時已經慢了好幾拍。</p>
+
+  <details class="deep">
+    <summary>均線排列、黃金交叉與死亡交叉</summary>
+    <div>
+      <p>同時畫好幾條均線時，它們的上下順序也是一種訊息。短均線在上、長均線在下（5 日 &gt; 10 日 &gt; 月線 &gt; 季線），而且都往上走，叫<dfn id="def-ma-order">多頭排列</dfn>：越近期進場的人成本越高，卻還是賺錢，代表買方一路願意追高。順序完全倒過來、而且都往下走，叫空頭排列。</p>
+      <p>短均線由下往上穿過長均線，俗稱「黃金交叉」；由上往下穿過，俗稱「死亡交叉」。名字很響亮，但因為均線本身就落後，交叉通常發生在價格已經走了一段之後，在盤整時還會反覆交叉、來回打臉。把它當成「趨勢可能在轉變」的提醒就好。</p>
+    </div>
+  </details>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §十一（候補名單）</span></div>
+    <p class="quote">南亞 1303：玻纖布（日東紡唯一合作夥伴）、銅箔、CCL 一條龍，又受惠油價；但 8/25 以來從 174 元漲到 300 元以上、本益比約 50 倍，等拉回季線再考慮。</p>
+    <p>從 174 元漲到 300 元，漲幅是 300 ÷ 174 − 1 ≈ 72%，而且不到兩個月。季線是最近約 60 個交易日的平均，其中還包含不少 8/25 漲勢開始之前的日子，就算只算漲勢中的那些天，平均也低於 300 元，所以季線會明顯低於現在的股價。股價離季線很遠，代表最近三個月進場的人平均賺很多，任何壞消息都可能引來獲利了結。「等拉回季線」就是等股價回到接近這段期間平均成本的位置，不在離均線最遠的地方追價。季線本身也一天天往上走，所以「拉回季線」可以是股價回落，也可以是季線慢慢追上來。</p>
+  </div>
+</section>
+
+<section id="ma-slope">
+  <h2><span class="sec-num">6.5</span>均線的方向：上彎、下彎與扣抵</h2>
+  <p class="lead-in">均線的位置告訴你平均成本在哪裡，均線的方向告訴你平均成本正在變高還是變低。計畫用來形容 10/16 盤勢的「下彎」，說的就是方向。</p>
+
+  <div class="box define" id="def-ma-down">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>均線下彎</dfn><span class="en">Falling moving average</span></p>
+    <p>均線的數值一天比一天低，畫在圖上是往右下彎。反過來，一天比一天高叫上彎（也說「翻揚」），幾乎不動叫走平。月線下彎，代表最近 20 個交易日的平均成本在下降。</p>
+  </div>
+
+  <p>均線為什麼會彎？回到圖 6.3 的窗口。每過一天，總和加入今天的收盤、扣掉最舊那天的收盤，所以均線的變化量只取決於這兩個數字。被扣掉的那個價格叫<dfn id="def-deduct">扣抵</dfn>價（Drop-off price），也就是 N 個交易日前的收盤價。</p>
+
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">今天的均線 − 昨天的均線 ＝ <span class="frac"><span>今天收盤 − 扣抵價</span><span>N</span></span></div>
+    <div class="where">今天收盤高於扣抵價，均線上升；低於扣抵價，均線下降；相等就走平。例如圖 6.3 第 7 天：(97 − 102) ÷ 5 ＝ −1.0。</div>
+  </div>
+
+  <p>這個公式有一個很實用的推論：<strong>你可以事先知道均線接下來幾天好不好轉彎</strong>。只要往回數 N 天，就知道接下來要扣掉哪些價格。如果接下來要扣的是一段高價（俗稱「扣高」），股價得漲到比它們還高，均線才會停止下彎；如果要扣的是一段低價（「扣低」），股價只要站穩，均線就會自然翻揚。</p>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>大跌之後，月線為什麼會連續好幾天下彎？（點位為假設）</h4>
+    <ol class="calc">
+      <li>假設今天月線在 48,500 點，明天要扣抵的是 20 個交易日前的收盤 49,800 點；明天指數收在 47,111 點，和今天一樣。<span class="eq">月線變化 ＝ (47,111 − 49,800) ÷ 20 ＝ −134.45 點</span></li>
+      <li>明天的月線：<span class="eq">48,500 − 134.45 ≈ 48,366 點（繼續下彎）</span></li>
+      <li>要讓月線明天不再下降，收盤至少要等於扣抵價：<span class="eq">49,800 ÷ 47,111 − 1 ≈ +5.7%</span></li>
+    </ol>
+    <p class="answer">只要接下來要扣的都是急跌前的高價，指數就算止跌、甚至小漲，月線也會繼續往下彎好幾天。下彎的月線像一道慢慢壓下來的天花板。</p>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §二</span></div>
+    <p class="quote">大盤本益比約 26 倍；10 日線與月線下彎，反彈到 49,000 點附近容易遇壓。</p>
+    <p>先拆前半句。「10 日線下彎」表示最近的收盤低於 10 個交易日前的收盤；「月線下彎」表示也低於 20 個交易日前。這和盤勢對得上：那一週<span class="term" data-term="加權指數">指數</span>跌了 2,022 點，其中 10/15 單日就跌 1,656 點，最新的收盤遠低於要扣掉的舊收盤。再看計畫第五節的加碼條件寫「大盤站回月線」，能「站回」，代表 10/16 的收盤在月線之下。合起來就是：<strong>指數在兩條下彎的均線下方</strong>，最近兩週到一個月進場的人平均是賠錢的。後半句的 49,000 點，下一節解。（「<span class="term" data-term="大盤本益比">大盤本益比</span>約 26 倍」是估值，見第 10 章。）</p>
+  </div>
+
+  <p>下面的工具畫的是一段示意走勢：先漲、做頭、跌破月線，最後反彈到下彎的月線下方停住。點圖上任何一天，讀數會告訴你那天收盤在 10 日線、月線、季線的上方還是下方，以及均線往哪裡彎。試著找出兩個時刻：第一次收盤跌破月線的那一天；以及最後幾天，股價反彈卻停在月線下方的位置。後者就是計畫描述的盤面。也可以打開 5 日線，比較它和月線哪一條轉得快。</p>
+
+  <div class="widget" data-widget="ma" data-days="120" data-show="10,20,60"></div>
+</section>
+
+<section id="support-resistance">
+  <h2><span class="sec-num">6.6</span>支撐與壓力：價格的記憶</h2>
+  <p class="lead-in">價格不是在一張白紙上移動。市場記得自己曾經在哪裡大量成交、在哪裡轉頭，這些地方常會變成下一次的關卡。</p>
+
+  <div class="box define" id="def-support">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>支撐</dfn><span class="en">Support</span></p>
+    <p>價格跌到附近時，容易出現買盤、讓跌勢停下來的價位或區間。反過來，價格漲到附近時容易遇到賣盤、讓漲勢停下來的地方叫<dfn id="def-resistance">壓力</dfn>（Resistance）。兩者都是「容易」，不是「一定」；通常是一個區間，不是一個精確的數字。</p>
+  </div>
+
+  <p>支撐和壓力從哪裡來？答案是人的成本和記憶。假設一檔股票曾在 120 元附近成交了很多張，之後跌到 100 元。那些在 120 元買進的人，每張帳面虧損 (120 − 100) × 1,000 股 ＝ 2 萬元，被<dfn id="def-trapped">套牢</dfn>（Trapped holders）了。等價格反彈回 120 元，他們終於可以不賠出場，這叫「解套」，其中不少人會選擇賣掉。這批集中出現的賣單，就是 120 元的壓力。</p>
+  <p>支撐的道理相反。價格曾在 100 元止跌反彈，當時沒買到的人記得這個價，下次跌回 100 元附近就想買；在 100 元買到的人看到它守住，也可能加碼。集中出現的買單，就是 100 元的支撐。</p>
+  <p>常見的支撐與壓力有這幾種：</p>
+  <ul>
+    <li><b><dfn id="def-prior-high">前高</dfn>與前低</b>：上一個波段的高點與低點。前高常是壓力（上次就是在那裡漲不上去），前低常是支撐。</li>
+    <li><b>均線</b>：很多人看同一條月線或季線，它就成了會移動的關卡。站在均線上的股票拉回到均線常有買盤；在均線下的股票反彈到均線常遇賣壓（上一節的「天花板」）。</li>
+    <li><b><dfn id="def-round">整數關卡</dfn></b>：50,000 點、1,000 元這類好記的整數。人們習慣把掛單、停損、目標價設在整數附近，委託就容易聚集在那裡。</li>
+    <li><b>成交密集區</b>：過去成交量特別大的價格區間，代表很多人的成本在那裡。</li>
+    <li><b>缺口</b>：價格跳空留下的空白區（下一節）。</li>
+  </ul>
+  <p>支撐和壓力還會<strong>角色互換</strong>。壓力被有力地突破之後，原本想解套的人已經賣完了，那個價位反而變成新的支撐；支撐被跌破之後，在那裡買進的人全部被套，它就變成新的壓力。下面這張示意圖把這幾件事畫在同一段走勢裡。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 318" role="img" aria-label="支撐與壓力示意：價格在 90 與 100 之間來回，第 11 天盤中衝過 100 卻收在下方是假突破；第 17 天帶著約 2.7 倍均量的長紅收盤站上 100；之後回測 100 不破，壓力變成支撐">
+        <line x1="30" y1="100" x2="388" y2="100" class="s-accent s-15 s-dash"/>
+        <line x1="30" y1="190" x2="250" y2="190" class="s-3 s-15 s-dash"/>
+        <line x1="4" y1="232" x2="396" y2="232" class="s-rule s-1"/>
+        <line x1="34" y1="289" x2="362" y2="289" class="s-3 s-1 s-dash"/>
+        <line x1="40" y1="163" x2="40" y2="194.5" class="s-up s-15"/>
+        <rect x="35.5" y="167.5" width="9" height="13.5" class="f-up"/>
+        <line x1="55" y1="145" x2="55" y2="172" class="s-up s-15"/>
+        <rect x="50.5" y="149.5" width="9" height="18.0" class="f-up"/>
+        <line x1="70" y1="122.5" x2="70" y2="154" class="s-up s-15"/>
+        <rect x="65.5" y="127" width="9" height="22.5" class="f-up"/>
+        <line x1="85" y1="100" x2="85" y2="131.5" class="s-up s-15"/>
+        <rect x="80.5" y="109" width="9" height="18" class="f-up"/>
+        <line x1="100" y1="104.5" x2="100" y2="136" class="s-down s-15"/>
+        <rect x="95.5" y="109" width="9" height="22.5" class="f-down"/>
+        <line x1="115" y1="127" x2="115" y2="163" class="s-down s-15"/>
+        <rect x="110.5" y="131.5" width="9" height="27.0" class="f-down"/>
+        <line x1="130" y1="154" x2="130" y2="185.5" class="s-down s-15"/>
+        <rect x="125.5" y="158.5" width="9" height="22.5" class="f-down"/>
+        <line x1="145" y1="158.5" x2="145" y2="190" class="s-up s-15"/>
+        <rect x="140.5" y="163" width="9" height="18" class="f-up"/>
+        <line x1="160" y1="136" x2="160" y2="167.5" class="s-up s-15"/>
+        <rect x="155.5" y="140.5" width="9" height="22.5" class="f-up"/>
+        <line x1="175" y1="113.5" x2="175" y2="145" class="s-up s-15"/>
+        <rect x="170.5" y="118" width="9" height="22.5" class="f-up"/>
+        <line x1="190" y1="86.5" x2="190" y2="122.5" class="s-up s-15"/>
+        <rect x="185.5" y="113.5" width="9" height="4.5" class="f-up"/>
+        <line x1="205" y1="109" x2="205" y2="140.5" class="s-down s-15"/>
+        <rect x="200.5" y="113.5" width="9" height="22.5" class="f-down"/>
+        <line x1="220" y1="131.5" x2="220" y2="163" class="s-down s-15"/>
+        <rect x="215.5" y="136" width="9" height="18" class="f-down"/>
+        <line x1="235" y1="145" x2="235" y2="185.5" class="s-up s-15"/>
+        <rect x="230.5" y="149.5" width="9" height="4.5" class="f-up"/>
+        <line x1="250" y1="122.5" x2="250" y2="154" class="s-up s-15"/>
+        <rect x="245.5" y="127" width="9" height="22.5" class="f-up"/>
+        <line x1="265" y1="104.5" x2="265" y2="131.5" class="s-up s-15"/>
+        <rect x="260.5" y="109" width="9" height="18" class="f-up"/>
+        <line x1="280" y1="59.5" x2="280" y2="113.5" class="s-up s-15"/>
+        <rect x="275.5" y="64" width="9" height="45" class="f-up"/>
+        <line x1="295" y1="46" x2="295" y2="73" class="s-up s-15"/>
+        <rect x="290.5" y="50.5" width="9" height="13.5" class="f-up"/>
+        <line x1="310" y1="46" x2="310" y2="77.5" class="s-down s-15"/>
+        <rect x="305.5" y="50.5" width="9" height="22.5" class="f-down"/>
+        <line x1="325" y1="73" x2="325" y2="98.2" class="s-up s-15"/>
+        <rect x="320.5" y="74.8" width="9" height="2.7" class="f-up"/>
+        <line x1="340" y1="46" x2="340" y2="77.5" class="s-up s-15"/>
+        <rect x="335.5" y="50.5" width="9" height="24.3" class="f-up"/>
+        <line x1="355" y1="28" x2="355" y2="55" class="s-up s-15"/>
+        <rect x="350.5" y="32.5" width="9" height="18.0" class="f-up"/>
+        <rect x="35.5" y="292.0" width="9" height="18.0" class="f-up o-50"/>
+        <rect x="50.5" y="289.0" width="9" height="21.0" class="f-up o-50"/>
+        <rect x="65.5" y="287.5" width="9" height="22.5" class="f-up o-50"/>
+        <rect x="80.5" y="284.5" width="9" height="25.5" class="f-up o-50"/>
+        <rect x="95.5" y="290.5" width="9" height="19.5" class="f-down o-50"/>
+        <rect x="110.5" y="287.5" width="9" height="22.5" class="f-down o-50"/>
+        <rect x="125.5" y="286.0" width="9" height="24.0" class="f-down o-50"/>
+        <rect x="140.5" y="290.5" width="9" height="19.5" class="f-up o-50"/>
+        <rect x="155.5" y="292.0" width="9" height="18.0" class="f-up o-50"/>
+        <rect x="170.5" y="289.0" width="9" height="21.0" class="f-up o-50"/>
+        <rect x="185.5" y="289.0" width="9" height="21.0" class="f-up o-50"/>
+        <rect x="200.5" y="287.5" width="9" height="22.5" class="f-down o-50"/>
+        <rect x="215.5" y="290.5" width="9" height="19.5" class="f-down o-50"/>
+        <rect x="230.5" y="286.0" width="9" height="24.0" class="f-up o-50"/>
+        <rect x="245.5" y="292.0" width="9" height="18.0" class="f-up o-50"/>
+        <rect x="260.5" y="289.0" width="9" height="21.0" class="f-up o-50"/>
+        <rect x="275.5" y="253.0" width="9" height="57.0" class="f-up"/>
+        <rect x="290.5" y="277.0" width="9" height="33.0" class="f-up o-50"/>
+        <rect x="305.5" y="287.5" width="9" height="22.5" class="f-down o-50"/>
+        <rect x="320.5" y="296.5" width="9" height="13.5" class="f-up o-50"/>
+        <rect x="335.5" y="286.0" width="9" height="24.0" class="f-up o-50"/>
+        <rect x="350.5" y="283.0" width="9" height="27.0" class="f-up o-50"/>
+        <text x="28" y="93" class="t-sm t-2">壓力 <tspan class="t-mono">100</tspan>（前高）</text>
+        <text x="28" y="209" class="t-sm t-2">支撐 <tspan class="t-mono">90</tspan>（前低）</text>
+        <text x="160" y="56" class="ta-m t-sm t-b">假突破</text>
+        <text x="160" y="72" class="ta-m t-sm t-3">收盤沒站上</text>
+        <line x1="176" y1="76" x2="186" y2="85" class="s-3 s-1"/>
+        <text x="246" y="36" class="ta-m t-sm t-b">帶量突破</text>
+        <text x="246" y="52" class="ta-m t-sm t-3">收盤站上前高</text>
+        <text x="325" y="120" class="ta-m t-sm t-b">回測不破</text>
+        <text x="325" y="137" class="ta-m t-sm t-accent">壓力變支撐</text>
+        <text x="4" y="252" class="t-sm t-3">成交量</text>
+        <text x="280" y="248" class="ta-m t-sm t-b t-up">爆量</text>
+        <text x="30" y="293" class="ta-e t-sm t-3">均量</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意。上半部是日K，下半部是每天的成交量。第 11 天的長上影線盤中衝過 100，收盤又掉回去，量也沒有放大；第 17 天收盤站上 100，成交量約是先前均量的 2.7 倍；幾天後價格回到 100 附近，量縮、留下下影線，原本的壓力變成了支撐。</span></figcaption>
+  </figure>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §二</span></div>
+    <p class="quote">10 日線與月線下彎，反彈到 49,000 點附近容易遇壓。</p>
+    <p>「遇壓」就是遇到壓力。計畫沒有解釋為什麼是 49,000 點，但用本章的工具，可以找到至少三個理由，而且它們疊在同一個區域。</p>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>為什麼是 49,000 點？用支撐壓力的語言解讀</h4>
+    <ol class="calc">
+      <li>先量距離：從 10/16 收盤到 49,000 點還有多遠？<span class="eq">49,000 − 47,111 ＝ 1,889 點；1,889 ÷ 47,111 ≈ +4.0%</span></li>
+      <li>套牢區：6.2 節推算上一週收盤約 49,133 點，也就是急跌開始前的位置。上週在 49,000 點上下買進的人，現在每 100 元的部位大約虧 4 元，指數一回到那裡就有人想解套。<span class="eq">47,111 ÷ 49,133 − 1 ≈ −4.1%</span></li>
+      <li>整數關卡：49,000 是好記的整數，掛單與目標價容易聚集。</li>
+      <li>下彎的均線：計畫要等「站回月線」，表示收盤在月線之下；指數往上反彈，得先穿過正在下彎的 10 日線與月線。</li>
+    </ol>
+    <p class="answer">49,000 點附近同時是套牢區與整數關卡，上方還壓著兩條下彎的均線，所以計畫判斷反彈到那裡「容易」遇壓。計畫沒有公布均線的點位，本書也不猜它們確切在哪裡。</p>
+  </div>
+  <aside class="note">支撐和壓力是<b>區</b>，不是<b>線</b>。計畫寫「49,000 點附近」、「44,500–45,000 點」，都是區間的寫法。把它想成一條有厚度的帶子，價格在帶子裡來回幾十點，不必大驚小怪。</aside>
+</section>
+
+<section id="trend">
+  <h2><span class="sec-num">6.7</span>趨勢、突破、回測與缺口</h2>
+  <p class="lead-in">單一天的漲跌是雜訊，一連串轉折點的排列才是趨勢。這一節把「趨勢」說清楚，再定義兩份文件最常用的幾個動作：突破、跌破、回測。</p>
+
+  <div class="box define" id="def-trend">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>趨勢</dfn><span class="en">Trend</span></p>
+    <p>價格在一段時間裡的主要方向，用轉折點的排列來判斷。高點一個比一個高、低點也一個比一個高，是上升趨勢；高點、低點都一個比一個低，是下降趨勢；高低點在一個區間裡來回、分不出方向，叫<dfn id="def-range">盤整</dfn>（Consolidation）。</p>
+  </div>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 274" role="img" aria-label="三種走勢：上升趨勢的高點與低點一路墊高，回檔不跌破前低；盤整的高低點在支撐與壓力之間來回；下降趨勢的高點與低點一路降低，反彈站不上前高">
+        <line x1="134" y1="10" x2="134" y2="268" class="s-rule s-1"/>
+        <line x1="266" y1="10" x2="266" y2="268" class="s-rule s-1"/>
+        <text x="69" y="24" class="ta-m t-b">上升趨勢</text>
+        <text x="69" y="42" class="ta-m t-sm t-2">高點、低點都墊高</text>
+        <text x="200" y="24" class="ta-m t-b">盤整</text>
+        <text x="200" y="42" class="ta-m t-sm t-2">高低點在區間內</text>
+        <text x="331" y="24" class="ta-m t-b">下降趨勢</text>
+        <text x="331" y="42" class="ta-m t-sm t-2">高點、低點都降低</text>
+
+        <line x1="10" y1="217.7" x2="130" y2="144.6" class="s-accent s-15 s-dash"/>
+        <polyline points="16,214 42,160 62,186 88,124 108,158 126,80" class="f-none s-ink s-2w s-round draw"/>
+        <circle cx="16" cy="214" r="3" class="f-ink"/>
+        <circle cx="42" cy="160" r="3" class="f-ink"/>
+        <circle cx="62" cy="186" r="3" class="f-ink"/>
+        <circle cx="88" cy="124" r="3" class="f-ink"/>
+        <circle cx="108" cy="158" r="3" class="f-ink"/>
+        <circle cx="126" cy="80" r="3" class="f-ink"/>
+        <text x="16" y="234" class="ta-m t-sm t-2">低1</text>
+        <text x="42" y="150" class="ta-m t-sm t-2">高1</text>
+        <text x="66" y="209" class="ta-m t-sm t-2">低2</text>
+        <text x="88" y="114" class="ta-m t-sm t-2">高2</text>
+        <text x="113" y="182" class="ta-m t-sm t-2">低3</text>
+        <text x="122" y="70" class="ta-m t-sm t-2">高3</text>
+
+        <line x1="142" y1="106" x2="260" y2="106" class="s-3 s-15 s-dash"/>
+        <line x1="142" y1="154" x2="260" y2="154" class="s-3 s-15 s-dash"/>
+        <polyline points="146,150 168,110 192,152 216,108 238,150 256,112" class="f-none s-ink s-2w s-round draw"/>
+        <circle cx="168" cy="110" r="3" class="f-ink"/>
+        <circle cx="192" cy="152" r="3" class="f-ink"/>
+        <circle cx="216" cy="108" r="3" class="f-ink"/>
+        <circle cx="238" cy="150" r="3" class="f-ink"/>
+        <text x="150" y="98" class="ta-m t-sm t-3">壓力</text>
+        <text x="150" y="172" class="ta-m t-sm t-3">支撐</text>
+
+        <line x1="272" y1="79.8" x2="392" y2="163.8" class="s-accent s-15 s-dash"/>
+        <polyline points="278,84 298,150 318,112 344,176 364,144 384,214" class="f-none s-ink s-2w s-round draw"/>
+        <circle cx="278" cy="84" r="3" class="f-ink"/>
+        <circle cx="298" cy="150" r="3" class="f-ink"/>
+        <circle cx="318" cy="112" r="3" class="f-ink"/>
+        <circle cx="344" cy="176" r="3" class="f-ink"/>
+        <circle cx="364" cy="144" r="3" class="f-ink"/>
+        <circle cx="384" cy="214" r="3" class="f-ink"/>
+        <text x="282" y="74" class="ta-m t-sm t-2">高1</text>
+        <text x="298" y="168" class="ta-m t-sm t-2">低1</text>
+        <text x="314" y="102" class="ta-m t-sm t-2">高2</text>
+        <text x="344" y="194" class="ta-m t-sm t-2">低2</text>
+        <text x="358" y="130" class="ta-m t-sm t-2">高3</text>
+        <text x="380" y="232" class="ta-m t-sm t-2">低3</text>
+
+        <text x="69" y="262" class="ta-m t-sm t-2">回檔不跌破前低</text>
+        <text x="200" y="262" class="ta-m t-sm t-2">高低點來回打轉</text>
+        <text x="331" y="262" class="ta-m t-sm t-2">反彈站不上前高</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意。判斷趨勢不看某一天漲或跌，而是看轉折點怎麼排。藍色虛線是趨勢線：上升趨勢把低點連起來，下降趨勢把高點連起來；價格回到趨勢線附近，常是測試趨勢還在不在的時刻。</span></figcaption>
+  </figure>
+
+  <p>趨勢一定要搭配一把時間尺。日K 上的趨勢通常是幾週到幾個月的方向，週K 上的是幾個月到幾年。日K 正在下跌，不代表週K 上的長期上升趨勢已經結束；一段長期上升趨勢裡，本來就會有好幾次<span class="term" data-term="回檔">回檔</span>。說「趨勢轉空」之前，先說清楚是哪一把尺。</p>
+  <p>上升趨勢什麼時候算被破壞？最直接的訊號是<strong>低點不再墊高</strong>：價格回檔時跌破了前一個低點。下降趨勢則是<strong>高點不再降低</strong>：反彈時站上了前一個高點。這時就用得到「突破」與「跌破」。</p>
+
+  <div class="box define" id="def-breakout">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>突破</dfn><span class="en">Breakout</span></p>
+    <p>價格越過一個壓力（前高、下彎的均線、整數關卡、盤整區上緣），而且<strong>收盤</strong>站在它上方。方向相反，價格跌到支撐下方而且收盤在下方，叫<dfn id="def-breakdown">跌破</dfn>（Breakdown）。GCFIE 的「失守」就是支撐被跌破。</p>
+  </div>
+
+  <p>為什麼強調收盤？因為盤中的價格可以被幾筆大單、一則謠言暫時推過去，收盤價則是一整天、包括最後收盤集合競價的結果。盤中越過、收盤又縮回去，就會留下一根長上影線（或長下影線），這叫<dfn id="def-false-break">假突破</dfn>（False breakout），圖 6.4 的第 11 天就是。有些人還會再加條件，例如連續兩天收在上方，或超過關卡一定幅度才算數。你的兩份文件都用收盤當標準：GCFIE 寫「收盤跌破＝失守確認」，計畫寫「停損看收盤價」。</p>
+  <p>突破時有沒有量也很重要。帶著爆量越過前高，代表很多人用真金白銀接受了新價格；量縮的突破，參與的人少，比較容易被打回來。</p>
+
+  <div class="box define" id="def-retest">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>回測</dfn><span class="en">Retest / pullback test</span></p>
+    <p>價格離開一個關鍵價位之後，又回到它附近，測試它守不守得住。突破後拉回、回測不破，原本的壓力變成支撐，突破比較可信；跌破後反彈、回測上不去，原本的支撐變成壓力。也常泛指「價格回到某個支撐區去測試」。</p>
+  </div>
+  <p>計畫第五節「指數回測約 44,500–45,000 點時分批承接」用的是第二種意思：如果指數往下拉回到 44,500–45,000 點這個區間，就在那裡分批買進，因為那是預先設好、可能有支撐的位置。</p>
+
+  <h3>缺口：一段沒有成交的空白</h3>
+  <div class="box define" id="def-gap">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>缺口</dfn><span class="en">Gap</span></p>
+    <p>今天的最低價高於昨天的最高價（向上跳空），或今天的最高價低於昨天的最低價（向下跳空），兩根 K 棒之間留下一段完全沒有成交的價格空白。也叫「跳空缺口」。之後價格回到這段空白裡，叫缺口回補。</p>
+  </div>
+  <p>舉個例子：昨天最高 102、最低 98；今天開 104，盤中最低 103.5。從 102 到 103.5 這 1.5 元之間沒有任何一筆成交，就是一個向上缺口。之後只要哪一天的最低價跌到 102 以下，缺口就被完全回補了。向上缺口常被當成支撐（跳空那天沒買到的人，等著它回來），向下缺口常被當成壓力。</p>
+  <p>缺口多半發生在開盤，因為收盤後到隔天開盤之間的消息，會一次反映在開盤價上：美股大漲大跌、財報、CPI 公布。台股的盤前報告，本質上就是在猜今天開盤會跳多少。但開盤只是一天的起點：</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第二十八節（禁止事項）</span></div>
+    <p class="quote">8. 把盤前期貨漲跌直接當成當日收盤預測。</p>
+    <p>用 K 棒的語言說：盤前的期貨大約告訴你今天會不會跳空開高或開低，也就是 K 棒的起點；收盤在哪裡，還要經過一整天的拔河。跳空開低之後一路被買上來，收出一根紅K，甚至把缺口補回去，盤前的悲觀就被價格否定了。這也是 GCFIE 第十八節「價格優先於籌碼」的精神：先看價格怎麼反應，再下結論。</p>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第十二、二十九節</span></div>
+    <p class="quote">⑤ SPX / Nasdaq 漲不動甚至下跌。</p>
+    <p class="quote">Late-Cycle / Terminal Structure：空單回補、Call狂熱、VIX反升、利率升、價格鈍化。</p>
+    <p>GCFIE 的<span class="term" data-term="末端結構模型">末端結構模型</span>裡，有一項純粹是價格條件。「漲不動」「價格鈍化」翻成本章的詞彙，就是上升趨勢的高點不再墊高、高檔頻頻出現長上影線、好消息出來價格卻沒有反應。它不是說趨勢已經反轉，而是說買方的力道在減弱，多頭進入容錯率低的階段（第 36 章）。</p>
+  </div>
+</section>
+
+<section id="confirmation">
+  <h2><span class="sec-num">6.8</span>兩份文件裡的價格確認線</h2>
+  <p class="lead-in">前七節教的是詞彙。最後看兩份文件怎麼用這些詞。它們都不拿技術面來猜明天，而是事先寫好「守住會怎樣、跌破會怎樣」，再讓收盤價來回答。</p>
+
+  <h3>GCFIE：先設一條線，再讓價格驗證</h3>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第十九、二十三、二十六節</span></div>
+    <p class="quote">45,800支撐→收盤跌破＝失守確認。</p>
+    <p class="quote">例如 45,800守住 + 台積電止跌 + PCB/Memory維持強勢 → 高檔輪動仍成立；反之 45,800跌破 + 台積電轉弱 + VIX升 → 降低 Beta。必須建立價格確認線。</p>
+    <p class="quote">必須提供情境 A（突破／守住意味什麼）與情境 B（跌破／失守意味什麼），讓盤前分析可以在盤中被驗證。</p>
+    <p>三段話用的全是本章的詞彙，逐一拆開：</p>
+    <ul>
+      <li><b>45,800 是範例數字</b>，示範一條<span class="term" data-term="價格確認線">價格確認線</span>怎麼寫。每天的報告要依當時的盤勢，從前低、均線、整數關卡這些支撐壓力裡挑一條。</li>
+      <li><b>「收盤跌破」才算「失守確認」</b>。盤中跌破又被拉回，只會留下一根長下影線，那是買盤承接，不是失守。這就是 6.7 節「用收盤確認」的規則。</li>
+      <li><b>條件式的寫法</b>：價格條件放第一個，再加上台積電、類股、VIX 等其他條件，最後才是結論。結論也是動作而不是預言，例如「降低 <span class="term" data-term="Beta">Beta</span>」，意思是減少跟著大盤上下震盪的曝險（第 16 章）。這種寫法叫<span class="term" data-term="條件式策略">條件式策略</span>。</li>
+      <li><b>情境 A／B</b>：開盤前就把突破（守住）和跌破（失守）兩條路都寫好，盤中只要看價格走哪一條。隔天再回頭檢查，就是 GCFIE 的<span class="term" data-term="預警驗證">預警驗證</span>（第 36 章）。</li>
+    </ul>
+  </div>
+
+  <h3>計畫：用均線和價位寫條件</h3>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §五、§六</span></div>
+    <p class="quote">條件二選一：大盤站回月線且外資停止連賣，或指數回測約 44,500–45,000 點時分批承接；用營收與財報汰弱留強；最後一筆加碼可等 12/9 結果</p>
+    <p class="quote">停損看收盤價、隔天執行；跌破停損的股票不攤平，改用候補股替換。</p>
+    <p class="quote">停利分三段：目標1賣 1/3、目標2再賣 1/3，剩下用 10 日線或「高點回落 15%」移動停利。</p>
+    <p class="quote">組合總停損：總資產跌到約 88 萬（−12%），持股降到五成以下，等大盤站回月線再說。</p>
+  </div>
+  <p>計畫裡出現的技術詞彙，全部是「條件」：</p>
+  <ul>
+    <li><b>加碼條件一「大盤站回月線且外資停止連賣」</b>：價格條件加上籌碼條件，兩個都要。站回月線，表示指數收盤回到最近 20 個交易日的平均成本之上，也穿過了上一節說的那道下彎天花板；外資停止<span class="term" data-term="連續賣超">連賣</span>，表示壓低指數的最大賣方暫停了。</li>
+    <li><b>加碼條件二「回測約 44,500–45,000 點」</b>：預先畫好的支撐區。從 10/16 收盤算，45,000 點是 45,000 ÷ 47,111 − 1 ≈ −4.5%，44,500 點是 44,500 ÷ 47,111 − 1 ≈ −5.5%。跌到這裡才分批買，等於讓價格先回測，再決定。</li>
+    <li><b>「停損看收盤價、隔天執行」</b>：用收盤確認跌破，避免被盤中的長下影線洗出場；隔天才執行，避免在收盤前的混亂裡倉促下單。這叫<span class="term" data-term="收盤價停損">收盤價停損</span>（第 32 章）。</li>
+    <li><b>「10 日線」移動停利</b>：上漲時，10 日線跟著股價往上走；收盤跌破 10 日線，代表短線趨勢轉弱，就把剩下的部位賣掉。下面算一個例子。</li>
+    <li><b>組合總停損之後「等大盤站回月線再說」</b>：大幅減碼之後，用月線當作「重新進場前的確認」，而不是憑感覺判斷跌夠了沒有。</li>
+  </ul>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 330" role="img" aria-label="計畫的價格尺：10/16 收盤 47,111 點；上方 49,000 點附近是反彈壓力，接近推算的上週收盤 49,133 點；下方 44,500 到 45,000 點是回測承接區，距收盤約 −4.5% 到 −5.5%；加碼條件一是收盤站回月線且外資停止連賣，條件二是回測時分批承接">
+        <defs>
+          <marker id="ar06a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-down"/></marker>
+          <marker id="ar06b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-3"/></marker>
+        </defs>
+        <text x="16" y="22" class="t-sm t-3">加權指數（點）</text>
+        <line x1="76" y1="34" x2="76" y2="318" class="s-ink s-1"/>
+        <line x1="70" y1="65" x2="76" y2="65" class="s-ink s-1"/>
+        <line x1="70" y1="115" x2="76" y2="115" class="s-ink s-1"/>
+        <line x1="70" y1="165" x2="76" y2="165" class="s-ink s-1"/>
+        <line x1="70" y1="215" x2="76" y2="215" class="s-ink s-1"/>
+        <line x1="70" y1="265" x2="76" y2="265" class="s-ink s-1"/>
+        <line x1="70" y1="315" x2="76" y2="315" class="s-ink s-1"/>
+        <text x="66" y="69" class="ta-e t-xs t-mono t-3">49,000</text>
+        <text x="66" y="119" class="ta-e t-xs t-mono t-3">48,000</text>
+        <text x="66" y="169" class="ta-e t-xs t-mono t-3">47,000</text>
+        <text x="66" y="219" class="ta-e t-xs t-mono t-3">46,000</text>
+        <text x="66" y="269" class="ta-e t-xs t-mono t-3">45,000</text>
+        <text x="66" y="319" class="ta-e t-xs t-mono t-3">44,000</text>
+
+        <line x1="76" y1="65" x2="232" y2="65" class="s-ink s-15 s-dash"/>
+        <circle cx="76" cy="58.4" r="3.5" class="f-plate s-ink s-15"/>
+        <text x="96" y="56" class="t-sm t-b">反彈壓力：49,000 附近</text>
+        <text x="96" y="84" class="t-sm t-3">上週收盤約 49,133（推算）</text>
+        <text x="246" y="69" class="t-sm t-2">套牢區＋整數關卡</text>
+        <line x1="86" y1="62" x2="86" y2="152" class="s-down s-15" marker-end="url(#ar06a)"/>
+        <text x="96" y="118" class="t-sm t-b t-down">一週 −2,022 點</text>
+        <text x="96" y="135" class="t-sm t-down">約 −4.1%</text>
+
+        <circle cx="76" cy="159.5" r="5" class="f-ink"/>
+        <text x="96" y="165" class="t-b">10/16 收盤 47,111</text>
+
+        <line x1="86" y1="172" x2="86" y2="260" class="s-3 s-1 s-dash" marker-end="url(#ar06b)"/>
+        <text x="96" y="214" class="t-sm t-3">再跌 4.5%～5.5%</text>
+        <text x="96" y="256" class="t-sm t-b">回測承接區</text>
+        <rect x="77" y="265" width="155" height="25" class="f-wash"/>
+        <text x="154" y="282" class="ta-m t-mono t-b t-accent">44,500–45,000</text>
+
+        <rect x="240" y="88" width="150" height="94" rx="4" class="f-soft"/>
+        <text x="250" y="108" class="t-b t-accent">加碼條件一</text>
+        <text x="250" y="128" class="t-sm">收盤站回月線</text>
+        <text x="250" y="147" class="t-sm">且外資停止連賣</text>
+        <text x="250" y="170" class="t-sm t-3">月線在收盤上方、下彎</text>
+
+        <rect x="240" y="244" width="150" height="56" rx="4" class="f-soft"/>
+        <text x="250" y="265" class="t-b t-accent">加碼條件二</text>
+        <text x="250" y="286" class="t-sm">回測時分批承接</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>依計畫第二、五節的數字繪製，刻度每格 1,000 點；49,133 點由 47,111 ＋ 2,022 推算。計畫沒有公布 10 日線與月線的點位，所以圖上只寫它們的相對位置，不畫數值。兩個加碼條件只要成立一個。</span></figcaption>
+  </figure>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>台光電最後 1/3 部位的移動停利（參考價取自計畫，之後的股價為假設）</h4>
+    <ol class="calc">
+      <li>計畫的參考價 5,165 元、目標1 6,000 元、目標2 7,000 元。假設股價漲過目標2 後，最高收盤來到 7,400 元。「高點回落 15%」的出場價：<span class="eq">7,400 × (1 − 15%) ＝ 6,290 元</span></li>
+      <li>假設這時 10 日線在 7,050 元。收盤跌破 7,050 元，10 日線的條件就成立。<span class="eq">7,050 − 6,290 ＝ 760 元，10 日線近得多</span></li>
+      <li>兩個出場價相對參考價的報酬：<span class="eq">7,050 ÷ 5,165 − 1 ≈ +36.5%；6,290 ÷ 5,165 − 1 ≈ +21.8%</span></li>
+    </ol>
+    <p class="answer">在這個假設下，10 日線跟得緊、保住較多獲利，但也比較容易被正常的震盪洗出場；15% 給的空間大、抱得久，回吐也多。計畫寫的是「或」，兩把尺各有取捨，第 32 章會再談怎麼搭配。</p>
+  </div>
+
+  <h3>技術面能做什麼、不能做什麼</h3>
+  <p>支撐、壓力、均線之所以有用，是因為很多人看著同一條線、在同一個區域掛單，讓價格在那裡比較「容易」出現反應。它們沒有任何力量擋住價格。10/15 美國 CPI 高於預期、加上 AI 資料中心融資的信用疑慮，指數單日跌了 1,656 點，任何一條均線都擋不住這種消息。</p>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>均線和支撐壓力可以預測股價會在哪裡反轉，跌到月線就該買，碰到前高就該賣。</p></div>
+    <div class="myth-right"><p>它們標出的是「多數人的成本與掛單集中在哪裡」，價格到那裡比較可能出現反應，也常常直接穿過去。兩份文件的用法是反過來的：先設好線，<strong>等收盤價表態</strong>，再依事先寫好的條件行動。技術面回答的是「現在發生了什麼」，不是「明天會發生什麼」。</p></div>
+  </div>
+
+  <div class="box warn">
+    <div class="box-label"><span class="zh"></span><span class="lat">RISK</span></div>
+    <p>事後回頭看 K 線圖，每個高點和低點都很「明顯」，這是後見之明。在當下，你永遠不知道這一次是真突破還是假突破。所以兩份文件都搭配了停損、分批與部位上限：判斷錯的時候，損失有上限。</p>
+  </div>
+
+  <p>最後，把這一章濃縮成一套每天都能用的讀圖順序。打勾會被記住，下次打開還在：</p>
+  <ul class="checklist" data-key="ch06-read-chart">
+    <li>看最後一根 K 棒：收盤對開盤（紅K 或黑K），收盤對昨收（漲或跌）。</li>
+    <li>看影線：上影線長（上方有賣壓）還是下影線長（下方有承接）？</li>
+    <li>看量：和均量比，是爆量、量縮還是平常？</li>
+    <li>看位置：收盤在 10 日線、月線、季線的上方還是下方？均線往哪裡彎？</li>
+    <li>找出最近的前高、前低與整數關卡，寫下「收盤守住代表什麼、收盤跌破代表什麼」。</li>
+  </ul>
+</section>
+
+</article>
+
+<section class="recap" id="recap">
+  <h2>本章重點</h2>
+  <ul>
+    <li>（撰寫中）</li>
+  </ul>
+</section>
+
+<section class="quiz-set" id="quiz">
+  <h2>自我檢測</h2>
+  <p>每題選一個答案，選完會顯示解析。</p>
+</section>
+
+</main>
+</div>
+</div>
+</body>
+</html>

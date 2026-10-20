@@ -1,0 +1,30 @@
+{
+  "chapter": 2,
+  "terms": [
+    { "term": "股票", "en": "Stock / Share", "def": "公司所有權切成的等分憑證；持有股票就是持有公司的一小部分，按持股比例分享獲利、承擔虧損。", "anchor": "def-stock" },
+    { "term": "股東", "en": "Shareholder", "def": "持有公司股份的人，享有盈餘分配、表決與剩餘財產分配等權利，權利按持股比例計算。", "anchor": "def-shareholder" },
+    { "term": "面額", "en": "Par value", "def": "每股在公司帳上登記的金額；台灣上市櫃股票多為 10 元，非 10 元面額者簡稱加註「*」。", "anchor": "def-par" },
+    { "term": "股本", "en": "Share capital", "def": "面額 × 發行股數，即公司登記的資本額；面額 10 元時，股本 ÷ 10 元就是股數。", "anchor": "def-capital" },
+    { "term": "IPO", "en": "Initial public offering", "def": "首次公開發行：公司第一次把股票賣給大眾並掛牌交易，募得的錢流進公司。", "anchor": "def-ipo", "aliases": ["首次公開發行"] },
+    { "term": "稀釋", "en": "Dilution", "def": "公司發行新股使總股數增加，老股東的持股比例因而下降。", "anchor": "def-dilution" },
+    { "term": "有限責任", "en": "Limited liability", "def": "股份有限公司的股東最多賠掉出資的錢，不必替公司償還債務。", "anchor": "def-limited" },
+    { "term": "股利", "en": "Dividend", "def": "公司把盈餘分給股東，分現金股利（配息）與股票股利（配股）兩種形式。", "anchor": "def-dividend", "aliases": ["配息"] },
+    { "term": "現金股利", "en": "Cash dividend", "def": "每股發給股東的現金，也叫股息；除息時股價會扣掉同樣的金額。", "anchor": "def-cash-div", "aliases": ["股息"] },
+    { "term": "股票股利", "en": "Stock dividend", "def": "以新股代替現金發放，按面額 10 元換算配股率；每股 1 元等於每 1,000 股配 100 股。", "anchor": "def-stock-div", "aliases": ["配股"] },
+    { "term": "除權息", "en": "Ex-dividend / Ex-rights", "def": "發放股利前把股價扣除股利的程序：參考價＝（前一日收盤價 − 現金股利）÷（1＋配股率）。", "anchor": "def-exdiv", "aliases": ["除息", "除權"] },
+    { "term": "填息", "en": "Dividend gap filled", "def": "除權息後，股價漲回除權息前一日的收盤價；除權後漲回叫填權。", "anchor": "def-fill", "aliases": ["填權", "填權息"] },
+    { "term": "貼息", "en": "Unfilled dividend gap", "def": "除息後股價一直低於除息參考價，等於股利從股價中挖出，加上稅費可能反而虧損。", "anchor": "def-unfilled" },
+    { "term": "市值", "en": "Market capitalization", "def": "股價 × 已發行股數，即用現價買下整家公司的金額；決定公司在市值加權指數中的份量。", "anchor": "def-mcap" },
+    { "term": "委託簿", "en": "Order book", "def": "所有未成交買賣單依價格排成的清單；看盤軟體顯示最接近成交的五個價位，稱最佳五檔。", "anchor": "def-book", "aliases": ["五檔", "最佳五檔", "買賣五檔"] },
+    { "term": "撮合", "en": "Order matching", "def": "交易所把買單和賣單配對成交，依價格優先、時間優先；台股盤中自 2020 年起採逐筆交易。", "anchor": "def-match" },
+    { "term": "成交價", "en": "Traded price", "def": "買賣雙方實際成交的價格；逐筆交易時以委託簿上排隊那一方的價格成交。", "anchor": "def-trade-price" },
+    { "term": "股價", "en": "Stock price", "def": "最近一筆成交價，隨每筆成交跳動；反映市場對公司未來獲利與折現率的預期。", "anchor": "def-price" },
+    { "term": "內外盤", "en": "Trades at bid / at ask", "def": "成交在委賣價叫外盤（買方主動往上買），成交在委買價叫內盤（賣方主動往下賣）。", "anchor": "def-inout", "aliases": ["外盤", "內盤"] },
+    { "term": "供需", "en": "Supply and demand", "def": "想買與想賣的力量對比；買方較急就往上吃賣單推高股價，賣方較急就壓低股價。", "anchor": "def-supply-demand" },
+    { "term": "上市", "en": "Listed on TWSE", "def": "在臺灣證券交易所掛牌交易；計入加權指數，單日漲跌幅 10%。", "anchor": "def-listed" },
+    { "term": "上櫃", "en": "Listed on TPEx", "def": "在證券櫃檯買賣中心掛牌交易，門檻低於上市；計入櫃買指數，買賣方式與上市相同。", "anchor": "def-otc" },
+    { "term": "興櫃", "en": "Emerging stock board", "def": "櫃買中心管理的上市櫃預備市場，與推薦證券商議價成交、沒有漲跌幅限制，風險較高。", "anchor": "def-emerging" },
+    { "term": "KY股", "en": "Foreign primary listing", "def": "外國註冊公司在台第一上市櫃，簡稱加「-KY」（KY 是開曼群島代碼），例如世芯-KY。", "anchor": "def-ky", "aliases": ["-KY", "KY 股"] },
+    { "term": "控股公司", "en": "Holding company", "def": "主要業務是持有其他公司股份的公司，例如日月光投控、中信金（金融控股公司）。", "anchor": "def-holding", "aliases": ["金控", "投控", "金融控股公司"] }
+  ]
+}
