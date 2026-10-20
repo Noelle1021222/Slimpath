@@ -551,10 +551,258 @@
 
 <section id="timing-gap">
   <h2><span class="sec-num">7.6</span>時間差：賺錢的公司為什麼會缺現金</h2>
+  <p class="lead-in">7.3 節的「#5 賺到、#6 才收到」，7.5 節的「賺 34 億、現金少 13 億」，說的是同一件事：損益表記帳的時間點，和錢真正進出的時間點不一樣。</p>
+
+  <div class="box define" id="def-accrual">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>應計基礎</dfn><span class="en">Accrual basis</span></p>
+    <p>會計記帳的原則：收入在商品或服務交給客戶、「賺到」的時候認列，不管錢收到沒有；費用在發生或使用的時候認列，不管錢付了沒有。和它相對的是<b>現金基礎</b>，也就是存摺的記法：錢進來才算收入，錢出去才算支出。損益表採用應計基礎，現金流量表則把它還原成現金。</p>
+  </div>
+
+  <p>什麼時候才算「賺到」，有一套詳細的規則，叫<span class="term" data-term="營收認列">營收認列</span>（第 8 章）。對一般製造業來說，大致是貨交給客戶、由客戶取得控制的時候。應計基礎讓損益表更能反映「這段期間真正做了多少生意」，代價是它和現金之間會出現三種時間差：</p>
+  <ol>
+    <li><b>先賺後收（應收帳款）</b>：企業之間的買賣，常約定交貨後 60 天、90 天才付款。貨一交出去，營收和利潤就入帳了，錢要過幾個月才到。</li>
+    <li><b>先付後賣（存貨）</b>：原料要先買、薪水要先付，產品做好放在倉庫，賣出之前，這些錢都變成了存貨，不會出現在損益表的成本裡。</li>
+    <li><b>先付後攤（資本支出與折舊）</b>：示意科技買新產線，40 億元在付款當天就流出去了；假設分 5 年折舊，損益表每年只認列 8 億的費用。第一年現金少了 40 億，帳上的費用只有 8 億。</li>
+  </ol>
+  <p>下面用一個最單純的例子，看第一種時間差有多大。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 300" role="img" aria-label="示意：接到新訂單後每月出貨 10 億、成本 9 億當月付現、客戶 90 天後付款。累計淨利每月加 1 億、一路向上，累計現金卻先掉到負 27 億，第 4 個月貨款入帳後才每月回升 1 億">
+        <text x="12" y="18" class="t-xs t-3">億元</text>
+        <line x1="148" y1="13" x2="170" y2="13" class="s-accent s-3w s-round"/>
+        <text x="176" y="18" class="t-sm">累計淨利</text>
+        <line x1="262" y1="13" x2="284" y2="13" class="s-ink s-3w s-round"/>
+        <text x="290" y="18" class="t-sm">累計現金</text>
+        <line x1="52" y1="32" x2="380" y2="32" class="s-rule s-1 s-dash"/>
+        <line x1="52" y1="152" x2="380" y2="152" class="s-rule s-1 s-dash"/>
+        <line x1="52" y1="212" x2="380" y2="212" class="s-rule s-1 s-dash"/>
+        <line x1="52" y1="272" x2="380" y2="272" class="s-rule s-1 s-dash"/>
+        <text x="46" y="36" class="ta-e t-xs t-3 t-mono">10</text>
+        <text x="46" y="96" class="ta-e t-xs t-3 t-mono">0</text>
+        <text x="46" y="156" class="ta-e t-xs t-3 t-mono">−10</text>
+        <text x="46" y="216" class="ta-e t-xs t-3 t-mono">−20</text>
+        <text x="46" y="276" class="ta-e t-xs t-3 t-mono">−30</text>
+        <polygon points="56,92 96,146 136,200 176,254 216,248 256,242 296,236 336,230 376,224 376,92" class="f-foil-soft"/>
+        <line x1="52" y1="92" x2="380" y2="92" class="s-ink s-1"/>
+        <polyline points="56,92 96,86 136,80 176,74 216,68 256,62 296,56 336,50 376,44" class="f-none s-accent s-3w s-round draw"/>
+        <polyline points="56,92 96,146 136,200 176,254 216,248 256,242 296,236 336,230 376,224" class="f-none s-ink s-3w s-round draw"/>
+        <text x="60" y="58" class="t-sm t-accent">出貨就認列營收與利潤</text>
+        <text x="300" y="152" class="ta-m t-b">現金缺口</text>
+        <text x="300" y="172" class="ta-m t-sm t-2">約 3 個月的成本</text>
+        <circle cx="176" cy="254" r="4" class="f-ink"/>
+        <text x="166" y="262" class="ta-e t-sm t-b t-mono">−27</text>
+        <circle cx="216" cy="248" r="4" class="f-ink"/>
+        <text x="224" y="265" class="t-sm">第 4 個月起貨款入帳</text>
+        <text x="56" y="292" class="ta-m t-xs t-3">開始</text>
+        <text x="176" y="292" class="ta-m t-xs t-3">第 3 月</text>
+        <text x="296" y="292" class="ta-m t-xs t-3">第 6 月</text>
+        <text x="376" y="292" class="ta-m t-xs t-3">第 8 月</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意：接到新訂單後，每月出貨 10 億、成本 9 億當月付現，客戶 90 天後才付款。帳上每月賺 1 億，累計淨利一路往上；現金卻先付出三個月的成本，掉到 −27 億，之後每月只回升 1 億。只要生意維持這個規模，這個缺口就一直存在。</span></figcaption>
+  </figure>
+
+  <p>這張圖最反直覺的地方在後半段：第 4 個月起貨款開始進來，但每個月收到的 10 億，馬上又要拿去付當月的 9 億成本，現金每月只回升 1 億。那 27 億的缺口，等於三個月的成本，只要生意還在做就收不回來。如果訂單繼續成長，例如每月出貨變成 20 億，缺口也會跟著放大成 54 億。<strong>成長越快，需要墊的現金越多。</strong></p>
+  <p>手上現金不夠、銀行又不願意借，帳上賺錢的公司也可能因為付不出貨款、薪水而周轉不靈。這種「帳上有獲利卻倒閉」的情況，日本稱為<dfn id="def-kuroji">黑字倒閉</dfn>（黑字指帳上是獲利）。景氣好、訂單暴增的時候，反而是這類風險最容易被忽略的時候。</p>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>淨利創新高，公司口袋裡的現金一定也變多了。</p></div>
+    <div class="myth-right"><p>淨利是應計基礎的成績單，現金要看現金流量表。示意科技 2026 年賺了 34 億，現金反而少了 13 億：17 億卡在應收帳款和存貨，25 億變成了新設備。看財報的習慣是把淨利和營業現金流並排：連續好幾年淨利遠大於營業現金流，就要找出原因，是生意在擴張，還是應收帳款收不回來。</p></div>
+  </div>
+
+  <h3>反過來的時間差：預付款</h3>
+  <p>時間差也可以朝另一個方向走。客戶在交貨前先付錢，供應商的現金就比營收先到；收到的錢因為還欠客戶貨，先記在資產負債表的負債（合約負債），出貨時才轉成營收。計畫第十節提到這件事：</p>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §十</span></div>
+    <p class="quote">加上零組件交期拉長、CSP 用預付款搶料，是典型的重複下單訊號。</p>
+    <p>對台灣供應商來說，<span class="term" data-term="預付款">預付款</span>讓現金流很好看，訂單能見度也高；但客戶願意先付錢「搶」，代表它擔心買不到，可能下了比實際需要更多的單。等供給追上來，多下的單就會被取消或延後。這是第 29 章<span class="term" data-term="重複下單">重複下單</span>的伏筆。讀財報時，現金流特別好的那幾季，要問一句：這是本業變強，還是客戶提早付錢？</p>
+  </div>
+
+  <h3>同一個道理，放大一萬倍：CSP 的資金鏈</h3>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §九</span></div>
+    <p class="quote">資金來源轉變是最大的需求面風險：舉債占資本支出由 FY2024 的 9% 升到 2026 年中的 32%，除 Alphabet、微軟外，多數 CSP 自由現金流接近零或轉負，Alphabet 甚至在 2026 年 6 月增資 847.5 億美元。升息與信用事件（CoreWeave）會直接打到這條資金鏈。</p>
+    <p>用三張表讀這段話：</p>
+    <ul>
+      <li><b>現金流量表</b>：<span class="term" data-term="CSP">CSP</span>（雲端服務供應商）的資本支出越來越大，就算損益表仍然賺錢，只要資本支出大於營業現金流，自由現金流就會接近零或轉負，和示意科技的 −8 億是同一種狀況。</li>
+      <li><b>籌資活動</b>：差額只能從外面補。<span class="term" data-term="舉債">舉債</span>占資本支出的比例從 9% 升到 32%，代表越來越多的設備是借錢買的；增資則是向股東拿錢。</li>
+      <li><b>資產負債表與損益表</b>：借款讓負債變大；利率上升，損益表上的利息費用跟著變多。一旦發生信用事件、借不到錢，資本支出就可能被迫放慢。</li>
+    </ul>
+    <p>台灣 AI 供應鏈的營收，有很大一部分來自這些資本支出。所以計畫把「資金來源」列為最大的需求面風險：問題不在 CSP 的損益表，而在它們的現金流量表。第 9 章會用計畫第九節的數字把這條鏈算完整。</p>
+  </div>
+
+  <p>把這一節濃縮成讀財報時可以自己問的五個問題（勾選會記在這台裝置上）：</p>
+  <ul class="checklist" data-key="c07-cash-check">
+    <li>營業現金流和淨利差多少？連續幾年淨利遠大於營業現金流，要找原因。</li>
+    <li>應收帳款和存貨，是不是長得比營收還快？</li>
+    <li>資本支出比折舊大多少？差距越大，代表公司擴張得越快。</li>
+    <li>現金減少時，是靠借款、發債還是增資補上的？</li>
+    <li>股利是用自由現金流發的，還是靠借來的錢發的？</li>
+  </ul>
 </section>
 
 <section id="calendar">
   <h2><span class="sec-num">7.7</span>台灣的財報什麼時候出來</h2>
+  <p class="lead-in">知道三張表長什麼樣子之後，下一個問題是：什麼時候拿得到？計畫第五節把「10 月營收」和「第三季財報」寫進加碼階段的關鍵事件，背後是一套法律規定的公布時程。</p>
+
+  <h3>會計年度與四個季度</h3>
+  <div class="box define" id="def-fy">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>會計年度</dfn><span class="en">Fiscal year (FY)</span></p>
+    <p>公司結一次總帳的那一年。台灣《商業會計法》規定，會計年度原則上是每年 1 月 1 日到 12 月 31 日，所以台灣公司的 Q1 是 1–3 月、Q2 是 4–6 月，以此類推。美國公司可以自己訂：輝達（NVIDIA）的會計年度在每年 1 月底結束，它的「FY2026」大部分落在 2025 年。</p>
+  </div>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §九</span></div>
+    <p class="quote">FY2026（約當 2025 年）2,159 億美元，+65%</p>
+    <p class="quote">FY2027 Q2 單季 962 億美元（+106%）</p>
+    <p>這是計畫表格裡<span class="term" data-term="輝達">輝達</span>營收那一列。輝達的 FY2026 從 2025 年 1 月底走到 2026 年 1 月 25 日，所以計畫特別註明「約當 2025 年」。同理，FY2027 的第二季大約是 2026 年 5 月到 7 月，不是台灣習慣的 4–6 月。把美國公司和台灣公司的數字放在一起比較時，要先把期間對齊。</p>
+  </div>
+
+  <h3>季報、年報與會計師</h3>
+  <div class="box define" id="def-quarterly">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>季報</dfn><span class="en">Quarterly report</span></p>
+    <p>每一季結束後公布的財務報告。台灣上市櫃公司每年發布第一、二、三季三份季報，須經會計師核閱。季報的損益表同時列出單季與年初累計的數字，例如第三季季報會有「7–9 月」和「1–9 月」兩欄；現金流量表則只有累計數。</p>
+  </div>
+  <div class="box define" id="def-annual">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>年報</dfn><span class="en">Annual financial report</span></p>
+    <p>會計年度結束後公布的全年財務報告，正式名稱是「年度財務報告」，須經會計師查核簽證。台灣沒有單獨的第四季季報，第四季的數字要用全年減掉前三季。股東會前公司另外會出一本「股東會年報」，內容包括營運概況與財報，兩者常被混稱。</p>
+  </div>
+  <p>年報和季報差在會計師做了多少事。<dfn id="def-audit">查核簽證</dfn>（audit）是會計師取得足夠的證據，對財報是否允當表達出具意見；<dfn id="def-review">核閱</dfn>（review）的程度較淺，主要是分析和詢問，結論只是「沒有發現需要修正的重大事項」。所以年報的可信度最高，季報次之，而每月的營收是公司自己結算的數字，沒有會計師把關。</p>
+
+  <div class="box define" id="def-consolidated">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>合併報表</dfn><span class="en">Consolidated financial statements</span></p>
+    <p>把母公司和它控制的子公司當成一家公司來編的財報，集團內部彼此的買賣會先互相抵銷。台灣上市櫃公司公布的季報與年報以合併報表為主；新聞說的 EPS，用的是「歸屬於母公司業主」的淨利，也就是扣掉子公司裡其他股東那一份（非控制權益）之後的部分。</p>
+  </div>
+  <p>合併報表很重要的原因是：許多集團把工廠、業務放在海外子公司。只看母公司自己的帳，可能只看到一小部分的生意；合併之後，才是整個集團的全貌。</p>
+
+  <h3>法定期限</h3>
+  <div class="box define" id="def-deadline">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>財報公布期限</dfn><span class="en">Filing deadline</span></p>
+    <p>法律規定公司最晚必須公告申報的日期。依《證券交易法》第 36 條，一般上市櫃公司的年度財報在會計年度結束後 3 個月內、第一到第三季季報在每季結束後 45 天內、上個月的營收在每月 10 日前公告。期限是「最晚」，很多公司會提早公布。</p>
+  </div>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>台灣一般上市櫃公司的公布期限（金融業等少數公司不同；遇假日順延，以證交所公告為準）</caption>
+      <thead><tr><th>資料</th><th>涵蓋期間</th><th>會計師</th><th>期限</th></tr></thead>
+      <tbody>
+        <tr><th>月營收</th><td>上個月</td><td>無（公司自結）</td><td>每月 10 日前</td></tr>
+        <tr><th>第一季季報</th><td>1–3 月</td><td>核閱</td><td>5 月 15 日前</td></tr>
+        <tr><th>第二季季報</th><td>4–6 月（及上半年累計）</td><td>核閱</td><td>8 月 14 日前</td></tr>
+        <tr><th>第三季季報</th><td>7–9 月（及前三季累計）</td><td>核閱</td><td>11 月 14 日前</td></tr>
+        <tr><th>年度財務報告</th><td>全年</td><td>查核簽證</td><td>次年 3 月 31 日前</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>45 天怎麼來的？第三季在 9 月 30 日結束，往後數 45 天：10 月有 31 天、11 月再 14 天，31 ＋ 14 ＝ 45，就是 11 月 14 日。同理 3/31 ＋ 45 天 ＝ 5/15，6/30 ＋ 45 天 ＝ 8/14。金融控股公司的季報期限比較晚，例如 2025 年一般上市公司的第三季財報期限是 11/14，金控則是 11/29（遇週末順延到 12/1）；計畫裡的兆豐金、中信金就屬於這一類。</p>
+  <p>把這些日期畫在一年的圓盤上，再疊上計畫的持有期：</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 444" role="img" aria-label="台股財報日曆：每月 10 日前公布月營收，第一、二、三季季報分別在 5/15、8/14、11/14 前，年報在 3/31 前；計畫持有期 10/19 到 3/10 涵蓋第三季財報與五次月營收，但年報期限落在出場之後">
+        <path d="M60.8 152.1 A146 146 0 0 1 334.9 140.3" class="f-none s-accent s-3w s-round"/>
+        <circle cx="200" cy="196" r="124" class="f-none s-ink s-15"/>
+        <line x1="200" y1="78" x2="200" y2="66" class="s-ink s-1"/>
+        <line x1="260" y1="94.4" x2="266.1" y2="84.1" class="s-ink s-1"/>
+        <line x1="300.3" y1="133.8" x2="310.5" y2="127.5" class="s-ink s-1"/>
+        <line x1="318" y1="193.5" x2="330" y2="193.2" class="s-ink s-1"/>
+        <line x1="303.8" y1="252" x2="314.4" y2="257.7" class="s-ink s-1"/>
+        <line x1="260.9" y1="297.1" x2="267.1" y2="307.4" class="s-ink s-1"/>
+        <line x1="203" y1="314" x2="203.4" y2="326" class="s-ink s-1"/>
+        <line x1="142.6" y1="299.1" x2="136.8" y2="309.6" class="s-ink s-1"/>
+        <line x1="98.1" y1="255.6" x2="87.8" y2="261.6" class="s-ink s-1"/>
+        <line x1="82" y1="197.5" x2="70" y2="197.7" class="s-ink s-1"/>
+        <line x1="97.6" y1="137.3" x2="87.2" y2="131.3" class="s-ink s-1"/>
+        <line x1="140" y1="94.4" x2="133.9" y2="84.1" class="s-ink s-1"/>
+        <text x="227.4" y="100.2" class="ta-m t-sm t-2">1月</text>
+        <text x="272.7" y="126.2" class="ta-m t-sm t-2">2月</text>
+        <text x="299.7" y="170.9" class="ta-m t-sm t-2">3月</text>
+        <text x="301.1" y="224.9" class="ta-m t-sm t-2">4月</text>
+        <text x="275.3" y="272.3" class="ta-m t-sm t-2">5月</text>
+        <text x="229.1" y="300.3" class="ta-m t-sm t-2">6月</text>
+        <text x="175.2" y="301.5" class="ta-m t-sm t-2">7月</text>
+        <text x="127.3" y="274.8" class="ta-m t-sm t-2">8月</text>
+        <text x="99.8" y="228.4" class="ta-m t-sm t-2">9月</text>
+        <text x="99.3" y="174.4" class="ta-m t-sm t-2">10月</text>
+        <text x="126" y="127.4" class="ta-m t-sm t-2">11月</text>
+        <text x="172.6" y="100.2" class="ta-m t-sm t-2">12月</text>
+        <path d="M286 193.4 A86 86 0 0 1 263.2 254.3" class="f-none s-foil s-3w"/>
+        <path d="M203 281.9 A86 86 0 0 1 142 259.5" class="f-none s-foil s-3w"/>
+        <path d="M114 197.9 A86 86 0 0 1 137.3 137.2" class="f-none s-foil s-3w"/>
+        <path d="M199.3 110 A86 86 0 0 1 286 193.4" class="f-none s-foil s-3w"/>
+        <circle cx="220.2" cy="73.7" r="3.5" class="f-3"/>
+        <circle cx="279.6" cy="100.9" r="3.5" class="f-3"/>
+        <circle cx="314.6" cy="148.7" r="3.5" class="f-3"/>
+        <circle cx="322.8" cy="213.6" r="3.5" class="f-3"/>
+        <circle cx="298.1" cy="271.9" r="3.5" class="f-3"/>
+        <circle cx="245.8" cy="311.2" r="3.5" class="f-3"/>
+        <circle cx="183" cy="318.8" r="3.5" class="f-3"/>
+        <circle cx="122.9" cy="293.1" r="3.5" class="f-3"/>
+        <circle cx="84.2" cy="240.4" r="3.5" class="f-3"/>
+        <circle cx="77.4" cy="177.4" r="3.5" class="f-3"/>
+        <circle cx="103.9" cy="117.6" r="3.5" class="f-3"/>
+        <circle cx="155.1" cy="80.4" r="3.5" class="f-3"/>
+        <circle cx="291.2" cy="280" r="7" class="f-accent s-paper s-2w"/>
+        <circle cx="116.4" cy="287.6" r="7" class="f-accent s-paper s-2w"/>
+        <circle cx="109.5" cy="111.2" r="7" class="f-accent s-paper s-2w"/>
+        <circle cx="323.9" cy="192.3" r="7" class="f-accent s-paper s-2w"/>
+        <rect x="225.6" y="70.8" width="10" height="10" transform="rotate(45 230.6 75.8)" class="f-plate s-accent s-2w"/>
+        <line x1="236" y1="66" x2="242" y2="42" class="s-3 s-1"/>
+        <text x="246" y="36" class="ta-m t-sm t-b">台積電法說</text>
+        <text x="306" y="300" class="t-sm t-b">Q1 季報</text>
+        <text x="306" y="318" class="t-sm t-mono t-2">5/15 前</text>
+        <text x="96" y="306" class="ta-e t-sm t-b">Q2 季報</text>
+        <text x="96" y="324" class="ta-e t-sm t-mono t-2">8/14 前</text>
+        <line x1="102" y1="104" x2="78" y2="86" class="s-3 s-1"/>
+        <text x="72" y="70" class="ta-e t-sm t-b">Q3 季報</text>
+        <text x="72" y="88" class="ta-e t-sm t-mono t-2">11/14 前</text>
+        <text x="340" y="188" class="t-sm t-b">年報</text>
+        <text x="340" y="206" class="t-sm t-mono t-2">3/31 前</text>
+        <text x="54" y="150" class="ta-e t-sm t-mono t-accent t-b">10/19</text>
+        <text x="342" y="136" class="t-sm t-mono t-accent t-b">3/10</text>
+        <text x="200" y="192" class="ta-m t-serif t-md">台股財報日曆</text>
+        <text x="200" y="214" class="ta-m t-sm t-3">一般上市櫃公司</text>
+        <circle cx="24" cy="352" r="3.5" class="f-3"/>
+        <text x="36" y="357" class="t-sm">月營收：每月 10 日前</text>
+        <circle cx="220" cy="352" r="7" class="f-accent"/>
+        <text x="234" y="357" class="t-sm">季報、年報期限</text>
+        <line x1="14" y1="378" x2="34" y2="378" class="s-foil s-3w"/>
+        <text x="42" y="383" class="t-sm">季底到期限：季報 45 天、年報 3 個月</text>
+        <line x1="14" y1="404" x2="34" y2="404" class="s-accent s-3w s-round"/>
+        <text x="42" y="409" class="t-sm">計畫持有期：10/19 建倉 → 3/10 出清</text>
+        <rect x="19" y="425" width="10" height="10" transform="rotate(45 24 430)" class="f-plate s-accent s-2w"/>
+        <text x="42" y="435" class="t-sm">公司法說會（以台積電為例，季後約一個月）</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>從 1 月開始順時針走一年。外圈藍色弧線是計畫的持有期：它涵蓋 11/10 的 10 月營收、11/14 的第三季財報，以及之後每月 10 日的月營收；但 2026 年的年報期限（2027/3/31）落在出場之後。第四季的成績，要靠 1 月中的台積電法說與月營收先看到。</span></figcaption>
+  </figure>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §五、§七</span></div>
+    <p class="quote">10 月營收（@November 10, 2026 前）；第三季財報（@November 14, 2026 前）</p>
+    <p class="quote">用營收與財報汰弱留強</p>
+    <p class="quote">每月 10 日前公布的月營收</p>
+    <p>前兩句在計畫的「② 加碼（11/5–12/10）」那一列，「@November 10, 2026」是原文件的日期標籤，就是 11/10。兩個日期都是法定期限：10 月的營收在 11/10 前公布，第三季（9/30 結束）的財報在 45 天後的 11/14 前公布。它們剛好落在加碼階段的前段，所以計畫的安排是：<strong>先看到硬資料，再決定加碼給誰</strong>。選股理由寫「9 月營收年增約 169%」的股票，如果 10 月營收和第三季財報延續這個力道，就是加碼的候選；如果明顯轉弱，就是<span class="term" data-term="汰弱留強">汰弱留強</span>裡被汰掉的那一檔。第三句來自第七節的每週追蹤清單，月營收是持有期內最頻繁的基本面資料。</p>
+    <p>兩個小細節：2026 年的 11/14 是星期六，依往例期限會順延到下一個上班日，實際日期以證交所公告為準；而大型公司通常不會等到期限，例如台積電 10 月的法說會就已經公布了第三季成績。</p>
+  </div>
+
+  <h3>法說會先到，財報後到</h3>
+  <p>期限是「最晚」，大公司通常更早。計畫第八節提到「2026 年 7 月與 10 月台積電法說都交出好成績」，也就是第二季、第三季結束後大約一個月，台積電就在<span class="term" data-term="法說會">法說會</span>上公布了成績與展望，比 8/14、11/14 的期限早了好幾週。第四季也一樣：計畫把「1 月中台積電法說（2027 年營收、資本支出、漲價）」列為勝負關鍵事件，那時距離年報期限還有兩個多月。</p>
+  <p>所以對大型權值股來說，市場反應的時點是法說會，正式財報是事後的確認；對中小型公司，期限前幾天公布的財報，常常才是大家第一次看到完整數字。美國的規定是另一套：大型公司的季報（10-Q）要在季底後 40 天內、年報（10-K）在 60 天內送交美國證管會，但多數公司會先在收盤後發新聞稿公布成績（第 4 章、第 11 章的<span class="term" data-term="盤後財報">盤後財報</span>）。計畫第五節的「10 月底美系雲端大廠財報」就是這樣來的。</p>
+
+  <h3>去哪裡找原始資料</h3>
+  <p>台灣所有上市櫃公司的財報、月營收、重大訊息，都要申報到<span class="term" data-term="公開資訊觀測站">公開資訊觀測站</span>（<a href="https://mops.twse.com.tw/">mops.twse.com.tw</a>），這是 GCFIE 所說的 Tier 1 來源。公司的 IR 網站則會放法說會簡報與逐字稿，常比財報本身更好讀。新聞與社群上的整理很方便，但數字要回到這兩個地方核對；第 38 章會把查資料的流程排成每天的步驟。</p>
+  <div class="box key">
+    <div class="box-label"><span class="zh"></span><span class="lat">KEY IDEA</span></div>
+    <p>台股的基本面資料有固定節奏：<strong>每月 10 日看營收，季後 45 天看季報，隔年 3 月底看年報</strong>；大型公司會用法說會提前揭露。把這個節奏記在行事曆上，計畫第五節的時間軸就不再是一串陌生的日期。</p>
+  </div>
 </section>
 
 </article>
