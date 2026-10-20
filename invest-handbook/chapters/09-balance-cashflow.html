@@ -49,22 +49,394 @@
 
 <section id="bs-anatomy">
   <h2><span class="sec-num">9.1</span>資產負債表：公司有什麼、欠什麼</h2>
-  <!-- S1 -->
+  <p class="lead-in">第 7 章的<span class="term" data-term="會計恆等式">會計恆等式</span>說：資產 ＝ 負債 ＋ 股東權益。左邊是公司手上有什麼，右邊是這些東西的錢從哪裡來：一部分是借的，一部分是股東出的，加上歷年賺了沒發掉的。<span class="term" data-term="資產負債表">資產負債表</span>就是把這條等式在某一天攤開來寫的清單。</p>
+  <p>因為記的是「某一天」的狀態（例如 12 月 31 日收盤後），資產負債表像一張照片；<span class="term" data-term="損益表">損益表</span>和<span class="term" data-term="現金流量表">現金流量表</span>記的是一整段期間，比較像影片。讀這一章時請一直記得這個差別：比率裡如果同時用到照片和影片，照片通常要取期初、期末的平均。</p>
+
+  <div class="box define" id="def-asset">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>資產</dfn><span class="en">Assets</span></p>
+    <p>公司擁有或控制、預期將來能帶來經濟效益的資源。現金、客戶欠的貨款、倉庫裡的貨、廠房與機器都是資產。關鍵在「將來能帶來錢」：一台已經報廢、沒有人要的機器，就不該再以原來的價值留在帳上。</p>
+  </div>
+  <div class="box define" id="def-liability">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>負債</dfn><span class="en">Liabilities</span></p>
+    <p>公司對別人的義務，將來要用現金、商品或服務去償還。向銀行借的錢、欠供應商的貨款、發行的公司債，以及客戶先付了錢、公司還沒交的貨，都是負債。負債有到期日，時間到了就要還，這是它和股東權益最大的不同。</p>
+  </div>
+
+  <p>資產和負債都會再依「多快變成現金、或多快要付出現金」分成兩層，分界線大約是一年。</p>
+  <div class="box define" id="def-current">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn id="def-current-asset">流動資產</dfn><span class="en">Current assets</span></p>
+    <p>預期在一年內（或一個正常營業週期內）變成現金或被用掉的資產，例如現金、應收帳款、存貨、預付款項。與它對應的是<dfn id="def-current-liab">流動負債</dfn>（current liabilities）：一年內要償還的負債，例如應付帳款、短期借款、一年內到期的長期借款。超過一年的，分別叫非流動資產（廠房設備、長期投資）與非流動負債（長期借款、公司債）。</p>
+  </div>
+
+  <p>回到第 7 章的<a href="07-three-statements.html#demo-co">示意科技</a>。第 7 章只寫了「銀行借款 55 億」，本章再假設其中 23 億是一年內要還的短期借款，32 億是長期借款。把它 2026 年底的資產負債表依流動性重新排列：</p>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>示意科技 2026/12/31 資產負債表，依流動性排列（億元，示意；借款拆分為本章假設）</caption>
+      <thead><tr><th>項目</th><th class="r">期末</th><th>屬於哪一層</th><th>白話</th></tr></thead>
+      <tbody>
+        <tr><th>現金</th><td class="r">17</td><td>流動資產</td><td>隨時可以動用的錢</td></tr>
+        <tr><th>應收帳款</th><td class="r">32</td><td>流動資產</td><td>貨交了，錢還沒收到</td></tr>
+        <tr><th>存貨</th><td class="r">33</td><td>流動資產</td><td>原料、半成品、還沒賣掉的成品</td></tr>
+        <tr><th>廠房設備（淨額）</th><td class="r">150</td><td>非流動資產</td><td>要用好幾年的生財工具</td></tr>
+        <tr><th>應付帳款</th><td class="r">18</td><td>流動負債</td><td>拿了料，還沒付錢</td></tr>
+        <tr><th>短期借款</th><td class="r">23</td><td>流動負債</td><td>一年內要還</td></tr>
+        <tr><th>長期借款</th><td class="r">32</td><td>非流動負債</td><td>一年以後才到期</td></tr>
+        <tr><th>股本</th><td class="r">50</td><td>股東權益</td><td>股東投入的錢（以面額計）</td></tr>
+        <tr><th>保留盈餘</th><td class="r">109</td><td>股東權益</td><td>歷年賺了、沒發掉的錢</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 362" role="img" aria-label="示意科技期末資產負債表像天平：左邊資產 232 億，由現金 17、應收帳款 32、存貨 33 與廠房設備 150 組成；右邊負債 73 億加股東權益 159 億，也是 232 億，兩邊等高">
+        <text x="130" y="30" class="ta-m t-b">資產 232</text>
+        <text x="270" y="30" class="ta-m t-b">負債＋權益 232</text>
+        <rect x="80" y="44.8" width="100" height="18.7" class="f-accent-soft s-ink s-1"/>
+        <rect x="80" y="63.5" width="100" height="35.2" class="f-accent-soft s-ink s-1"/>
+        <rect x="80" y="98.7" width="100" height="36.3" class="f-accent-soft s-ink s-1"/>
+        <rect x="80" y="135" width="100" height="165" class="f-soft s-ink s-1"/>
+        <text x="130" y="58.5" class="ta-m t-sm">現金 17</text>
+        <text x="130" y="85.5" class="ta-m t-sm">應收帳款 32</text>
+        <text x="130" y="121" class="ta-m t-sm">存貨 33</text>
+        <text x="130" y="214" class="ta-m t-sm">廠房設備</text>
+        <text x="130" y="232" class="ta-m t-sm t-mono">150</text>
+        <rect x="220" y="44.8" width="100" height="19.8" class="f-foil-soft s-ink s-1"/>
+        <rect x="220" y="64.6" width="100" height="25.3" class="f-foil-soft s-ink s-1"/>
+        <rect x="220" y="89.9" width="100" height="35.2" class="f-foil-soft s-ink s-1"/>
+        <rect x="220" y="125.1" width="100" height="55" class="f-accent s-ink s-1"/>
+        <rect x="220" y="180.1" width="100" height="119.9" class="f-accent s-ink s-1"/>
+        <text x="270" y="59" class="ta-m t-sm">應付帳款 18</text>
+        <text x="270" y="81.5" class="ta-m t-sm">短期借款 23</text>
+        <text x="270" y="112" class="ta-m t-sm">長期借款 32</text>
+        <text x="270" y="157" class="ta-m t-sm t-paper t-b">股本 50</text>
+        <text x="270" y="236" class="ta-m t-sm t-paper t-b">保留盈餘</text>
+        <text x="270" y="254" class="ta-m t-sm t-paper t-mono">109</text>
+        <path d="M74 46 H70 V134 H74" class="f-none s-2 s-1"/>
+        <path d="M74 136 H70 V299 H74" class="f-none s-2 s-1"/>
+        <text x="64" y="86" class="ta-e t-sm t-b">流動資產</text>
+        <text x="64" y="103" class="ta-e t-sm t-mono">82</text>
+        <text x="64" y="212" class="ta-e t-sm t-b">非流動</text>
+        <text x="64" y="229" class="ta-e t-sm t-b">資產</text>
+        <text x="64" y="246" class="ta-e t-sm t-mono">150</text>
+        <path d="M326 46 H330 V89 H326" class="f-none s-2 s-1"/>
+        <path d="M326 91 H330 V124 H326" class="f-none s-2 s-1"/>
+        <path d="M326 126 H330 V299 H326" class="f-none s-2 s-1"/>
+        <text x="336" y="62" class="t-sm t-b">流動負債</text>
+        <text x="336" y="79" class="t-sm t-mono">41</text>
+        <text x="336" y="104" class="t-sm t-b">非流動</text>
+        <text x="336" y="120" class="t-sm">負債 32</text>
+        <text x="336" y="205" class="t-sm t-b">股東權益</text>
+        <text x="336" y="222" class="t-sm t-mono">159</text>
+        <rect x="56" y="300" width="288" height="6" class="f-ink"/>
+        <path d="M200 306 L182 336 L218 336 Z" class="f-2"/>
+        <text x="200" y="356" class="ta-m t-sm t-2">兩邊永遠一樣重</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意科技 2026 年底，單位億元（示意）。左邊是公司有什麼，右邊是錢從哪裡來；淺色是會到期、要還的負債，深藍是屬於股東的權益。最上層的「流動」部分：左邊 82、右邊 41，這個對比就是 9.2 節的流動比率。</span></figcaption>
+  </figure>
+
+  <p>表上最值得新手細看的是兩個流動資產：它們是營收和現金之間的「中轉站」。</p>
+  <div class="box define" id="def-ar">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>應收帳款</dfn><span class="en">Accounts receivable</span></p>
+    <p>已經出貨、也認列了營收，但客戶還沒付的錢。企業之間常約定月結 60 天、90 天才付款，所以應收帳款等於「被客戶暫時借走的錢」。營收成長時它跟著變大很正常；如果它長得比營收快很多，代表收款變慢，甚至有客戶付不出來。</p>
+  </div>
+  <div class="box define" id="def-inventory">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>存貨</dfn><span class="en">Inventory</span></p>
+    <p>買進的原料、生產中的半成品，以及做好還沒賣出的成品。錢已經付出去，要等賣掉、收款才回得來。存貨的風險是跌價與過時：記憶體這類價格波動大的產品，景氣反轉時，存貨可能要認列跌價損失，直接吃掉獲利。</p>
+  </div>
+
+  <details class="deep">
+    <summary>週轉天數：錢卡在應收帳款和存貨裡多久？</summary>
+    <div>
+      <p>把餘額換算成「幾天的生意」，比看金額更直覺。以示意科技期末數字粗算（嚴謹的算法用期初、期末平均）：</p>
+      <p>應收帳款週轉天數 ＝ 應收帳款 ÷ 營收 × 365 ＝ 32 ÷ 300 × 365 ≈ 39 天：平均出貨後大約 39 天才收到錢。</p>
+      <p>存貨週轉天數 ＝ 存貨 ÷ 營業成本 × 365 ＝ 33 ÷ 210 × 365 ≈ 57 天：貨平均在倉庫裡放 57 天才賣出去。存貨用營業成本當分母，因為存貨是用成本記帳的。</p>
+      <p>單看一次沒有意義，要看趨勢。天數一季比一季拉長，通常是需求轉弱的早期訊號，這也是第 29 章「庫存循環」會用到的工具。</p>
+    </div>
+  </details>
+
+  <p>表上另外兩個項目，本章後面會再遇到：廠房設備的「淨額」是買進成本扣掉歷年折舊後的餘額（9.5 節）；預付款項則是先付錢、還沒拿到貨的權利，它在 AI 供應鏈裡扮演特別的角色（<a href="#def-prepay">9.8 節</a>）。</p>
+  <aside class="note">資產負債表上的數字，大多是「當初花多少錢買、再扣掉折舊」的歷史成本，不是今天能賣多少錢。所以帳上的<span class="term" data-term="股東權益">股東權益</span>（也叫淨值）和公司的<span class="term" data-term="市值">市值</span>常常差很多，兩者的比值就是第 10 章的<span class="term" data-term="股價淨值比">股價淨值比</span>。</aside>
 </section>
 
 <section id="health">
   <h2><span class="sec-num">9.2</span>體質指標：負債比率、流動比率與利息保障倍數</h2>
-  <!-- S2 -->
+  <p class="lead-in">醫生看健康檢查報告，不會只看一個數字，而是看幾個彼此相關的指標。資產負債表也一樣：有幾個比率專門回答「這家公司遇到壞日子，撐不撐得住」。</p>
+
+  <div class="box define" id="def-debt-ratio">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>負債比率</dfn><span class="en">Debt ratio</span></p>
+    <p>負債總額 ÷ 資產總額。公司的資產裡，有幾成是用別人的錢買來的。示意科技期末 73 ÷ 232 ≈ 31.5%：每 100 元資產，約 31.5 元來自負債，68.5 元來自股東。</p>
+  </div>
+  <div class="box define" id="def-current-ratio">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>流動比率</dfn><span class="en">Current ratio</span></p>
+    <p>流動資產 ÷ 流動負債。一年內能變成現金的東西，夠不夠付一年內要還的帳。示意科技 82 ÷ 41 ＝ 200%：短期能動用的資源，是短期要還的帳的兩倍。</p>
+  </div>
+  <p>流動比率有一個弱點：存貨也算在流動資產裡，但存貨要先賣掉、收到錢才能拿來還債，景氣差時可能得打折才賣得掉。所以還有一個更嚴格的版本，<dfn id="def-quick">速動比率</dfn>（quick ratio）：把存貨和預付費用從分子扣掉。</p>
+  <p>另一個角度是看損益表：本業賺的錢，夠不夠付利息？這叫<dfn id="def-icr">利息保障倍數</dfn>（interest coverage），常見算法是「付利息和繳稅之前的獲利 ÷ 利息費用」。倍數越高，利息的負擔越輕。</p>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>替示意科技做一次體檢（期末數字，億元，示意）</h4>
+    <ol class="calc">
+      <li>負債比率：負債 73、資產 232。<span class="eq">73 ÷ 232 ≈ 31.5%（期初 60 ÷ 200 ＝ 30.0%）</span></li>
+      <li>流動比率：流動資產 17 ＋ 32 ＋ 33 ＝ 82；流動負債 18 ＋ 23 ＝ 41。<span class="eq">82 ÷ 41 ＝ 200%</span></li>
+      <li>速動比率：扣掉存貨 33（示意科技沒有預付費用）。<span class="eq">(82 − 33) ÷ 41 ＝ 49 ÷ 41 ≈ 120%</span></li>
+      <li>利息保障倍數：稅前淨利 42.5 加回利息 2.5，就是付息、繳稅前的獲利 45。<span class="eq">45 ÷ 2.5 ＝ 18 倍</span></li>
+    </ol>
+    <p class="answer">負債比率一年只上升 1.5 個百分點，短期資源是短期債務的兩倍，賺的錢是利息的 18 倍。以這組數字看，示意科技的體質相當穩健。</p>
+  </div>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>四個體質指標速查</caption>
+      <thead><tr><th>指標</th><th>公式</th><th>回答的問題</th></tr></thead>
+      <tbody>
+        <tr><th>負債比率</th><td>負債 ÷ 資產</td><td>資產有幾成是借來的？</td></tr>
+        <tr><th>流動比率</th><td>流動資產 ÷ 流動負債</td><td>一年內的錢，夠還一年內的帳嗎？</td></tr>
+        <tr><th>速動比率</th><td>（流動資產 − 存貨 − 預付費用）÷ 流動負債</td><td>不賣存貨，也還得起嗎？</td></tr>
+        <tr><th>利息保障倍數</th><td>付息、繳稅前的獲利 ÷ 利息費用</td><td>本業賺的錢，夠付利息嗎？</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>沒有一個數字適用所有產業</h3>
+  <p>教科書常把流動比率 200%、速動比率 100% 當參考線，但真正有意義的比較只有兩種：<strong>跟同產業比，跟自己的過去比</strong>。產業之間的差距大到單看數字會誤判：</p>
+  <ul>
+    <li><b>銀行</b>：存款對銀行來說是負債（將來要還給存款人），股東權益通常不到資產的一成，負債比率九成以上是常態。計畫裡的中信金、兆豐金就是這種結構，主管機關另外用資本適足率等規定來管它們的風險。</li>
+    <li><b>資本密集的製造業</b>：蓋廠動輒數百億，常搭配長期借款或公司債，負債比率高一些不奇怪，重點是借款期限要和廠房的使用年限相配。</li>
+    <li><b>輕資產公司</b>：例如 IC 設計，不需要自己蓋晶圓廠，負債比率通常偏低。</li>
+  </ul>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>負債比率越低越好，零負債的公司最安全，有借錢的公司都比較危險。</p></div>
+    <div class="myth-right"><p>適度借錢能放大股東的報酬（9.3 節會算給你看），零負債有時代表公司沒有好好運用資金。真正危險的是兩件事：<strong>現金流撐不起利息與到期的本金</strong>，以及<strong>借短支長</strong>，用一年內要還的短期借款去蓋要用十年的工廠。銀行一旦不願意續借，公司就得在最差的時點找錢。</p></div>
+  </div>
+
+  <p>利息保障倍數還有一個容易被忽略的特性：它對利率很敏感。借款越多的公司，<span class="term" data-term="升息">升息</span>時受傷越重。</p>
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>同一家公司，利率從 2.5% 升到 4%（公司乙，假設）</h4>
+    <ol class="calc">
+      <li>公司乙每年營業利益 10 億，借款 200 億，利率 2.5%。<span class="eq">利息 ＝ 200 × 2.5% ＝ 5 億；保障倍數 ＝ 10 ÷ 5 ＝ 2 倍</span></li>
+      <li>借款到期，換成利率 4% 的新借款。<span class="eq">利息 ＝ 200 × 4% ＝ 8 億；保障倍數 ＝ 10 ÷ 8 ＝ 1.25 倍</span></li>
+      <li>稅前淨利（假設沒有其他業外收支）：<span class="eq">10 − 5 ＝ 5 億 → 10 − 8 ＝ 2 億，少了 60%</span></li>
+    </ol>
+    <p class="answer">本業一毛沒變，股東能分的獲利卻少了六成。示意科技的保障倍數是 18 倍，利率翻倍也還有 9 倍；高負債的公司就沒有這種餘裕。9.8 節的 CSP 資金鏈，講的就是這個機制放大到上兆美元的版本。</p>
+  </div>
+  <p>這些比率不必自己從頭算：<span class="term" data-term="公開資訊觀測站">公開資訊觀測站</span>的財務分析資料，已經依財務結構、償債能力、經營能力、獲利能力、現金流量五大類列好。但自己算過一次，你才知道每個數字的分子分母是什麼，看到異常時才問得出對的問題。</p>
 </section>
 
 <section id="roe-dupont">
   <h2><span class="sec-num">9.3</span>ROE 與杜邦分析：高報酬是怎麼來的</h2>
-  <!-- S3 -->
+  <p class="lead-in">股東把錢交給公司，最想知道的是：這些錢一年幫我賺多少？這個問題的答案，是財報分析裡最常被引用的比率。</p>
+
+  <div class="box define" id="def-roe">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>ROE</dfn><span class="en">Return on equity，股東權益報酬率</span></p>
+    <p>稅後淨利 ÷ 平均股東權益。股東放在公司裡的每 100 元（包括當初出的資本，和歷年賺了沒發掉的盈餘），一年替股東賺回多少。分母取期初、期末平均，因為淨利是一整年的「影片」，股東權益是某一天的「照片」。</p>
+  </div>
+  <p>示意科技的股東權益期初 140、期末 159，平均 149.5 億；全年<span class="term" data-term="稅後淨利">稅後淨利</span> 34 億。ROE ＝ 34 ÷ 149.5 ≈ 22.7%。</p>
+  <div class="box define" id="def-roa">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>ROA</dfn><span class="en">Return on assets，資產報酬率</span></p>
+    <p>稅後淨利 ÷ 平均總資產。不管資產是借錢買的還是股東出錢買的，全部的資產一年賺多少。示意科技的平均總資產 (200 ＋ 232) ÷ 2 ＝ 216 億，ROA ＝ 34 ÷ 216 ≈ 15.7%。</p>
+  </div>
+  <p>年報與公開資訊觀測站常用的 ROA 版本，會把稅後的利息費用加回分子：(34 ＋ 2.5 × (1 − 20%)) ÷ 216 ＝ 36 ÷ 216 ≈ 16.7%。這樣做是為了讓「錢是借來還是股東出的」不影響比較，比的純粹是資產賺錢的能力。比較兩家公司時，記得用同一種算法。</p>
+
+  <h3>杜邦分析：把 ROE 拆成三個齒輪</h3>
+  <p>同樣是 ROE 15%，可能來自完全不同的生意。二十世紀初，美國杜邦公司（DuPont）的內部報告發展出一套拆解法，1920 年代起在公司內廣泛使用，後來就叫杜邦分析。延伸成 ROE 的版本，是把它寫成三個比率相乘：</p>
+  <div class="box formula" id="def-dupont">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">ROE ＝ <span class="frac"><span>淨利</span><span>營收</span></span> × <span class="frac"><span>營收</span><span>平均資產</span></span> × <span class="frac"><span>平均資產</span><span>平均權益</span></span></div>
+    <div class="formula-line">＝ 淨利率 × 總資產週轉率 × 權益乘數</div>
+    <div class="where"><dfn>杜邦分析</dfn>（DuPont analysis）：營收和平均資產在相乘時上下約掉，剩下的正好是淨利 ÷ 平均權益。三個因子分別回答：每做 100 元生意賺幾元？每 1 元資產做多少生意？每 1 元股東的錢撐起多少資產？前兩個相乘就是 ROA，所以 ROE ＝ ROA × 權益乘數。</div>
+  </div>
+  <p>第一個因子<span class="term" data-term="淨利率">淨利率</span>是第 8 章的內容。另外兩個是新的：</p>
+  <ul>
+    <li><dfn id="def-turnover">總資產週轉率</dfn>（asset turnover）＝ 營收 ÷ 平均總資產。資產的「使用效率」：組裝廠的機器便宜、貨進出快，週轉率高；晶圓廠一座要上千億，週轉率低。</li>
+    <li><dfn id="def-em">權益乘數</dfn>（equity multiplier）＝ 平均總資產 ÷ 平均股東權益。就是公司層級的<span class="term" data-term="槓桿">槓桿</span>倍數。它和負債比率是一體兩面：權益乘數 ＝ 1 ÷ (1 − 負債比率)。負債比率 50%，乘數就是 2 倍。</li>
+  </ul>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>把示意科技的 ROE 22.7% 拆開（億元，示意）</h4>
+    <ol class="calc">
+      <li>淨利率：<span class="eq">34 ÷ 300 ≈ 11.3%</span></li>
+      <li>總資產週轉率：<span class="eq">300 ÷ 216 ≈ 1.39 次</span></li>
+      <li>權益乘數：<span class="eq">216 ÷ 149.5 ≈ 1.45 倍（平均負債比率 66.5 ÷ 216 ≈ 30.8%，1 ÷ 0.692 ≈ 1.45）</span></li>
+      <li>相乘驗算：<span class="eq">11.33% × 1.389 × 1.445 ≈ 22.7%；前兩項相乘 ≈ 15.7% ＝ ROA</span></li>
+    </ol>
+    <p class="answer">示意科技的 ROE 主要來自不錯的利潤率和正常的資產效率，槓桿只有 1.45 倍。這是一個「本業賺出來」的 ROE。</p>
+  </div>
+
+  <p>下面三家虛構的公司，ROE 都是 15%，但靠的齒輪完全不同：</p>
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 322" role="img" aria-label="三種 ROE 15% 的公司：高利潤型是淨利率 25% 乘週轉 0.5 次乘槓桿 1.2 倍；薄利多銷型是 3% 乘 2.5 次乘 2 倍；高槓桿型是 5% 乘 0.6 次乘 5 倍">
+        <text x="95" y="30" class="ta-m t-sm t-2">淨利率</text>
+        <text x="185" y="30" class="ta-m t-sm t-2">資產週轉率</text>
+        <text x="275" y="30" class="ta-m t-sm t-2">權益乘數</text>
+        <text x="360" y="30" class="ta-m t-sm t-2">ROE</text>
+        <line x1="16" y1="40" x2="390" y2="40" class="s-rule s-1"/>
+        <text x="16" y="64" class="t-b">高利潤型</text>
+        <text x="84" y="64" class="t-sm t-3">毛利厚、資產輕（如 IC 設計）</text>
+        <rect x="60" y="74" width="70" height="40" class="f-accent"/>
+        <text x="95" y="99" class="ta-m t-mono t-b t-paper">25%</text>
+        <text x="140" y="99" class="ta-m t-2">×</text>
+        <rect x="150" y="74" width="70" height="40" class="f-soft s-rule s-1"/>
+        <text x="185" y="99" class="ta-m t-mono">0.5 次</text>
+        <text x="230" y="99" class="ta-m t-2">×</text>
+        <rect x="240" y="74" width="70" height="40" class="f-soft s-rule s-1"/>
+        <text x="275" y="99" class="ta-m t-mono">1.2 倍</text>
+        <text x="320" y="99" class="ta-m t-2">＝</text>
+        <rect x="330" y="74" width="60" height="40" class="f-plate s-ink s-15"/>
+        <text x="360" y="99" class="ta-m t-mono t-b">15%</text>
+        <text x="16" y="148" class="t-b">薄利多銷型</text>
+        <text x="98" y="148" class="t-sm t-3">毛利薄、出貨快（如組裝廠）</text>
+        <rect x="60" y="158" width="70" height="40" class="f-soft s-rule s-1"/>
+        <text x="95" y="183" class="ta-m t-mono">3%</text>
+        <text x="140" y="183" class="ta-m t-2">×</text>
+        <rect x="150" y="158" width="70" height="40" class="f-accent"/>
+        <text x="185" y="183" class="ta-m t-mono t-b t-paper">2.5 次</text>
+        <text x="230" y="183" class="ta-m t-2">×</text>
+        <rect x="240" y="158" width="70" height="40" class="f-soft s-rule s-1"/>
+        <text x="275" y="183" class="ta-m t-mono">2.0 倍</text>
+        <text x="320" y="183" class="ta-m t-2">＝</text>
+        <rect x="330" y="158" width="60" height="40" class="f-plate s-ink s-15"/>
+        <text x="360" y="183" class="ta-m t-mono t-b">15%</text>
+        <text x="16" y="232" class="t-b">高槓桿型</text>
+        <text x="84" y="232" class="t-sm t-3">利潤與效率普通，靠借錢撐大</text>
+        <rect x="60" y="242" width="70" height="40" class="f-soft s-rule s-1"/>
+        <text x="95" y="267" class="ta-m t-mono">5%</text>
+        <text x="140" y="267" class="ta-m t-2">×</text>
+        <rect x="150" y="242" width="70" height="40" class="f-soft s-rule s-1"/>
+        <text x="185" y="267" class="ta-m t-mono">0.6 次</text>
+        <text x="230" y="267" class="ta-m t-2">×</text>
+        <rect x="240" y="242" width="70" height="40" class="f-plate s-r s-2w"/>
+        <text x="275" y="267" class="ta-m t-mono t-b t-red">5.0 倍</text>
+        <text x="320" y="267" class="ta-m t-2">＝</text>
+        <rect x="330" y="242" width="60" height="40" class="f-plate s-ink s-15"/>
+        <text x="360" y="267" class="ta-m t-mono t-b">15%</text>
+        <line x1="16" y1="296" x2="390" y2="296" class="s-rule s-1"/>
+        <text x="200" y="314" class="ta-m t-sm t-2">ROE 一樣，撐起它的齒輪和風險完全不同</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>三家公司都是虛構的示意數字。深色格是各自最主要的齒輪；紅框代表這個 ROE 有很大一部分是借來的，利率上升或營收下滑時最脆弱。</span></figcaption>
+  </figure>
+
+  <p>拆開之後，你就知道每家公司該盯什麼。高利潤型怕的是定價權被削弱；薄利多銷型最怕成本上升，因為利潤率本來就薄，少一點點就是一大截；高槓桿型怕的是利率和景氣，因為乘數會把壞消息一起放大。</p>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §十一（廣達權重 3% → 2%）</span></div>
+    <p class="quote">組裝毛利約 5%，記憶體成本壓縮；大摩估 2027 年機櫃僅 +12%</p>
+    <p>用杜邦的語言讀這句話：組裝廠是「薄利多銷型」，記憶體漲價直接壓縮最薄的那個齒輪（利潤率），而機櫃成長放緩代表另一個齒輪（週轉、出貨量）也在減速。用圖中的數字試算：淨利率從 3% 掉到 2%，ROE 從 15% 掉到 2% × 2.5 × 2 ＝ 10%，少了三分之一；高利潤型同樣少 1 個百分點（25% → 24%），ROE 只從 15% 降到 14.4%。這是計畫把廣達、緯穎減碼的財報邏輯。</p>
+  </div>
+
+  <h3>借來的 ROE</h3>
+  <p>權益乘數是三個齒輪裡最容易「調」的一個：公司什麼都不用改，只要借錢把股東的錢換掉，ROE 就會上升。</p>
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>示意科技年初借 40 億、全部發成特別股利（假設借款利率 5%）</h4>
+    <ol class="calc">
+      <li>資產總額不變（借來的現金又發出去了），平均權益少了 40 億：<span class="eq">149.5 − 40 ＝ 109.5 億；平均負債 66.5 ＋ 40 ＝ 106.5 億</span></li>
+      <li>多付利息，扣稅後淨利減少：<span class="eq">40 × 5% ＝ 2 億，稅後 2 × (1 − 20%) ＝ 1.6 億；淨利 34 − 1.6 ＝ 32.4 億</span></li>
+      <li>新的 ROE：<span class="eq">32.4 ÷ 109.5 ≈ 29.6%（原本 22.7%）</span></li>
+      <li>代價：<span class="eq">平均負債比率 30.8% → 106.5 ÷ 216 ≈ 49.3%；利息保障倍數 18 → 45 ÷ 4.5 ＝ 10 倍</span></li>
+    </ol>
+    <p class="answer">工廠、產品、客戶一樣都沒變，ROE 卻從 22.7% 跳到 29.6%。多出來的 7 個百分點不是本業變強，而是承擔了更多財務風險換來的。</p>
+  </div>
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>ROE 越高，公司就越好。看到 ROE 30% 的公司就可以放心買。</p></div>
+    <div class="myth-right"><p>先用杜邦分析拆開。由利潤率和週轉率撐起的高 ROE，代表本業有競爭力；由權益乘數撐起的高 ROE，有一部分是借來的，景氣好時很漂亮，升息或營收下滑時會被槓桿放大成大問題。還要看它穩不穩：連續多年維持高 ROE，比單一年的高峰更有意義。</p></div>
+  </div>
 </section>
 
 <section id="cf-three">
   <h2><span class="sec-num">9.4</span>現金流量表三段：錢實際去了哪裡</h2>
-  <!-- S4 -->
+  <p class="lead-in">資產負債表是照片，它告訴你年底現金剩 17 億，卻沒告訴你一年前的 30 億是怎麼變成 17 億的。回答這個問題的是現金流量表。第 7 章已經介紹過它的<a href="07-three-statements.html#linking">三段結構</a>；這一節把示意科技的現金畫成一道瀑布，再學一個檢查獲利「含金量」的方法。</p>
+
+  <div class="box define" id="def-ocf">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>營業現金流</dfn><span class="en">Operating cash flow (OCF)</span></p>
+    <p>營業活動現金流的簡稱：本業日常收支實際收到減實際付出的淨額，包括收貨款、付料款、發薪水、繳稅。多數公司用間接法編製：從淨利出發，加回折舊這類不必付現金的費用，再扣掉卡在<span class="term" data-term="營運資金">營運資金</span>裡的錢（應收帳款、存貨增加）。它回答的問題是：本業到底有沒有把錢帶回家？</p>
+  </div>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 316" role="img" aria-label="示意科技 2026 年現金瀑布：期初現金 30 億，營業現金流加 32 到 62，資本支出減 40 到 22，借款加 10 到 32，發股利減 15，期末現金 17 億；營業加投資等於自由現金流負 8，籌資合計負 5">
+        <line x1="20" y1="240" x2="380" y2="240" class="s-ink s-1"/>
+        <rect x="34" y="162" width="44" height="78" class="f-soft s-ink s-1"/>
+        <rect x="92" y="78.8" width="44" height="83.2" class="f-c4"/>
+        <rect x="150" y="78.8" width="44" height="104" class="f-c2"/>
+        <rect x="208" y="156.8" width="44" height="26" class="f-c1"/>
+        <rect x="266" y="156.8" width="44" height="39" class="f-c1 o-50"/>
+        <rect x="324" y="195.8" width="44" height="44.2" class="f-soft s-ink s-1"/>
+        <line x1="78" y1="162" x2="92" y2="162" class="s-3 s-1 s-dash"/>
+        <line x1="136" y1="78.8" x2="150" y2="78.8" class="s-3 s-1 s-dash"/>
+        <line x1="194" y1="182.8" x2="208" y2="182.8" class="s-3 s-1 s-dash"/>
+        <line x1="252" y1="156.8" x2="266" y2="156.8" class="s-3 s-1 s-dash"/>
+        <line x1="310" y1="195.8" x2="324" y2="195.8" class="s-3 s-1 s-dash"/>
+        <text x="56" y="155" class="ta-m t-mono t-b">30</text>
+        <text x="114" y="72" class="ta-m t-mono t-b">+32</text>
+        <text x="172" y="72" class="ta-m t-mono t-b">−40</text>
+        <text x="230" y="150" class="ta-m t-mono t-b">+10</text>
+        <text x="288" y="150" class="ta-m t-mono t-b">−15</text>
+        <text x="346" y="189" class="ta-m t-mono t-b">17</text>
+        <text x="56" y="258" class="ta-m t-sm">期初</text>
+        <text x="56" y="273" class="ta-m t-sm">現金</text>
+        <text x="114" y="258" class="ta-m t-sm">營業</text>
+        <text x="114" y="273" class="ta-m t-sm">現金流</text>
+        <text x="172" y="258" class="ta-m t-sm">資本</text>
+        <text x="172" y="273" class="ta-m t-sm">支出</text>
+        <text x="230" y="258" class="ta-m t-sm">新增</text>
+        <text x="230" y="273" class="ta-m t-sm">借款</text>
+        <text x="288" y="258" class="ta-m t-sm">發放</text>
+        <text x="288" y="273" class="ta-m t-sm">股利</text>
+        <text x="346" y="258" class="ta-m t-sm">期末</text>
+        <text x="346" y="273" class="ta-m t-sm">現金</text>
+        <path d="M94 282 V288 H192 V282" class="f-none s-accent s-15"/>
+        <text x="143" y="305" class="ta-m t-sm t-accent t-b">自由現金流 −8</text>
+        <path d="M210 282 V288 H308 V282" class="f-none s-2 s-15"/>
+        <text x="259" y="305" class="ta-m t-sm t-2 t-b">籌資合計 −5</text>
+        <rect x="20" y="16" width="10" height="10" class="f-c4"/>
+        <text x="34" y="25" class="t-sm t-2">營業</text>
+        <rect x="76" y="16" width="10" height="10" class="f-c2"/>
+        <text x="90" y="25" class="t-sm t-2">投資</text>
+        <rect x="132" y="16" width="10" height="10" class="f-c1"/>
+        <text x="146" y="25" class="t-sm t-2">籌資</text>
+        <text x="380" y="25" class="ta-e t-sm t-3">億元・示意</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意科技 2026 年（數字同第 7 章表三）。顏色沿用第 7 章：黃色營業、橘色投資、藍色籌資。本業帶回 32 億，買設備就花了 40 億，兩者相減的 −8 億是 9.6 節的自由現金流；再加上借款 10 億、發股利 15 億，現金從 30 億降到 17 億。</span></figcaption>
+  </figure>
+
+  <p>從瀑布可以看出這一年的故事：本業很賺錢，但擴產更花錢；公司同時還想照常發股利，只好一邊借錢、一邊動用存款。這三件事在損益表上完全看不到，損益表只會告訴你「淨利 34 億」。</p>
+
+  <h3>獲利的含金量：營業現金流 ÷ 淨利</h3>
+  <p>把營業現金流和稅後淨利並排，是讀財報最實用的習慣之一。示意科技 32 ÷ 34 ≈ 0.94：每賺 1 元帳面獲利，大約收回 0.94 元現金。營收快速成長的年份，應收帳款和存貨變多，這個比值略低於 1 很常見。</p>
+  <p>真正要警覺的是「淨利年年成長，營業現金流卻年年落後」。看一家虛構的公司丙：</p>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>公司丙：淨利成長、現金失血（億元，假設；為了聚焦，只考慮應收帳款的變化）</caption>
+      <thead><tr><th>年度</th><th class="r">營收</th><th class="r">稅後淨利</th><th class="r">應收帳款</th><th class="r">收款天數</th><th class="r">營業現金流</th></tr></thead>
+      <tbody>
+        <tr><th>第 1 年</th><td class="r">100</td><td class="r">10</td><td class="r">20</td><td class="r">73 天</td><td class="r">9</td></tr>
+        <tr><th>第 2 年</th><td class="r">130</td><td class="r">13</td><td class="r">40</td><td class="r">112 天</td><td class="r">−7</td></tr>
+        <tr><th>第 3 年</th><td class="r">170</td><td class="r">17</td><td class="r">75</td><td class="r">161 天</td><td class="r">−18</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>營收每年成長三成上下，淨利率穩定 10%，損益表無可挑剔。可是應收帳款從 20 億暴增到 75 億，收款天數從 73 天拉長到 161 天，營業現金流由正轉負：第 2 年 13 − (40 − 20) ＝ −7，第 3 年 17 − (75 − 40) ＝ −18。可能的解釋有好有壞：也許是給大客戶更長的付款期限換訂單，也許是客戶付不出來，最糟的情況是營收認列得太積極。不管是哪一種，都是要去讀附註、聽<span class="term" data-term="法說會">法說會</span>問清楚的訊號。</p>
+  <aside class="note">反過來，資本密集的公司營業現金流常常<b>明顯大於</b>淨利，因為每年有大筆折舊要加回來（9.5 節）。所以「營業現金流 ÷ 淨利」要和同業、和自己過去比，不要拿晶圓廠去比 IC 設計公司。</aside>
+  <p>最後提醒一個細節：依國際財務報導準則，支付的利息、收到的股利等項目可以歸在不同的段落，各公司的選擇不一定相同。比較兩家公司的現金流量表前，先看附註裡的分類方式。</p>
 </section>
 
 <section id="capex-dep">
