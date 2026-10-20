@@ -441,7 +441,73 @@
 
 <section id="capex-dep">
   <h2><span class="sec-num">9.5</span>資本支出與折舊：一次付清、分年認列</h2>
-  <!-- S5 -->
+  <p class="lead-in">瀑布裡最大的一筆流出是 40 億的設備。奇怪的是，這 40 億在損益表上找不到。它去了哪裡？</p>
+
+  <div class="box define" id="def-capex">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>資本支出</dfn><span class="en">Capital expenditure (CAPEX)</span></p>
+    <p>買進或建造使用年限超過一年的長期資產所付出的現金，例如蓋廠房、買機器、建資料中心、採購伺服器。現金流量表上多半叫「取得不動產、廠房及設備」，列在投資活動。它先變成資產負債表上的資產，之後才透過折舊，一年一年變成損益表上的費用。GCFIE 和英文新聞寫作 CAPEX 或 Capex。</p>
+  </div>
+  <div class="box define" id="def-dep">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>折舊</dfn><span class="en">Depreciation</span></p>
+    <p>把長期資產的成本，分攤到它能使用的年份，每年認列一部分費用。最常見的是直線法：每年折舊 ＝（成本 − 殘值）÷ 使用年限。折舊是費用，卻不必再付現金，因為現金在買設備那一年就付掉了。專利、軟體這類無形資產也有同樣的分攤，叫攤銷。</p>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>一條 40 億的新產線，分 5 年折舊、殘值 0（直線法；為了好算，第 1 年就提列整年）</h4>
+    <ol class="calc">
+      <li>每年折舊：<span class="eq">(40 − 0) ÷ 5 ＝ 8 億／年</span></li>
+      <li>第 1 年的現金：<span class="eq">付出 40 億，損益表只扣 8 億，帳面淨額剩 32 億</span></li>
+      <li>第 2 到第 5 年：<span class="eq">現金 0，每年費用 8 億；淨額 24 → 16 → 8 → 0</span></li>
+    </ol>
+    <p class="answer">五年加總，現金流出 40 億、費用 40 億，一樣多；差別只在時間。現金一次付清，費用分五年認列。</p>
+  </div>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>同一條產線，現金與費用的時間差（億元，示意）</caption>
+      <thead><tr><th>年度</th><th class="r">現金流出（投資活動）</th><th class="r">折舊費用（損益表）</th><th class="r">年底帳面淨額</th></tr></thead>
+      <tbody>
+        <tr><th>第 1 年</th><td class="r">40</td><td class="r">8</td><td class="r">32</td></tr>
+        <tr><th>第 2 年</th><td class="r">0</td><td class="r">8</td><td class="r">24</td></tr>
+        <tr><th>第 3 年</th><td class="r">0</td><td class="r">8</td><td class="r">16</td></tr>
+        <tr><th>第 4 年</th><td class="r">0</td><td class="r">8</td><td class="r">8</td></tr>
+        <tr><th>第 5 年</th><td class="r">0</td><td class="r">8</td><td class="r">0</td></tr>
+        <tr><th>合計</th><td class="r">40</td><td class="r">40</td><td class="r">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>這個時間差有兩個重要的後果。</p>
+  <p><b>第一，擴產高峰過後，折舊會壓低毛利率。</b>工廠設備的折舊算在<span class="term" data-term="營業成本">營業成本</span>裡。示意科技如果營收停在 300 億，新產線每年多出 8 億折舊，<span class="term" data-term="毛利率">毛利率</span>就會從 30% 掉到 (90 − 8) ÷ 300 ≈ 27.3%。新產能必須帶來新的營收，才能把這筆固定成本吃下來。這就是半導體公司在新廠量產初期，常提醒「折舊會稀釋毛利率」的原因。</p>
+  <p><b>第二，折舊年限是一種估計，會直接改變淨利。</b>假設一批 120 億的伺服器：估計用 4 年，每年折舊 30 億；估計用 6 年，每年只有 20 億。同一批機器、同樣的現金，淨利每年就差了 10 億（稅前）。現金流不會因為會計估計而改變，這也是下一節自由現金流受到重視的原因之一。</p>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>折舊不用付現金，所以不是真正的成本，看獲利時可以加回來不管。</p></div>
+    <div class="myth-right"><p>折舊代表的錢早就花掉了，而且設備用完還要再買。忽略折舊，等於假裝機器永遠不會壞、不會過時。比較合理的檢查是把資本支出和折舊並排：資本支出長期大約等於折舊，公司只是在維持現有規模；遠大於折舊，代表正在擴張，未來的折舊會跟著墊高。</p></div>
+  </div>
+
+  <div class="box define" id="def-capint">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>資本密集</dfn><span class="en">Capital-intensive</span></p>
+    <p>要先投入大量長期資產，才做得了生意的產業，例如晶圓代工、記憶體、封裝測試、電信、資料中心。特徵是資本支出占營收比重高、折舊大、資產週轉率低；景氣反轉時，廠房的折舊和利息照樣要付，獲利掉得特別快。</p>
+  </div>
+  <p>兩個簡單的比值，就能看出一家公司的資本密集程度與擴張速度。以示意科技 2026 年為例：</p>
+  <ul>
+    <li><b>資本支出 ÷ 營收</b>（資本支出強度）：40 ÷ 300 ≈ 13.3%。每做 100 元生意，要再投入 13 元買設備。</li>
+    <li><b>資本支出 ÷ 折舊</b>：40 ÷ 15 ≈ 2.7 倍。遠大於 1，代表設備規模在快速擴大。</li>
+  </ul>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §十一（候補名單）</span></div>
+    <p class="quote">京元電 2449：台積電測試委外受惠，2026 年資本支出 393.7 億元創新高。</p>
+    <p>測試是資本密集的生意：機台先買，訂單後到。資本支出創新高，代表公司看到夠多的委外需求，願意先把錢押下去；未來幾年的折舊也會跟著墊高。這筆投資划不划算，要看新產能開出來時，訂單是不是還在。讀這類「資本支出創新高」的消息，可以同時記住兩面：好消息寫在今年的資本支出裡，風險寫在未來幾年的折舊裡。</p>
+  </div>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第十五節</span></div>
+    <p class="quote">基本面：AI CAPEX、Server、HBM、DRAM、Networking、Power、Cooling、Advanced Packaging 是否持續成長。</p>
+    <p>為什麼 CAPEX 排在第一個？因為後面那一串（伺服器、記憶體、網通、電源、散熱、先進封裝），都是資本支出買的東西。<strong>一家公司的資本支出，就是另一家公司的營收。</strong>雲端業者在現金流量表上寫下的每一筆「取得設備」，最後都變成台灣供應鏈損益表第一行的<span class="term" data-term="營收">營收</span>。9.8 節會沿著這條線，把錢追回源頭。</p>
+  </div>
 </section>
 
 <section id="fcf">
