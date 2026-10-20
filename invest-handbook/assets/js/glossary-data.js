@@ -1240,6 +1240,181 @@ HB.glossary = {
   "ch": 8,
   "anchor": "def-eps"
  },
+ "公司債": {
+  "term": "公司債",
+  "en": "Corporate bond",
+  "def": "公司發行、向投資人借錢的債券，載明面額、票面利率與到期日；信用越差，要付的殖利率越高。",
+  "ch": 9,
+  "anchor": "def-corpbond"
+ },
+ "合約負債": {
+  "term": "合約負債",
+  "en": "Contract liability",
+  "def": "客戶已付款、公司尚未交付商品或服務的義務，交貨時才轉為營收；俗稱預收款。",
+  "ch": 9,
+  "anchor": "def-contract-liab"
+ },
+ "存貨": {
+  "term": "存貨",
+  "en": "Inventory",
+  "def": "原料、半成品與尚未賣出的成品；錢已付出、要賣掉收款才回來，有跌價與過時的風險。",
+  "ch": 9,
+  "anchor": "def-inventory"
+ },
+ "自由現金流": {
+  "term": "自由現金流",
+  "en": "Free cash flow (FCF)",
+  "def": "營業現金流 − 資本支出；可用於股利、買回、還債的錢。長期為負，就得一直向外籌錢。",
+  "ch": 9,
+  "anchor": "def-fcf"
+ },
+ "利息保障倍數": {
+  "term": "利息保障倍數",
+  "en": "Interest coverage ratio",
+  "def": "付息、繳稅前的獲利 ÷ 利息費用；倍數越低，升息時獲利越容易被利息吃掉。",
+  "ch": 9,
+  "anchor": "def-icr"
+ },
+ "折舊": {
+  "term": "折舊",
+  "en": "Depreciation",
+  "def": "把長期資產的成本分攤到使用年限的費用；不必再付現金，年限的估計會改變淨利。",
+  "ch": 9,
+  "anchor": "def-dep"
+ },
+ "杜邦分析": {
+  "term": "杜邦分析",
+  "en": "DuPont analysis",
+  "def": "把 ROE 拆成淨利率 × 總資產週轉率 × 權益乘數，看高報酬來自利潤、效率還是槓桿。",
+  "ch": 9,
+  "anchor": "def-dupont"
+ },
+ "流動比率": {
+  "term": "流動比率",
+  "en": "Current ratio",
+  "def": "流動資產 ÷ 流動負債；一年內能變現的資源，夠不夠還一年內到期的帳。",
+  "ch": 9,
+  "anchor": "def-current-ratio"
+ },
+ "流動負債": {
+  "term": "流動負債",
+  "en": "Current liabilities",
+  "def": "一年內要償還的負債：應付帳款、短期借款、一年內到期的長期借款等。",
+  "ch": 9,
+  "anchor": "def-current-liab"
+ },
+ "流動資產": {
+  "term": "流動資產",
+  "en": "Current assets",
+  "def": "預期一年內（或一個營業週期內）變成現金或用掉的資產：現金、應收帳款、存貨、預付款項等。",
+  "ch": 9,
+  "anchor": "def-current-asset"
+ },
+ "負債": {
+  "term": "負債",
+  "en": "Liabilities",
+  "def": "公司將來要用現金、商品或服務償還的義務，如借款、應付帳款、公司債、合約負債；有到期日。",
+  "ch": 9,
+  "anchor": "def-liability"
+ },
+ "負債比率": {
+  "term": "負債比率",
+  "en": "Debt ratio",
+  "def": "負債總額 ÷ 資產總額，資產有幾成是借錢買的；要和同業、自己的過去比，銀行常在九成以上。",
+  "ch": 9,
+  "anchor": "def-debt-ratio"
+ },
+ "現金增資": {
+  "term": "現金增資",
+  "en": "Cash capital increase",
+  "def": "公司發行新股向股東或大眾收取現金；不必還、不付息，但股數增加、每股獲利被稀釋。",
+  "ch": 9,
+  "anchor": "def-cashissue"
+ },
+ "速動比率": {
+  "term": "速動比率",
+  "en": "Quick ratio",
+  "def": "（流動資產 − 存貨 − 預付費用）÷ 流動負債；不靠賣存貨也還得起短期債嗎。",
+  "ch": 9,
+  "anchor": "def-quick"
+ },
+ "資本支出": {
+  "term": "資本支出",
+  "en": "Capital expenditure (CAPEX)",
+  "def": "買進或建造廠房、機器、資料中心等長期資產的現金支出，列在投資活動，之後以折舊攤成費用。",
+  "ch": 9,
+  "anchor": "def-capex"
+ },
+ "資本密集": {
+  "term": "資本密集",
+  "en": "Capital-intensive",
+  "def": "須先投入大量長期資產才能營運的產業，如晶圓代工、記憶體、資料中心；折舊大、週轉率低。",
+  "ch": 9,
+  "anchor": "def-capint"
+ },
+ "資產": {
+  "term": "資產",
+  "en": "Assets",
+  "def": "公司擁有或控制、預期將來能帶來經濟效益的資源，如現金、應收帳款、存貨、廠房設備。",
+  "ch": 9,
+  "anchor": "def-asset"
+ },
+ "預付款": {
+  "term": "預付款",
+  "en": "Prepayment",
+  "def": "交貨前先付的錢；付款方記為資產，收款方記為合約負債。搶料時大增，可能是重複下單的訊號。",
+  "ch": 9,
+  "anchor": "def-prepay"
+ },
+ "舉債": {
+  "term": "舉債",
+  "en": "Debt financing",
+  "def": "以銀行借款或發行公司債籌措資金；須付息還本、負債增加，但不稀釋股權。",
+  "ch": 9,
+  "anchor": "def-borrow"
+ },
+ "應收帳款": {
+  "term": "應收帳款",
+  "en": "Accounts receivable",
+  "def": "已出貨並認列營收、但客戶還沒付的錢；長得比營收快很多，代表收款變慢或客戶付不出來。",
+  "ch": 9,
+  "anchor": "def-ar"
+ },
+ "營業現金流": {
+  "term": "營業現金流",
+  "en": "Operating cash flow (OCF)",
+  "def": "本業日常收支實收減實付的淨額；由淨利加回折舊、扣除營運資金增加而來。",
+  "ch": 9,
+  "anchor": "def-ocf"
+ },
+ "總資產週轉率": {
+  "term": "總資產週轉率",
+  "en": "Asset turnover",
+  "def": "營收 ÷ 平均總資產；每 1 元資產一年做出多少生意，資本密集產業偏低。",
+  "ch": 9,
+  "anchor": "def-turnover"
+ },
+ "權益乘數": {
+  "term": "權益乘數",
+  "en": "Equity multiplier",
+  "def": "平均總資產 ÷ 平均股東權益＝1 ÷（1 − 負債比率），即公司層級的槓桿倍數。",
+  "ch": 9,
+  "anchor": "def-em"
+ },
+ "ROA": {
+  "term": "ROA",
+  "en": "Return on assets",
+  "def": "資產報酬率＝稅後淨利 ÷ 平均總資產（年報常再加回稅後利息）；全部資產一年賺多少。",
+  "ch": 9,
+  "anchor": "def-roa"
+ },
+ "ROE": {
+  "term": "ROE",
+  "en": "Return on equity",
+  "def": "股東權益報酬率＝稅後淨利 ÷ 平均股東權益，股東的每 100 元一年賺回多少；宜用杜邦分析拆開看。",
+  "ch": 9,
+  "anchor": "def-roe"
+ },
  "去槓桿": {
   "term": "去槓桿",
   "en": "Deleveraging",
@@ -1514,6 +1689,18 @@ HB.glossaryAlias = {
  "累計年增率": "累計營收",
  "訂單能見度": "在手訂單",
  "ASP": "平均單價",
+ "股東權益報酬率": "ROE",
+ "權益報酬率": "ROE",
+ "資產報酬率": "ROA",
+ "資產週轉率": "總資產週轉率",
+ "營業活動現金流": "營業現金流",
+ "OCF": "營業現金流",
+ "CAPEX": "資本支出",
+ "Capex": "資本支出",
+ "FCF": "自由現金流",
+ "增資": "現金增資",
+ "預付款項": "預付款",
+ "預收款": "合約負債",
  "融資買進": "融資",
  "維持率": "擔保維持率",
  "整戶擔保維持率": "擔保維持率",

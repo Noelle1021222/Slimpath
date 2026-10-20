@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>估值：本益比、目標價與本益比壓縮 · 讀通投資</title>
+<meta name="description" content="股價＝EPS × 本益比。自己算出計畫裡的「台積電約 16 倍」「世芯 22 倍對創意 68 倍」，看懂目標價怎麼來，以及為什麼獲利成長三成、指數卻可能原地踏步。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=LXGW+WenKai+TC:wght@400;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;900&amp;display=swap">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/css/handbook.css">
+<script>try{var d=document.documentElement,g=function(k){return JSON.parse(localStorage.getItem("hb."+k))},t=g("theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);if(g("quote")==="intl")d.setAttribute("data-quote","intl");if(g("size")==="lg")d.setAttribute("data-size","lg")}catch(e){}</script>
+<script src="../assets/js/curriculum.js" defer></script>
+<script src="../assets/js/data-plan.js" defer></script>
+<script src="../assets/js/glossary-data.js" defer></script>
+<script src="../assets/js/handbook.js" defer></script>
+<script src="../assets/js/widgets.js" defer></script>
+<script src="../assets/js/widgets-plan.js" defer></script>
+<script src="../assets/js/widgets-basics.js" defer></script>
+<script src="../assets/js/widgets-markets.js" defer></script>
+</head>
+<body data-chapter="10-valuation">
+<div class="page">
+<div class="chapter-grid">
+<main class="chapter" id="main">
+
+<header class="opener">
+  <p class="eyebrow"></p>
+  <div class="opener-num" aria-hidden="true"></div>
+  <h1>估值：本益比、目標價與本益比壓縮</h1>
+  <p class="lede">計畫說台積電「約 16 倍」、大盤「約 26 倍」，ASIC 選世芯是因為它 22 倍、創意卻要 68 倍。這些倍數都是本益比：市場願意為每 1 元獲利付幾元。這一章教你自己算出它們，看懂目標價怎麼來，以及為什麼獲利成長三成，指數卻可能原地踏步。</p>
+  <dl class="opener-meta"></dl>
+</header>
+
+<section class="objectives" aria-labelledby="obj-h">
+  <h2 id="obj-h">學完這章，你能夠</h2>
+  <ol>
+    <li>用「股價 ＝ EPS × 本益比」算出本益比、盈餘殖利率與回本年數，並分清歷史本益比和預估本益比。</li>
+    <li>自己驗算計畫裡的估值：台積電約 16 倍、台光電約 20 倍、世芯 22 倍對創意 68 倍、華星光近 89 倍。</li>
+    <li>說出決定合理本益比的四個因素（成長、確定性、利率、景氣循環），會用 PEG 粗估成長配不配得上倍數。</li>
+    <li>用「1.3 × 20 ÷ 26 ＝ 1.0」解釋本益比壓縮，讀懂計畫第十一節的警告與 GCFIE 的「估值飽和」。</li>
+    <li>拆解目標價的來源，並會用股價淨值比、股利殖利率看金融股。</li>
+    <li>知道估值能告訴你什麼（錯了會跌多深），不能告訴你什麼（什麼時候跌）。</li>
+  </ol>
+</section>
+
+<article class="prose">
+
+<section id="price-value">
+  <h2><span class="sec-num">10.1</span>價格與價值：好公司不等於好價格</h2>
+  <p class="lead-in">一瓶水 20 元你會買，200 元你就會猶豫。水沒有變，變的是價格。股票也一樣：同一家公司，用不同的價格買進，結果可以差很多。</p>
+  <p>先分清兩個詞。<b>價格</b>是你付出去的錢，螢幕上每秒都在跳；<b>價值</b>是你買到的東西值多少，也就是這家公司未來能替股東賺多少錢。<a href="02-what-is-a-stock.html#expectations">第 2 章</a>說過，買一股就是買下公司未來獲利的一小份。價值看不見，只能估計，於是有了估值。</p>
+
+  <div class="box define" id="def-valuation">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>估值</dfn><span class="en">Valuation</span></p>
+    <p>估計一家公司（或一股）值多少錢，再拿來和股價比較，判斷現在的價格偏貴、合理還是偏便宜。新聞常說「評價」，意思相同。方法分兩大類：<b>相對估值</b>用倍數和同業、和自己的歷史比，例如本益比、股價淨值比、股利殖利率；<b>絕對估值</b>把未來每年的現金流換算成今天的錢再加總，叫<span class="term" data-term="現金流折現">現金流折現</span>（第 13 章）。</p>
+  </div>
+
+  <p>這一章專講相對估值，因為你的兩份文件用的幾乎都是倍數。先用一個例子說明，為什麼「用多少錢買」和「買哪一家」一樣重要。</p>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>同一家公司，貴買和便宜買差多少（假設數字）</h4>
+    <ol class="calc">
+      <li>假設公司今年每股賺 10 元（這就是 <span class="term" data-term="EPS">EPS</span>），之後 5 年每年成長 10%。5 年後的 EPS：<span class="eq">10 × 1.1⁵ ≈ 16.1 元</span></li>
+      <li>假設 5 年後市場願意用 20 倍的獲利買它，股價：<span class="eq">16.1 × 20 ≈ 322 元</span></li>
+      <li>甲在平靜的時候用 20 倍買進，付 10 × 20 ＝ 200 元：<span class="eq">322 ÷ 200 − 1 ≈ +61%</span></li>
+      <li>乙在最熱的時候用 40 倍買進，付 10 × 40 ＝ 400 元：<span class="eq">322 ÷ 400 − 1 ≈ −19.5%</span></li>
+    </ol>
+    <p class="answer">公司一樣好，獲利一樣每年成長 10%，乙五年後還虧近兩成。兩人唯一的差別，是買進時付了幾倍的獲利。</p>
+  </div>
+
+  <p>「幾倍的獲利」就是本益比，下一節詳細拆。先看你的兩份文件怎麼談估值。</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §二</span></div>
+    <p class="quote">判讀：基本面強、評價偏高、利率與信用風險升溫 → 先防守、分批進、等事件落地再加碼。</p>
+    <p>「基本面強」講的是價值那一邊：公司很會賺錢，訂單也多。「評價偏高」講的是價格那一邊：現在的股價已經替很多好消息付了錢。兩件事可以同時成立。計畫的結論也不是「不買」，而是「分批進」：估值偏高的時候，用買進的節奏控制風險。</p>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第二十四節</span></div>
+    <p class="quote">固定使用紅黃綠燈。至少包含 SPX/Nasdaq、SOX、Market Breadth、VIX、VIX Structure、Put/Call、ES/NQ positioning、Short Covering、10Y / 30Y、Oil、Macro event、台股外資現貨、台指期、台股市場廣度、AI基本面、AI估值、追價風險。</p>
+    <p>GCFIE 每天的<span class="term" data-term="風險矩陣">風險矩陣</span>把「AI基本面」和「AI估值」分成兩格，各給一個燈號。所以同一天可能出現基本面<span class="sig g">綠燈</span>、估值<span class="sig o">橙燈</span>的組合，這和計畫的判讀是同一個邏輯。最後一格「追價風險」，問的就是：在這個估值下追進去，錯了會傷多重。</p>
+  </div>
+
+  <div class="box key">
+    <div class="box-label"><span class="zh"></span><span class="lat">KEY IDEA</span></div>
+    <p>「好公司」回答的是價值，「好價格」回答的是估值。你的報酬由兩者一起決定：<strong>好公司用太貴的價格買，也可能是一筆壞投資</strong>。</p>
+  </div>
+
+  <aside class="note">估值得出的是一個區間，不是一個精確的數字。它的用途是幫你分辨「明顯便宜」「大致合理」「明顯昂貴」，而不是算到小數點。</aside>
+</section>
+
+<section id="pe">
+  <h2><span class="sec-num">10.2</span>本益比：花幾年的獲利買一股</h2>
+  <p class="lead-in">估值工具裡最常用的是本益比。看盤軟體、新聞、券商報告，幾乎每天都會出現它；你的計畫也用它來比較台積電、台光電、世芯和創意。</p>
+
+  <div class="box define" id="def-pe">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>本益比</dfn><span class="en">Price-to-earnings ratio, P/E</span></p>
+    <p>股價除以每股盈餘（EPS），英文簡寫 P/E 或 PE。意思是：<b>為了買到每 1 元的年度獲利，市場願意付幾元。</b>本益比 16 倍，就是每 1 元獲利標價 16 元。「本」是你付的成本（股價），「益」是每股的獲利（EPS）。</p>
+  </div>
+
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">本益比 ＝ <span class="frac"><span>股價</span><span>EPS（每股盈餘）</span></span></div>
+    <div class="where">也可以用整家公司算：<span class="term" data-term="市值">市值</span> ÷ <span class="term" data-term="稅後淨利">稅後淨利</span>，結果相同，因為分子、分母都乘上同一個股數。倒過來寫，就是本章最重要的一條式子：<b>股價 ＝ EPS × 本益比</b>。</div>
+  </div>
+
+  <p>這條式子把股價拆成兩個因子。EPS 由公司決定，是財報上的實際數字或分析師的預估（<a href="08-income-metrics.html#def-eps">第 8 章</a>）；本益比由市場決定，反映大家的期待、信心和當時的利率。<span class="term" data-term="股價">股價</span>會動，一定是其中一個或兩個因子在動。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 300" role="img" aria-label="股價等於長方形面積：寬是 EPS 150 元，高是本益比 16 倍，面積 2,400 元；EPS 不變、本益比升到 22 倍，面積變成 3,300 元">
+        <text x="60" y="44" class="ta-m t-sm t-2">本益比（倍）</text>
+        <line x1="60" y1="54" x2="60" y2="260" class="s-ink s-1"/>
+        <line x1="60" y1="260" x2="340" y2="260" class="s-ink s-1"/>
+        <rect x="60" y="84" width="240" height="48" class="f-up-soft s-up s-15 s-dash"/>
+        <rect x="60" y="132" width="240" height="128" class="f-wash s-accent s-15"/>
+        <text x="180" y="72" class="ta-m t-sm t-b">3,300 元 ＝ 150 × 22</text>
+        <text x="180" y="104" class="ta-m t-sm">本益比 16 → 22 倍</text>
+        <text x="180" y="123" class="ta-m t-sm t-up t-b">股價 +900 元</text>
+        <text x="180" y="190" class="ta-m t-md t-b">股價 2,400 元</text>
+        <text x="180" y="214" class="ta-m t-sm t-mono t-2">150 × 16</text>
+        <text x="52" y="264" class="ta-e t-xs t-mono t-3">0</text>
+        <text x="52" y="136" class="ta-e t-xs t-mono t-3">16</text>
+        <text x="52" y="88" class="ta-e t-xs t-mono t-3">22</text>
+        <text x="60" y="277" class="ta-m t-xs t-mono t-3">0</text>
+        <text x="180" y="277" class="ta-m t-xs t-mono t-3">75</text>
+        <text x="300" y="277" class="ta-m t-xs t-mono t-3">150</text>
+        <text x="180" y="295" class="ta-m t-sm t-2">EPS（每股盈餘，元）</text>
+        <text x="310" y="104" class="t-sm t-2">EPS 沒變，</text>
+        <text x="310" y="123" class="t-sm t-2">只有倍數變</text>
+        <text x="310" y="186" class="t-sm t-b">面積</text>
+        <text x="310" y="205" class="t-sm t-b">＝ 股價</text>
+        <text x="310" y="236" class="t-sm t-3">寬 ＝ 獲利</text>
+        <text x="310" y="254" class="t-sm t-3">高 ＝ 倍數</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>把股價想成長方形的面積：寬是 EPS，高是本益比。以台積電 2027 年預估 EPS 150 元為例，16 倍是 2,400 元（計畫參考價 2,420 元）；EPS 一塊錢都沒多，市場只要願意給 22 倍，面積就多出紅色那一塊，變成計畫的目標 2：3,300 元。</span></figcaption>
+  </figure>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>計畫說台積電「約 16 倍」，自己算一次</h4>
+    <ol class="calc">
+      <li>計畫第四節：法人估 2027 年 EPS 約 150 元，參考價 2,420 元。<span class="eq">2,420 ÷ 150 ≈ 16.1 倍</span></li>
+      <li>倒過來，每付 1 元能買到多少年度獲利：<span class="eq">150 ÷ 2,420 ≈ 6.2%</span></li>
+      <li>如果 EPS 從此不變，靠獲利「賺回」股價要幾年：<span class="eq">2,420 ÷ 150 ≈ 16 年</span></li>
+    </ol>
+    <p class="answer">16 倍、6.2%、16 年，是同一件事的三種說法。</p>
+  </div>
+
+  <p>第 2 步的百分比有自己的名字：<dfn id="def-earnings-yield">盈餘殖利率</dfn>（Earnings yield），就是本益比的倒數，EPS ÷ 股價。它的單位和存款利率、債券殖利率一樣是百分比，所以可以放在一起比較。股票的盈餘殖利率如果比沒有風險的公債殖利率還低，代表你承擔了股票的波動，拿到的獲利卻比公債少，這時候的<span class="term" data-term="風險溢酬">風險溢酬</span>就很薄。要記得，盈餘殖利率不是你實際領到的現金：公司通常只把一部分獲利發成股利，其餘留下來再投資。</p>
+  <p>第 3 步的「回本年數」是最直覺的讀法，但它假設獲利永遠不變。成長中的公司，獲利一年比一年多，真正回本的時間比本益比短；獲利會衰退的公司則更長。這就是為什麼成長快的公司可以「合理地」有比較高的本益比（10.4 節）。</p>
+
+  <h3>用哪一年的 EPS？</h3>
+  <p>本益比的分子只有一個：今天的股價。分母卻有好幾種選擇，換一個 EPS，本益比就不一樣。最常見的有兩種。</p>
+
+  <div class="box define" id="def-trailing">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>歷史本益比</dfn><span class="en">Trailing P/E</span></p>
+    <p>用已經公布的實際獲利計算，通常是最近四季的 EPS 加總，所以也叫近四季本益比。<a href="https://www.twse.com.tw/zh/page/trading/exchange/BWIBBU.html">證交所</a>每天盤後公布的「個股日本益比」就是這一種：以公司在公開資訊觀測站已申報的近四季財報為基礎，EPS 是零或負數時不計算。</p>
+  </div>
+
+  <div class="box define" id="def-forward">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>預估本益比</dfn><span class="en">Forward P/E</span></p>
+    <p>用分析師對今年或明年 EPS 的預估計算。它看的是未來，比較符合「股價反映預期」的道理；但分母是估計，會被上修或下修。你的計畫用的幾乎都是這一種：台積電、台光電、世芯、創意的倍數，都是用 <b>2027 年</b>的預估 EPS 算的。</p>
+  </div>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>同一檔股票的三個本益比（假設股價 300 元，數字為示意）</caption>
+      <thead><tr><th>用哪一個 EPS</th><th class="r">EPS</th><th class="r">本益比</th></tr></thead>
+      <tbody>
+        <tr><th>近四季實際（歷史本益比）</th><td class="r">10 元</td><td class="r">30.0 倍</td></tr>
+        <tr><th>今年預估</th><td class="r">15 元</td><td class="r">20.0 倍</td></tr>
+        <tr><th>明年預估</th><td class="r">18 元</td><td class="r">16.7 倍</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>公司成長越快，這三個數字差越多。一個人說「這檔 30 倍太貴」，另一個人說「才 17 倍」，兩人可能都沒算錯，只是用了不同年份的 EPS。</p>
+
+  <p>預估 EPS 又是誰估的？券商的分析師各有各的數字，資料公司會把它們彙整起來。</p>
+  <div class="box define" id="def-consensus">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>共識預估</dfn><span class="en">Consensus estimate</span></p>
+    <p>多位分析師對同一家公司 EPS（或營收）預估的平均值或中位數，由 FactSet、Bloomberg 等資料公司彙整，也叫市場共識。計畫寫「依 FactSet 預估，世芯 2027 年本益比約 22 倍」，就是用 FactSet 彙整的共識 EPS 算出來的。共識代表「市場已經預期到的」，所以財報公布時，股價的反應取決於實際結果和共識之間的<span class="term" data-term="預期差">預期差</span>（第 11 章）。</p>
+  </div>
+
+  <aside class="note">看到一個本益比，先問三件事：用<b>哪一天</b>的股價？<b>哪一年</b>的 EPS？<b>誰</b>估的？三個答案不同，數字就不能放在一起比。</aside>
+</section>
+
+<section id="plan-pe">
+  <h2><span class="sec-num">10.3</span>用計畫的數字練功</h2>
+  <p class="lead-in">計畫裡出現了七、八個本益比。算法都一樣，基準卻不完全相同。這一節一個一個拆開，最後畫在同一張圖上。</p>
+
+  <h3>台光電：EPS 是一個區間，本益比也是</h3>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §十一 配置調整</span></div>
+    <p class="quote">M9 近乎獨家、2027 年產能增五成以上，漲價延伸到低階 CCL；法人 2027 年 EPS 預估約 230–280 元，以 5,165 元計約 20 倍</p>
+    <p>這是計畫把台光電從 5% 加碼到 6% 的理由。前半句講它的<span class="term" data-term="定價權">定價權</span>（<span class="term" data-term="CCL">CCL</span> 的高階材料幾乎獨家），後半句講估值。法人給的 EPS 是一個區間，所以本益比也是一個區間。</p>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>台光電「約 20 倍」從哪裡來</h4>
+    <ol class="calc">
+      <li>用 EPS 預估的高端 280 元：<span class="eq">5,165 ÷ 280 ≈ 18.4 倍</span></li>
+      <li>用低端 230 元：<span class="eq">5,165 ÷ 230 ≈ 22.5 倍</span></li>
+      <li>用中點 255 元：<span class="eq">5,165 ÷ 255 ≈ 20.3 倍</span></li>
+    </ol>
+    <p class="answer">計畫的「約 20 倍」是中點的讀法。EPS 預估只要上下差約 10%（230 和 280 各離中點約 25 元），本益比就在 18 到 22 倍之間移動。估值的誤差，大半來自 EPS 的誤差。</p>
+  </div>
+
+  <h3>世芯對創意：同樣做 ASIC，倍數差三倍</h3>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §四</span></div>
+    <p class="quote">ASIC 選世芯而非創意：依 FactSet 預估，世芯 2027 年本益比約 22 倍，創意約 68 倍。</p>
+    <p class="quote">創意（體質好但估值高）、台燿、聯亞、中華電（純防守，10/15 大跌時電信股逆勢上漲）</p>
+    <p>第二句是同一節「候補名單」的第一行。世芯和創意都是替客戶設計 AI 客製晶片（<span class="term" data-term="ASIC">ASIC</span>）的<span class="term" data-term="設計服務">設計服務</span>公司，題材相近。兩個倍數用的是同一個資料來源（FactSet 共識）、同一個年度（2027），可以直接比。</p>
+  </div>
+  <p>換成盈餘殖利率更直觀。花 100 元買世芯，買到的 2027 年預估獲利約 100 ÷ 22 ≈ 4.5 元；花 100 元買創意，只買到 100 ÷ 68 ≈ 1.5 元。若創意的股價不動，要變得和世芯一樣是 22 倍，它的 2027 年 EPS 得是目前預估的 68 ÷ 22 ≈ 3.1 倍。計畫的判斷是：與其押創意的獲利遠遠超出預期，不如買已經便宜三倍的世芯。候補名單把創意寫成「體質好但估值高」，正是 10.1 那句話的實例。</p>
+
+  <h3>華星光近 89 倍：高期待的代價</h3>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §四 高彈性</span></div>
+    <p class="quote">華星光本益比近 89 倍，押光通訊升級，波動最大。</p>
+    <p>89 倍的盈餘殖利率只有 1 ÷ 89 ≈ 1.1%；獲利不變的話，要 89 年才賺得回股價。這種倍數只有在市場相信<span class="term" data-term="光通訊">光通訊</span>升級會讓獲利連續好幾年高速成長時才撐得住。計畫沒寫 89 倍用的是過去還是預估的 EPS，所以不能和世芯的 22 倍精確比較，但數量級的差距已經說明了風險。</p>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>獲利翻倍，股價也可能下跌（假設情境）</h4>
+    <ol class="calc">
+      <li>假設一年後 EPS 真的翻倍：<span class="eq">EPS × 2</span></li>
+      <li>但成長變得沒那麼稀奇，市場只願意給 30 倍：<span class="eq">本益比 × 30 ÷ 89 ≈ × 0.337</span></li>
+      <li>股價 ＝ EPS × 本益比，兩個變化相乘：<span class="eq">2 × 30 ÷ 89 ≈ 0.674，股價約 −33%</span></li>
+    </ol>
+    <p class="answer">獲利翻倍，股價還跌三成多。高本益比的股票同時押注兩件事：成長兌現，而且市場繼續願意給高倍數。只要第二件落空，第一件做到了也不夠。這是計畫只給華星光 3.5% 權重的原因之一。</p>
+  </div>
+
+  <h3>南亞科 4 倍多：全計畫最低的倍數</h3>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §四 高彈性</span></div>
+    <p class="quote">南亞科前三季 EPS 約 49 元，富邦估明年 EPS 可達 110 元；但部分 DDR4 現貨價已回檔、第 4 季合約價預估漲幅收斂，屬景氣後段訊號，所以只放小部位。</p>
+    <p>用參考價約 480 元算：480 ÷ 110 ≈ 4.4 倍，是計畫裡最低的本益比。照「低就是便宜」的直覺，它應該重壓；計畫卻只放 3.5%。為什麼？答案在 10.4 節的第四個因素。</p>
+  </div>
+
+  <p>把這些數字畫在一起：</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 344" role="img" aria-label="計畫中出現的本益比由低到高：南亞科約 4.4 倍、台積電約 16 倍、台光電約 20 倍、世芯 22 倍、大盤 26 倍、南亞約 50 倍、創意 68 倍、華星光近 89 倍">
+        <rect x="16" y="10" width="12" height="12" class="f-accent"/>
+        <text x="34" y="21" class="t-sm">2027 年預估 EPS</text>
+        <rect x="206" y="10" width="12" height="12" class="f-3"/>
+        <text x="224" y="21" class="t-sm">計畫未註明基準</text>
+        <line x1="108" y1="38" x2="108" y2="306" class="s-ink s-1"/>
+        <line x1="191.3" y1="38" x2="191.3" y2="306" class="s-rule s-1 s-dot"/>
+        <line x1="274.7" y1="38" x2="274.7" y2="306" class="s-rule s-1 s-dot"/>
+        <line x1="358" y1="38" x2="358" y2="306" class="s-rule s-1 s-dot"/>
+        <text x="100" y="57" class="ta-e t-sm">南亞科</text>
+        <rect x="108" y="44" width="12.2" height="16" class="f-accent"/>
+        <text x="126" y="57" class="t-sm t-mono">4.4</text>
+        <text x="100" y="91" class="ta-e t-sm">台積電</text>
+        <rect x="108" y="78" width="44.7" height="16" class="f-accent"/>
+        <text x="159" y="91" class="t-sm t-mono">16</text>
+        <text x="100" y="125" class="ta-e t-sm">台光電</text>
+        <rect x="108" y="112" width="56.4" height="16" class="f-accent"/>
+        <line x1="159.1" y1="120" x2="170.5" y2="120" class="s-ink s-15"/>
+        <line x1="159.1" y1="114" x2="159.1" y2="126" class="s-ink s-15"/>
+        <line x1="170.5" y1="114" x2="170.5" y2="126" class="s-ink s-15"/>
+        <text x="177" y="125" class="t-sm t-mono">約 20</text>
+        <text x="100" y="159" class="ta-e t-sm t-b">世芯</text>
+        <rect x="108" y="146" width="61.1" height="16" class="f-accent"/>
+        <text x="175" y="159" class="t-sm t-mono t-b">22</text>
+        <text x="100" y="193" class="ta-e t-sm">大盤</text>
+        <rect x="108" y="180" width="72.2" height="16" class="f-3"/>
+        <text x="186" y="193" class="t-sm t-mono">26</text>
+        <text x="100" y="227" class="ta-e t-sm">南亞</text>
+        <rect x="108" y="214" width="138.9" height="16" class="f-3"/>
+        <text x="253" y="227" class="t-sm t-mono">約 50</text>
+        <text x="100" y="261" class="ta-e t-sm t-b">創意</text>
+        <rect x="108" y="248" width="188.9" height="16" class="f-accent"/>
+        <text x="303" y="261" class="t-sm t-mono t-b">68</text>
+        <text x="100" y="295" class="ta-e t-sm">華星光</text>
+        <rect x="108" y="282" width="247.2" height="16" class="f-3"/>
+        <text x="361" y="295" class="t-sm t-mono">近 89</text>
+        <text x="108" y="321" class="ta-m t-xs t-mono t-3">0</text>
+        <text x="191.3" y="321" class="ta-m t-xs t-mono t-3">30</text>
+        <text x="274.7" y="321" class="ta-m t-xs t-mono t-3">60</text>
+        <text x="358" y="321" class="ta-m t-xs t-mono t-3">90</text>
+        <text x="233" y="338" class="ta-m t-sm t-2">本益比（倍）</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>計畫中出現的本益比。藍色用 2027 年預估 EPS 計算，彼此比較有意義；灰色計畫沒寫明用哪一段獲利。台光電的細線是 EPS 230–280 元對應的 18–22 倍；南亞科是本章用約 480 元 ÷ 富邦估明年 EPS 110 元換算。世芯和創意同產業、同基準，差距約 3.1 倍。</span></figcaption>
+  </figure>
+
+  <aside class="note">跨產業比本益比要小心。記憶體、金融、電子組裝、IC 設計的「正常」倍數本來就不一樣。比較最有意義的是：同產業、同一個 EPS 基準，或拿公司和它自己的過去比。</aside>
+</section>
+
+<section id="fair-pe">
+  <h2><span class="sec-num">10.4</span>什麼決定合理的本益比</h2>
+  <p class="lead-in">台積電 16 倍、華星光 89 倍，市場都「願意」。倍數的高低不是隨便給的，大致由四個因素決定：成長、確定性、利率、景氣循環。</p>
+
+  <h3>① 成長：用 PEG 檢查倍數配不配得上</h3>
+  <p>成長越快，未來的 EPS 越大。今天用高倍數買進，幾年後用當時的 EPS 換算，倍數就降下來了。最簡單的檢查工具叫 PEG。</p>
+
+  <div class="box define" id="def-peg">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>本益成長比</dfn><span class="en">PEG ratio</span></p>
+    <p>本益比除以 EPS 的年成長率（把百分比的數字直接代入）。美國基金經理人彼得‧林區（Peter Lynch）在 1989 年的 <i>One Up on Wall Street</i> 一書中推廣這個想法：定價合理的公司，本益比大約等於它的成長率，也就是 PEG 約等於 1。PEG 小於 1，代表相對於成長，倍數偏便宜；大於 1 則偏貴。這是經驗法則，不是精確的界線。</p>
+  </div>
+
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">PEG ＝ <span class="frac"><span>本益比</span><span>EPS 年成長率（%）</span></span></div>
+    <div class="where">例：本益比 20 倍、EPS 每年成長 20%，PEG ＝ 20 ÷ 20 ＝ 1。倒過來用更實用：要讓 PEG ＝ 1，EPS 每年得成長「本益比那麼多 %」。</div>
+  </div>
+
+  <p>套到計畫：世芯 22 倍，EPS 每年成長約 22% 就說得通；創意 68 倍，需要每年約 68%；華星光近 89 倍，需要每年約 89%，而且要連續好幾年。哪一個比較容易做到，一目了然。</p>
+  <p>大盤也可以算：本益比約 26 倍，投信估 2027 年 EPS 成長約 30%，26 ÷ 30 ≈ 0.87。不過這只用了一年的成長，PEG 原本看的是未來幾年的平均成長；2027 年之後成長若放慢，這個數字就會變大。PEG 還有兩個限制：成長率本身是預估；景氣循環股的成長忽高忽低，PEG 會失真。</p>
+
+  <h3>② 確定性：獲利穩不穩、護城河深不深</h3>
+  <p>兩家公司預估成長一樣快，獲利比較穩、比較能預測的那家，倍數通常比較高，因為投資人願意為「確定」多付一點錢。確定性來自<span class="term" data-term="護城河">護城河</span>和定價權：別人做不出來、客戶離不開、漲價也留得住訂單。計畫第八節觀察到：</p>
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §八</span></div>
+    <p class="quote">少數有護城河的公司（台積電、台光電、奇鋐）連續三年都是贏家，題材股則一年一換。</p>
+    <p>能連續贏三年的公司，市場比較敢給倍數，倍數也比較穩；一年一換的題材股，倍數來得快、去得也快。所以同樣 30 倍，放在兩種公司身上，代表的風險完全不同。</p>
+  </div>
+
+  <h3>③ 利率：分母裡的那個數字</h3>
+  <p><a href="02-what-is-a-stock.html#expectations">第 2 章</a>的簡化模型說：股價 ≈ 每年獲利 ÷ 投資人要求的報酬率。把成長也放進去，再假設獲利全數發給股東、每年以固定速度成長，就得到一條好用的近似：</p>
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">合理本益比 ≈ <span class="frac"><span>1</span><span>要求報酬率 − 長期成長率</span></span></div>
+    <div class="where">要求報酬率 ＝ 無風險利率（例如公債<span class="term" data-term="殖利率">殖利率</span>）＋ 股票的風險溢酬。假設要求 8%、成長 4%：1 ÷ 0.04 ＝ 25 倍。利率上升一個百分點，要求變成 9%：1 ÷ 0.05 ＝ 20 倍。獲利完全沒變，股價卻少了 20%。</div>
+  </div>
+  <p>分母是兩個數字相減，差距本來就小，所以一點點利率變動就能讓本益比大幅移動。而且本益比越高，代表分母越小，對利率越敏感：</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 300" role="img" aria-label="簡化模型下的合理本益比曲線：要求報酬率從 6% 升到 7%，本益比由 50 倍降到 33 倍，跌 33%；從 8% 升到 9%，由 25 倍降到 20 倍，跌 20%">
+        <defs>
+          <marker id="ar10a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-down"/></marker>
+        </defs>
+        <text x="16" y="22" class="t-sm t-2">合理本益比（倍）</text>
+        <line x1="60" y1="40" x2="380" y2="40" class="s-rule s-1 s-dot"/>
+        <line x1="60" y1="84" x2="380" y2="84" class="s-rule s-1 s-dot"/>
+        <line x1="60" y1="128" x2="380" y2="128" class="s-rule s-1 s-dot"/>
+        <line x1="60" y1="172" x2="380" y2="172" class="s-rule s-1 s-dot"/>
+        <line x1="60" y1="216" x2="380" y2="216" class="s-rule s-1 s-dot"/>
+        <line x1="60" y1="32" x2="60" y2="260" class="s-ink s-1"/>
+        <line x1="60" y1="260" x2="380" y2="260" class="s-ink s-1"/>
+        <text x="52" y="44" class="ta-e t-xs t-mono t-3">50</text>
+        <text x="52" y="88" class="ta-e t-xs t-mono t-3">40</text>
+        <text x="52" y="132" class="ta-e t-xs t-mono t-3">30</text>
+        <text x="52" y="176" class="ta-e t-xs t-mono t-3">20</text>
+        <text x="52" y="220" class="ta-e t-xs t-mono t-3">10</text>
+        <text x="52" y="264" class="ta-e t-xs t-mono t-3">0</text>
+        <polyline points="60.0 40.0 79.4 64.4 98.8 84.0 118.1 100.0 137.5 113.3 156.9 124.6 176.3 134.3 195.6 142.7 215.0 150.0 234.4 156.5 253.8 162.2 273.1 167.4 292.5 172.0 311.9 176.2 331.3 180.0 350.6 183.5 370.0 186.7" class="f-none s-accent s-2w s-round draw"/>
+        <line x1="60" y1="40" x2="137.5" y2="40" class="s-3 s-1 s-dash"/>
+        <line x1="137.5" y1="44" x2="137.5" y2="107" class="s-down s-15" marker-end="url(#ar10a)"/>
+        <line x1="215" y1="150" x2="292.5" y2="150" class="s-3 s-1 s-dash"/>
+        <line x1="292.5" y1="152" x2="292.5" y2="167" class="s-down s-15" marker-end="url(#ar10a)"/>
+        <circle cx="60" cy="40" r="4" class="f-accent"/>
+        <circle cx="137.5" cy="113.3" r="4" class="f-accent"/>
+        <circle cx="215" cy="150" r="4" class="f-accent"/>
+        <circle cx="292.5" cy="172" r="4" class="f-accent"/>
+        <text x="146" y="62" class="t-sm t-2">利率 +1 個百分點</text>
+        <text x="146" y="80" class="t-sm t-mono">50 → 33 倍</text>
+        <text x="146" y="98" class="t-sm t-down t-b">−33%</text>
+        <text x="300" y="112" class="t-sm t-2">同樣 +1</text>
+        <text x="300" y="130" class="t-sm t-mono">25 → 20 倍</text>
+        <text x="300" y="148" class="t-sm t-down t-b">−20%</text>
+        <text x="60" y="276" class="ta-m t-xs t-mono t-3">6%</text>
+        <text x="137.5" y="276" class="ta-m t-xs t-mono t-3">7%</text>
+        <text x="215" y="276" class="ta-m t-xs t-mono t-3">8%</text>
+        <text x="292.5" y="276" class="ta-m t-xs t-mono t-3">9%</text>
+        <text x="370" y="276" class="ta-m t-xs t-mono t-3">10%</text>
+        <text x="215" y="294" class="ta-m t-sm t-2">要求報酬率（長期成長率固定 4%）</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意，用簡化模型 1 ÷（要求報酬率 − 4%）畫出。曲線左邊陡、右邊平：本益比本來就高的時候，同樣升 1 個百分點，倍數掉得更多。高估值的成長股對利率特別敏感，原因就在這裡（第 13 章用折現再解釋一次）。</span></figcaption>
+  </figure>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第十四、三十三節</span></div>
+    <p class="quote">可能形成：AI需求越強 → CAPEX越大 → 融資越多 → 長端利率越高 → AI估值反而受到壓縮。</p>
+    <p class="quote">Rates 告訴我們估值的折現壓力。</p>
+    <p>這條鏈的最後一步，就是上面那條曲線：長天期的利率（例如美國 <span class="term" data-term="10Y">10Y</span> 公債殖利率）上升，要求報酬率跟著上升，本益比下降。所以 GCFIE 提醒，AI 需求越強不一定越利多：需求推高<span class="term" data-term="資本支出">資本支出</span>（CAPEX），資本支出越來越靠借錢，借錢推高利率，利率又回頭壓低 AI 股的本益比。計畫第十一節把「大盤本益比約 26 倍」和「聯準會處於升息循環」寫在同一句風險裡，道理相同。</p>
+  </div>
+
+  <h3>④ 景氣循環：本益比最低的時候，常是最危險的時候</h3>
+  <p>記憶體、原物料、航運這類<span class="term" data-term="景氣循環">景氣循環</span>產業，獲利跟著供需大起大落。獲利高峰時 EPS 很大，本益比看起來很低；但市場知道高峰撐不久，只肯給很低的倍數。到了谷底，EPS 只剩一點點甚至虧損，本益比反而高得嚇人，或根本算不出來。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 334" role="img" aria-label="景氣循環股示意：股價比 EPS 早一步見頂；本益比在獲利谷底最高約 30 倍，在獲利高峰最低約 10 倍">
+        <text x="16" y="21" class="t-sm t-b">股價與獲利（示意）</text>
+        <rect x="236" y="10" width="12" height="12" class="f-accent-soft"/>
+        <text x="254" y="21" class="t-sm">EPS</text>
+        <line x1="296" y1="16" x2="318" y2="16" class="s-accent s-2w"/>
+        <text x="324" y="21" class="t-sm">股價</text>
+        <line x1="250" y1="46" x2="250" y2="168" class="s-3 s-1 s-dash"/>
+        <line x1="250" y1="254" x2="250" y2="310" class="s-3 s-1 s-dash"/>
+        <rect x="40" y="140.9" width="20" height="9.1" class="f-accent-soft"/>
+        <rect x="80" y="131.8" width="20" height="18.2" class="f-accent-soft"/>
+        <rect x="120" y="113.6" width="20" height="36.4" class="f-accent-soft"/>
+        <rect x="160" y="86.4" width="20" height="63.6" class="f-accent-soft"/>
+        <rect x="200" y="59.1" width="20" height="90.9" class="f-accent-soft"/>
+        <rect x="240" y="50" width="20" height="100" class="f-accent-soft"/>
+        <rect x="280" y="77.3" width="20" height="72.7" class="f-accent-soft"/>
+        <rect x="320" y="113.6" width="20" height="36.4" class="f-accent-soft"/>
+        <rect x="360" y="136.4" width="20" height="13.6" class="f-accent-soft"/>
+        <line x1="36" y1="150" x2="384" y2="150" class="s-ink s-1"/>
+        <polyline points="50 126 90 106 130 82 170 58 210 50 250 62 290 86 330 106 370 114" class="f-none s-accent s-2w s-round draw"/>
+        <circle cx="210" cy="50" r="4" class="f-accent"/>
+        <text x="200" y="40" class="ta-m t-sm t-accent t-b">股價先見頂</text>
+        <text x="264" y="58" class="t-sm t-2">EPS 後見頂</text>
+        <line x1="16" y1="170" x2="384" y2="170" class="s-rule s-1"/>
+        <text x="16" y="190" class="t-sm t-b">本益比 ＝ 股價 ÷ EPS</text>
+        <line x1="36" y1="310" x2="384" y2="310" class="s-ink s-1"/>
+        <polyline points="50 210 90 218.3 130 239.2 170 255.2 210 268.3 250 276.7 290 276.7 330 264.2 370 210" class="f-none s-foil s-2w s-round draw"/>
+        <circle cx="50" cy="210" r="4" class="f-plate s-ink s-15"/>
+        <circle cx="370" cy="210" r="4" class="f-plate s-ink s-15"/>
+        <circle cx="250" cy="276.7" r="4" class="f-r"/>
+        <circle cx="290" cy="276.7" r="4" class="f-r"/>
+        <text x="58" y="206" class="t-sm t-mono">30 倍</text>
+        <text x="362" y="200" class="ta-e t-sm t-mono">30 倍</text>
+        <text x="270" y="298" class="ta-m t-sm t-mono t-b">10 倍</text>
+        <text x="56" y="262" class="t-sm t-2">獲利谷底：</text>
+        <text x="56" y="280" class="t-sm t-2">本益比最高</text>
+        <text x="270" y="228" class="ta-m t-sm t-red t-b">看起來最便宜，</text>
+        <text x="270" y="246" class="ta-m t-sm t-red t-b">其實是獲利高峰</text>
+        <text x="210" y="328" class="ta-m t-sm t-3">時間：一個景氣循環</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意數字。上圖：股價看的是未來，比 EPS 早一步見頂、早一步回落。下圖：本益比在獲利高峰附近最低（紅點），在谷底最高。照「本益比低就買」的直覺，會買在紅點，也就是最接近下坡的地方。</span></figcaption>
+  </figure>
+
+  <p>回到南亞科：約 480 元 ÷ 富邦估明年 EPS 110 元 ≈ 4.4 倍。計畫在同一段寫著「部分 DDR4 現貨價已回檔、第 4 季合約價預估漲幅收斂，屬景氣後段訊號」，也就是<span class="term" data-term="記憶體循環">記憶體循環</span>可能接近圖中紅點附近。4.4 倍的意思是：市場不相信 110 元的 EPS 能維持好幾年。所以計畫只放 3.5%，停損也放得比較寬（停損 375 元，約 −22%），讓它有空間波動，又不至於拖垮整個組合。</p>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>本益比低就是便宜，越低越該買。</p></div>
+    <div class="myth-right"><p>本益比低有兩種可能：市場真的低估了它，或市場預期獲利會往下掉。景氣循環股在獲利高峰時本益比最低，這時買進常常買在高點；反而在獲利谷底、本益比高得嚇人時，股價可能已經跌完。先問「這個 EPS 能持續嗎？」再看倍數。看起來便宜、其實是獲利即將衰退的股票，俗稱價值陷阱。</p></div>
+  </div>
+
+  <h3>拿它和自己的過去比</h3>
+  <p>不同產業的倍數不好比，那就拿公司和它自己的歷史比。常見的工具是<dfn id="def-pe-band">本益比河流圖</dfn>（P/E band chart）：把股價和「EPS × 10 倍」「× 15 倍」「× 20 倍」……幾條線畫在一起，看股價現在落在歷史上哪一段倍數，很多看盤網站都有。它的前提是公司的生意沒有改變。如果公司的成長率換了一級（例如 AI 讓某些零組件廠從低速成長變成高速成長），舊的倍數區間就不再適用，河流圖會一直顯示「太貴」。</p>
+
+  <div class="box key">
+    <div class="box-label"><span class="zh"></span><span class="lat">KEY IDEA</span></div>
+    <p>成長越快、獲利越確定、利率越低，合理本益比越高；景氣循環股在獲利高峰時，合理本益比反而最低。</p>
+  </div>
+</section>
+
+<section id="compression">
+  <h2><span class="sec-num">10.5</span>大盤本益比與本益比壓縮</h2>
+  <p class="lead-in">本益比不只能算個股，也能算整個市場。你的計畫裡最重要的一個估值數字，就是「大盤本益比約 26 倍」。</p>
+
+  <div class="box define" id="def-market-pe">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>大盤本益比</dfn><span class="en">Market P/E</span></p>
+    <p>把整個市場當成一家公司：全部股票的總市值 ÷ 總獲利。因為是總額相除，市值大的<span class="term" data-term="權值股">權值股</span>影響最大，和<span class="term" data-term="加權指數">加權指數</span>的<span class="term" data-term="市值加權">市值加權</span>是同一個邏輯。不同機構用的獲利期間（過去四季或未來預估）和股票範圍不同，數字可能差很多，比較時要用同一個來源。</p>
+  </div>
+
+  <p>「股價 ＝ EPS × 本益比」在指數上也成立：指數 ＝ 指數的 EPS × 大盤本益比。用計畫的數字反推，47,111 ÷ 26 ≈ 1,812。你可以把這 1,812 點想成整個台股的「EPS」：指數 47,111 點，等於這 1,812 點的年度獲利乘上 26 倍。</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §二、§十一</span></div>
+    <p class="quote">投信估台股 2026、2027 年 EPS 成長約 67%、30%，但預期 10–11 月以震盪為主；融資餘額已回到 6,300 億元以上。</p>
+    <p class="quote">大盤本益比約 26 倍；10 日線與月線下彎，反彈到 49,000 點附近容易遇壓。</p>
+    <p class="quote">評價與資金面才是持有期內的主要風險：大盤本益比約 26 倍、融資餘額創高、聯準會處於升息循環、AI 信用壓力浮現，央行會議紀錄也提到股市信用擴張的疑慮。2027 年台股 EPS 估增約 30%，若本益比由約 26 倍降到約 20 倍，指數就只會原地踏步。</p>
+    <p>注意計畫把「評價」放在「資金面」前面，當成持有期內的頭號風險。基本面（EPS 成長 67%、30%）它並不擔心；它擔心的是市場願意給的倍數。最後一句就是本章的核心算式，下面一步一步算。</p>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>EPS +30%、本益比 26 → 20 倍，指數怎麼走？</h4>
+    <ol class="calc">
+      <li>今天：指數的 EPS 約 1,812 點，本益比 26 倍。<span class="eq">1,812 × 26 ≈ 47,111</span></li>
+      <li>2027 年 EPS 成長 30%：<span class="eq">1,812 × 1.3 ≈ 2,355.6</span></li>
+      <li>本益比降到 20 倍：<span class="eq">2,355.6 × 20 ≈ 47,111（和今天一樣）</span></li>
+      <li>只看倍數，連指數都不用知道：<span class="eq">1.3 × 20 ÷ 26 ＝ 26 ÷ 26 ＝ 1.00</span></li>
+    </ol>
+    <p class="answer">指數原地踏步。三成的獲利成長，剛好被本益比從 26 倍降到 20 倍（−23%）吃掉。注意不能用 30% − 23% ＝ 7% 相減：兩個變化要相乘。</p>
+  </div>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 304" role="img" aria-label="本益比壓縮的面積圖：今年寬 1.0、高 26 倍；明年寬 1.3、高 20 倍，兩個長方形面積相同，指數不變">
+        <defs>
+          <marker id="ar10b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-3"/></marker>
+        </defs>
+        <text x="200" y="24" class="ta-m t-sm t-2">面積 ＝ 指數：寬（EPS）變寬，高（本益比）變矮</text>
+        <text x="74" y="84" class="ta-m t-sm t-b">今年</text>
+        <rect x="24" y="94" width="100" height="156" class="f-wash s-accent s-15"/>
+        <text x="74" y="164" class="ta-m t-lg t-b">26 倍</text>
+        <text x="74" y="188" class="ta-m t-sm t-mono t-2">× EPS 1.0</text>
+        <text x="74" y="272" class="ta-m t-sm">47,111 點</text>
+        <text x="161" y="162" class="ta-m t-sm t-3">一年後</text>
+        <line x1="130" y1="172" x2="192" y2="172" class="s-3 s-15" marker-end="url(#ar10b)"/>
+        <text x="265" y="84" class="ta-m t-sm t-b">明年</text>
+        <rect x="200" y="94" width="100" height="36" class="f-down-soft"/>
+        <rect x="200" y="130" width="100" height="120" class="f-wash"/>
+        <rect x="300" y="130" width="30" height="120" class="f-up-soft"/>
+        <rect x="200" y="94" width="100" height="156" class="f-none s-3 s-1 s-dash"/>
+        <rect x="200" y="130" width="130" height="120" class="f-none s-accent s-15"/>
+        <text x="250" y="117" class="ta-m t-sm t-down t-b">−6 倍</text>
+        <text x="306" y="108" class="t-sm t-down">本益比</text>
+        <text x="306" y="125" class="t-sm t-mono t-down">26 → 20</text>
+        <text x="250" y="186" class="ta-m t-lg t-b">20 倍</text>
+        <text x="250" y="210" class="ta-m t-sm t-mono t-2">× EPS 1.3</text>
+        <text x="336" y="176" class="t-sm t-up t-b">EPS</text>
+        <text x="336" y="194" class="t-sm t-up t-b">+30%</text>
+        <text x="265" y="272" class="ta-m t-sm">47,111 點（不變）</text>
+        <text x="200" y="296" class="ta-m t-mono t-b">1.3 × 20 ÷ 26 ＝ 1.00</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>和圖 10.1 一樣，面積就是指數。明年的長方形變寬（EPS 多了右邊那條 +30%），也變矮（本益比少了上面那條 −6 倍）。兩條的面積剛好相等，所以指數不動。這就是計畫第十一節那句話的圖解。</span></figcaption>
+  </figure>
+
+  <div class="box define" id="def-compression">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>本益比壓縮</dfn><span class="en">Multiple compression</span></p>
+    <p>公司（或大盤）的 EPS 繼續成長，市場願意給的本益比卻下降，使股價漲得比獲利少，甚至不漲反跌。常見原因：利率上升、成長即將放慢、好消息已經被提前買進。反方向叫<dfn id="def-expansion">本益比擴張</dfn>（Multiple expansion）：獲利沒有多多少，市場給的倍數變高，股價漲得比獲利快。</p>
+  </div>
+
+  <p>現在換你動手。工具預設是計畫的數字：今年 26 倍、EPS 成長 30%、明年 20 倍。試三件事：① 先看「原地踏步」；② 把「明年本益比」拉回 26 倍，獲利成長就完整變成 +30% 的漲幅；③ 把「明年 EPS 成長」拉到 0%、本益比留在 20 倍，看看獲利沒成長時，光是本益比壓縮就會讓股價跌約 23%。</p>
+
+  <div class="widget" data-widget="pe" data-part="2" data-eps="100" data-pe1="26" data-growth="30" data-pe2="20" data-note="把大盤想成一家今年 EPS 100 元的公司（示意）：26 倍、EPS 成長 30%（投信估 2027 年）、明年 20 倍。數字為教學用，不是預測。"></div>
+
+  <p>工具裡「股價不跌的最低本益比」算的是 26 ÷ 1.3 ＝ 20：只要 2027 年真的成長三成，本益比守在 20 倍以上，指數就不會比今天低。另一個好記的換算：在 EPS 成長 30% 的前提下，2027 年本益比每差 1 倍，指數就差 47,111 × 1.3 ÷ 26 ≈ 2,356 點，約等於今天指數的 5%。</p>
+
+  <h3>把計畫的情境換算成本益比</h3>
+  <p>計畫第十一節列了三種情境和加權指數的可能區間。用上面的「2027 年指數 EPS ≈ 2,355.6 點」去除，就能看出每個情境隱含的本益比。這是本章的換算，不是計畫原本的算法；前提是 2027 年獲利真的成長 30%。</p>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>計畫情境的指數區間 ÷ 2027 年指數 EPS 約 2,355.6 點（本章換算）</caption>
+      <thead><tr><th>情境</th><th class="r">主觀機率</th><th class="r">指數區間</th><th class="r">隱含 2027 年本益比</th></tr></thead>
+      <tbody>
+        <tr><th>樂觀</th><td class="r">約 3 成</td><td class="r">51,000–55,000</td><td class="r">21.7–23.3 倍</td></tr>
+        <tr><th>基準</th><td class="r">約 5 成</td><td class="r">44,000–51,000</td><td class="r">18.7–21.7 倍</td></tr>
+        <tr><th>悲觀</th><td class="r">約 2 成</td><td class="r">38,000–43,000</td><td class="r">16.1–18.3 倍</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>換算後有一個發現：<strong>連樂觀情境都假設本益比會從 26 倍降到 22–23 倍</strong>。計畫並沒有期待倍數維持高檔，三種情境的差別只在壓縮多少。反過來說，如果 2027 年獲利預估被下修，同樣的指數對應的本益比會更高，悲觀情境的區間也會往下移。</p>
+
+  <details class="deep">
+    <summary>26 倍是用哪一年的獲利？</summary>
+    <div>
+      <p>計畫沒有註明。第十一節的算式把 26 倍當成「2027 年獲利成長 30% 之前」的倍數，本章照這個讀法計算。如果 26 倍其實是用過去四季的獲利算的，而 2026 年全年獲利又成長約 67%，那麼以 2026 年獲利計的本益比會低得多。這也是 10.2 節那三個問題的實例：同一個大盤，用不同年份的 EPS，倍數可以差很多。讀新聞裡的「大盤本益比」，先確認基準，再和同一個來源的歷史數字比。</p>
+    </div>
+  </details>
+
+  <h3>戴維斯雙擊與雙殺</h3>
+  <p>EPS 和本益比同方向變動時，效果會相乘放大。EPS 成長、本益比同時擴張，股價漲幅大於獲利成長，叫<dfn id="def-davis">戴維斯雙擊</dfn>（Davis double play），名稱來自美國投資人謝爾比‧戴維斯（Shelby Cullom Davis）。反過來，獲利衰退加上本益比壓縮，叫戴維斯雙殺，股價跌幅大於獲利衰退。</p>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>EPS 與本益比的四種組合（示意）</caption>
+      <thead><tr><th>情況</th><th class="r">EPS</th><th class="r">本益比</th><th class="r">股價</th></tr></thead>
+      <tbody>
+        <tr><th>戴維斯雙擊</th><td class="r"><span class="up">+30%</span></td><td class="r">20 → 26 倍</td><td class="r"><span class="up">+69%</span></td></tr>
+        <tr><th>本益比不變</th><td class="r"><span class="up">+30%</span></td><td class="r">26 → 26 倍</td><td class="r"><span class="up">+30%</span></td></tr>
+        <tr><th>本益比壓縮</th><td class="r"><span class="up">+30%</span></td><td class="r">26 → 20 倍</td><td class="r">0%</td></tr>
+        <tr><th>戴維斯雙殺</th><td class="r"><span class="down">−20%</span></td><td class="r">20 → 15 倍</td><td class="r"><span class="down">−40%</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>第一列：1.3 × 26 ÷ 20 ＝ 1.69。最後一列：0.8 × 15 ÷ 20 ＝ 0.6。景氣反轉時，雙殺會讓股價跌得比獲利快很多，這是高倍數股票最大的風險。</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §十一 候補名單更新</span></div>
+    <p class="quote">南亞 1303：玻纖布（日東紡唯一合作夥伴）、銅箔、CCL 一條龍，又受惠油價；但 8/25 以來從 174 元漲到 300 元以上、本益比約 50 倍，等拉回季線再考慮。</p>
+    <p>這是本益比擴張的實例。假設這段期間的 EPS 預估沒有改變，股價從 174 元漲到約 300 元，本益比就是從約 50 × 174 ÷ 300 ≈ 29 倍擴張到約 50 倍。實際上 EPS 預估多半也上修了，但不論如何，倍數已經擴張了一大段。計畫的處理是「等拉回<span class="term" data-term="季線">季線</span>再考慮」：估值告訴你它不便宜，價格條件決定什麼時候再看。</p>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第十五節</span></div>
+    <p class="quote">尤其關注 Beat-and-Raise But Stock Falls：財報優於預期、財測上修、CAPEX增加、訂單增加，但股價卻下跌。不得直接解讀成產業景氣轉差；正確判讀為 Expectation / Valuation Saturation。</p>
+    <p>Valuation Saturation 可以譯成「估值飽和」：倍數已經高到連好消息都推不動。用本章的式子看，<span class="term" data-term="財測">財測</span>上修代表 EPS 預估上升，股價卻下跌，那就表示本益比下降得比 EPS 上升還多，本益比壓縮正在發生。計畫第八節記下的「2026 年 7 月與 10 月台積電法說都交出好成績，前後幾天股價仍重挫」是同一個現象，第 11 章會用<span class="term" data-term="Expectation Saturation">Expectation Saturation</span>和<span class="term" data-term="利多出盡">利多出盡</span>再談一次。</p>
+  </div>
+</section>
+
+<section id="target">
+  <h2><span class="sec-num">10.6</span>目標價從哪裡來</h2>
+  <p class="lead-in">新聞常寫「某券商給目標價 X 元」。目標價看起來像預言，其實是一道乘法。</p>
+
+  <div class="box define" id="def-target">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>目標價</dfn><span class="en">Price target</span></p>
+    <p>估計股價在一段期間內可以到達的價格，券商報告多半以未來 12 個月為期。最常見的算法是「預估 EPS × 目標本益比」。券商研究員在報告中發布的，叫法人目標價。目標價是一句條件句：「如果 EPS 是這麼多，而且市場願意給這個倍數，股價就是這樣。」它不是承諾。</p>
+  </div>
+
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">目標價 ＝ 預估 EPS × 目標本益比</div>
+    <div class="where">兩個因子都是估計，誤差會相乘。EPS 估高 10%、倍數也給高 10%，目標價就高了 1.1 × 1.1 − 1 ＝ 21%。</div>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §四</span></div>
+    <p class="quote">智邦 9 月營收年增約 66%；奇鋐有法人給 4,145 元目標價。</p>
+    <p class="quote">華城、中興電法人目標價分別為 980 元、181 元，中興電在手訂單 431 億元、能見度到 2030 年</p>
+    <p>把法人目標價和計畫自己的目標放在一起看：</p>
+    <div class="table-wrap">
+      <table class="data">
+        <caption>法人目標價與計畫的目標（元；括號為相對參考價的漲幅）</caption>
+        <thead><tr><th>股票</th><th class="r">參考價</th><th class="r">法人目標價</th><th class="r">計畫目標1</th><th class="r">計畫目標2</th></tr></thead>
+        <tbody>
+          <tr><th>奇鋐 3017</th><td class="r">3,315</td><td class="r">4,145（+25.0%）</td><td class="r">3,800</td><td class="r">4,145</td></tr>
+          <tr><th>華城 1519</th><td class="r">約 663</td><td class="r">980（+47.8%）</td><td class="r">790</td><td class="r">950</td></tr>
+          <tr><th>中興電 1513</th><td class="r">約 165</td><td class="r">181（+9.7%）</td><td class="r">181</td><td class="r">195</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>奇鋐的<span class="term" data-term="目標2">目標 2</span>、中興電的<span class="term" data-term="目標1">目標 1</span>直接等於法人目標價；華城的目標 2 定在 950 元，比法人的 980 元保守。計畫沒有照抄法人的數字，而是把它當成參考之一。</p>
+  </div>
+
+  <h3>計畫的目標價，隱含幾倍？</h3>
+  <p>計畫沒寫出它的目標隱含多少本益比，但台積電和台光電都有 EPS 預估，可以反推回去。</p>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>台積電的停損、參考價和兩個目標，各是幾倍？（以 2027 年 EPS 150 元計）</h4>
+    <ol class="calc">
+      <li><span class="term" data-term="停損">停損</span> 2,080 元（−14.0%）：<span class="eq">2,080 ÷ 150 ≈ 13.9 倍</span></li>
+      <li>參考價 2,420 元：<span class="eq">2,420 ÷ 150 ≈ 16.1 倍</span></li>
+      <li>目標 1 2,800 元（+15.7%）：<span class="eq">2,800 ÷ 150 ≈ 18.7 倍</span></li>
+      <li>目標 2 3,300 元（+36.4%）：<span class="eq">3,300 ÷ 150 ＝ 22.0 倍</span></li>
+    </ol>
+    <p class="answer">如果 2027 年 EPS 就是 150 元，股價要走到目標 2，市場得把台積電的本益比從約 16 倍推高到 22 倍。換句話說，目標 2 需要本益比擴張，或是 EPS 超出 150 元的預估。</p>
+  </div>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 330" role="img" aria-label="計畫價位換算成本益比：台積電停損約 13.9 倍、參考價 16.1 倍、目標1 18.7 倍、目標2 22 倍；台光電停損約 16.6 倍、參考價 20.3 倍、目標1 23.5 倍、目標2 27.5 倍，高於大盤 26 倍">
+        <line x1="16" y1="260.5" x2="396" y2="260.5" class="s-rule s-1 s-dot"/>
+        <line x1="16" y1="194.7" x2="396" y2="194.7" class="s-rule s-1 s-dot"/>
+        <line x1="16" y1="128.9" x2="396" y2="128.9" class="s-rule s-1 s-dot"/>
+        <line x1="16" y1="63.2" x2="396" y2="63.2" class="s-rule s-1 s-dot"/>
+        <text x="396" y="257" class="ta-e t-xs t-mono t-3">15 倍</text>
+        <text x="396" y="191" class="ta-e t-xs t-mono t-3">20 倍</text>
+        <text x="396" y="125" class="ta-e t-xs t-mono t-3">25 倍</text>
+        <text x="396" y="59" class="ta-e t-xs t-mono t-3">30 倍</text>
+        <line x1="16" y1="115.8" x2="396" y2="115.8" class="s-foil s-15 s-dash"/>
+        <text x="16" y="110" class="t-xs t-b">大盤 26 倍</text>
+        <text x="120" y="30" class="ta-m t-b">台積電</text>
+        <text x="120" y="46" class="ta-m t-xs t-3">EPS 150 元</text>
+        <text x="300" y="30" class="ta-m t-b">台光電</text>
+        <text x="300" y="46" class="ta-m t-xs t-3">EPS 255 元（中點）</text>
+        <line x1="120" y1="56" x2="120" y2="300" class="s-2 s-1"/>
+        <line x1="300" y1="56" x2="300" y2="300" class="s-2 s-1"/>
+        <rect x="115" y="245.6" width="10" height="14.9" class="f-accent-soft s-accent s-1"/>
+        <rect x="295" y="191.4" width="10" height="26.6" class="f-accent-soft s-accent s-1"/>
+        <circle cx="120" cy="168.4" r="5" class="f-up"/>
+        <circle cx="120" cy="212.3" r="5" class="f-up"/>
+        <circle cx="120" cy="245.6" r="5" class="f-ink"/>
+        <circle cx="120" cy="275.4" r="5" class="f-down"/>
+        <text x="108" y="172.5" class="ta-e t-sm">目標2 3,300</text>
+        <text x="108" y="216.5" class="ta-e t-sm">目標1 2,800</text>
+        <text x="108" y="249.5" class="ta-e t-sm t-b">參考價 2,420</text>
+        <text x="108" y="279.5" class="ta-e t-sm">停損 2,080</text>
+        <text x="132" y="172.5" class="t-sm t-mono t-up t-b">22.0</text>
+        <text x="132" y="216.5" class="t-sm t-mono t-up">18.7</text>
+        <text x="132" y="249.5" class="t-sm t-mono t-b">16.1</text>
+        <text x="132" y="279.5" class="t-sm t-mono t-down">13.9</text>
+        <circle cx="300" cy="96.7" r="5" class="f-up"/>
+        <circle cx="300" cy="148.3" r="5" class="f-up"/>
+        <circle cx="300" cy="191.4" r="5" class="f-ink"/>
+        <circle cx="300" cy="239.1" r="5" class="f-down"/>
+        <text x="288" y="100.5" class="ta-e t-sm">目標2 7,000</text>
+        <text x="288" y="152.5" class="ta-e t-sm">目標1 6,000</text>
+        <text x="288" y="195.5" class="ta-e t-sm t-b">參考價 5,165</text>
+        <text x="288" y="243.5" class="ta-e t-sm">停損 4,240</text>
+        <text x="312" y="100.5" class="t-sm t-mono t-up t-b">27.5</text>
+        <text x="312" y="152.5" class="t-sm t-mono t-up">23.5</text>
+        <text x="312" y="195.5" class="t-sm t-mono t-b">20.3</text>
+        <text x="312" y="243.5" class="t-sm t-mono t-down">16.6</text>
+        <text x="200" y="322" class="ta-m t-sm t-3">價位 ÷ 2027 年預估 EPS ＝ 隱含本益比</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>把計畫表上的價位換成本益比（本章換算）。藍色小框是分批買進區。台積電從停損到目標 2，倍數在 14 到 22 倍之間；台光電的目標 2 隱含約 27.5 倍，已經高過大盤的 26 倍。台光電的 EPS 若是 230 或 280 元，每個倍數會再上下移動約 2 到 3 倍。</span></figcaption>
+  </figure>
+
+  <p>台光電同樣算：用 EPS 中點 255 元，目標 1 的 6,000 元約 23.5 倍，目標 2 的 7,000 元約 27.5 倍，高過大盤。這不代表目標錯了：台光電成長比大盤快，PEG 的邏輯容許它有較高的倍數。但它告訴你，台光電要達標，市場得繼續相信它的成長，而且願意付比大盤更高的價格。</p>
+  <p>自己試試看。下面的工具預設台光電的 EPS 中點 255 元、20 倍。把本益比拉到 27.5 倍，看看 7,000 元需要多高的倍數；再把 EPS 改成 280 元，本益比只要 25 倍就到 7,000 元；改成 230 元，則要 30 倍以上。</p>
+
+  <div class="widget" data-widget="pe" data-part="1" data-eps="255" data-pe="20" data-note="EPS 255 元是計畫引用的法人 2027 年預估區間 230–280 元的中點；倍數為教學用。"></div>
+
+  <h3>為什麼目標價常常追著股價改</h3>
+  <p>目標價的兩個輸入都會受股價影響。股價大漲時，分析師常會上修 EPS 預估（月營收亮眼、訂單增加），也常提高「目標本益比」（同業都漲了、市場更樂觀）。兩個一起上修，目標價就跟著股價往上跑；股價大跌時則反過來，兩個一起下修。所以目標價比較像「在目前的市場情緒下，分析師覺得合理的價位」，很少領先股價。</p>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>法人給奇鋐目標價 4,145 元，所以股價會漲到 4,145 元。</p></div>
+    <div class="myth-right"><p>目標價是預估 EPS 乘上一個主觀的倍數，兩者都可能改，而且常常在股價變動之後才改。它真正有用的是背後的假設：分析師相信多少 EPS、願意給幾倍。讀目標價時，先反推它隱含的本益比，再問自己認不認同這個倍數。</p></div>
+  </div>
+
+  <h3>安全邊際：替自己的估計留緩衝</h3>
+  <div class="box define" id="def-margin-safety">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>安全邊際</dfn><span class="en">Margin of safety</span></p>
+    <p>你估計的價值和實際買進價格之間的差距。葛拉漢（Benjamin Graham）在《智慧型股票投資人》（<i>The Intelligent Investor</i>）的最後一章，把它稱為投資的核心概念：價值永遠只是估計，買得夠便宜，估錯了也不至於傷太重。</p>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>假設你認為台積電合理是 18 倍（假設的判斷）</h4>
+    <ol class="calc">
+      <li>你的估計價值：<span class="eq">150 × 18 ＝ 2,700 元</span></li>
+      <li>在參考價 2,420 元買進，安全邊際：<span class="eq">(2,700 − 2,420) ÷ 2,700 ≈ 10.4%</span></li>
+      <li>在買進區下緣 2,250 元買進：<span class="eq">(2,700 − 2,250) ÷ 2,700 ≈ 16.7%</span></li>
+      <li>萬一 EPS 只有 135 元（比預估少 10%），市場又只給 16 倍：<span class="eq">135 × 16 ＝ 2,160 元</span></li>
+    </ol>
+    <p class="answer">第 4 步就是「估錯了」的情況：股價會落到 2,160 元，比 2,250 元再低約 4%，但還在停損 2,080 元之上。安全邊際越大，越能承受 EPS 估太高或倍數給太多的錯誤。計畫把台積電的買進區設在參考價往下約 7%（2,250–2,420 元），分批掛低一點的單，就是在多爭取一點安全邊際。</p>
+  </div>
+</section>
+
+<section id="pb-yield">
+  <h2><span class="sec-num">10.7</span>另外兩把尺：股價淨值比與股利殖利率</h2>
+  <!-- S7 -->
+</section>
+
+<section id="not-timing">
+  <h2><span class="sec-num">10.8</span>估值不是擇時工具</h2>
+  <!-- S8 -->
+</section>
+
+</article>
+
+<section class="recap" id="recap">
+  <h2>本章重點</h2>
+  <ul>
+    <li>（待填）</li>
+  </ul>
+</section>
+
+<section class="quiz-set" id="quiz">
+  <h2>自我檢測</h2>
+  <p>每題選一個答案，選完會顯示解析。</p>
+  <!-- QUIZ -->
+</section>
+
+</main>
+</div>
+</div>
+</body>
+</html>
