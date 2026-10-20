@@ -1,0 +1,26 @@
+{
+  "chapter": 7,
+  "terms": [
+    { "term": "財務報表", "en": "Financial statements", "def": "公司依會計準則定期公布的正式報告，簡稱財報。主要有資產負債表、綜合損益表、權益變動表、現金流量表與附註。", "anchor": "def-statements", "aliases": ["財報", "財務報告", "三大財報"] },
+    { "term": "損益表", "en": "Income statement", "def": "一段期間的成績單：營收扣掉成本、費用、利息與稅，算出稅後淨利。回答「這段期間賺了多少」。", "anchor": "def-is", "aliases": ["綜合損益表"] },
+    { "term": "資產負債表", "en": "Balance sheet", "def": "某一天的財務狀況照片：公司有什麼（資產）、欠什麼（負債），相減就是屬於股東的股東權益。", "anchor": "def-bs" },
+    { "term": "現金流量表", "en": "Cash flow statement", "def": "一段期間現金實際的進出，分營業、投資、籌資三段，三段合計就是現金的增減。", "anchor": "def-cf" },
+    { "term": "會計恆等式", "en": "Accounting equation", "def": "資產＝負債＋股東權益。左邊是錢變成了什麼，右邊是錢從哪裡來；每筆交易後都成立。", "anchor": "def-equation" },
+    { "term": "股東權益", "en": "Shareholders' equity", "def": "資產減負債後屬於股東的部分，又叫淨值；主要是股本（含資本公積）加保留盈餘。", "anchor": "def-equity", "aliases": ["淨值", "權益"] },
+    { "term": "每股淨值", "en": "Book value per share", "def": "股東權益÷流通在外股數，代表每一股在帳面上分到的淨值。", "anchor": "def-equity" },
+    { "term": "保留盈餘", "en": "Retained earnings", "def": "歷年累積的稅後淨利扣掉已發放的股利後，留在公司的部分；淨利經由它流進資產負債表。", "anchor": "def-re" },
+    { "term": "投資活動現金流", "en": "Cash flow from investing", "def": "現金流量表第二段：買賣廠房設備等長期資產、投資其他公司的現金進出；擴張中的公司常是大負數。", "anchor": "def-cfi", "aliases": ["投資現金流"] },
+    { "term": "籌資活動現金流", "en": "Cash flow from financing", "def": "現金流量表第三段：借款、還款、發債、增資、發股利等，公司與出資者之間的現金往來。", "anchor": "def-cff", "aliases": ["籌資現金流"] },
+    { "term": "營運資金", "en": "Working capital", "def": "流動資產減流動負債；日常營運中主要是應收帳款加存貨減應付帳款，增加時會吃掉現金。", "anchor": "def-wc" },
+    { "term": "應計基礎", "en": "Accrual basis", "def": "收入在賺到時認列、費用在發生時認列，不看錢收付了沒有。損益表採用它，所以淨利不等於現金。", "anchor": "def-accrual", "aliases": ["權責發生制", "應計制"] },
+    { "term": "黑字倒閉", "en": "Profitable but insolvent", "def": "帳上有獲利，卻因現金被應收帳款、存貨卡住又借不到錢，付不出款項而周轉不靈。", "anchor": "def-kuroji" },
+    { "term": "會計年度", "en": "Fiscal year (FY)", "def": "公司結一次總帳的一年。台灣原則上是 1/1–12/31；美國公司可自訂，例如輝達在 1 月底結束。", "anchor": "def-fy", "aliases": ["財年", "FY"] },
+    { "term": "季報", "en": "Quarterly report", "def": "每季結束後公布的財報，經會計師核閱。台灣一般上市櫃公司在季後 45 天內公布第一到三季季報。", "anchor": "def-quarterly", "aliases": ["季財報", "季度財報"] },
+    { "term": "年報", "en": "Annual financial report", "def": "全年度財務報告，經會計師查核簽證，一般在次年 3/31 前公布；第四季數字＝全年減前三季。", "anchor": "def-annual", "aliases": ["年度財報", "年度財務報告"] },
+    { "term": "查核簽證", "en": "Audit", "def": "會計師取得足夠證據，對財報是否允當表達出具意見；年度財報必須經過查核簽證。", "anchor": "def-audit", "aliases": ["查核"] },
+    { "term": "核閱", "en": "Review", "def": "會計師以分析和詢問為主的檢查，程度比查核淺，只表示未發現需修正的重大事項；用於季報。", "anchor": "def-review" },
+    { "term": "合併報表", "en": "Consolidated financial statements", "def": "把母公司和其控制的子公司當成一家編的財報，內部交易互相抵銷。台股季報、年報以它為主。", "anchor": "def-consolidated", "aliases": ["合併財報", "合併財務報告"] },
+    { "term": "財報公布期限", "en": "Filing deadline", "def": "法定最晚公告日：月營收每月 10 日前、季報季後 45 天內、年報次年 3/31 前；金融業等不同。", "anchor": "def-deadline", "aliases": ["申報期限", "財報期限"] },
+    { "term": "自結", "en": "Self-reported (unaudited) results", "def": "公司自行結算、尚未經會計師核閱或查核的數字，常在正式財報前先公告；以正式財報為準。", "anchor": "calendar", "aliases": ["自結數", "自結損益"] }
+  ]
+}
