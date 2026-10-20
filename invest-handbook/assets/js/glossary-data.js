@@ -939,6 +939,160 @@ HB.glossary = {
   "ch": 6,
   "anchor": "def-kline"
  },
+ "月增率": {
+  "term": "月增率",
+  "en": "Month-over-month growth (MoM)",
+  "def": "和上個月相比的成長率；最即時，但易受春節、天數、出貨時點等季節因素干擾。",
+  "ch": 8,
+  "anchor": "def-mom"
+ },
+ "月營收": {
+  "term": "月營收",
+  "en": "Monthly revenue",
+  "def": "台灣上市櫃公司依證交法第 36 條須於每月 10 日前公告的上月營收，是最快的官方基本面資料。",
+  "ch": 8,
+  "anchor": "def-monthly"
+ },
+ "毛利": {
+  "term": "毛利",
+  "en": "Gross profit",
+  "def": "營收減營業成本，財報上叫營業毛利；回答產品本身賺不賺錢。",
+  "ch": 8,
+  "anchor": "def-gross"
+ },
+ "毛利率": {
+  "term": "毛利率",
+  "en": "Gross margin",
+  "def": "毛利 ÷ 營收。反映定價權與成本優勢；組裝廠約 5–6%，掌握瓶頸的供應商高得多。",
+  "ch": 8,
+  "anchor": "def-gm"
+ },
+ "平均單價": {
+  "term": "平均單價",
+  "en": "Average selling price (ASP)",
+  "def": "總營收 ÷ 出貨數量。營收＝出貨量 × 平均單價；漲價帶來的營收幾乎全變成毛利。",
+  "ch": 8,
+  "anchor": "def-asp"
+ },
+ "在手訂單": {
+  "term": "在手訂單",
+  "en": "Backlog",
+  "def": "已簽約但尚未出貨認列的訂單金額，是未來的營收，代表訂單能見度。",
+  "ch": 8,
+  "anchor": "def-backlog"
+ },
+ "年增率": {
+  "term": "年增率",
+  "en": "Year-over-year growth (YoY)",
+  "def": "和去年同期相比的成長率＝本期 ÷ 去年同期 − 1；可排除季節性。倍數＝1＋年增率。",
+  "ch": 8,
+  "anchor": "def-yoy"
+ },
+ "季增率": {
+  "term": "季增率",
+  "en": "Quarter-over-quarter growth (QoQ)",
+  "def": "和上一季相比的成長率，常用在季報的營收、毛利率與 EPS。",
+  "ch": 8,
+  "anchor": "def-qoq"
+ },
+ "美元營收": {
+  "term": "美元營收",
+  "en": "Revenue in US dollars",
+  "def": "以美元計算的營收；換成新台幣受匯率影響，台幣升值會壓低新台幣營收與毛利率。",
+  "ch": 8,
+  "anchor": "def-usd-rev"
+ },
+ "淨利率": {
+  "term": "淨利率",
+  "en": "Net margin",
+  "def": "稅後淨利 ÷ 營收；含業外與稅，會被一次性收支拉高拉低。",
+  "ch": 8,
+  "anchor": "def-npm"
+ },
+ "累計營收": {
+  "term": "累計營收",
+  "en": "Year-to-date revenue",
+  "def": "從 1 月加到最近一個月的營收總和；和去年同期比為累計年增率，可攤平單月雜訊。",
+  "ch": 8,
+  "anchor": "def-cum"
+ },
+ "稅前淨利": {
+  "term": "稅前淨利",
+  "en": "Pre-tax income",
+  "def": "營業利益加減業外損益後、繳所得稅之前的獲利。",
+  "ch": 8,
+  "anchor": "def-pretax"
+ },
+ "稅後淨利": {
+  "term": "稅後淨利",
+  "en": "Net income",
+  "def": "稅前淨利減所得稅費用，財報上叫本期淨利；全部成本、費用、稅扣完後屬於股東的錢。",
+  "ch": 8,
+  "anchor": "def-net-income"
+ },
+ "業外損益": {
+  "term": "業外損益",
+  "en": "Non-operating income and expenses",
+  "def": "本業以外的收支，如利息、匯兌損益、處分資產利益、轉投資收益；常是一次性的。",
+  "ch": 8,
+  "anchor": "def-nonop"
+ },
+ "營收": {
+  "term": "營收",
+  "en": "Revenue",
+  "def": "營業收入的簡稱：本業賣出商品或服務所認列的收入總額，尚未扣除任何成本；營收大不代表賺得多。",
+  "ch": 8,
+  "anchor": "def-revenue"
+ },
+ "營收認列": {
+  "term": "營收認列",
+  "en": "Revenue recognition",
+  "def": "依 IFRS 15，商品或服務的控制權移轉給客戶（通常是出貨或驗收）時才記為營收。",
+  "ch": 8,
+  "anchor": "def-recognition"
+ },
+ "營益率": {
+  "term": "營益率",
+  "en": "Operating margin",
+  "def": "營業利益 ÷ 營收，又稱營業利益率；反映整個本業的經營效率。",
+  "ch": 8,
+  "anchor": "def-opm"
+ },
+ "營業成本": {
+  "term": "營業成本",
+  "en": "Cost of goods sold",
+  "def": "直接做出產品的成本，例如原料、工廠人工、廠房機器折舊與外包加工費。",
+  "ch": 8,
+  "anchor": "def-cogs"
+ },
+ "營業利益": {
+  "term": "營業利益",
+  "en": "Operating income",
+  "def": "毛利減營業費用，即本業賺到的錢；排除業外收支，最能代表公司主要生意的賺錢能力。",
+  "ch": 8,
+  "anchor": "def-op-income"
+ },
+ "營業費用": {
+  "term": "營業費用",
+  "en": "Operating expenses",
+  "def": "推銷、管理、研究發展三類經營費用，不直接算進產品成本，大部分是固定的。",
+  "ch": 8,
+  "anchor": "def-opex"
+ },
+ "營業槓桿": {
+  "term": "營業槓桿",
+  "en": "Operating leverage",
+  "def": "固定費用使營業利益的變動幅度大於營收的變動幅度，上漲下跌都會被放大。",
+  "ch": 8,
+  "anchor": "def-op-leverage"
+ },
+ "EPS": {
+  "term": "EPS",
+  "en": "Earnings per share",
+  "def": "每股盈餘＝歸屬母公司的稅後淨利 ÷ 加權平均流通股數；面額 10 元時 EPS 10 元即賺一個股本。",
+  "ch": 8,
+  "anchor": "def-eps"
+ },
  "去槓桿": {
   "term": "去槓桿",
   "en": "Deleveraging",
@@ -1172,6 +1326,24 @@ HB.glossaryAlias = {
  "失守": "跌破",
  "假跌破": "假突破",
  "跳空": "缺口",
+ "營業收入": "營收",
+ "營業毛利": "毛利",
+ "營業利益率": "營益率",
+ "業外": "業外損益",
+ "營業外收入及支出": "業外損益",
+ "淨利": "稅後淨利",
+ "本期淨利": "稅後淨利",
+ "純益": "稅後淨利",
+ "每股盈餘": "EPS",
+ "YoY": "年增率",
+ "年增": "年增率",
+ "MoM": "月增率",
+ "月增": "月增率",
+ "QoQ": "季增率",
+ "季增": "季增率",
+ "累計年增率": "累計營收",
+ "訂單能見度": "在手訂單",
+ "ASP": "平均單價",
  "融資買進": "融資",
  "維持率": "擔保維持率",
  "整戶擔保維持率": "擔保維持率",

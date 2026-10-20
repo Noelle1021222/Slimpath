@@ -48,22 +48,505 @@
 
 <section id="why-statements">
   <h2><span class="sec-num">7.1</span>為什麼要讀財報：股價長期跟著獲利</h2>
+  <p class="lead-in">打開計畫第四節的選股理由，幾乎每一句都有數字：「廣達第三季營收單季破兆」「南亞科前三季 EPS 約 49 元」「台塑化第 3 季 EPS 2.76 元創單季新高」。這些數字都出自同一個地方：公司定期公布的財務報表。</p>
+
+  <div class="box define" id="def-statements">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>財務報表</dfn><span class="en">Financial statements</span></p>
+    <p>公司依照會計準則，把「一段期間賺了多少、現金怎麼進出」和「某一天有什麼、欠什麼」整理成的正式報告，簡稱<b>財報</b>。台灣上市櫃公司依金管會認可的國際財務報導準則（IFRS）編製，一份完整的財報有四張表：資產負債表、綜合損益表、權益變動表、現金流量表，再加上說明細節的附註。投資人最常看的是其中三張，就是本章的「三大財報」。</p>
+  </div>
+
+  <p>為什麼要花力氣讀這些數字？第 2 章說過，<span class="term" data-term="股價">股價</span>反映的是大家對未來的預期。預期可以很樂觀，也可以很悲觀，但它最後要落在一件查得到的事情上：公司到底賺了多少錢。短期內，利率、資金、情緒都能讓股價大幅偏離；把時間拉長到好幾年，股價大致會繞著獲利走。</p>
+  <p>這個關係可以寫成一條很短的公式：</p>
+
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">股價 ＝ EPS × 本益比</div>
+    <div class="where"><span class="term" data-term="EPS">EPS</span>（每股盈餘）是每一股分到的稅後淨利，第 8 章會一步步算；<span class="term" data-term="本益比">本益比</span>是市場願意為每 1 元獲利付幾元，第 10 章專門討論。財報提供的是 EPS 這一半，本益比則由市場決定。</div>
+  </div>
+
+  <p>下面這張圖用一家假想公司說明「繞著獲利走」是什麼意思。虛線是「如果市場永遠給 15 倍本益比，股價應該在哪裡」，實線是假想的實際股價。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 290" role="img" aria-label="示意：十年間 EPS 從 2 元成長到 5 元，股價從 30 元漲到 76 元；中間股價時而高於、時而低於 EPS 乘 15 倍的獲利線，但長期跟著它走">
+        <line x1="16" y1="20" x2="40" y2="20" class="s-accent s-2w s-dash"/>
+        <text x="46" y="25" class="t-sm">獲利線：EPS × 15 倍</text>
+        <line x1="214" y1="20" x2="238" y2="20" class="s-ink s-2w"/>
+        <text x="244" y="25" class="t-sm">實際股價</text>
+        <line x1="44" y1="76" x2="380" y2="76" class="s-rule s-1 s-dash"/>
+        <line x1="44" y1="116" x2="380" y2="116" class="s-rule s-1 s-dash"/>
+        <line x1="44" y1="156" x2="380" y2="156" class="s-rule s-1 s-dash"/>
+        <line x1="44" y1="196" x2="380" y2="196" class="s-rule s-1 s-dash"/>
+        <line x1="44" y1="236" x2="380" y2="236" class="s-ink s-1"/>
+        <text x="38" y="80" class="t-xs t-3 ta-e t-mono">80</text>
+        <text x="38" y="120" class="t-xs t-3 ta-e t-mono">60</text>
+        <text x="38" y="160" class="t-xs t-3 ta-e t-mono">40</text>
+        <text x="38" y="200" class="t-xs t-3 ta-e t-mono">20</text>
+        <text x="38" y="240" class="t-xs t-3 ta-e t-mono">0</text>
+        <text x="16" y="56" class="t-xs t-3">股價（元）</text>
+        <polyline points="50,176 86,164 122,170 158,152 194,134 230,146 266,122 302,104 338,110 374,86" class="f-none s-accent s-2w s-dash s-round"/>
+        <polyline points="50,176 86,144 122,180 158,156 194,112 230,160 266,126 302,76 338,124 374,84" class="f-none s-ink s-2w s-round draw"/>
+        <circle cx="302" cy="76" r="4" class="f-up"/>
+        <circle cx="230" cy="160" r="4" class="f-down"/>
+        <text x="292" y="66" class="ta-e t-sm"><tspan class="t-b t-up">樂觀</tspan>：股價跑在前面</text>
+        <line x1="230" y1="166" x2="230" y2="186" class="s-3 s-1 s-dot"/>
+        <text x="230" y="202" class="ta-m t-sm"><tspan class="t-b t-down">悲觀</tspan>：股價落後獲利</text>
+        <text x="50" y="256" class="ta-m t-xs t-3">第 1 年</text>
+        <text x="194" y="256" class="ta-m t-xs t-3">第 5 年</text>
+        <text x="380" y="256" class="ta-e t-xs t-3">第 10 年</text>
+        <text x="200" y="280" class="ta-m t-sm t-2">長期跟著獲利，短期繞著它擺盪</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>示意數字。十年間 EPS 從 2 元成長到 5 元（2.5 倍），股價從 30 元漲到 76 元（約 2.5 倍），長期的成長倍數幾乎一樣。但在任何一年，股價都可能比獲利線高出兩三成或低一成多，差距來自本益比在 13 到 19 倍之間擺盪。</span></figcaption>
+  </figure>
+
+  <p>這張圖說明兩件事。第一，十年下來，股價的成長倍數和 EPS 差不多，<strong>獲利是股價長期的錨</strong>。第二，在任何一年裡，股價都可能偏離獲利線，那是本益比在變：大家樂觀時願意付 18、19 倍，悲觀時只肯付 13 倍。所以股價的變化可以拆成兩個引擎：</p>
+
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">1 ＋ 股價漲跌幅 ＝（1 ＋ EPS 成長率）×（1 ＋ 本益比變化率）</div>
+    <div class="where">例：EPS 成長 20%、本益比從 15 倍升到 18 倍（＋20%），股價 ＝ 1.2 × 1.2 ＝ 1.44 倍，漲 44%。只要其中一個引擎反向，另一個的成果就會被抵銷。</div>
+  </div>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">20 檔計畫 §十一、§八</span></div>
+    <p class="quote">2027 年台股 EPS 估增約 30%，若本益比由約 26 倍降到約 20 倍，指數就只會原地踏步。</p>
+    <p>代進兩個引擎：EPS 引擎是 1.3 倍，本益比引擎是 20 ÷ 26 ≈ 0.77 倍。相乘 1.3 × 20 ÷ 26 ＝ 26 ÷ 26 ＝ 1.00，剛好原地踏步。獲利成長的三成，全部被本益比下降吃掉。</p>
+    <p class="quote">導火線多半是總經、關稅、戰爭或韓國槓桿，而不是 AI 訂單轉壞；只要月營收與法說沒轉弱，數週到數月內都收復。</p>
+    <p>這句是計畫回顧 2023–2026 年歷次急跌的結論。急跌時動的是本益比引擎（恐慌讓大家不願意付高倍數）；只要 EPS 引擎沒壞，股價最後會回到獲利線附近。要判斷 EPS 引擎有沒有壞，看的就是<span class="term" data-term="月營收">月營收</span>、<span class="term" data-term="法說會">法說會</span>和財報。</p>
+  </div>
+
+  <p>這也是 GCFIE 把公司自己公布的資料放在最高等級的原因：</p>
+
+  <div class="box doc">
+    <div class="box-label"><span class="zh"></span><span class="lat">FROM YOUR DOCUMENTS</span> <span class="doc-src">GCFIE 第二十七節</span></div>
+    <p class="quote">Tier 1｜官方：CFTC、Cboe、CME、U.S. Treasury、BLS、Federal Reserve、TWSE、TAIFEX、公司IR。</p>
+    <p class="quote">若 Tier 1 與 Tier 3 衝突，Tier 1 優先。</p>
+    <p>公司 IR（Investor Relations，投資人關係）是公司對投資人說話的窗口，IR 網站會放財報、法說會簡報與新聞稿。財報由公司依法申報，並經會計師查核或核閱（7.7 節），所以和交易所、聯準會的官方資料同列 Tier 1。新聞轉述的數字如果和財報對不上，以財報為準。</p>
+  </div>
 </section>
 
 <section id="three-questions">
   <h2><span class="sec-num">7.2</span>三張表，三個問題</h2>
+  <p class="lead-in">先別管公司。假設你的朋友小美想搞清楚自己的財務狀況，她會問三個不同的問題，而這三個問題剛好對應三張表。</p>
+  <ul>
+    <li><b>這一年賺了多少？</b>小美年薪 72 萬元，房租、吃飯、交通一共花掉 60 萬，一年結餘 12 萬。</li>
+    <li><b>12 月 31 日這一天，她有什麼、欠什麼？</b>存款 30 萬、一台機車值 5 萬，合計 35 萬；信用卡帳單還有 3 萬沒繳。35 − 3 ＝ 32 萬，才是真正屬於她自己的。</li>
+    <li><b>錢實際是怎麼進出的？</b>翻開存摺：每月薪水入帳、繳卡費、年中付現買機車。這一年存款增加多少，不一定等於結餘的 12 萬，因為買機車花的錢不算「開銷」，而信用卡上那 3 萬還沒真的付出去。</li>
+  </ul>
+  <p>公司也一樣。三個問題，三張表：</p>
+
+  <div class="box define" id="def-is">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>損益表</dfn><span class="en">Income statement</span></p>
+    <p>一段期間（一季或一年）的成績單：賣了多少（<span class="term" data-term="營收">營收</span>），扣掉成本、費用、利息與稅之後，最後剩多少（<span class="term" data-term="稅後淨利">稅後淨利</span>）。回答的問題是「<b>這段期間賺了多少？</b>」台灣財報上的正式名稱是「綜合損益表」。</p>
+  </div>
+  <div class="box define" id="def-bs">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>資產負債表</dfn><span class="en">Balance sheet</span></p>
+    <p>某一天（季底或年底）的財務狀況：公司擁有什麼（<span class="term" data-term="資產">資產</span>）、欠別人什麼（<span class="term" data-term="負債">負債</span>），兩者相減就是屬於股東的部分（股東權益）。回答的問題是「<b>這一天，公司有什麼、欠什麼？</b>」</p>
+  </div>
+  <div class="box define" id="def-cf">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>現金流量表</dfn><span class="en">Cash flow statement</span></p>
+    <p>一段期間內現金實際的進與出，分成營業、投資、籌資三段（7.4 節）。回答的問題是「<b>現金從哪裡來、花到哪裡去？</b>」它就是公司的存摺，只是幫你把每一筆分好類。</p>
+  </div>
+
+  <h3>照片與影片</h3>
+  <p>三張表最容易混淆的地方是「時間」。資產負債表是一張<strong>照片</strong>，拍的是某一天的樣子，所以標題會寫「2026 年 12 月 31 日」；損益表和現金流量表是一段<strong>影片</strong>，記錄一段期間發生的事，標題會寫「2026 年 1 月 1 日至 12 月 31 日」。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 262" role="img" aria-label="資產負債表是年初與年底兩張照片；損益表與現金流量表是中間一整年的影片，影片把期初照片變成期末照片">
+        <defs>
+          <marker id="ar07a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-ink"/></marker>
+        </defs>
+        <text x="52" y="24" class="ta-m t-sm t-b">照片</text>
+        <text x="200" y="24" class="ta-m t-sm t-b t-accent">影片：一整年</text>
+        <text x="348" y="24" class="ta-m t-sm t-b">照片</text>
+        <rect x="10" y="36" width="84" height="116" class="f-plate s-ink s-15"/>
+        <rect x="16" y="42" width="72" height="104" class="f-none s-3 s-1 s-dash"/>
+        <text x="52" y="76" class="ta-m t-sm t-b">資產負債表</text>
+        <text x="52" y="102" class="ta-m t-sm">期初</text>
+        <text x="52" y="124" class="ta-m t-sm t-mono t-2">12/31</text>
+        <rect x="306" y="36" width="84" height="116" class="f-plate s-ink s-15"/>
+        <rect x="312" y="42" width="72" height="104" class="f-none s-3 s-1 s-dash"/>
+        <text x="348" y="76" class="ta-m t-sm t-b">資產負債表</text>
+        <text x="348" y="102" class="ta-m t-sm">期末</text>
+        <text x="348" y="124" class="ta-m t-sm t-mono t-2">12/31</text>
+        <rect x="106" y="46" width="186" height="42" class="f-accent-soft"/>
+        <text x="199" y="72" class="ta-m t-sm t-b">損益表：賺了多少</text>
+        <rect x="106" y="100" width="186" height="42" class="f-wash s-accent s-1"/>
+        <text x="199" y="126" class="ta-m t-sm t-b">現金流量表：現金進出</text>
+        <line x1="292" y1="67" x2="304" y2="67" class="s-ink s-15" marker-end="url(#ar07a)"/>
+        <line x1="292" y1="121" x2="304" y2="121" class="s-ink s-15" marker-end="url(#ar07a)"/>
+        <line x1="52" y1="152" x2="52" y2="180" class="s-3 s-1 s-dash"/>
+        <line x1="348" y1="152" x2="348" y2="180" class="s-3 s-1 s-dash"/>
+        <line x1="52" y1="180" x2="348" y2="180" class="s-ink s-15"/>
+        <line x1="126" y1="174" x2="126" y2="186" class="s-ink s-1"/>
+        <line x1="200" y1="174" x2="200" y2="186" class="s-ink s-1"/>
+        <line x1="274" y1="174" x2="274" y2="186" class="s-ink s-1"/>
+        <circle cx="52" cy="180" r="4" class="f-ink"/>
+        <circle cx="348" cy="180" r="4" class="f-ink"/>
+        <text x="89" y="170" class="ta-m t-sm t-mono t-3">Q1</text>
+        <text x="163" y="170" class="ta-m t-sm t-mono t-3">Q2</text>
+        <text x="237" y="170" class="ta-m t-sm t-mono t-3">Q3</text>
+        <text x="311" y="170" class="ta-m t-sm t-mono t-3">Q4</text>
+        <text x="52" y="202" class="ta-m t-sm t-mono t-2">2025/12/31</text>
+        <text x="348" y="202" class="ta-m t-sm t-mono t-2">2026/12/31</text>
+        <text x="200" y="232" class="ta-m t-b">期初照片 ＋ 一年的影片 ＝ 期末照片</text>
+        <text x="200" y="254" class="ta-m t-sm t-3">季報也一樣：照片拍在季底，影片長三個月</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>資產負債表只告訴你某一天的狀態；這一年中間發生了什麼（賺了多少、現金怎麼流），要看損益表和現金流量表。把影片「播完」，就會從期初照片走到期末照片。</span></figcaption>
+  </figure>
+
+  <p>這個區別有很實際的用途。看到「營收創新高」，要問是哪一段期間（單月？單季？全年？）；看到「現金 500 億」，要問是哪一天的照片。同一家公司，季底那天的現金可能剛好很多或很少，單看一張照片容易誤判，所以分析師會比較好幾個季底的照片，看趨勢。</p>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>三大財報一覽</caption>
+      <thead><tr><th>報表</th><th>回答的問題</th><th>時間</th><th>新聞常見的數字</th></tr></thead>
+      <tbody>
+        <tr><th>損益表</th><td>這段期間賺了多少？</td><td>期間（影片）</td><td>營收、毛利率、EPS（第 8 章）</td></tr>
+        <tr><th>資產負債表</th><td>這一天有什麼、欠什麼？</td><td>時點（照片）</td><td>負債比、每股淨值（第 9 章）</td></tr>
+        <tr><th>現金流量表</th><td>現金從哪來、到哪去？</td><td>期間（影片）</td><td>資本支出、自由現金流（第 9 章）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <aside class="note">正式財報的第四張表叫「權益變動表」，記錄股東權益這一年怎麼變：賺了多少加進來、發了多少股利出去、有沒有增資。它是三張表之間的橋，下一節的「保留盈餘」就在這裡出現。</aside>
 </section>
 
 <section id="equation">
   <h2><span class="sec-num">7.3</span>會計恆等式：錢從哪裡來，變成了什麼</h2>
+  <p class="lead-in">資產負債表的英文叫 balance sheet，「平衡的表」。左右兩邊的總數永遠相等，這不是會計師湊出來的，而是因為同一筆錢被記了兩次：一次記<b>錢變成了什麼</b>，一次記<b>錢從哪裡來</b>。</p>
+
+  <div class="box define" id="def-equation">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>會計恆等式</dfn><span class="en">Accounting equation</span></p>
+    <p>資產 ＝ 負債 ＋ 股東權益。左邊是公司把錢放在哪裡：現金、<span class="term" data-term="應收帳款">應收帳款</span>、<span class="term" data-term="存貨">存貨</span>、廠房設備；右邊是這些錢的來源：向別人借的（負債），以及屬於股東的（股東權益）。任何一筆交易發生之後，這個等式都成立。</p>
+  </div>
+
+  <div class="box define" id="def-equity">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>股東權益</dfn><span class="en">Shareholders' equity</span></p>
+    <p>資產減掉負債之後，剩下屬於股東的部分，又叫<b>淨值</b>。主要由兩塊組成：股東投入的錢（<span class="term" data-term="股本">股本</span>，以及溢價發行時多收的資本公積），和公司歷年賺了、還沒發給股東的錢（保留盈餘，7.4 節）。股東權益除以股數，就是「每股淨值」。</p>
+  </div>
+
+  <p>小美的例子也適用：資產 35 萬 ＝ 負債 3 萬 ＋ 淨值 32 萬。公司只是規模大、項目多。要看懂這個等式為什麼永遠成立，最好的方法是跟著一家公司從零開始，看錢怎麼轉一圈。</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 340" role="img" aria-label="公司的錢的循環：股東與銀行把錢投入成為現金；現金拿去買廠房設備；現金也拿去買原料生產成存貨，存貨賣出變成應收帳款，收款後回到現金；最後以股利與還款回到股東與銀行">
+        <defs>
+          <marker id="ar07b1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-c1"/></marker>
+          <marker id="ar07b2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-c2"/></marker>
+          <marker id="ar07b3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-c4"/></marker>
+          <marker id="ar07b4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-3"/></marker>
+        </defs>
+        <circle cx="22" cy="16" r="5" class="f-c1"/>
+        <text x="32" y="21" class="t-sm t-b">籌資活動</text>
+        <circle cx="290" cy="16" r="5" class="f-c2"/>
+        <text x="300" y="21" class="t-sm t-b">投資活動</text>
+        <rect x="14" y="30" width="124" height="56" rx="8" class="f-plate s-ink s-15"/>
+        <text x="76" y="54" class="ta-m t-b">股東・銀行</text>
+        <text x="76" y="74" class="ta-m t-sm t-3">出資、借錢給公司</text>
+        <rect x="262" y="30" width="124" height="56" rx="8" class="f-plate s-ink s-15"/>
+        <text x="324" y="54" class="ta-m t-b">廠房・設備</text>
+        <text x="324" y="74" class="ta-m t-sm t-3">蓋廠、買機器</text>
+        <rect x="262" y="252" width="124" height="56" rx="8" class="f-plate s-ink s-15"/>
+        <text x="324" y="276" class="ta-m t-b">原料・存貨</text>
+        <text x="324" y="296" class="ta-m t-sm t-3">買料、生產</text>
+        <rect x="14" y="252" width="124" height="56" rx="8" class="f-plate s-ink s-15"/>
+        <text x="76" y="276" class="ta-m t-b">應收帳款</text>
+        <text x="76" y="296" class="ta-m t-sm t-3">賣了，錢還沒收</text>
+        <circle cx="200" cy="168" r="40" class="f-accent"/>
+        <text x="200" y="174" class="ta-m t-md t-b t-paper">現金</text>
+        <line x1="110" y1="88" x2="164" y2="142" class="s-c1 s-2w" marker-end="url(#ar07b1)"/>
+        <line x1="180" y1="132" x2="134" y2="88" class="s-c1 s-2w" marker-end="url(#ar07b1)"/>
+        <text x="122" y="138" class="ta-e t-sm">出資・借款</text>
+        <text x="166" y="104" class="t-sm">股利・還款</text>
+        <line x1="230" y1="140" x2="284" y2="88" class="s-c2 s-2w" marker-end="url(#ar07b2)"/>
+        <text x="262" y="128" class="t-sm">買設備</text>
+        <line x1="324" y1="88" x2="324" y2="248" class="s-3 s-15 s-dash" marker-end="url(#ar07b4)"/>
+        <text x="332" y="174" class="t-sm t-3">產能</text>
+        <line x1="228" y1="196" x2="282" y2="250" class="s-c4 s-2w" marker-end="url(#ar07b3)"/>
+        <text x="256" y="214" class="t-sm">付料款</text>
+        <line x1="260" y1="280" x2="142" y2="280" class="s-c4 s-2w" marker-end="url(#ar07b3)"/>
+        <text x="200" y="270" class="ta-m t-sm">賣出：營收入帳</text>
+        <line x1="118" y1="250" x2="170" y2="198" class="s-c4 s-2w" marker-end="url(#ar07b3)"/>
+        <text x="142" y="222" class="ta-e t-sm">收款</text>
+        <circle cx="154" cy="328" r="5" class="f-c4"/>
+        <text x="164" y="333" class="t-sm t-b">營業活動</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>現金在中間，三種顏色的箭頭就是現金流量表的三段：藍色是籌資（向股東、銀行拿錢或還錢），橘色是投資（買長期使用的設備），黃色是營業（買料、生產、賣出、收款這個日常的小循環）。</span></figcaption>
+  </figure>
+
+  <p>下面用一家虛構的「示意科技」，把它剛成立時的七筆交易逐一記下來。每一列都檢查一次等式。</p>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>示意科技剛成立的七筆交易（億元，示意；先不計稅與其他費用）</caption>
+      <thead><tr><th>#</th><th>交易</th><th>資產這邊</th><th>負債＋權益這邊</th><th class="r">資產＝負債＋權益</th></tr></thead>
+      <tbody>
+        <tr><th>1</th><td>股東出資 50</td><td>現金 ＋50</td><td>股本 ＋50</td><td class="r">50 ＝ 0 ＋ 50</td></tr>
+        <tr><th>2</th><td>向銀行借款 30</td><td>現金 ＋30</td><td>借款 ＋30</td><td class="r">80 ＝ 30 ＋ 50</td></tr>
+        <tr><th>3</th><td>付現買設備 60</td><td>現金 −60、設備 ＋60</td><td>不變</td><td class="r">80 ＝ 30 ＋ 50</td></tr>
+        <tr><th>4</th><td>原料先拿貨、下個月付 10</td><td>存貨 ＋10</td><td>應付帳款 ＋10</td><td class="r">90 ＝ 40 ＋ 50</td></tr>
+        <tr><th>5</th><td>成本 8 的貨賣 12，客戶 60 天後付款</td><td>存貨 −8、應收帳款 ＋12</td><td>保留盈餘 ＋4</td><td class="r">94 ＝ 40 ＋ 54</td></tr>
+        <tr><th>6</th><td>收到貨款 12</td><td>現金 ＋12、應收帳款 −12</td><td>不變</td><td class="r">94 ＝ 40 ＋ 54</td></tr>
+        <tr><th>7</th><td>付清原料款 10</td><td>現金 −10</td><td>應付帳款 −10</td><td class="r">84 ＝ 30 ＋ 54</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>七筆交易只有三種模式：</p>
+  <ol>
+    <li><b>兩邊一起變大或變小</b>：借錢（#2）兩邊各加 30；付清欠款（#7）兩邊各減 10。</li>
+    <li><b>只在一邊換位置</b>：買設備（#3）是現金變成設備，收款（#6）是應收帳款變成現金。總數不變，錢只是換了形狀。</li>
+    <li><b>賺錢讓股東權益變大</b>：#5 把成本 8 的貨賣了 12，多出來的 4 屬於股東，記在保留盈餘。</li>
+  </ol>
+  <p>最後一列的照片是：現金 22、設備 60、存貨 2，資產合計 84；借款 30，股東權益 54（股本 50 ＋ 保留盈餘 4）。如果股本 50 億元是以<span class="term" data-term="面額">面額</span> 10 元發行，公司就有 5 億股，每股淨值 ＝ 54 ÷ 5 ＝ 10.8 元。</p>
+  <p>請特別留意 #5 和 #6。公司在 #5 那一刻就「賺了 4 億」，但現金一毛都還沒進來，要等到 #6 才收到錢。<strong>賺到錢和收到錢是兩件事</strong>，這個時間差是 7.6 節的主角。</p>
+
+  <div class="box myth">
+    <div class="box-label"><span class="zh"></span><span class="lat">MISCONCEPTION</span></div>
+    <div class="myth-wrong"><p>資產越大的公司越有錢、越安全。</p></div>
+    <div class="myth-right"><p>資產只說明錢「放在哪裡」，要看右邊才知道「錢是誰的」。兩家公司資產都是 100 億：A 公司負債 20、權益 80；B 公司負債 90、權益 10。如果資產價值縮水 10%（存貨跌價、設備閒置），A 的權益從 80 變 70，少 12.5%；B 的權益從 10 變 0，股東的錢全部歸零，因為負債一毛都不會少。B 的結構就像<a href="25-margin-leverage.html#leverage">第 25 章的融資</a>：負債比例越高，資產的小波動對股東的衝擊越大。</p></div>
+  </div>
 </section>
 
 <section id="linking">
   <h2><span class="sec-num">7.4</span>三張表怎麼接起來</h2>
+  <p class="lead-in">三張表記的是同一套帳，只是切的角度不同。把它們縫在一起的，主要是兩條線：淨利流進保留盈餘，現金的增減流進資產負債表上的現金。</p>
+
+  <h3>第一條線：淨利 → 保留盈餘</h3>
+  <div class="box define" id="def-re">
+    <div class="box-label"><span class="zh"></span><span class="lat">DEFINITION</span></div>
+    <p class="term-name"><dfn>保留盈餘</dfn><span class="en">Retained earnings</span></p>
+    <p>公司歷年累積的稅後淨利，扣掉已經發給股東的股利之後，留在公司裡的部分。它屬於股東權益，所以損益表上的淨利，會透過保留盈餘流進資產負債表。</p>
+  </div>
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">期末保留盈餘 ＝ 期初保留盈餘 ＋ 本期稅後淨利 − 本期發放的股利</div>
+    <div class="where">股利不是費用，不會出現在損益表上。它是把已經賺到的錢分給股東，所以直接從保留盈餘扣掉（第 2 章的<span class="term" data-term="現金股利">現金股利</span>）。實務上還有少數項目會直接調整股東權益，這裡先略過。</div>
+  </div>
+  <p>公司賠錢時，淨利是負的，保留盈餘就減少；連年虧損，保留盈餘可能變成負數，在財報上叫「待彌補虧損」。這也是為什麼長期虧損的公司，淨值會一路往下掉。</p>
+
+  <h3>第二條線：現金流量表 → 資產負債表上的現金</h3>
+  <p>現金流量表把一段期間的現金進出分成三段，三段加起來就是現金的增減：</p>
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">期末現金 ＝ 期初現金 ＋ 營業 ＋ 投資 ＋ 籌資活動現金流</div>
+    <div class="where">現金流入記正數，流出記負數。三段的分類，就是圖 7.3 的三種顏色。</div>
+  </div>
+  <ul>
+    <li><b>營業活動</b>：本業的日常收支，例如收貨款、付料款、付薪水、付利息與稅。這一段的合計就是<span class="term" data-term="營業現金流">營業現金流</span>，它告訴你本業到底有沒有把錢帶回家。</li>
+    <li><b>投資活動</b>：買賣要用好幾年的資產，例如蓋廠、買機器（<span class="term" data-term="資本支出">資本支出</span>），或投資其他公司。這一段的合計叫<dfn id="def-cfi">投資活動現金流</dfn>，正在擴張的公司通常是很大的負數。</li>
+    <li><b>籌資活動</b>：公司和出錢的人之間的往來，例如借款、還款、發<span class="term" data-term="公司債">公司債</span>、<span class="term" data-term="現金增資">現金增資</span>、發放股利。這一段的合計叫<dfn id="def-cff">籌資活動現金流</dfn>。</li>
+  </ul>
+  <p>三段的正負號組合，常常就能看出公司在哪個階段。這只是讀表的起點，不是結論：</p>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>三段現金流的常見組合</caption>
+      <thead><tr><th>公司的狀態</th><th>營業</th><th>投資</th><th>籌資</th></tr></thead>
+      <tbody>
+        <tr><th>成熟、會賺現金</th><td>＋</td><td>−（維修、汰換）</td><td>−（還債、發股利）</td></tr>
+        <tr><th>快速擴張</th><td>＋</td><td>−−（大量資本支出）</td><td>＋（借錢、增資補洞）</td></tr>
+        <tr><th>本業失血</th><td>−</td><td>− 或 ＋（賣資產）</td><td>＋（靠外部資金撐）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>從淨利還原成現金</h3>
+  <p>營業活動這一段，大多數公司用「間接法」編製：從淨利出發，一步步改成現金。為什麼淨利和現金會不一樣？因為損益表採用應計基礎（7.6 節），記的是「賺到」和「用掉」，不是「收到」和「付出」。調整只有兩大類：</p>
+  <ol>
+    <li><b>加回沒有付現金的費用。</b>最大宗是<span class="term" data-term="折舊">折舊</span>。設備在買的那一年，現金就已經從投資活動流出去了；之後每年在損益表上攤提的折舊，只是把當初的成本分攤到使用的年份，當年並沒有再付錢，所以要加回來。</li>
+    <li><b>扣掉卡在營運裡的錢。</b>應收帳款增加，代表賣了但錢沒收到，要減；存貨增加，代表錢變成了倉庫裡的貨，要減；應付帳款增加，代表拿了貨還沒付錢，現金暫時留在手上，要加。這些卡在日常營運裡的錢，統稱<dfn id="def-wc">營運資金</dfn>（working capital，正式的定義是流動資產減流動負債）。</li>
+  </ol>
+  <div class="box formula">
+    <div class="box-label"><span class="zh"></span><span class="lat">FORMULA</span></div>
+    <div class="formula-line">營業現金流 ≈ 淨利 ＋ 折舊 − 應收帳款增加 − 存貨增加 ＋ 應付帳款增加</div>
+    <div class="where">台灣公司的現金流量表通常從「稅前淨利」開始，再把實際付出的所得稅另列一行；這裡為了好懂，直接從稅後淨利出發，算出來的結果相同。</div>
+  </div>
+
+  <p>把兩條線畫在一起，就是整本財報的骨架：</p>
+
+  <figure class="fig">
+    <div class="fig-plate">
+      <svg viewBox="0 0 400 440" role="img" aria-label="三表連動：損益表的淨利一方面扣掉股利後累積成資產負債表的保留盈餘，另一方面成為現金流量表的起點；現金流量表算出的現金增減，讓資產負債表的期初現金變成期末現金">
+        <defs>
+          <marker id="ar07c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="f-accent"/></marker>
+        </defs>
+        <text x="10" y="24" class="t-serif t-md">現金流量表</text>
+        <rect x="10" y="34" width="186" height="206" class="f-plate s-ink s-15"/>
+        <rect x="14" y="42" width="178" height="24" class="f-accent-soft"/>
+        <text x="22" y="59" class="t-sm t-b">淨利</text>
+        <text x="22" y="85" class="t-sm">＋ 折舊</text>
+        <text x="22" y="111" class="t-sm">− 營運資金增加</text>
+        <line x1="18" y1="121" x2="188" y2="121" class="s-rule s-1"/>
+        <text x="22" y="139" class="t-sm t-b">＝ 營業現金流</text>
+        <text x="22" y="165" class="t-sm">＋ 投資現金流</text>
+        <text x="22" y="191" class="t-sm">＋ 籌資現金流</text>
+        <line x1="18" y1="201" x2="188" y2="201" class="s-rule s-1"/>
+        <rect x="14" y="208" width="178" height="24" class="f-foil-soft"/>
+        <text x="22" y="225" class="t-sm t-b">＝ 現金增減</text>
+        <text x="224" y="24" class="t-serif t-md">損益表</text>
+        <rect x="224" y="34" width="156" height="124" class="f-plate s-ink s-15"/>
+        <text x="234" y="60" class="t-sm">營收</text>
+        <text x="234" y="86" class="t-sm">− 成本・費用</text>
+        <text x="234" y="112" class="t-sm">− 利息・所得稅</text>
+        <line x1="230" y1="122" x2="374" y2="122" class="s-rule s-1"/>
+        <rect x="228" y="128" width="148" height="24" class="f-accent-soft"/>
+        <text x="234" y="145" class="t-sm t-b">＝ 淨利</text>
+        <line x1="224" y1="138" x2="200" y2="62" class="s-accent s-2w" marker-end="url(#ar07c)"/>
+        <path d="M380 140 H394 V409 H386" class="f-none s-accent s-2w" marker-end="url(#ar07c)"/>
+        <line x1="150" y1="240" x2="150" y2="322" class="s-accent s-2w" marker-end="url(#ar07c)"/>
+        <circle cx="212" cy="100" r="9" class="f-accent"/>
+        <text x="212" y="105" class="ta-m t-sm t-b t-paper">2</text>
+        <circle cx="394" cy="270" r="9" class="f-accent"/>
+        <text x="394" y="275" class="ta-m t-sm t-b t-paper">1</text>
+        <circle cx="150" cy="270" r="9" class="f-accent"/>
+        <text x="150" y="275" class="ta-m t-sm t-b t-paper">3</text>
+        <circle cx="216" cy="186" r="9" class="f-accent"/>
+        <text x="216" y="190.5" class="ta-m t-sm t-b t-paper">1</text>
+        <text x="230" y="191" class="t-sm">淨利 − 股利 → 保留盈餘</text>
+        <circle cx="216" cy="212" r="9" class="f-accent"/>
+        <text x="216" y="216.5" class="ta-m t-sm t-b t-paper">2</text>
+        <text x="230" y="217" class="t-sm">從淨利出發算現金</text>
+        <circle cx="216" cy="238" r="9" class="f-accent"/>
+        <text x="216" y="242.5" class="ta-m t-sm t-b t-paper">3</text>
+        <text x="230" y="243" class="t-sm">現金增減 → 期末現金</text>
+        <text x="10" y="284" class="t-serif t-md">資產負債表</text>
+        <rect x="10" y="294" width="370" height="132" class="f-plate s-ink s-15"/>
+        <line x1="195" y1="294" x2="195" y2="426" class="s-ink s-1"/>
+        <text x="22" y="314" class="t-sm t-b t-2">資產</text>
+        <text x="207" y="314" class="t-sm t-b t-2">負債＋股東權益</text>
+        <rect x="14" y="324" width="177" height="22" class="f-foil-soft"/>
+        <text x="22" y="340" class="t-sm t-b">現金</text>
+        <text x="22" y="364" class="t-sm">應收帳款</text>
+        <text x="22" y="388" class="t-sm">存貨</text>
+        <text x="22" y="412" class="t-sm">廠房設備</text>
+        <text x="207" y="340" class="t-sm">借款</text>
+        <text x="207" y="364" class="t-sm">應付帳款</text>
+        <text x="207" y="388" class="t-sm">股本</text>
+        <rect x="199" y="396" width="177" height="22" class="f-accent-soft"/>
+        <text x="207" y="412" class="t-sm t-b">保留盈餘</text>
+      </svg>
+    </div>
+    <figcaption><span class="fig-n"></span><span>三表連動。① 淨利扣掉股利，累積進保留盈餘；② 現金流量表從同一個淨利出發，調整成真正的現金；③ 算出的現金增減，把資產負債表的期初現金變成期末現金。藍底是淨利這條線，金底是現金這條線。</span></figcaption>
+  </figure>
+
+  <p>有了這張地圖，回頭讀計畫的句子，就能說出每個數字住在哪一張表：</p>
+  <div class="table-wrap">
+    <table class="data">
+      <caption>把計畫裡的句子放回地圖</caption>
+      <thead><tr><th>計畫原文（摘錄）</th><th>在哪裡</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td>廣達第三季營收單季破兆（§四）</td><td>損益表第一行</td><td>7–9 月這一季的營收</td></tr>
+        <tr><td>南亞科前三季 EPS 約 49 元（§四）</td><td>損益表最後</td><td>1–9 月累計的每股盈餘（7.7 節）</td></tr>
+        <tr><td>多數 CSP 自由現金流接近零或轉負（§九）</td><td>現金流量表</td><td>營業現金流減掉資本支出（第 9 章）</td></tr>
+        <tr><td>舉債占資本支出由 FY2024 的 9% 升到 2026 年中的 32%（§九）</td><td>現金流量表、資產負債表</td><td>借款是籌資流入，也讓負債變大</td></tr>
+        <tr><td>Alphabet 甚至在 2026 年 6 月增資 847.5 億美元（§九）</td><td>現金流量表、資產負債表</td><td>增資是籌資流入，也讓股東權益變大</td></tr>
+        <tr><td>中興電在手訂單 431 億元（§四）</td><td>還不在三張表裡</td><td>訂單要交貨後才變成營收；多半在法說會或附註揭露</td></tr>
+        <tr><td>台積電：Q4 美元營收財測 523–543 億美元（§四）</td><td>不是財報</td><td>公司對未來的預估，叫<span class="term" data-term="財測">財測</span>（第 11 章）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>最後兩列特別重要。市場常常為了「還不在財報裡」的東西大漲大跌：訂單、財測、產業預估。財報記的是已經發生的事，股價卻在交易未來，兩者之間的落差，就是第 11 章「預期」的主題。</p>
 </section>
 
 <section id="demo-co">
   <h2><span class="sec-num">7.5</span>用「示意科技」走完一整年</h2>
+  <p class="lead-in">示意科技成立多年，已經有一點規模。2026 年訂單大增，全年營收 300 億元；年中花 40 億擴建產線，向銀行多借了 10 億，也發了每股 3 元、共 15 億元的現金股利。下面是它這一年的三張表，全部是虛構的示意數字，單位是億元。</p>
+  <p>建議的讀法：先看損益表（賺了多少），再比較期初、期末兩張照片（什麼變了），最後用現金流量表解釋現金為什麼變了。</p>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>表一 · 示意科技 2026 年損益表（億元，示意）</caption>
+      <thead><tr><th>項目</th><th class="r">金額</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><th>營收</th><td class="r">300</td><td>全年賣出的金額</td></tr>
+        <tr><td>營業成本</td><td class="r">−210</td><td>原料、人工，以及工廠設備的折舊 15</td></tr>
+        <tr><th><span class="term" data-term="毛利">毛利</span></th><td class="r">90</td><td>營收的 30%</td></tr>
+        <tr><td><span class="term" data-term="營業費用">營業費用</span></td><td class="r">−45</td><td>研發、行銷、管理</td></tr>
+        <tr><th><span class="term" data-term="營業利益">營業利益</span></th><td class="r">45</td><td>本業賺到的</td></tr>
+        <tr><td>利息費用</td><td class="r">−2.5</td><td>付給銀行</td></tr>
+        <tr><th>稅前淨利</th><td class="r">42.5</td><td></td></tr>
+        <tr><td>所得稅</td><td class="r">−8.5</td><td>假設稅率 20%</td></tr>
+        <tr><th>稅後淨利</th><td class="r">34</td><td>全部屬於股東</td></tr>
+        <tr><th>EPS</th><td class="r">6.8 元</td><td>34 億 ÷ 5 億股</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>表二 · 示意科技資產負債表（億元，示意）</caption>
+      <thead><tr><th>項目</th><th class="r">期初 2025/12/31</th><th class="r">期末 2026/12/31</th><th class="r">變化</th></tr></thead>
+      <tbody>
+        <tr><td>現金</td><td class="r">30</td><td class="r">17</td><td class="r">−13</td></tr>
+        <tr><td>應收帳款</td><td class="r">20</td><td class="r">32</td><td class="r">＋12</td></tr>
+        <tr><td>存貨</td><td class="r">25</td><td class="r">33</td><td class="r">＋8</td></tr>
+        <tr><td>廠房設備（淨額）</td><td class="r">125</td><td class="r">150</td><td class="r">＋25</td></tr>
+        <tr><th>資產合計</th><td class="r"><b>200</b></td><td class="r"><b>232</b></td><td class="r">＋32</td></tr>
+        <tr><td>應付帳款</td><td class="r">15</td><td class="r">18</td><td class="r">＋3</td></tr>
+        <tr><td>銀行借款</td><td class="r">45</td><td class="r">55</td><td class="r">＋10</td></tr>
+        <tr><th>負債合計</th><td class="r">60</td><td class="r">73</td><td class="r">＋13</td></tr>
+        <tr><td>股本</td><td class="r">50</td><td class="r">50</td><td class="r">0</td></tr>
+        <tr><td>保留盈餘</td><td class="r">90</td><td class="r">109</td><td class="r">＋19</td></tr>
+        <tr><th>股東權益合計</th><td class="r">140</td><td class="r">159</td><td class="r">＋19</td></tr>
+        <tr><th>負債＋股東權益</th><td class="r"><b>200</b></td><td class="r"><b>232</b></td><td class="r">＋32</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-wrap">
+    <table class="data">
+      <caption>表三 · 示意科技 2026 年現金流量表（億元，示意）</caption>
+      <thead><tr><th>項目</th><th class="r">金額</th></tr></thead>
+      <tbody>
+        <tr><td>稅後淨利</td><td class="r">34</td></tr>
+        <tr><td>＋ 折舊（沒有付現金的費用）</td><td class="r">15</td></tr>
+        <tr><td>− 應收帳款增加</td><td class="r">−12</td></tr>
+        <tr><td>− 存貨增加</td><td class="r">−8</td></tr>
+        <tr><td>＋ 應付帳款增加</td><td class="r">3</td></tr>
+        <tr><th>營業活動現金流</th><td class="r"><b>32</b></td></tr>
+        <tr><td>購買設備（資本支出）</td><td class="r">−40</td></tr>
+        <tr><th>投資活動現金流</th><td class="r"><b>−40</b></td></tr>
+        <tr><td>新增銀行借款</td><td class="r">10</td></tr>
+        <tr><td>發放現金股利</td><td class="r">−15</td></tr>
+        <tr><th>籌資活動現金流</th><td class="r"><b>−5</b></td></tr>
+        <tr><th>本期現金增減</th><td class="r"><b>−13</b></td></tr>
+        <tr><td>期初現金 → 期末現金</td><td class="r">30 → 17</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box example">
+    <div class="box-label"><span class="zh"></span><span class="lat">WORKED EXAMPLE</span></div>
+    <h4>三張表接得起來嗎？逐條對帳</h4>
+    <ol class="calc">
+      <li>保留盈餘：期初加淨利、減股利，應該等於期末。<span class="eq">90 ＋ 34 − 15 ＝ 109，與表二相符</span></li>
+      <li>現金：期初加上三段現金流，應該等於期末。<span class="eq">30 ＋ 32 − 40 − 5 ＝ 17，與表二相符</span></li>
+      <li>廠房設備：期初加上買進、減掉折舊。<span class="eq">125 ＋ 40 − 15 ＝ 150，與表二相符</span></li>
+      <li>會計恆等式：<span class="eq">資產 17 ＋ 32 ＋ 33 ＋ 150 ＝ 232；負債 73 ＋ 權益 159 ＝ 232</span></li>
+    </ol>
+    <p class="answer">四項檢查都通過：損益表的 34 億流進了保留盈餘，現金流量表的 −13 億流進了現金，資產負債表兩邊都是 232 億。</p>
+  </div>
+
+  <h3>賺了 34 億，現金卻少了 13 億</h3>
+  <p>這是本節最該記住的一個畫面。示意科技的損益表很漂亮：稅後淨利 34 億，EPS 6.8 元。可是年底的現金只剩 17 億，比年初少了 13 億。錢去了哪裡？把表三重新分組：</p>
+  <ul>
+    <li><b>卡在營運裡 17 億</b>：客戶欠的錢多了 12 億，倉庫裡的貨多了 8 億，自己欠供應商的多了 3 億（抵掉一些）。12 ＋ 8 − 3 ＝ 17。</li>
+    <li><b>擴產花掉 25 億</b>：買設備 40 億，但損益表只扣了 15 億折舊，兩者相差 25 億。</li>
+    <li><b>付給出錢的人 5 億</b>：發了 15 億股利，只借進 10 億。</li>
+  </ul>
+  <p>34 − 17 − 25 − 5 ＝ −13，剛好對上。這不代表示意科技經營得不好：營收大增，應收帳款和存貨本來就會跟著變多；擴產也是為了明年賺更多。但有一個數字值得盯著看：營業現金流 32 億減掉資本支出 40 億，<span class="term" data-term="自由現金流">自由現金流</span>是 −8 億。換句話說，今年發的 15 億股利，有一部分是靠借款和原有的現金撐出來的。這種情況一兩年沒關係，連續好幾年就要問：錢還能從哪裡來？</p>
+  <aside class="note">表一還能算出三個利潤率：毛利率 90 ÷ 300 ＝ 30%，營益率 45 ÷ 300 ＝ 15%，淨利率 34 ÷ 300 ≈ 11.3%。它們怎麼用、不同產業差多少，是第 8 章的內容；自由現金流與資本支出的細節在第 9 章。</aside>
 </section>
 
 <section id="timing-gap">
