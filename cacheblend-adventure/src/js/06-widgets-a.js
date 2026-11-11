@@ -142,7 +142,7 @@ NB.R.attnmix = (body, step, ctx) => {
 // KV cache size calculator
 NB.R.kvsize = (body, step, ctx) => {
   nbHead(body, step);
-  const P = { L: 32, H: 32, d: 128, b: 2, T: 4096 };
+  const P = { L: 24, H: 16, d: 64, b: 2, T: 1024 };
   const defs = [
     { k: 'L', name: '層數 L', vals: [12, 24, 32, 48, 80] },
     { k: 'H', name: 'KV head 數 H<sub>kv</sub>', vals: [4, 8, 16, 32] },

@@ -23,7 +23,7 @@ function buildTitleLevel() {
   return lv;
 }
 
-const READY = ['w1'];
+const READY = ['w1', 'w2', 'w3', 'w4', 'w5', 'w6'];
 const isReady = (w) => READY.indexOf(w.id) >= 0;
 
 const GAME = {

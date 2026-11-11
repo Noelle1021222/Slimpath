@@ -34,10 +34,9 @@ ACT.floor = (ctx, o) => {
     col.tile = t; tiles.push(t);
   }
   o.toks.forEach((tk, i) => {
-    B.decal('Q ' + tk, o.cx - (n / 2) * P2 - 1.5, y, tz(i), { h: 0.72, color: '#3d4a8f' });
-    B.decal('K ' + tk, tx(i), y, o.cz - (n / 2) * P2 - 0.8, { h: 0.66, color: '#b0561a' });
+    B.label('Q ' + tk, o.cx - (n / 2) * P2 - 1.3, y + 0.75, tz(i), { h: 0.62, px: 28, bg: '#c9d6f5' });
+    B.label('K ' + tk, tx(i), y + 0.9, o.cz - (n / 2) * P2 - 0.9, { h: 0.62, px: 28, bg: '#fbdcc0' });
   });
-  B.decal('每一列是發問的 Q，每一欄是被參考的 K', o.cx, y, o.cz + (n / 2) * P2 + 0.9, { h: 0.5, color: '#5a4a3a', font: 'body' });
   const paint = () => tiles.forEach((t) => t.m.material.color.setHex(solved ? (t.c <= t.r ? GOOD : OFF) : t.bad ? BAD : t.on ? ON : OFF));
   if (solved) tiles.forEach((t) => { t.on = t.c <= t.r; });
   paint();
