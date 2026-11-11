@@ -45,6 +45,7 @@ const GAME = {
       $('#app').prepend(h('div#nogl-bg'));
     }
     this.bind();
+    CLOUD.init();
     const ld = $('#loading'); if (ld) ld.remove();
     if (data && data.wid && WORLDS.some((w) => w.id === data.wid)) this.enterWorld(data.wid, true);
     else this.showTitle();
@@ -83,7 +84,9 @@ const GAME = {
       else if (k === 'n') this.showCodex();
       else if (k === 'Escape') this.showSettings();
     });
-    document.addEventListener('visibilitychange', () => { if (document.hidden) SV.save(); });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) { SV.save(); CLOUD.flush(); } });
+    bus.on('saved', () => CLOUD.queue());
+    bus.on('cloud:merged', () => this.onProgressChanged('已從你的帳號讀回進度'));
     try { if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => { SV.save(); return { wid: this.wid }; }); } catch (e) { /* not inside a viewer */ }
   },
 
@@ -92,7 +95,7 @@ const GAME = {
     this.closeAll();
     this.wid = null; this.world = null; this.lv = null;
     UI.showHud(false); UI.actHud(null);
-    if (this.mode3d) { E.mode = 'title'; E.setLevel(buildTitleLevel()); }
+    if (this.mode3d && !(E.mode === 'title' && E.level && E.level.id === 'title')) { E.mode = 'title'; E.setLevel(buildTitleLevel()); }
     const has = SV.totalStars() > 0;
     const again = h('button.btn.alt', { onclick: () => {
       if (again.dataset.sure) { SV.reset(); this.showTitle(); UI.toast('進度已清空，重新出發。'); }
@@ -107,6 +110,7 @@ const GAME = {
         h('div.title-btns',
           h('button.btn', { onclick: () => { AU.init(); AU.music(MUSIC.title); has ? this.showMap() : this.newGame(); } }, has ? '繼續冒險' : '開始冒險'),
           has ? again : null,
+          h('button.btn.alt', { onclick: () => { AU.init(); this.showRestore(); } }, '找回進度'),
           h('button.btn.alt', { onclick: () => { AU.init(); this.showSettings(); } }, '設定')),
         h('p.title-foot', '內容依據論文〈CacheBlend: Fast Large Language Model Serving for RAG with Cached Knowledge Fusion〉與講義《從零理解 CacheBlend》。' + (this.mode3d ? '' : '（這台裝置無法啟動 3D，已改用筆記本模式，內容完全相同。）'))));
     UI.app.append(this.titleEl);
@@ -410,10 +414,55 @@ const GAME = {
       h('div.set-row', h('div', h('b', '背景音樂')), seg([[1, '開'], [0, '關']], o.music ? 1 : 0, (v) => { o.music = v; AU.setMusic(!!v); SV.save(); })),
       this.mode3d ? h('div.set-row', h('div', h('b', '畫質'), h('div.d', '如果畫面卡頓，改成「省電」')), seg([['auto', '自動'], ['high', '高'], ['low', '省電']], o.q, (v) => { o.q = v; E.setQuality(v); SV.save(); })) : null,
       h('div.set-row', h('div', h('b', '自由模式'), h('div.d', '直接開放全部九個世界，方便複習')), seg([[0, '關'], [1, '開']], o.free ? 1 : 0, (v) => { o.free = v; SV.save(); })),
+      h('div.set-row', h('div', h('b', '進度儲存'), h('div.d', CLOUD.on ? '已同步到你的 Claude 帳號，換裝置也讀得到' : '目前只存在這個瀏覽器裡')), h('button.btn.small.alt', { onclick: () => { m.close(); this.showRestore(); } }, '找回進度')),
       h('div.set-row', h('div', h('b', '操作方式'), h('div.keys', h('kbd', 'WASD / 方向鍵'), h('span', '移動（觸控：左下搖桿）'), h('kbd', '空白鍵'), h('span', '跳（觸控：右下按鈕）'), h('kbd', 'E'), h('span', '互動'), h('kbd', '點地面'), h('span', '自動走過去'), h('kbd', '拖曳 / 滾輪'), h('span', '轉動視角 / 拉遠拉近'), h('kbd', 'M · N'), h('span', '地圖 · 筆記本')))),
       this.wid && this.mode3d ? h('div.set-row', h('div', h('b', '卡住了？'), h('div.d', '把角色送回這個世界的起點')), h('button.btn.small.alt', { onclick: () => { const sp = this.lv.spawn; E.teleport(sp.x, sp.y, sp.z); E.snapCam(); m.close(); } }, '回到起點')) : null,
       this.wid ? h('div.set-row', h('div', h('b', '離開這個世界'), h('div.d', '已完成的站點都會保留')), h('button.btn.small.alt', { onclick: () => { m.close(); this.leaveWorld(); } }, '回世界地圖')) : null);
     m.body.append(list);
+  },
+  // ---------- getting progress back ----------
+  // Progress lives in the browser that was used. If it is gone (another device, another way of opening
+  // the page, cleared site data), the player can say how far they were and carry on from there.
+  showRestore() {
+    if (UI.dialogOpen || UI.modals.some((m) => m.opts.tag === 'restore')) return;
+    const m = UI.sheet('找回進度', '進度不見了？從之前玩到的地方接著玩', { tag: 'restore' });
+    m.body.append(
+      h('p', '進度原本存在「當時玩的那個瀏覽器或 App」裡。換了裝置、換了開啟方式，或清除過網站資料，這裡就讀不到。'),
+      h('p', { html: '選你<b>之前已經打完</b>的最後一個世界。它和它之前的世界會標記為通關，你可以直接從下一個世界接著玩。原有的進度不會被減少。' }));
+    const list = h('div.codex-list');
+    WORLDS.forEach((w, i) => {
+      list.append(h('button.map-node', { onclick: () => { m.close(); this.restoreUpTo(i + 1); } },
+        h('span.no', { style: { background: w.color } }, String(w.no)),
+        h('span', h('div.nm', '我已經打完：' + w.name), h('div.ds', i < WORLDS.length - 1 ? '接著從第 ' + (w.no + 1) + ' 世界「' + WORLDS[i + 1].name + '」開始' : '九個世界全部標記為通關'))));
+    });
+    m.body.append(list);
+  },
+  restoreUpTo(n) {
+    const d = SV.d;
+    WORLDS.slice(0, n).forEach((w) => {
+      w.stations.concat([w.gate]).forEach((s) => { const k = w.id + '.' + s.id; d.st[k] = Math.max(d.st[k] || 0, 3); });
+      d.cleared[w.id] = 1; d.seen[w.id] = 1;
+    });
+    d.intro = 1;
+    if (n >= WORLDS.length) d.done = 1;
+    SV.save();
+    this.onProgressChanged('進度已恢復到第 ' + n + ' 世界通關', true);
+  },
+  // progress changed from outside the current screen: redraw whatever is showing
+  onProgressChanged(msg, openMap) {
+    if (msg) UI.toast(msg, 'good', 3200);
+    if (this.wid && this.lv) {
+      Object.keys(this.lv.stations).forEach((sid) => this.lv.stations[sid].setDone(SV.isDone(this.wid, sid)));
+      this.refreshGates(true);
+      if (SV.isDone(this.wid, 'gate') && this.lv.portal && !this.lv.portal.active) this.lv.portal.activate(true);
+      this.refreshHud();
+      return;
+    }
+    if (this.wid) return;
+    const map = UI.modals.find((m) => m.opts.tag === 'map');
+    if (map) { map.opts.onClose = null; UI.closeModal(map); this.showMap(); return; }
+    if (UI.modals.length) return;
+    if (this.titleEl) { this.showTitle(); if (openMap) this.showMap(); }
   },
   async leaveWorld() {
     await UI.fade(true);
