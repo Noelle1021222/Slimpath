@@ -56,7 +56,7 @@ WORLDS.push({
     },
     { id: 'hunt', name: 'HKVD 獵場', title: 'HKVD 獵場：把額度花在刀口上', kind: 'act',
       fallback: { steps: [{ t: 'pick', q: '區塊 2 接在區塊 1 後面。下面是區塊 2 每個 token 的 KV 偏差（教學示意）。你只能重算 3 個，選哪些？', k: 3, correct: [1, 2, 3],
-        items: [{ t: 'Cristiano', s: '2.1' }, { t: 'scored', s: '8.4' }, { t: '8', s: '9.7' }, { t: 'goals', s: '6.9' }, { t: 'at', s: '0.6' }, { t: 'FIFA', s: '1.3' }, { t: 'World', s: '0.8' }, { t: 'Cups', s: '1.5' }, { t: '.', s: '0.4' }],
+        items: [{ t: 'Cristiano', s: '1.9' }, { t: 'scored', s: '8.4' }, { t: '8', s: '9.7' }, { t: 'goals', s: '6.9' }, { t: 'at', s: '0.6' }, { t: 'FIFA', s: '1.2' }, { t: 'World', s: '0.8' }, { t: 'Cups', s: '1.5' }, { t: '.', s: '0.4' }],
         after: '偏差最高的那一小群叫 HKVD token。優先重算它們，注意力偏差降得最多。' }] } },
     {
       id: 'curve', name: '偏差火爐', title: '偏差火爐：為什麼少量就夠', sub: '講義第 14 課・論文 §4.3、圖 6、圖 7', look: 'machine', codex: ['hkvd', 'sparsity'],
@@ -139,7 +139,7 @@ WORLDS.push({
     B.gemRow(P.x + 4, P.z, P.x + 1, P.z, 0, 2, 'c');
     const H = P.island(18, 27);
     const t1 = ['Lionel', 'Messi', 'scored', '13', 'goals', 'at', 'FIFA', 'World', 'Cups'];
-    const t2 = [['Cristiano', 2.1], ['scored', 8.4], ['8', 9.7], ['goals', 6.9], ['at', 0.6], ['FIFA', 1.3], ['World', 0.8], ['Cups', 1.5], ['.', 0.4]];
+    const t2 = [['Cristiano', 1.9], ['scored', 8.4], ['8', 9.7], ['goals', 6.9], ['at', 0.6], ['FIFA', 1.2], ['World', 0.8], ['Cups', 1.5], ['.', 0.4]];
     const tokens = [];
     t1.forEach((tx, i) => tokens.push({ text: tx, dev: 0, chunk: 1, x: H.x - 10.4 + i * 2.6, z: H.z - 4.6 }));
     t2.forEach((q, i) => tokens.push({ text: q[0], dev: q[1], chunk: 2, x: H.x - 10.4 + i * 2.6, z: H.z + 1.2 }));

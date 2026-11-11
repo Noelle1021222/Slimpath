@@ -70,6 +70,34 @@ const ACTS = {
       await page.waitForTimeout(500);
     }
   },
+  async race(page) {
+    await page.waitForTimeout(300);
+    await page.evaluate(() => window.CBQ.UI.firePrompt(0));
+    await page.waitForTimeout(500);
+    const r = await solveStation(page);
+    process.stdout.write('(quiz ' + r.join(',') + ') ');
+    for (let i = 0; i < 80; i++) {
+      const st = await page.evaluate(() => { const { E, UI, SV, GAME } = window.CBQ; if (UI.dialogOpen) UI.dialogSkip(); return { done: SV.isDone(GAME.wid, 'race'), s: E.level.debug.race.state() }; });
+      if (st.done) return;
+      await page.waitForTimeout(300);
+    }
+  },
+  async boss(page) {
+    await page.evaluate(() => window.CBQ.E.level.debug.boss.setNoFire(true));
+    for (let i = 0; i < 200; i++) {
+      const st = await page.evaluate(() => { const { E, UI, SV, GAME } = window.CBQ; if (UI.dialogOpen) UI.dialogSkip(); if (SV.isDone(GAME.wid, 'boss')) return { done: true }; const d = E.level.debug.boss; const s = d.state(); const c = d.crystals.find((q) => q.alive && q.opt && q.opt[1]); return { phase: s.phase, hp: s.hp, hearts: s.hearts, c: c ? { x: c.x, z: c.z } : null, blade: d.blade, anchor: E.level.anchors.boss }; });
+      if (st.done) return;
+      if (st.phase === 'wait') { await goto(page, st.anchor.x, st.anchor.z, { tol: 1.5, timeout: 15000 }); await page.waitForTimeout(300); continue; }
+      if (st.phase === 'round' && st.c) { await goto(page, st.c.x, st.c.z + 1.4, { tol: 0.5, jump: false, timeout: 12000 }); await page.waitForTimeout(250); await page.evaluate(() => window.CBQ.UI.firePrompt(0)); await page.waitForTimeout(900); continue; }
+      if (st.phase === 'seal') {
+        await goto(page, st.blade.x, st.blade.z + 1.5, { tol: 0.6, jump: false, timeout: 12000 }); await page.waitForTimeout(300);
+        await page.evaluate(() => window.CBQ.UI.firePrompt(0)); await page.waitForTimeout(500);
+        const r = await solveStation(page); process.stdout.write('(seal ' + r.join(',') + ') ');
+        await page.waitForTimeout(2500); continue;
+      }
+      await page.waitForTimeout(250);
+    }
+  },
   async run(page) {
     for (let i = 0; i < 400; i++) {
       const st = await page.evaluate(() => { const { E, UI, SV, GAME } = window.CBQ; if (UI.dialogOpen) UI.dialogSkip(); if (SV.isDone(GAME.wid, 'run')) return { done: true }; const d = E.level.debug.run; const s = d.state(); return Object.assign(s, { z: d.pads[s.expect] ? d.pads[s.expect].z : null, x: d.pads[0].m.position.x }); });

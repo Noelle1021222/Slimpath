@@ -23,7 +23,7 @@ function buildTitleLevel() {
   return lv;
 }
 
-const READY = ['w1', 'w2', 'w3', 'w4', 'w5', 'w6'];
+const READY = ['w1', 'w2', 'w3', 'w4', 'w5', 'w6', 'w7', 'w8', 'w9'];
 const isReady = (w) => READY.indexOf(w.id) >= 0;
 
 const GAME = {
@@ -61,6 +61,7 @@ const GAME = {
       E.fx.burst(g.x, g.y, g.z, COL.cyan, 16, 3.5, 0.7);
       SV.addCrystal(this.wid || 'title', g.id);
       this.refreshHud();
+      if (this.lv && this.wid && SV.crystals(this.wid).length === this.lv.gems.length) { AU.sfx('win'); UI.toast('這個世界的 KV 晶體全部到手了！', 'good', 3200); }
     });
     bus.on('fell', () => UI.toast('掉下去了！凱薇把你拉回剛才的位置。', 'warn', 1800));
     bus.on('ui:map', () => this.showMap());
@@ -197,6 +198,13 @@ const GAME = {
       const r = 1.5 + Math.sin(t * 5) * 0.14;
       arrow.position.set(p.x + (dx / d) * r, p.y + 0.5, p.z + (dz / d) * r);
       arrow.rotation.y = Math.atan2(dx, dz);
+    });
+    // if the player stands around for a while, the companion points the way once
+    let idle = 0, hinted = false;
+    lv.updates.push((dt) => {
+      if (hinted) return;
+      idle = E.p.moveAmt > 0.1 ? 0 : idle + dt;
+      if (idle > 25 && $('#act-hud').hidden) { hinted = true; const g = this.nextGoal(); if (g) UI.toast('凱薇：' + g.text + '。跟著金色箭頭走就對了。', '', 4200); }
     });
     E.setLevel(lv); E.mode = 'play';
     this.refreshGates(true);
@@ -403,6 +411,7 @@ const GAME = {
       this.mode3d ? h('div.set-row', h('div', h('b', '畫質'), h('div.d', '如果畫面卡頓，改成「省電」')), seg([['auto', '自動'], ['high', '高'], ['low', '省電']], o.q, (v) => { o.q = v; E.setQuality(v); SV.save(); })) : null,
       h('div.set-row', h('div', h('b', '自由模式'), h('div.d', '直接開放全部九個世界，方便複習')), seg([[0, '關'], [1, '開']], o.free ? 1 : 0, (v) => { o.free = v; SV.save(); })),
       h('div.set-row', h('div', h('b', '操作方式'), h('div.keys', h('kbd', 'WASD / 方向鍵'), h('span', '移動（觸控：左下搖桿）'), h('kbd', '空白鍵'), h('span', '跳（觸控：右下按鈕）'), h('kbd', 'E'), h('span', '互動'), h('kbd', '點地面'), h('span', '自動走過去'), h('kbd', '拖曳 / 滾輪'), h('span', '轉動視角 / 拉遠拉近'), h('kbd', 'M · N'), h('span', '地圖 · 筆記本')))),
+      this.wid && this.mode3d ? h('div.set-row', h('div', h('b', '卡住了？'), h('div.d', '把角色送回這個世界的起點')), h('button.btn.small.alt', { onclick: () => { const sp = this.lv.spawn; E.teleport(sp.x, sp.y, sp.z); E.snapCam(); m.close(); } }, '回到起點')) : null,
       this.wid ? h('div.set-row', h('div', h('b', '離開這個世界'), h('div.d', '已完成的站點都會保留')), h('button.btn.small.alt', { onclick: () => { m.close(); this.leaveWorld(); } }, '回世界地圖')) : null);
     m.body.append(list);
   },
@@ -416,13 +425,6 @@ const GAME = {
     this.showMap();
   }
 };
-const FOUR = [
-  'RAG 經常在不同問題裡重複使用相同的文字區塊，所以有重用 KV 快取的機會。',
-  '但完整前綴不相同時，直接重用區塊的 KV 會缺少跨區塊的上下文影響（cross-attention）。',
-  'CacheBlend 挑出少數高偏差（HKVD）token 重算，讓融合後的表示接近完整重算的結果。',
-  '系統再把逐層載入和重算重疊（pipelining）來降低 TTFT，並用品質與效能實驗確認取捨。'
-];
-
 // ---------- boot ----------
 function whenThree(cb) {
   if (window.THREE) { cb(); return; }

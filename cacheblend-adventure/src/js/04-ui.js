@@ -27,7 +27,6 @@ const UI = {
         h('div.hud-right',
           h('div#ct-gem.chip.counter', { html: IC.gem + '<span>0</span>', title: 'KV 晶體' }),
           h('div#ct-star.chip.counter', { html: IC.star + '<span>0</span>', title: '星星' }),
-          h('button#btn-ask.chip.icon-btn', { html: IC.ask, 'aria-label': '問凱薇', title: '問凱薇', hidden: true, onclick: () => bus.emit('ui:ask') }),
           h('button#btn-codex.chip.icon-btn', { html: IC.book, 'aria-label': '筆記本', title: '筆記本', onclick: () => bus.emit('ui:codex') }),
           h('button#btn-map.chip.icon-btn', { html: IC.map, 'aria-label': '世界地圖', title: '世界地圖', onclick: () => bus.emit('ui:map') }),
           h('button#btn-menu.chip.icon-btn', { html: IC.gear, 'aria-label': '設定', title: '設定', onclick: () => bus.emit('ui:menu') }))),
@@ -63,8 +62,9 @@ const UI = {
     if (show) bus.emit('ui:quest', p);
     p.hidden = !show;
   },
-  actHud(html) {
+  actHud(html, side) {
     const el = $('#act-hud');
+    el.classList.toggle('side', !!side);
     if (html == null) { if (!el.hidden) { el.hidden = true; el.innerHTML = ''; this.app.classList.remove('has-act'); } this._act = null; return; }
     if (this._act !== html) { el.innerHTML = html; this._act = html; }
     if (el.hidden) { el.hidden = false; this.app.classList.add('has-act'); }

@@ -62,8 +62,9 @@ body {
   --gr: max(16px, env(safe-area-inset-right, 0px));
   --gt: calc(10px + env(safe-area-inset-top, 0px));
   --gb: calc(12px + env(safe-area-inset-bottom, 0px));
-  user-select: none; -webkit-user-select: none;
+  user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
 }
+#app button:not(#btn-jump) { touch-action: manipulation; }
 #gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; outline: none; }
 #nogl-bg { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 100%, #f0a36b 0%, #7a5aa6 38%, #18203f 78%); }
 
@@ -569,6 +570,10 @@ button.sr-cell { cursor: pointer; width: 38px; }
 .dev-bar i.b { background: var(--orange); }
 .dev-bar span { position: relative; font-family: var(--font-mono); font-size: 12px; font-weight: 700; padding-left: 8px; line-height: 22px; }
 .set-row .seg button { font-size: 13px; padding: 5px 10px; }
+@media (min-width: 900px) {
+  #act-hud.side { left: var(--gl); transform: none; top: calc(var(--gt) + 64px); width: 380px; text-align: left; }
+  #act-hud.side .row { justify-content: flex-start; }
+}
 
 </style>
 <div id="app">
@@ -855,7 +860,6 @@ const UI = {
         h('div.hud-right',
           h('div#ct-gem.chip.counter', { html: IC.gem + '<span>0</span>', title: 'KV 晶體' }),
           h('div#ct-star.chip.counter', { html: IC.star + '<span>0</span>', title: '星星' }),
-          h('button#btn-ask.chip.icon-btn', { html: IC.ask, 'aria-label': '問凱薇', title: '問凱薇', hidden: true, onclick: () => bus.emit('ui:ask') }),
           h('button#btn-codex.chip.icon-btn', { html: IC.book, 'aria-label': '筆記本', title: '筆記本', onclick: () => bus.emit('ui:codex') }),
           h('button#btn-map.chip.icon-btn', { html: IC.map, 'aria-label': '世界地圖', title: '世界地圖', onclick: () => bus.emit('ui:map') }),
           h('button#btn-menu.chip.icon-btn', { html: IC.gear, 'aria-label': '設定', title: '設定', onclick: () => bus.emit('ui:menu') }))),
@@ -891,8 +895,9 @@ const UI = {
     if (show) bus.emit('ui:quest', p);
     p.hidden = !show;
   },
-  actHud(html) {
+  actHud(html, side) {
     const el = $('#act-hud');
+    el.classList.toggle('side', !!side);
     if (html == null) { if (!el.hidden) { el.hidden = true; el.innerHTML = ''; this.app.classList.remove('has-act'); } this._act = null; return; }
     if (this._act !== html) { el.innerHTML = html; this._act = html; }
     if (el.hidden) { el.hidden = false; this.app.classList.add('has-act'); }
@@ -2100,6 +2105,88 @@ FIG.devices = (el) => {
     el.append(h('div.dev-row', h('div.dev-name', h('b', r[0]), h('span.pill2', '儲存成本：' + r[2]), h('span.note', '　載入一層 ' + r[1] + ' ms')),
       h('div.dev-bar', h('i.a', { style: { width: (a / mx) * 100 + '%' } }), h('span', '沒有管線化 ' + a + ' ms')),
       h('div.dev-bar', h('i.b', { style: { width: (b / mx) * 100 + '%' } }), h('span', '有管線化 ' + b + ' ms'))));
+  });
+};
+
+// ---- 06-widgets-e.js ----
+// ===== custom notebook widgets, part E (world 8: reading the evaluation) =====
+// Fig. 12: name the four points on the TTFT / quality plane
+NB.R.scatter = (body, step, ctx) => {
+  nbHead(body, step);
+  const pts = step.points, methods = step.methods;
+  const c = chart({ x: [0, 2.5], y: [0, 0.42], xt: [0, 0.5, 1, 1.5, 2, 2.5], yt: [0, 0.1, 0.2, 0.3, 0.4], yf: (v) => v.toFixed(1), xl: 'TTFT（秒）　越左越快', yl: 'F1 分數　越高越好', label: '延遲與品質' });
+  const fig = h('div.fig'); fig.append(c.el);
+  // the "better" arrow, as in the paper's figure
+  c.under.append(sv('path', { d: 'M' + c.sx(1.45) + ' ' + c.sy(0.14) + ' L' + c.sx(1.0) + ' ' + c.sy(0.24), stroke: '#55608a', 'stroke-width': 8, 'stroke-linecap': 'round', fill: 'none', opacity: 0.35 }));
+  c.under.append(sv('text', { x: c.sx(1.5), y: c.sy(0.1), 'font-size': 13, fill: '#55608a', 'font-weight': 700, text: '往左上角越好' }));
+  const assign = {};
+  let cur = 0, locked = false;
+  const chips = h('div.pool'), info = h('p.note');
+  body.append(fig, h('div.cap', step.cap || ''), info, chips);
+  const draw = () => {
+    c.over.innerHTML = '';
+    pts.forEach((p, i) => {
+      const m = methods.find((q) => q.key === assign[p.id]);
+      const g = sv('g', { style: 'cursor:pointer' });
+      g.append(sv('circle', { cx: c.sx(p.x), cy: c.sy(p.y), r: i === cur && !locked ? 17 : 14, fill: m ? m.color : '#ffffff', stroke: '#1b2340', 'stroke-width': i === cur && !locked ? 4 : 2.5 }));
+      g.append(sv('text', { x: c.sx(p.x), y: c.sy(p.y) + 5, 'text-anchor': 'middle', 'font-size': 14, 'font-weight': 700, 'font-family': 'JetBrains Mono, monospace', fill: m && m.dark ? '#ffffff' : '#1b2340', text: p.id }));
+      g.addEventListener('click', () => { if (locked) return; cur = i; AU.sfx('tap'); draw(); });
+      c.over.append(g);
+    });
+    const p = pts[cur];
+    info.innerHTML = locked ? '' : '目前選的是點 <b>' + p.id + '</b>（TTFT ' + p.x.toFixed(2) + ' 秒，F1 ' + p.y.toFixed(2) + '）。它是哪一種方法？點圖上的圓點可以換一個點。';
+    chips.innerHTML = '';
+    methods.forEach((m) => {
+      const used = Object.keys(assign).find((k) => assign[k] === m.key);
+      chips.append(h('button.tok' + (assign[p.id] === m.key ? '.sel' : ''), { onclick: () => {
+        if (locked) return;
+        if (used) delete assign[used];
+        assign[p.id] = m.key; AU.sfx('pick');
+        const nxt = pts.findIndex((q) => !assign[q.id]);
+        if (nxt >= 0) cur = nxt;
+        draw();
+        ctx.primary('檢查（' + Object.keys(assign).length + '/' + pts.length + '）', check, Object.keys(assign).length === pts.length);
+      } }, h('span.tag', { style: { background: m.color } }, used ? used : '?'), h('span', m.name)));
+    });
+  };
+  const check = () => {
+    if (locked) return;
+    const wrong = pts.filter((p) => assign[p.id] !== p.ans);
+    if (!wrong.length) { locked = true; draw(); ctx.ok(step.after); }
+    else ctx.bad('有 ' + wrong.length + ' 個點標錯了。想想：誰完全不重算所以最快、但品質最差？誰幾乎一樣快卻保住品質？');
+  };
+  ctx.primary('檢查（0/' + pts.length + '）', check, false);
+  draw();
+  return { solve() { if (locked) return; pts.forEach((p) => { assign[p.id] = p.ans; }); draw(); check(); } };
+};
+
+// Fig. 14: TTFT under increasing request rate
+NB.R.loadtest = (body, step, ctx) => {
+  nbHead(body, step);
+  const SLO = 5;
+  const M = [
+    { name: 'Full KV recompute', t0: 3.0, mu: 0.5, color: '#2f4fa8', marker: 'tri' },
+    { name: 'Prefix caching（RAM）', t0: 2.4, mu: 0.52, color: '#7fa8e8', marker: 'dot' },
+    { name: 'Prefix caching（RAM+SSD）', t0: 2.0, mu: 0.6, color: '#4fa866', marker: 'dot' },
+    { name: 'CacheBlend', t0: 0.8, mu: 1.0, color: '#d9544f', marker: 'sq' }
+  ];
+  const T = (m, r) => (r >= m.mu * 0.985 ? 99 : m.t0 / (1 - r / m.mu));
+  const series = M.map((m) => { const pts = []; for (let r = 0.02; r < m.mu * 0.97; r += 0.02) { const y = T(m, r); if (y > 8.4) { pts.push([r, 8.4]); break; } pts.push([r, y]); } return { pts, color: m.color, width: 3 }; });
+  return sliderChart(body, step, ctx, {
+    name: '請求率', min: 0.02, max: 1, step: 0.02, start: 0.06, fmt: (v) => v.toFixed(2) + ' 筆/秒',
+    legend: M.map((m) => [m.color, m.name]),
+    cap: '仿論文圖 14 的形狀，數值為教學示意。橫軸是送進系統的請求率。',
+    chart: { x: [0, 1], y: [0, 8.4], xt: [0, 0.2, 0.4, 0.6, 0.8, 1], yt: [0, 2, 4, 6, 8], xf: (v) => v.toFixed(1), xl: '每秒送進來的請求數', yl: 'TTFT（秒）', label: '請求率與 TTFT', series },
+    draw: (c, v, read) => {
+      c.over.append(sv('line', { x1: c.sx(0), x2: c.sx(1), y1: c.sy(SLO), y2: c.sy(SLO), stroke: '#1b2340', 'stroke-width': 1.5, 'stroke-dasharray': '3 4' }));
+      c.over.append(sv('text', { x: c.sx(1) - 4, y: c.sy(SLO) - 6, 'text-anchor': 'end', 'font-size': 12, fill: '#1b2340', 'font-weight': 700, text: 'TTFT 上限 5 秒' }));
+      c.over.append(sv('line', { x1: c.sx(v), x2: c.sx(v), y1: c.sy(0), y2: c.sy(8.4), stroke: '#ec8b3c', 'stroke-width': 2.5 }));
+      read.innerHTML = '每秒 <b>' + v.toFixed(2) + '</b> 筆請求時：<br>' + M.map((m) => { const y = T(m, v); return '<span style="color:' + m.color + '">■</span> ' + m.name + '：' + (y > 30 ? '<b style="color:var(--rose)">塞爆了</b>' : '<b>' + y.toFixed(1) + ' 秒</b>' + (y > SLO ? '（超過上限）' : '')); }).join('<br>');
+    },
+    goals: [
+      { q: '把請求率往上加，停在「Full KV recompute 還壓得住 5 秒」的最大值。', set: 0.2, test: (v) => T(M[0], v) <= SLO + 0.01 && T(M[0], v + 0.02) > SLO, ok: '完整重算大約只撐得住每秒 0.20 筆。', bad: '看深藍色那一項：要 ≤ 5 秒，而且再多一點就會超過。' },
+      { q: '繼續加，停在「CacheBlend 還壓得住 5 秒」的最大值。', set: 0.84, test: (v) => T(M[3], v) <= SLO + 0.01 && T(M[3], v + 0.02) > SLO, ok: '', bad: '看紅色的 CacheBlend：要 ≤ 5 秒，而且再多一點就會超過。' }
+    ]
   });
 };
 
@@ -3741,6 +3828,248 @@ ACT.flow = (ctx, o) => {
   lv.debug[o.id] = { order: o.order.map((k) => ({ x: stops[k].inter.x, z: stops[k].inter.z })), state: () => ({ step, busy }) };
 };
 
+// ---- 09f-activities.js ----
+// ===== activities for worlds 8-9 =====
+// W8: predict where the four methods land, then watch them race (Fig. 12).
+ACT.race = (ctx, o) => {
+  const lv = ctx.lv, y = o.y || 0;
+  let state = ctx.done(o.id) ? 'done' : 'idle';
+  const runners = o.lanes.map((ln, i) => {
+    const z = o.z0 + i * o.dz;
+    B.box((o.x0 + o.x1) / 2, y + 0.02, z, o.x1 - o.x0 + 3, 0.04, o.dz - 0.5, i % 2 ? 0xd9c9a8 : 0xcfbe98, { cast: false });
+    const r = makeRobot({ accent: ln.color, trim: ln.color, s: 0.95 });
+    r.position.set(o.x0, y, z); r.rotation.y = Math.PI / 2; lv.group.add(r);
+    const name = B.label(ln.name, o.x0, y + 2.5, z, { h: 0.5, px: 24, bg: '#1b2340', color: '#f4f6fb', border: '#f4f6fb' });
+    const res = B.label('　', o.x1 + 2.6, y + 1.2, z, { h: 0.5, px: 24, font: 'mono' });
+    res.visible = false;
+    return { ln, r, z, name, res, t: 0, done: state === 'done' };
+  });
+  B.box(o.x1 + 0.4, y + 0.03, o.z0 + ((o.lanes.length - 1) * o.dz) / 2, 0.5, 0.05, o.lanes.length * o.dz, COL.ink, { cast: false });
+  B.box(o.x0 - 0.9, y + 0.03, o.z0 + ((o.lanes.length - 1) * o.dz) / 2, 0.3, 0.05, o.lanes.length * o.dz, COL.paper, { cast: false });
+  const setRes = (q, txt, bg) => {
+    const t = textTex(txt, { px: 24, font: 'mono', bg: bg || '#f4f6fb' });
+    q.res.material.map.dispose(); q.res.material.map = t.tex; q.res.scale.set(0.5 * t.aspect, 0.5, 1); t.onRedraw = (a) => q.res.scale.set(0.5 * a, 0.5, 1); q.res.visible = true;
+  };
+  const park = () => runners.forEach((q) => { q.r.position.x = o.x1; q.name.position.x = o.x1; setRes(q, 'TTFT ' + q.ln.ttft.toFixed(2) + 's　F1 ' + q.ln.f1.toFixed(2), q.ln.f1 < 0.25 ? '#f8d2cf' : '#cdebd4'); });
+  if (state === 'done') park();
+  button3d(o.board.x, o.board.z, y, '預測台', COL.rose);
+  const startRace = (stars) => {
+    state = 'racing';
+    const K = 2.6, longest = Math.max.apply(null, o.lanes.map((l) => l.ttft)) * K;
+    UI.actHud('<b>Prefill 競速！</b>　誰先送出第一個 token？');
+    AU.sfx('roar');
+    E.focus((o.x0 + o.x1) / 2, y + 1, o.z0 + ((o.lanes.length - 1) * o.dz) / 2, longest + 3.2).then(async () => {
+      state = 'done'; UI.actHud(null);
+      ctx.complete(o.id, stars);
+      await UI.say(o.win);
+    });
+    let t = 0, judged = false;
+    lv.updates.push((dt) => {
+      if (state !== 'racing') return;
+      t += dt;
+      runners.forEach((q) => {
+        const dur = q.ln.ttft * K, k = Math.min(1, t / dur);
+        q.r.position.x = lerp(o.x0, o.x1, k); q.name.position.x = q.r.position.x;
+        animRobot(q.r, E.t, k < 1 ? 1 : 0, true, dt);
+        if (k >= 1 && !q.done) { q.done = true; AU.sfx('ok'); E.fx.burst(o.x1, y + 1, q.z, q.ln.color, 20, 4, 0.8); setRes(q, 'TTFT ' + q.ln.ttft.toFixed(2) + 's'); }
+      });
+      if (!judged && t > longest + 0.9) {
+        judged = true; AU.sfx('star');
+        runners.forEach((q) => setRes(q, 'TTFT ' + q.ln.ttft.toFixed(2) + 's　F1 ' + q.ln.f1.toFixed(2), q.ln.f1 < 0.25 ? '#f8d2cf' : '#cdebd4'));
+        UI.actHud('<b>裁判亮分！</b>　跑得快還不夠，答案也要對。');
+      }
+    });
+  };
+  lv.inter.push({ x: o.board.x, y, z: o.board.z + 0.4, r: 2.3, acts: () => (state !== 'idle' ? null : [{ label: '賽前預測：四種方法各在哪裡', fn: async () => {
+    const res = await NB.run(o.quiz, { key: ctx.wid + '.' + o.id + '.quiz', kicker: '預測完成', doneLabel: '開賽！' });
+    if (res.done) startRace(res.stars);
+  } }]) });
+  ctx.anchor(o.id, o.board.x, o.board.z + 0.4, y);
+  lv.anims.push((dt, t) => { if (state !== 'racing') runners.forEach((q) => animRobot(q.r, t, 0, true, dt)); });
+  lv.updates.push(() => {
+    if (state !== 'idle') return;
+    const p = E.p.pos;
+    if (Math.abs(p.x - (o.x0 + o.x1) / 2) < 19 && Math.abs(p.z - o.z0 - 3) < 12) UI.actHud('四位選手準備比 <b>TTFT</b>。開賽前，先到紅色的<b>預測台</b>押注。');
+    else UI.actHud(null);
+  });
+  lv.debug = lv.debug || {};
+  lv.debug[o.id] = { state: () => state };
+};
+
+// W9: the final boss. Each round the dragon shouts a misconception; grab the crystal with the right rebuttal.
+ACT.boss = (ctx, o) => {
+  const lv = ctx.lv, y = o.y || 0;
+  let phase = ctx.done(o.id) ? 'done' : 'wait', round = 0, hp = o.rounds.length, hearts = 5, fails = 0, fireT = 0, inv = 0, noFire = false, moved = false;
+  const startPos = new THREE.Vector3();
+  // --- the dragon ---
+  const D = new THREE.Group(); D.position.set(o.cx, y, o.cz - 11); lv.group.add(D);
+  const P = (geoName, color, px, py, pz, sx, sy, sz, mo, parent) => { const m = mesh(geoName, color, mo); m.position.set(px, py, pz); m.scale.set(sx, sy, sz); m.castShadow = true; (parent || D).add(m); return m; };
+  const purple = 0x6a3b8f, dark = 0x3a2050;
+  P('sph', purple, 0, 2.6, 0, 3.2, 2.4, 2.6);
+  P('sph', 0xc9a0e0, 0, 2.2, 1.6, 2.2, 1.7, 1.4);
+  const neck = new THREE.Group(); neck.position.set(0, 4.2, 1.2); D.add(neck);
+  P('cyl', purple, 0, 1.0, 0.3, 0.9, 2.2, 0.9, null, neck).rotation.x = 0.35;
+  const head = new THREE.Group(); head.position.set(0, 2.5, 1.2); neck.add(head);
+  P('box', purple, 0, 0, 0, 2.0, 1.4, 2.4, null, head);
+  P('box', dark, 0, -0.5, 1.5, 1.6, 0.5, 1.2, null, head);
+  const eyeL = P('sph', 0xffe14a, -0.7, 0.3, 1.0, 0.3, 0.3, 0.2, { basic: true }, head), eyeR = P('sph', 0xffe14a, 0.7, 0.3, 1.0, 0.3, 0.3, 0.2, { basic: true }, head);
+  P('cone', 0xf4f6fb, -0.8, 1.1, -0.5, 0.25, 1.1, 0.25, null, head).rotation.z = 0.4;
+  P('cone', 0xf4f6fb, 0.8, 1.1, -0.5, 0.25, 1.1, 0.25, null, head).rotation.z = -0.4;
+  const wingL = new THREE.Group(); wingL.position.set(-2.4, 4, -0.4); D.add(wingL); P('box', dark, -2.2, 0, 0, 4.6, 0.16, 3, null, wingL);
+  const wingR = new THREE.Group(); wingR.position.set(2.4, 4, -0.4); D.add(wingR); P('box', dark, 2.2, 0, 0, 4.6, 0.16, 3, null, wingR);
+  P('cone', purple, 0, 1.4, -3.4, 1.2, 4.4, 1.2).rotation.x = -1.3;
+  B.col(o.cx - 4.5, o.cx + 4.5, y, y + 7, o.cz - 14, o.cz - 8, { solid: true, walk: false });
+  B.label(WHO.boss.name, o.cx, y + 10.2, o.cz - 11, { h: 0.7, px: 30, bg: '#3a2050', color: '#f4f6fb', border: '#f4f6fb' });
+  let flinch = 0, dead = phase === 'done';
+  if (dead) D.visible = false;
+  lv.anims.push((dt, t) => {
+    if (!D.visible) return;
+    wingL.rotation.z = Math.sin(t * 2.2) * 0.35 + 0.2; wingR.rotation.z = -Math.sin(t * 2.2) * 0.35 - 0.2;
+    D.position.y = y + Math.sin(t * 1.3) * 0.25 - (phase === 'seal' ? 1.2 : 0);
+    neck.rotation.x = Math.sin(t * 1.1) * 0.08 + (phase === 'seal' ? 0.7 : 0);
+    if (!dead) head.rotation.y = Math.atan2(E.p.pos.x - o.cx, E.p.pos.z - (o.cz - 11)) * 0.6;
+    flinch = Math.max(0, flinch - dt * 2);
+    D.rotation.z = Math.sin(t * 40) * 0.06 * flinch;
+    const es = 0.3 + Math.sin(t * 6) * 0.03; eyeL.scale.x = eyeR.scale.x = es;
+  });
+  // --- crystals ---
+  const spots = [{ x: o.cx - 8.5, z: o.cz + 0.5 }, { x: o.cx, z: o.cz - 2.5 }, { x: o.cx + 8.5, z: o.cz + 0.5 }];
+  const cols = [COL.blue, COL.orange, COL.green];
+  const crystals = spots.map((s, i) => {
+    const g = new THREE.Group(); g.position.set(s.x, y, s.z); lv.group.add(g);
+    const gem = mesh('oct', cols[i], { phong: true, flat: true, emissive: shade(cols[i], 0.4) }); gem.scale.set(0.6, 0.95, 0.6); gem.position.y = 1.5; gem.castShadow = true; g.add(gem);
+    const base = mesh('cyl', COL.ink); base.scale.set(0.8, 0.3, 0.8); base.position.y = 0.15; g.add(base);
+    B.label('ABC'[i], 0, 3.0, 0, { parent: g, h: 0.75, px: 34, font: 'mono', bg: '#1b2340', color: '#f4f6fb', border: '#f4f6fb' });
+    g.visible = false;
+    const c = { g, gem, i, x: s.x, z: s.z, opt: null, alive: false };
+    c.inter = { x: s.x, y, z: s.z, r: 1.9, enabled: false, label: '', fn: () => pick(c) };
+    lv.inter.push(c.inter);
+    lv.anims.push((dt, t) => { gem.rotation.y = t * 1.5 + i; gem.position.y = 1.5 + Math.sin(t * 2.4 + i) * 0.14; });
+    return c;
+  });
+  // --- fireball warnings ---
+  const rings = [];
+  for (let i = 0; i < 3; i++) {
+    const m = new THREE.Mesh(G('ring'), new THREE.MeshBasicMaterial({ color: 0xff5a2a, transparent: true, opacity: 0.85, depthWrite: false, side: THREE.DoubleSide }));
+    m.rotation.x = -Math.PI / 2; m.visible = false; m.userData.own = true; lv.group.add(m);
+    rings.push({ m, t: 0, on: false, x: 0, z: 0 });
+  }
+  // --- the blade that seals the dragon ---
+  const blade = new THREE.Group(); blade.position.set(o.cx, y, o.cz + 1); blade.visible = false; lv.group.add(blade);
+  const bm = mesh('box', COL.orange, { phong: true, flat: true, emissive: 0x6a3000 }); bm.scale.set(0.3, 2.6, 0.08); bm.position.y = 2.4; blade.add(bm);
+  const bg = mesh('box', COL.gold); bg.scale.set(1.1, 0.16, 0.2); bg.position.y = 1.05; blade.add(bg);
+  const bh = mesh('cyl', COL.ink); bh.scale.set(0.09, 0.6, 0.09); bh.position.y = 0.7; blade.add(bh);
+  const glow = makeGlow(COL.orange, 5); glow.position.y = 2.2; blade.add(glow);
+  lv.anims.push((dt, t) => { blade.rotation.y = t * 1.2; });
+  const bladeInter = { x: o.cx, y, z: o.cz + 1, r: 2.4, enabled: false, label: '舉起融合之刃', fn: () => seal() };
+  lv.inter.push(bladeInter);
+
+  const heartsStr = () => '♥'.repeat(hearts) + '<span style="opacity:.3">' + '♥'.repeat(Math.max(0, 5 - hearts)) + '</span>';
+  const hud = () => {
+    if (phase === 'round') {
+      const r = o.rounds[round];
+      UI.actHud('<div class="row"><span class="pill">魔龍 ' + '■'.repeat(hp) + '□'.repeat(o.rounds.length - hp) + '</span><span class="hearts">' + heartsStr() + '</span></div><b>魔龍：「' + r.claim + '」</b><div class="opt">' + crystals.filter((c) => c.alive).map((c) => '<div><i style="color:#' + cols[c.i].toString(16).padStart(6, '0') + '">' + 'ABC'[c.i] + '</i>' + c.opt[0] + '</div>').join('') + '</div>' + (moved ? '' : '<div class="row"><span class="pill">慢慢看。你一移動，魔龍才會開始吐火球</span></div>'), true);
+    } else if (phase === 'seal') UI.actHud('魔龍倒下了！到場中央<b>舉起融合之刃</b>，給牠最後一擊。', true);
+  };
+  const startRound = async () => {
+    phase = 'talk'; UI.actHud(null);
+    rings.forEach((rg) => { rg.on = false; rg.m.visible = false; });
+    const r = o.rounds[round];
+    AU.sfx('roar'); flinch = 0.6;
+    await UI.say([['boss', r.claim], ['kv', '牠說錯了！三顆水晶各寫著一句反駁，去拿<b>正確</b>的那一顆。小心火球。']]);
+    const order = shuffled([0, 1, 2]);
+    crystals.forEach((c, k) => { c.opt = r.opts[order[k]]; c.alive = true; c.g.visible = true; c.inter.enabled = true; c.inter.label = '拿起水晶 ' + 'ABC'[c.i]; E.fx.burst(c.x, y + 1.5, c.z, cols[c.i], 14, 3, 0.6); });
+    fireT = 1.6; moved = false; startPos.copy(E.p.pos); phase = 'round';
+    ctx.anchor(o.id, o.cx, o.cz + 4, y);
+  };
+  const hurt = (why) => {
+    hearts--; inv = 1.2; AU.sfx('hit'); E.fx.burst(E.p.pos.x, E.p.pos.y + 1, E.p.pos.z, 0xff5a2a, 26, 5, 0.7);
+    if (why) UI.toast(why, 'bad', 3600);
+    if (hearts <= 0) knockout();
+  };
+  const knockout = async () => {
+    phase = 'talk'; fails++;
+    crystals.forEach((c) => { c.alive = false; c.g.visible = false; c.inter.enabled = false; });
+    rings.forEach((rg) => { rg.on = false; rg.m.visible = false; });
+    UI.actHud(null);
+    E.teleport(o.cx, y, o.cz + 10);
+    await UI.say([['kv', '好險！我把你拉回來了。深呼吸，再聽一次牠說了什麼。']]);
+    hearts = 3; startRound();
+  };
+  const pick = async (c) => {
+    if (phase !== 'round' || !c.alive) return;
+    if (c.opt[1]) {
+      phase = 'talk';
+      crystals.forEach((q) => { q.alive = false; q.inter.enabled = false; if (q !== c) q.g.visible = false; });
+      rings.forEach((rg) => { rg.on = false; rg.m.visible = false; });
+      AU.sfx('zap'); flinch = 1.4; hp--;
+      E.fx.burst(c.x, y + 1.5, c.z, cols[c.i], 30, 5, 0.8);
+      E.fx.burst(o.cx, y + 5, o.cz - 10, 0xffffff, 60, 7, 1.1);
+      await sleep(500); AU.sfx('boom'); c.g.visible = false;
+      UI.actHud(null);
+      await UI.say([['kv', '命中！' + o.rounds[round].why]]);
+      round++;
+      if (round >= o.rounds.length) {
+        phase = 'seal'; AU.sfx('roar');
+        blade.visible = true; bladeInter.enabled = true; E.fx.burst(o.cx, y + 2, o.cz + 1, COL.orange, 60, 6, 1.2);
+        ctx.anchor(o.id, o.cx, o.cz + 1, y);
+        await UI.say([['boss', '不……不可能……我的 prefill……'], ['kv', '八片碎片合而為一了！<b>融合之刃 CacheBlend</b> 就在場中央，去舉起它！']]);
+      } else startRound();
+    } else {
+      c.alive = false; c.g.visible = false; c.inter.enabled = false;
+      AU.sfx('boom');
+      hurt('不對：' + c.opt[2]);
+    }
+  };
+  const seal = async () => {
+    if (phase !== 'seal') return;
+    const res = await NB.run(o.seal, { key: ctx.wid + '.' + o.id + '.seal', kicker: '真言完成', doneLabel: '斬！' });
+    if (!res.done) return;
+    phase = 'done'; bladeInter.enabled = false; UI.actHud(null);
+    AU.sfx('boom'); dead = true;
+    for (let i = 0; i < 6; i++) E.fx.burst(o.cx + (Math.random() - 0.5) * 6, y + 2 + Math.random() * 5, o.cz - 11 + (Math.random() - 0.5) * 4, [COL.blue, COL.orange, COL.green, 0xffffff][i % 4], 50, 8, 1.6);
+    E.tween(1.4, (k) => { D.scale.setScalar(1 - k * 0.98); D.rotation.y = k * 9; }, () => { D.visible = false; });
+    blade.visible = false;
+    ctx.complete(o.id, fails === 0 ? 3 : fails === 1 ? 2 : 1);
+    await sleep(1500);
+    await UI.say(o.win);
+  };
+  lv.triggers.push({ x: o.cx, z: o.cz + 9, y, r: 5, once: true, fn: () => { if (phase === 'wait') startRound(); } });
+  ctx.anchor(o.id, o.cx, o.cz + 9, y);
+  lv.updates.push((dt) => {
+    // pull the camera back inside the arena so the dragon stays in view
+    const inArena = phase !== 'done' && Math.abs(E.p.pos.x - o.cx) < 17 && Math.abs(E.p.pos.z - o.cz) < 16;
+    const ck = 1 - Math.exp(-2 * dt);
+    E.camPitch = lerp(E.camPitch, inArena ? 0.56 : 0.74, ck); E.camDist = lerp(E.camDist, inArena ? 19 : 13.5, ck);
+    if (phase !== 'round' && phase !== 'seal') return;
+    hud();
+    if (phase !== 'round') return;
+    inv = Math.max(0, inv - dt);
+    if (!moved && startPos.distanceTo(E.p.pos) > 2.5) moved = true;
+    if (!noFire && moved) {
+      fireT -= dt;
+      if (fireT <= 0) {
+        fireT = Math.max(1.5, 2.9 - round * 0.2);
+        const rg = rings.find((q) => !q.on);
+        if (rg) { rg.on = true; rg.t = 0; rg.x = E.p.pos.x + E.p.vel.x * 0.35; rg.z = E.p.pos.z + E.p.vel.z * 0.35; rg.m.position.set(rg.x, y + 0.06, rg.z); rg.m.visible = true; AU.sfx('tick'); }
+      }
+    }
+    rings.forEach((rg) => {
+      if (!rg.on) return;
+      rg.t += dt;
+      const k = rg.t / 1.35;
+      rg.m.scale.setScalar(0.4 + k * 1.5); rg.m.material.opacity = 0.4 + k * 0.5;
+      if (k >= 1) {
+        rg.on = false; rg.m.visible = false; AU.sfx('boom');
+        E.fx.burst(rg.x, y + 0.5, rg.z, 0xff5a2a, 36, 6, 0.7);
+        if (inv <= 0 && Math.hypot(E.p.pos.x - rg.x, E.p.pos.z - rg.z) < 1.9 && E.p.pos.y - y < 1.4) hurt('被火球打中了！紅圈出現時趕快離開。');
+      }
+    });
+  });
+  lv.debug = lv.debug || {};
+  lv.debug[o.id] = { state: () => ({ phase, round, hp, hearts }), crystals, setNoFire: (v) => { noFire = v; }, blade: { x: o.cx, z: o.cz + 1 } };
+};
+
 // ---- 10-world1.js ----
 // ===== World 1: 詞元村 (handout lessons 1-2) =====
 const WORLDS = [];
@@ -3750,7 +4079,8 @@ WORLDS.push({
   intro: [
     ['kv', '歡迎來到<b>詞元村</b>！我是凱薇，一顆 KV 快取精靈。推論王國的一切，都從這裡的小方塊開始。'],
     ['kv', '神諭 LLM 其實看不懂字。文字得先被切成<b>詞元（token）</b>，再換成數字，它才有辦法計算。'],
-    ['kv', '用搖桿或 WASD 走路，跳躍鍵（空白鍵）可以跳，也可以直接點地面走過去。看到<b>橘色菱形</b>就靠近互動。'],
+    ['kv', '用搖桿或 WASD 走路，跳躍鍵（空白鍵）可以跳，也可以直接點地面走過去。拖曳畫面能轉動視角。'],
+    ['kv', '看到<b>橘色菱形</b>就靠近互動。迷路的話，跟著腳邊的<b>金色箭頭</b>走。'],
     ['kv', '先去右前方的<b>切詞機</b>試試手感吧！']
   ],
   outro: [
@@ -4636,7 +4966,7 @@ WORLDS.push({
     },
     { id: 'hunt', name: 'HKVD 獵場', title: 'HKVD 獵場：把額度花在刀口上', kind: 'act',
       fallback: { steps: [{ t: 'pick', q: '區塊 2 接在區塊 1 後面。下面是區塊 2 每個 token 的 KV 偏差（教學示意）。你只能重算 3 個，選哪些？', k: 3, correct: [1, 2, 3],
-        items: [{ t: 'Cristiano', s: '2.1' }, { t: 'scored', s: '8.4' }, { t: '8', s: '9.7' }, { t: 'goals', s: '6.9' }, { t: 'at', s: '0.6' }, { t: 'FIFA', s: '1.3' }, { t: 'World', s: '0.8' }, { t: 'Cups', s: '1.5' }, { t: '.', s: '0.4' }],
+        items: [{ t: 'Cristiano', s: '1.9' }, { t: 'scored', s: '8.4' }, { t: '8', s: '9.7' }, { t: 'goals', s: '6.9' }, { t: 'at', s: '0.6' }, { t: 'FIFA', s: '1.2' }, { t: 'World', s: '0.8' }, { t: 'Cups', s: '1.5' }, { t: '.', s: '0.4' }],
         after: '偏差最高的那一小群叫 HKVD token。優先重算它們，注意力偏差降得最多。' }] } },
     {
       id: 'curve', name: '偏差火爐', title: '偏差火爐：為什麼少量就夠', sub: '講義第 14 課・論文 §4.3、圖 6、圖 7', look: 'machine', codex: ['hkvd', 'sparsity'],
@@ -4719,7 +5049,7 @@ WORLDS.push({
     B.gemRow(P.x + 4, P.z, P.x + 1, P.z, 0, 2, 'c');
     const H = P.island(18, 27);
     const t1 = ['Lionel', 'Messi', 'scored', '13', 'goals', 'at', 'FIFA', 'World', 'Cups'];
-    const t2 = [['Cristiano', 2.1], ['scored', 8.4], ['8', 9.7], ['goals', 6.9], ['at', 0.6], ['FIFA', 1.3], ['World', 0.8], ['Cups', 1.5], ['.', 0.4]];
+    const t2 = [['Cristiano', 1.9], ['scored', 8.4], ['8', 9.7], ['goals', 6.9], ['at', 0.6], ['FIFA', 1.2], ['World', 0.8], ['Cups', 1.5], ['.', 0.4]];
     const tokens = [];
     t1.forEach((tx, i) => tokens.push({ text: tx, dev: 0, chunk: 1, x: H.x - 10.4 + i * 2.6, z: H.z - 4.6 }));
     t2.forEach((q, i) => tokens.push({ text: q[0], dev: q[1], chunk: 2, x: H.x - 10.4 + i * 2.6, z: H.z + 1.2 }));
@@ -4957,6 +5287,403 @@ WORLDS.push({
   }
 });
 
+// ---- 17-world8.js ----
+// ===== World 8: 評測競技場 (handout lessons 18-21, paper §7, Figs 12-19, Tables 2-3) =====
+WORLDS.push({
+  id: 'w8', no: 8, name: '評測競技場', en: 'Evaluation Arena', color: '#c9a21c',
+  desc: '怎麼量快慢與品質、論文測出了什麼', lessons: '講義第 18–21 課・論文 §7',
+  intro: [
+    ['kv', '歡迎來到<b>評測競技場</b>！方法再漂亮，也要上場比過才算數。'],
+    ['kv', '論文第 7 節就是一整場比賽：比誰先吐出第一個字，也比誰答得對。'],
+    ['kv', '裁判長伊娃很嚴格。先弄懂計分規則，才看得懂記分板。']
+  ],
+  outro: [
+    ['eva', '你會算倍數、會看指標、會讀圖，也知道每個數字是在什麼條件下量出來的。這才叫看懂實驗。'],
+    ['kv', '第八片碎片，集滿了！融合之刃重新成形。最後一站：<b>延遲魔龍</b>的城堡。']
+  ],
+  stations: [
+    {
+      id: 'metric', name: '計時台', title: '計時台：效能指標與加速倍數', sub: '講義第 18 課', look: 'terminal', codex: ['ttft', 'speedup'],
+      steps: [
+        { t: 'match', q: '先認識計時用的指標。',
+          pairs: [
+            ['TTFT', '第一個輸出 token 出現之前的等待時間'],
+            ['Throughput（吞吐量）', '單位時間內完成的工作量'],
+            ['End-to-end latency', '整個請求從頭到尾完成所需的時間'],
+            ['Request rate', '每秒送進系統的請求數'],
+            ['Batch size', '一起處理的請求（序列）數量']
+          ],
+          after: 'CacheBlend 降低的是長上下文的 prefill 成本，所以論文最主要看 <b>TTFT</b>。延遲越低越好，吞吐量越高越好。' },
+        { t: 'fill', q: '加速倍數怎麼算。TTFT 從 3 秒降到 1 秒：',
+          html: '加速倍數 = 3 ÷ 1 = {0} 倍<br>減少的比例 = (3 − 1) ÷ 3 ≈ {1} %',
+          blanks: [{ a: 3 }, { a: 66.7, tol: 0.5 }], hint: '2 ÷ 3 ≈ 0.667，也就是 66.7%。',
+          after: '加速 3 倍，是「減少約 66.7%」，不是「減少 300%」。' },
+        { t: 'fill', q: '吞吐量從每秒 2 筆變成每秒 8 筆：',
+          html: '變成原本的 8 ÷ 2 = {0} 倍<br>增加的幅度 = (8 − 2) ÷ 2 = {1} %',
+          blanks: [{ a: 4 }, { a: 300 }],
+          after: '「4 倍」和「增加 300%」是同一件事的兩種說法。延遲和吞吐量的分子分母方向相反，別顛倒。' },
+        { t: 'fill', q: '只加速一部分。原本 prefill 3 秒、後續生成 2 秒，總共 5 秒。現在 prefill 加速 3 倍：',
+          html: '新的總時間 = 1 + 2 = {0} 秒<br>整體加速 = 5 ÷ 3 ≈ {1} 倍',
+          blanks: [{ a: 3 }, { a: 1.67, tol: 0.02 }],
+          after: '整體只有 1.67 倍，不是 3 倍。<b>TTFT 快三倍，不代表整段回答也快三倍</b>：後續生成、檢索、排隊的時間沒有跟著變快。' }
+      ]
+    },
+    {
+      id: 'quality', name: '品質裁判席', title: '品質裁判席：F1、ROUGE-L 與其他指標', sub: '講義第 19 課', look: 'scale', codex: ['f1', 'rouge'],
+      steps: [
+        { t: 'info', kicker: 'QUALITY', title: '品質是「和參考答案比較」量出來的',
+          html: '<p>品質指標是一套規則：拿模型的輸出，去和資料集的參考答案比較。</p><p>分數接近，代表<b>在這套規則下</b>表現接近。它不代表文字逐字相同，也不保證每個事實都正確。</p>' },
+        { t: 'fill', q: 'F1 分數。標準答案是「New York」，模型回答「New York City」。重疊的詞有 2 個。',
+          html: '<span class="lbl">Precision</span>（回答的詞有多少是對的）= 2 ÷ 3 ≈ {0}<br><span class="lbl">Recall</span>（標準答案的詞有多少被答到）= 2 ÷ 2 = {1}<br><span class="lbl">F1</span> = 2 × P × R ÷ (P + R) = {2}',
+          blanks: [{ a: 0.67, tol: 0.011 }, { a: 1 }, { a: 0.8, tol: 0.011 }],
+          hint: '2 × 0.667 × 1 ÷ (0.667 + 1) = 1.333 ÷ 1.667。',
+          after: '多答一個字，F1 就掉到 0.8。所以論文在短答案的資料集上，會提示模型「五個字以內作答」，減少答案長度造成的影響。' },
+        { t: 'fill', q: 'ROUGE-L 看「最長共同子序列」：順序要一樣，但不必相鄰。',
+          html: '「A B C D」和「A X C D」的最長共同子序列是 A C D，長度 = {0}',
+          blanks: [{ a: 3 }],
+          after: 'ROUGE-L 常用來評估摘要。換句話說可能讓分數降低，所以它和 F1 一樣，只是「在這個規則下」的相近程度。' },
+        { t: 'match', q: '論文表 3：每個資料集用哪個指標？',
+          pairs: [
+            ['2WikiMQA、Musique（多文件問答）', 'F1 分數'],
+            ['SAMSum、MultiNews（摘要）', 'Rouge-L 分數'],
+            ['RepoBench（程式碼補全）', 'Edit similarity 編輯相似度'],
+            ['Loong（長上下文推理）', 'ChatGPT-as-a-judge 模型當評審']
+          ],
+          after: '摘要寫「五個資料集」，但表 3 實際列了六個。讀報告時以各實驗明列的範圍為準。' },
+        { t: 'choice', q: 'F1 從 0.80 掉到 0.78。下面哪個說法正確？',
+          opts: [
+            ['絕對下降 0.02；相對下降 2.5%', 1, '0.02 ÷ 0.80 = 2.5%。'],
+            ['相對下降 2%', 0, '0.02 是絕對差。相對降幅要除以原本的 0.80。'],
+            ['下降了 20%', 0, '0.02 不是 0.2。']
+          ],
+          after: '論文寫「品質損失 0.02」指的是分數的<b>絕對差</b>。' }
+      ]
+    },
+    {
+      id: 'setup', name: '選手檢錄處', title: '選手檢錄處：誰來比、怎麼比', sub: '講義第 20 課・論文 §7.1', look: 'lectern', codex: ['setup', 'baselines'],
+      steps: [
+        { t: 'info', kicker: 'SETUP', title: '六個模型、兩組機器',
+          html: '<div class="tw"><table class="t"><tr><th>模型</th><th>測試配置</th></tr><tr><td>Mistral-7B</td><td>1 張 A40</td></tr><tr><td>Yi-34B</td><td>1 張 A40，8-bit 量化</td></tr><tr><td>Llama-70B</td><td>2 張 A40，8-bit 量化</td></tr><tr><td>Qwen3-30B-A3B、gpt-oss-20B</td><td>2 張 H100</td></tr><tr><td>Ministral-8B</td><td>列在受測模型中</td></tr></table></div><p>兩組機器都配 1 TB 的 NVMe SSD，實測吞吐量分別是 4.8 GB/s 和 6.8 GB/s。主要比較（圖 12）用前三個模型；後三個是為了測不同架構（圖 18）。</p>' },
+        { t: 'bucket', q: '論文表 2：這個模型是哪一種架構？',
+          buckets: ['Full attention ＋ dense MLP', 'Sliding window ＋ dense MLP', 'Full attention ＋ MoE', 'Sliding window ＋ MoE'],
+          items: [['Mistral-7B', 0], ['Yi-34B', 0], ['Llama-70B', 0], ['Ministral-8B', 1], ['Qwen3-30B-A3B', 2], ['gpt-oss-20B', 3]],
+          after: 'Sliding window attention 只讓 token 參考有限的近期範圍；MoE（mixture of experts）改變的是 FFN 那一段。這兩種新架構 CacheBlend 都測過。' },
+        { t: 'match', q: '比較的對象（baselines）。',
+          pairs: [
+            ['Full KV recompute', '原始文字直接送進 LLM，prefill 時算出全部 KV'],
+            ['Prefix caching', '存下常用前綴的 KV；非前綴的部分照樣計算'],
+            ['Full KV reuse', 'PromptCache 的做法：各區塊的 KV 直接拼接'],
+            ['MapReduce', '先平行摘要每個區塊，再把摘要餵給 LLM 作答'],
+            ['MapRerank', '每個區塊各自作答並打信心分數，取最高分的那個']
+          ] },
+        { t: 'choice', q: '論文對 prefix caching 做了一個「對它有利」的理想化假設。是什麼？',
+          opts: [
+            ['假設把 KV 從 RAM 或 SSD 載入 GPU 完全不花時間', 1, '所以它在論文裡的表現，比真實情況還好一些。'],
+            ['假設它每次都命中全部區塊', 0, '它仍然只能重用前綴。'],
+            ['假設它不需要儲存空間', 0, '論文正好指出它得為同一區塊存多個版本。']
+          ] },
+        { t: 'choice', q: '主要比較（圖 12）裡，每筆請求的上下文長什麼樣子？',
+          opts: [
+            ['檢索出的 6 個區塊，每塊 512 token', 1, '用 SentenceTransformers 的 embedding、依 L2 距離取前 6 名。'],
+            ['1 個區塊，4096 token', 0, '是多個區塊，這正是論文關心的情境。'],
+            ['45 個區塊，每塊 128 token', 0, '128 token 是圖 2 那個動機實驗的切法。']
+          ],
+          after: '另外，測吞吐量的 extended 資料集會<b>略過最前面 1000 筆請求</b>：那時快取還是空的，不該算進統計。讀數字時要連同這些條件一起讀。' }
+      ]
+    },
+    { id: 'race', name: '四強賽跑', title: '四強賽跑：延遲與品質能否兼顧', kind: 'act',
+      fallback: { steps: [{ t: 'bucket', q: '論文圖 12：這個方法落在圖的哪裡？（橫軸 TTFT，縱軸品質）',
+        buckets: ['左上：快，品質好', '左下：快，品質差', '右上：慢，品質好'],
+        items: [['CacheBlend', 0], ['Full KV reuse', 1], ['Prefix caching', 2], ['Full KV recompute', 2]],
+        after: '和完整重算相比，CacheBlend 的 TTFT 低 2.2–3.3 倍，F1 與 Rouge-L 的下降在 0.02 以內。' }] } },
+    {
+      id: 'load', name: '高壓擂台', title: '高壓擂台：請求變多還撐得住嗎', sub: '論文 §7.2、圖 14', look: 'machine', codex: ['results'],
+      steps: [
+        { t: 'info', kicker: 'KEY TAKEAWAYS', title: '論文第 7 節的三個結論',
+          html: '<ul><li><b>TTFT</b>：比 full KV recompute 低 <b>2.2–3.3 倍</b>。</li><li><b>品質</b>：比 full KV reuse 好很多（F1、Rouge-L 從約 0.15 提升到約 0.35）；和 full KV recompute、prefix caching 相比，只掉 <b>0.01–0.03</b>。</li><li><b>吞吐量</b>：相同 TTFT 下，比 full KV recompute 高最多 <b>5 倍</b>，比 prefix caching 高 <b>3.3 倍</b>。</li></ul><p>前兩點剛才在跑道上看過了。第三點要看「請求越來越多」的時候。</p>' },
+        { t: 'loadtest', q: '',
+          after: '0.84 ÷ 0.20 ≈ 4.2 倍。論文圖 14 的結論：在相近的品質下，CacheBlend 可以承受 <b>2.8–5 倍</b>的請求率。每筆請求佔用 GPU 的時間變短，同樣的機器就能服務更多人。' },
+        { t: 'choice', q: '為什麼 prefix caching 在這種多區塊的情境下撐不久？',
+          opts: [
+            ['同一個區塊前面接不同內容，就得存不同版本的 KV；儲存空間固定時，命中率比較低', 1, '論文 §7.2 的解釋。'],
+            ['因為它的品質比較差', 0, '它的品質和完整重算一樣好，問題出在省不到多少 prefill。'],
+            ['因為它不能用 GPU', 0, '和硬體無關。']
+          ] },
+        { t: 'choice', q: '讀圖 14 時，橫軸「request rate」是什麼？',
+          opts: [['每秒送進系統的請求數', 1, '只有在系統能穩定處理、TTFT 還壓得住時，才能把它當成「撐得住的吞吐量」來討論。'], ['每秒輸出的 token 數', 0, '它不是直接量到的輸出速度。'], ['GPU 的使用率', 0, '橫軸是負載，不是資源使用率。']] }
+      ]
+    },
+    {
+      id: 'sens', name: '變因實驗室', title: '變因實驗室：換個條件還成立嗎', sub: '論文 §7.3、圖 13、圖 15–19', look: 'crystal', codex: ['sensitivity'],
+      steps: [
+        { t: 'bucket', q: '快問快答：這句話，論文的實驗支持嗎？',
+          buckets: ['支持', '不支持'],
+          items: [
+            ['重算比例在 5%–18% 之間，品質幾乎貼著完整重算（Yi-34B）', 0, '圖 16：品質損失最多 0.002'],
+            ['Batch size 越大，CacheBlend 相對完整重算的優勢越明顯', 0, '圖 15(c)：batch 越大，prefill 的開銷越主導'],
+            ['KV 放在越慢的磁碟，CacheBlend 就比 full KV reuse 慢越多', 1, '圖 17：差距反而變小，因為延遲由載入主導', '圖 17 顯示差距變小：延遲主要被載入主導，重算那一點成本不明顯。'],
+            ['Sliding window attention 和 MoE 架構的模型上，5–20% 的重算比例也能有相近品質', 0, '圖 18'],
+            ['CacheBlend 只對問答有效，程式碼補全就不行', 1, '圖 19：RepoBench 和 Loong 上品質也相近', '圖 19 測了 RepoBench（程式碼）和 Loong（推理），品質和完整重算相近。'],
+            ['和 MapReduce 比，CacheBlend 的 TTFT 低 2–5 倍，F1 還更高', 0, '圖 13'],
+            ['MapRerank 比 CacheBlend 快一點，所以它的品質也比較好', 1, '圖 13：品質差很多', 'MapRerank 把區塊分開處理，忽略區塊之間的依賴，品質差很多。'],
+            ['區塊數變多、區塊變長時，CacheBlend 仍然比完整重算省時間', 0, '圖 15(a)(b)']
+          ],
+          after: '這就是 §7.3 的敏感度分析：一次只改一個條件，看結論還站不站得住。' },
+        { t: 'match', q: '每張圖在回答什麼問題？',
+          pairs: [
+            ['圖 12', '延遲和品質能不能兼顧'],
+            ['圖 14', '請求變多時，系統撐不撐得住'],
+            ['圖 16', '重算比例和品質怎麼取捨'],
+            ['圖 17', '儲存裝置比較慢時，方法還有沒有效'],
+            ['圖 18', '換成不同架構的模型還行不行']
+          ],
+          after: '全部十九張圖的導覽都收在筆記本的「論文圖表導覽」分頁，讀原稿時可以逐圖對照。' },
+        { t: 'choice', q: '論文說 5%–18% 的重算比例，換算成 TTFT 大約是多少？',
+          opts: [
+            ['比 full KV recompute 快 4.1–6.6 倍，比 prefix caching 快 3.4–6.1 倍（Yi-34B）', 1, '這是特定模型上的結果。'],
+            ['剛好快 100 ÷ 15 ≈ 6.67 倍，任何模型都一樣', 0, '還有載入等成本，而且每個模型不同。'],
+            ['和完整重算一樣慢', 0, '只重算一小部分，當然快得多。']
+          ] }
+      ]
+    }
+  ],
+  gate: {
+    id: 'gate', name: '裁判長試煉', title: '裁判長試煉', sub: '伊娃的三個問題', look: 'board',
+    steps: [
+      { t: 'choice', kicker: '第 1 題', q: '和 full KV recompute 相比，CacheBlend 的主要結果是？',
+        opts: [['TTFT 低 2.2–3.3 倍、吞吐量高 2.8–5 倍，品質幾乎不掉', 1], ['TTFT 低 100 倍，品質掉一半', 0, '沒有這麼誇張，品質也幾乎沒掉。'], ['TTFT 一樣，但品質更好', 0, '品質是「幾乎一樣」，重點在更快。']] },
+      { t: 'choice', kicker: '第 2 題', q: '和 full KV reuse 相比呢？',
+        opts: [['TTFT 差不多，但問答的 F1 絕對值高出 0.1–0.2', 1, '摘要的 Rouge-L 也高 0.03–0.25。'], ['快很多，品質一樣', 0, 'Full KV reuse 完全不重算，本來就最快。'], ['慢很多，品質也比較差', 0, '品質明顯比較好。']] },
+      { t: 'choice', kicker: '第 3 題', q: '圖 12 的橫軸是 TTFT、縱軸是品質。哪個方向比較好？',
+        opts: [['左上角：TTFT 低、品質高', 1], ['右上角', 0, '右邊代表等得比較久。'], ['左下角', 0, '下面代表品質差。'], ['右下角', 0, '又慢又差。']] }
+    ]
+  },
+  build(ctx) {
+    const lv = ctx.lv, sand = 0xe8dcc0;
+    const P = B.path(0, 6, 0, 'F');
+    const A = P.island(17, 12);
+    lv.spawn = { x: 0, y: 0, z: 3.8 };
+    B.npc('eva', -3.4, 0.8, 0, { accent: COL.rose, trim: COL.gold, hat: 'crown' }, () => (ctx.done('race')
+      ? [['eva', '跑得快、答得對，兩樣都要。記分板不會說謊。']]
+      : [['eva', '我是裁判長伊娃。在我的場子，每個數字都要說清楚是怎麼量的。'], ['eva', '先去右邊的計時台，把倍數算對。']]));
+    ctx.station('metric', 3.8, -1.6, 0);
+    B.flag(-7.4, -4.8, 0, COL.rose); B.flag(7.4, -4.8, 0, COL.blue); B.flag(-7.4, 4.8, 0, COL.green); B.flag(7.4, 4.8, 0, COL.gold);
+    B.decal('評測競技場', 0, 0, 1.6, { h: 1.05, color: '#7a5a14' });
+    B.gemRow(-1, 1.6, 1, -2, 0, 3, 'a');
+    P.gate({ need: ['metric'], label: '先完成：計時台' });
+    P.bridge(4);
+    B.gemRow(P.x, P.z + 3, P.x, P.z + 1, 0, 2, 'b');
+    const C = P.island(17, 14);
+    ctx.station('quality', C.x - 3.6, C.z - 2.4, 0);
+    ctx.station('setup', C.x + 3.6, C.z + 1.6, 0);
+    B.flag(C.x - 7.4, C.z - 5.8, 0, COL.gold); B.flag(C.x + 7.4, C.z - 5.8, 0, COL.rose); B.pillar(C.x + 7, C.z + 5.6, 0, 3, 0.4, sand); B.pillar(C.x - 7, C.z + 5.6, 0, 3, 0.4, sand);
+    P.exit('L');
+    P.gate({ need: ['quality', 'setup'], label: '先完成：品質裁判席與選手檢錄處' });
+    P.bridge(5);
+    B.gemRow(P.x + 4, P.z, P.x + 1, P.z, 0, 2, 'c');
+    const H = P.island(22, 36);
+    const methods = [
+      { key: 'full', name: 'Full KV recompute', color: '#2f4fa8', dark: true },
+      { key: 'prefix', name: 'Prefix caching', color: '#7fa8e8' },
+      { key: 'reuse', name: 'Full KV reuse', color: '#ec8b3c' },
+      { key: 'blend', name: 'CacheBlend', color: '#d9544f', dark: true }
+    ];
+    ACT.race(ctx, {
+      id: 'race', y: 0, x0: H.x - 13, x1: H.x + 11, z0: H.z - 6.6, dz: 2.4, board: { x: H.x - 2, z: H.z + 6.6 },
+      lanes: [
+        { name: 'Full KV recompute', color: 0x2f4fa8, ttft: 2.1, f1: 0.33 },
+        { name: 'Prefix caching', color: 0x7fa8e8, ttft: 1.9, f1: 0.33 },
+        { name: 'Full KV reuse', color: 0xec8b3c, ttft: 0.25, f1: 0.15 },
+        { name: 'CacheBlend', color: 0xd9544f, ttft: 0.7, f1: 0.32 }
+      ],
+      quiz: { id: 'race-quiz', title: '賽前預測：讀懂圖 12', sub: '論文 §7.2、圖 12', steps: [
+        { t: 'info', kicker: 'FIGURE 12', title: '一張圖看快慢和品質',
+          html: '<p>論文最重要的一張結果圖：橫軸是 <b>TTFT</b>（越左越快），縱軸是<b>品質</b>（越高越好）。每個方法是圖上的一個點，<b>越靠左上角越好</b>。</p><p>下一頁有四個沒標名字的點。憑你這一路學到的，把它們認出來。</p>' },
+        { t: 'scatter', q: '這四個點各是哪一種方法？', points: [{ id: 'A', x: 0.25, y: 0.15, ans: 'reuse' }, { id: 'B', x: 0.7, y: 0.32, ans: 'blend' }, { id: 'C', x: 1.9, y: 0.33, ans: 'prefix' }, { id: 'D', x: 2.1, y: 0.33, ans: 'full' }], methods,
+          cap: '依論文圖 12 各方法的相對位置重繪，數值為教學示意。',
+          hint: 'A 最快但品質最差。C 和 D 品質一樣好，其中只比完整重算快一點點的是 prefix caching。',
+          after: 'A 是 full KV reuse，B 是 CacheBlend，C 是 prefix caching，D 是 full KV recompute。押好了，開賽！' }
+      ] },
+      win: [
+        ['eva', '成績出爐。Full KV reuse 跑最快，可是 F1 只有 0.15，答案不能用。'],
+        ['eva', 'CacheBlend 只慢一點點，F1 卻有 0.32，和完整重算的 0.33 幾乎一樣。而且比完整重算快了 3 倍。'],
+        ['kv', '論文的數字：TTFT 比完整重算低 <b>2.2–3.3 倍</b>，F1 和 Rouge-L 的下降在 <b>0.02</b> 以內。這是在 3 個模型、4 個資料集上量到的。'],
+        ['kv', 'Prefix caching 幾乎和完整重算一樣慢，因為 6 個區塊裡它只省得到第一個。']
+      ]
+    });
+    // spectator stands on both long sides
+    for (let i = 0; i < 3; i++) B.box(H.x, 0.4 + i * 0.7, H.z - 9.1 - i * 0.7, 26, 0.8, 0.7, i % 2 ? 0xd9544f : 0xf4f6fb, i === 0 ? { solid: true, walk: false } : { cast: false });
+    B.flag(H.x - 14.5, H.z - 9, 0, COL.rose, 4.5); B.flag(H.x + 14.5, H.z - 9, 0, COL.blue, 4.5); B.flag(H.x - 14.5, H.z + 9.6, 0, COL.green, 4.5); B.flag(H.x + 14.5, H.z + 9.6, 0, COL.gold, 4.5);
+    B.gemRow(H.x - 8, H.z + 8.4, H.x + 8, H.z + 8.4, 0, 3, 'd');
+    P.exit('F', 15.5);
+    P.gate({ need: ['race'], label: '先完成：四強賽跑' });
+    P.bridge(2.5);
+    P.stairs(4, 0.45, 3);
+    P.bridge(2);
+    const F = P.island(20, 17);
+    ctx.station('load', F.x - 5.4, F.z + 1.4, P.y);
+    ctx.station('sens', F.x - 0.6, F.z - 4.6, P.y);
+    ctx.station('gate', F.x + 5, F.z - 1.2, P.y);
+    B.portal(F.x + 6.8, F.z + 5.2, P.y, '前往世界地圖');
+    // podium
+    B.box(F.x - 7, P.y + 0.5, F.z - 6.4, 1.6, 1.0, 1.6, COL.gold, { solid: true, walk: false }); B.box(F.x - 8.7, P.y + 0.35, F.z - 6.4, 1.6, 0.7, 1.6, 0xc8ccd6, { solid: true, walk: false }); B.box(F.x - 5.3, P.y + 0.25, F.z - 6.4, 1.6, 0.5, 1.6, 0xc98a5a, { solid: true, walk: false });
+    B.pillar(F.x + 8.4, F.z - 7, P.y, 3.6, 0.45, sand); B.pillar(F.x - 8.6, F.z + 7, P.y, 3.6, 0.45, sand);
+    B.flag(F.x + 6.6, F.z - 3, P.y, COL.rose); B.flag(F.x + 3.4, F.z - 3, P.y, COL.rose);
+    B.gemRow(F.x - 3, F.z + 5, F.x + 1.6, F.z + 6.4, P.y, 3, 'e');
+    const s2 = B.stone(A.x + 10.6, A.z + 1, 1.0, 2.2); B.gem(s2.x, 2.1, s2.z, 'f0');
+  }
+});
+
+// ---- 18-world9.js ----
+// ===== World 9: 魔龍城 (handout lessons 22-23 and 25, paper §8-10) =====
+const FOUR = [
+  'RAG 經常在不同問題裡重複使用相同的文字區塊，所以有重用 KV 快取的機會。',
+  '但完整前綴不相同時，直接重用區塊的 KV 會缺少跨區塊的上下文影響（cross-attention）。',
+  'CacheBlend 挑出少數高偏差（HKVD）token 重算，讓融合後的表示接近完整重算的結果。',
+  '系統再把逐層載入和重算重疊（pipelining）來降低 TTFT，並用品質與效能實驗確認取捨。'
+];
+const BOSS_ROUNDS = [
+  { claim: '文字一模一樣，KV 當然可以整份直接拿來用！',
+    opts: [['不一定。前文和位置也要相同，才能精確沿用', 1], ['沒錯，文字相同 KV 就相同', 0, '同一段文字前面接了不同內容，後面幾層的 KV 就會不同。'], ['錯，KV 永遠不能重用', 0, '前綴完全相同時可以精確沿用；前文不同時，CacheBlend 用少量重算來修。']],
+    why: '前綴完全相同才能精確沿用。前文換了，就是 CacheBlend 要處理的近似問題。' },
+  { claim: '只重算少數 token？那其他文字不就被你們刪掉了！',
+    opts: [['沒有刪。沒選中的 token 的 K、V 都還在，照樣被讀取', 1], ['是刪掉了，反正不重要', 0, '沒有任何 token 被刪掉。'], ['它們的 K、V 被歸零了', 0, '舊的 K、V 原封不動地沿用，沒有被改。']],
+    why: '減少的是「重新計算的列」，上下文一個字都沒少。' },
+  { claim: '重算 15% 的 token，延遲就剛好剩 15%，不然就是騙人！',
+    opts: [['不等於。還有載入、同步、選 token 和後續生成的成本', 1], ['對，剛好 15%', 0, '計算量大約成正比，但延遲還包含其他成本。'], ['延遲反而會變成 115%', 0, '只重算一部分，不會比完整重算還慢。']],
+    why: '重算比例不等於剩餘時間。新的問題本身、快取沒命中的內容，也都還是要算。' },
+  { claim: 'KV 偏差最大的 token，就是人類覺得最重要的詞！',
+    opts: [['不是。偏差是內部數值的變化，只是挑重算位置用的指標', 1], ['是，所以只挑名詞就好', 0, '偏差高低和詞性沒有固定關係。'], ['偏差最大的 token 應該先刪掉', 0, '偏差大代表它最需要被重算，不是該刪。']],
+    why: '它是挑選重算位置的代理指標，不保證符合人類的判斷，也不是「最佳 token 集合」的證明。' },
+  { claim: 'CacheBlend 就是把新文件重新訓練進模型裡！',
+    opts: [['不是。它只在推論時重用和修正 KV，不改模型權重', 1], ['對，每份文件都要微調一次', 0, '完全不需要訓練或微調。'], ['它把文件寫進了嵌入表', 0, '嵌入表是模型權重的一部分，CacheBlend 不會動它。']],
+    why: '論文標題的 cached knowledge fusion，是指快取表示的融合，不是讓模型永久學會新文件。' },
+  { claim: '把 KV 丟到再慢的硬碟上，都完全沒有代價！',
+    opts: [['不一定。載入太慢、快取沒命中或頻寬被搶，延遲一樣會增加', 1], ['對，硬碟多慢都沒差', 0, '載入比重算慢太多時，延遲就由載入決定了。'], ['KV 根本不能放在硬碟上', 0, '可以放。管線化正是讓比較慢的裝置也派得上用場。']],
+    why: '只有時間關係合適時，搬運或重算的成本才藏得住。控制器的工作，就是挑出這樣的組合。' }
+];
+WORLDS.push({
+  id: 'w9', no: 9, name: '魔龍城', en: 'Dragon Keep', color: '#7a3b8f',
+  desc: '最終決戰：破除誤解，說出整篇論文', lessons: '講義第 22–23、25 課・論文 §8–10',
+  intro: [
+    ['kv', '就是這裡了，<b>延遲魔龍 普利菲爾</b>的城堡。八片碎片已經重新合成融合之刃。'],
+    ['kv', '魔龍最厲害的武器不是火，而是<b>似是而非的說法</b>。牠每吼一句，你就拿正確的道理砸回去。'],
+    ['kv', '先到前面的石碑看看牠的底細，再走進競技場。']
+  ],
+  outro: [
+    ['sys', '延遲魔龍消失了。推論王國的居民發現，神諭回答問題的速度快了好幾倍，答案卻和以前一樣可靠。'],
+    ['kv', '你做到了！從一個 token 開始，一路走到論文的最後一頁。'],
+    ['kv', '走進最後一道傳送門，領你的結業證書吧。']
+  ],
+  stations: [
+    {
+      id: 'limits', name: '龍之石碑', title: '龍之石碑：定位、限制與適用範圍', sub: '講義第 22 課・論文 §8–9', look: 'board', codex: ['limits'],
+      steps: [
+        { t: 'bucket', q: '論文第 8 節（相關研究）。這類技術和 CacheBlend 是什麼關係？',
+          buckets: ['互補，可以一起用', '被 CacheBlend 改進的做法'],
+          items: [
+            ['把 KV 快取壓縮或量化，讓它變小', 0, '存的、搬的 KV 更少，對 CacheBlend 有利'],
+            ['刪掉 prompt 裡不重要的 token，把輸入變短', 0, 'CacheBlend 可以處理不同長度的區塊'],
+            ['vLLM、Orca 這類通用的推論服務引擎', 0, 'CacheBlend 是加在它們上面的重用能力'],
+            ['只能重用前綴的 prefix caching', 1, '多區塊時只省得到第一塊'],
+            ['直接拼接、忽略 cross-attention 的 PromptCache', 1, '位置與跨區塊注意力都不夠準確']
+          ],
+          after: 'CacheBlend 只專心解決一件事：<b>輸入裡有多個重複使用的區塊時，如何快速融合它們的 KV 快取</b>。其他方向大多可以和它疊加。' },
+        { t: 'choice', multi: true, q: '論文第 9 節自己列出的限制有哪些？（可複選）',
+          opts: [
+            ['目前只適用 transformer 架構，Mamba、Griffin 等留待未來', 1],
+            ['還沒在更多模型和不同量化設定上測試', 1],
+            ['只整合進 vLLM，還沒測 Distserve、StableGen 等較新的引擎', 1],
+            ['還沒研究怎麼在不同運算節點之間共享 KV 快取', 1],
+            ['每換一份文件就要重新訓練模型', 0, '這不是限制，CacheBlend 根本不需要訓練。']
+          ] },
+        { t: 'choice', q: '哪一種情況，CacheBlend 能幫上的忙最小？',
+          opts: [
+            ['上下文很短、很少重複，或大部分時間都花在生成很長的答案', 1, '能省的 prefill 本來就不多。'],
+            ['同一批長文件被很多問題反覆用到', 0, '這正是它最擅長的情境。'],
+            ['輸入裡有好幾個檢索到的區塊', 0, '這正是它要解決的問題。']
+          ],
+          after: '即使品質分數接近完整重算，也不代表每一筆請求都零差異。評估時要<b>同時看速度、品質、命中條件與資源使用</b>。' },
+        { t: 'choice', q: '論文第 5 節有一句話，把載入與重算的快慢關係寫反了。判讀時該以什麼為準？',
+          opts: [
+            ['看 Basic insight 和數值例子：載入比重算慢時，重算才藏得住', 1, '例如每層載入 16 ms、重算 3 ms。'],
+            ['照那一句話的字面意思', 0, '它和論文自己的 Basic insight、數值例子互相矛盾。'],
+            ['兩種情況都不會增加延遲', 0, '重算比載入慢時，延遲就由重算決定。']
+          ],
+          after: '這類要特別辨認的地方，講義整理了五個，都收在筆記本的「讀原稿的提醒」分頁。' }
+      ]
+    },
+    { id: 'boss', name: '延遲魔龍', title: '決戰：延遲魔龍 普利菲爾', kind: 'act',
+      fallback: { steps: BOSS_ROUNDS.map((r, i) => ({ t: 'choice', kicker: '魔龍的第 ' + (i + 1) + ' 句話', q: '魔龍：「' + r.claim + '」該怎麼反駁？', opts: r.opts, after: r.why })).concat([
+        { t: 'order', q: '用四句話說完這篇論文。', items: FOUR }]) } }
+  ],
+  gate: {
+    id: 'gate', name: '結業考', title: '結業考', sub: '不看答案也能說清楚', look: 'lectern', codex: ['misconceptions'],
+    steps: [
+      { t: 'choice', kicker: '第 1 題', q: 'KV Cache 是什麼？',
+        opts: [['各層已處理 token 的 K、V 張量，供後續 Attention 重用', 1, '它是輸入相關的中間結果。'], ['模型訓練學到的權重', 0, '權重在推論時固定；KV Cache 隨輸入而變。'], ['存好的文字答案', 0, '那是答案快取。']] },
+      { t: 'choice', kicker: '第 2 題', q: '為什麼「A＋B 一起算的 KV」不一定等於「A 的 KV 拼上 B 的 KV」？',
+        opts: [['B 獨立預算時沒讀過 A；一起算時 B 會參考 A，後面幾層的表示就不同', 1, '位置校正補不回這個差異。'], ['因為位置編碼不能修正', 0, 'RoPE 的位置可以用旋轉修正；修不了的是前文不同。'], ['因為 A 會回頭參考 B', 0, '因果遮罩讓 A 看不到後面的 B。']] },
+      { t: 'choice', kicker: '第 3 題', q: '某一層選了 10 個 token 重算。這一層 Attention 讀得到的 K、V 只剩 10 個位置嗎？',
+        opts: [['不是。10 個新值加上其餘位置的舊值，完整的上下文位置都在', 1], ['是，其他位置被丟掉了', 0, '沒選中的 token 仍然提供舊的 K、V。'], ['是，而且遮罩也取消了', 0, '原本的因果遮罩照樣遵守。']] },
+      { t: 'choice', kicker: '第 4 題', q: '為什麼不先完整重算一遍，再挑出偏差最大的 token？',
+        opts: [['那樣就已經付出想省掉的成本。CacheBlend 改用前面層的差異和跨層相關性，逐層縮小候選', 1], ['因為完整重算的結果不準', 0, '它正是品質的基準。'], ['因為偏差沒辦法計算', 0, '算得出來，只是代價太高。']] },
+      { t: 'choice', kicker: '第 5 題', q: '每層載入 4 ms、重算 7 ms，理想管線化之後，每層的步調大約是？',
+        opts: [['約 7 ms，由比較慢的重算主導', 1, '不能說 4 ms 的載入把 7 ms 的重算遮住了。'], ['約 4 ms', 0, '比較慢的那一方決定步調。'], ['約 11 ms', 0, '那是兩者相加，沒有重疊時才會這樣。'], ['約 0 ms', 0, '兩件工作都要時間，重疊只是不必相加。']] },
+      { t: 'choice', kicker: '第 6 題', q: '一句話說明 CacheBlend。',
+        opts: [
+          ['重用每個區塊預先算好的 KV，只重算一小部分高偏差 token 來補回跨區塊注意力，並把載入與重算重疊', 1],
+          ['把常見問題的答案存起來，下次直接回傳', 0, '那是答案快取。CacheBlend 每次仍會重新生成答案。'],
+          ['把文件訓練進模型，之後就不用檢索', 0, '它不改模型權重。'],
+          ['只快取輸入的第一個區塊', 0, '那是 prefix caching。']
+        ] }
+    ]
+  },
+  build(ctx) {
+    const lv = ctx.lv, stone = 0x5a5368;
+    lv.killY = -20;
+    const P = B.path(0, 6, 0, 'F');
+    const A = P.island(17, 12);
+    lv.spawn = { x: 0, y: 0, z: 3.8 };
+    ctx.station('limits', 3.6, -1.6, 0);
+    B.torch(-6.6, -4.6, 0, 0xc05ae0); B.torch(6.8, 4.4, 0, 0xc05ae0); B.torch(-6.6, 4.4, 0, 0xc05ae0);
+    B.pillar(-7.2, -0.4, 0, 4.4, 0.5, stone); B.pillar(7.2, -4.6, 0, 4.4, 0.5, stone);
+    B.rock(-4.6, -4.6, 0, 1.2, 0x3a3548); B.crystals(-3.4, 2.6, 0, 0.8, 0xc05ae0);
+    B.decal('魔龍城', 0, 0, 1.6, { h: 1.1, color: '#d8b8ff' });
+    B.gemRow(-1, 1.6, 1, -2, 0, 3, 'a');
+    P.gate({ need: ['limits'], label: '先完成：龍之石碑' });
+    P.bridge(5);
+    B.gemRow(P.x, P.z + 4, P.x, P.z + 1, 0, 3, 'b');
+    const H = P.island(36, 32);
+    ACT.boss(ctx, {
+      id: 'boss', y: 0, cx: H.x, cz: H.z + 2, rounds: BOSS_ROUNDS,
+      seal: { id: 'seal', title: '融合之刃的真言', sub: '用自己的話說完這篇論文', steps: [
+        { t: 'info', kicker: 'FINAL STRIKE', title: '說得出來，刀才揮得下去',
+          html: '<p>融合之刃只聽得懂完整的道理。把你這一路學到的，從頭到尾串起來。</p>' },
+        { t: 'order', q: '用四句話說完這篇論文。', items: FOUR,
+          after: '問題、難點、方法、系統與驗證。這四句就是整篇論文的骨架。' },
+        { t: 'order', q: '再串一次因果鏈。',
+          items: ['不同的前文，會改變 token 的表示', '表示變了，各層的 KV 也跟著變', '所以直接重用預存的 KV 會有偏差', '挑高偏差的 token 做部分重算，修正偏差', '把載入和重算管線化，減少額外的等待', '最後用品質和速度一起驗證'],
+          after: '這條因果鏈串得起來，你就真的讀懂 CacheBlend 了。' }
+      ] },
+      win: [['sys', '融合之刃落下。魔龍化成無數發光的 token，散進夜空。'], ['kv', '贏了！現在每個問題的 prefill 都只要原本的幾分之一。'], ['kv', '右邊的門開了。裡面有最後一張考卷，寫完就可以結業。']]
+    });
+    [[-15.5, -13.5], [15.5, -13.5], [-15.5, 13.5], [15.5, 13.5], [-15.5, 0], [15.5, -4]].forEach((q) => B.pillar(H.x + q[0], H.z + q[1], 0, 6, 0.6, stone));
+    [[-11, -13.5], [11, -13.5], [-15.5, 7], [-15.5, -7], [15.5, 7.5]].forEach((q) => B.torch(H.x + q[0], H.z + q[1], 0, 0xc05ae0));
+    B.box(H.x, 0.03, H.z + 2, 14, 0.05, 14, 0x4a4458, { geo: 'cyl', cast: false });
+    B.gemRow(H.x - 10, H.z + 12, H.x + 10, H.z + 12, 0, 4, 'c');
+    P.exit('R', 9);
+    P.gate({ need: ['boss'], label: '先擊敗：延遲魔龍' });
+    P.bridge(5);
+    const F = P.island(14, 15);
+    ctx.station('gate', F.x - 0.6, F.z - 2.6, 0);
+    B.portal(F.x + 3.6, F.z + 3.6, 0, '領取結業證書');
+    B.torch(F.x - 5, F.z - 5.4, 0, COL.gold); B.torch(F.x + 5.4, F.z - 5.4, 0, COL.gold); B.flag(F.x - 5.6, F.z + 5, 0, COL.orange); B.flag(F.x + 5.8, F.z - 0.6, 0, COL.blue); B.flag(F.x - 3, F.z + 5.6, 0, COL.green);
+    B.gemRow(F.x - 3, F.z + 2.4, F.x + 0.6, F.z + 4.6, 0, 2, 'd');
+    const s2 = B.stone(A.x - 10.6, A.z + 1, 1.0, 2.2); B.gem(s2.x, 2.1, s2.z, 'e0');
+  }
+});
+
 // ---- 20-codex.js ----
 // ===== notebook entries (unlocked by finishing stations) =====
 const CODEX = {
@@ -5080,7 +5807,7 @@ function buildTitleLevel() {
   return lv;
 }
 
-const READY = ['w1', 'w2', 'w3', 'w4', 'w5', 'w6'];
+const READY = ['w1', 'w2', 'w3', 'w4', 'w5', 'w6', 'w7', 'w8', 'w9'];
 const isReady = (w) => READY.indexOf(w.id) >= 0;
 
 const GAME = {
@@ -5118,6 +5845,7 @@ const GAME = {
       E.fx.burst(g.x, g.y, g.z, COL.cyan, 16, 3.5, 0.7);
       SV.addCrystal(this.wid || 'title', g.id);
       this.refreshHud();
+      if (this.lv && this.wid && SV.crystals(this.wid).length === this.lv.gems.length) { AU.sfx('win'); UI.toast('這個世界的 KV 晶體全部到手了！', 'good', 3200); }
     });
     bus.on('fell', () => UI.toast('掉下去了！凱薇把你拉回剛才的位置。', 'warn', 1800));
     bus.on('ui:map', () => this.showMap());
@@ -5254,6 +5982,13 @@ const GAME = {
       const r = 1.5 + Math.sin(t * 5) * 0.14;
       arrow.position.set(p.x + (dx / d) * r, p.y + 0.5, p.z + (dz / d) * r);
       arrow.rotation.y = Math.atan2(dx, dz);
+    });
+    // if the player stands around for a while, the companion points the way once
+    let idle = 0, hinted = false;
+    lv.updates.push((dt) => {
+      if (hinted) return;
+      idle = E.p.moveAmt > 0.1 ? 0 : idle + dt;
+      if (idle > 25 && $('#act-hud').hidden) { hinted = true; const g = this.nextGoal(); if (g) UI.toast('凱薇：' + g.text + '。跟著金色箭頭走就對了。', '', 4200); }
     });
     E.setLevel(lv); E.mode = 'play';
     this.refreshGates(true);
@@ -5460,6 +6195,7 @@ const GAME = {
       this.mode3d ? h('div.set-row', h('div', h('b', '畫質'), h('div.d', '如果畫面卡頓，改成「省電」')), seg([['auto', '自動'], ['high', '高'], ['low', '省電']], o.q, (v) => { o.q = v; E.setQuality(v); SV.save(); })) : null,
       h('div.set-row', h('div', h('b', '自由模式'), h('div.d', '直接開放全部九個世界，方便複習')), seg([[0, '關'], [1, '開']], o.free ? 1 : 0, (v) => { o.free = v; SV.save(); })),
       h('div.set-row', h('div', h('b', '操作方式'), h('div.keys', h('kbd', 'WASD / 方向鍵'), h('span', '移動（觸控：左下搖桿）'), h('kbd', '空白鍵'), h('span', '跳（觸控：右下按鈕）'), h('kbd', 'E'), h('span', '互動'), h('kbd', '點地面'), h('span', '自動走過去'), h('kbd', '拖曳 / 滾輪'), h('span', '轉動視角 / 拉遠拉近'), h('kbd', 'M · N'), h('span', '地圖 · 筆記本')))),
+      this.wid && this.mode3d ? h('div.set-row', h('div', h('b', '卡住了？'), h('div.d', '把角色送回這個世界的起點')), h('button.btn.small.alt', { onclick: () => { const sp = this.lv.spawn; E.teleport(sp.x, sp.y, sp.z); E.snapCam(); m.close(); } }, '回到起點')) : null,
       this.wid ? h('div.set-row', h('div', h('b', '離開這個世界'), h('div.d', '已完成的站點都會保留')), h('button.btn.small.alt', { onclick: () => { m.close(); this.leaveWorld(); } }, '回世界地圖')) : null);
     m.body.append(list);
   },
@@ -5473,13 +6209,6 @@ const GAME = {
     this.showMap();
   }
 };
-const FOUR = [
-  'RAG 經常在不同問題裡重複使用相同的文字區塊，所以有重用 KV 快取的機會。',
-  '但完整前綴不相同時，直接重用區塊的 KV 會缺少跨區塊的上下文影響（cross-attention）。',
-  'CacheBlend 挑出少數高偏差（HKVD）token 重算，讓融合後的表示接近完整重算的結果。',
-  '系統再把逐層載入和重算重疊（pipelining）來降低 TTFT，並用品質與效能實驗確認取捨。'
-];
-
 // ---------- boot ----------
 function whenThree(cb) {
   if (window.THREE) { cb(); return; }
