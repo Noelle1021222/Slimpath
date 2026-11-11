@@ -275,7 +275,7 @@ svg { display: block; }
 .nb .tw { overflow-x: auto; }
 .card { background: rgba(255, 255, 255, .78); border: 2px solid var(--ink); border-radius: 12px; padding: 10px 12px; }
 .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-.grow { flex: 1; min-width: 0; }
+.grow { flex: 1 1 240px; min-width: 0; }
 
 .opts { display: grid; gap: 9px; }
 .opt-b {
@@ -562,3 +562,18 @@ button.sr-cell { cursor: pointer; width: 38px; }
 }
 /* a sheet opened from the title screen must sit above it, and the title steps aside meanwhile */
 #modal-root:not(:empty) ~ #title { visibility: hidden; }
+/* phone-width fixes for the denser lesson figures */
+.nb code { white-space: normal; overflow-wrap: anywhere; }
+@media (max-width: 520px) {
+  .bars { gap: 3px; padding: 6px 0 0; }
+  .bar-b { min-width: 27px; padding: 3px 1px 5px; }
+  .bar-b i { width: 15px; }
+  .bar-b em { font-size: 9.5px; }
+  .sr { gap: 4px; min-width: 0; }
+  .sr-col > b { font-size: 9.5px; }
+  .sr-cell { width: 23px; }
+  button.sr-cell { width: 31px; }
+  .sr-attn .sr-cell { width: 12px; }
+  .sr-op { font-size: 12px; }
+}
+.tok .tag { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-family: var(--font-mono); font-weight: 700; font-size: 12px; flex: none; }

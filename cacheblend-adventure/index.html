@@ -289,7 +289,7 @@ svg { display: block; }
 .nb .tw { overflow-x: auto; }
 .card { background: rgba(255, 255, 255, .78); border: 2px solid var(--ink); border-radius: 12px; padding: 10px 12px; }
 .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-.grow { flex: 1; min-width: 0; }
+.grow { flex: 1 1 240px; min-width: 0; }
 
 .opts { display: grid; gap: 9px; }
 .opt-b {
@@ -576,6 +576,21 @@ button.sr-cell { cursor: pointer; width: 38px; }
 }
 /* a sheet opened from the title screen must sit above it, and the title steps aside meanwhile */
 #modal-root:not(:empty) ~ #title { visibility: hidden; }
+/* phone-width fixes for the denser lesson figures */
+.nb code { white-space: normal; overflow-wrap: anywhere; }
+@media (max-width: 520px) {
+  .bars { gap: 3px; padding: 6px 0 0; }
+  .bar-b { min-width: 27px; padding: 3px 1px 5px; }
+  .bar-b i { width: 15px; }
+  .bar-b em { font-size: 9.5px; }
+  .sr { gap: 4px; min-width: 0; }
+  .sr-col > b { font-size: 9.5px; }
+  .sr-cell { width: 23px; }
+  button.sr-cell { width: 31px; }
+  .sr-attn .sr-cell { width: 12px; }
+  .sr-op { font-size: 12px; }
+}
+.tok .tag { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-family: var(--font-mono); font-weight: 700; font-size: 12px; flex: none; }
 
 </style>
 <div id="app">
@@ -1910,7 +1925,7 @@ NB.R.selrc = (body, step, ctx) => {
     const inp = [];
     for (let i = 0; i < N; i++) inp.push(h('button.sr-cell' + (sel.has(i) ? '.rc' : ''), { 'aria-label': 't' + (i + 1), onclick: () => { if (stage > 0) return; if (sel.has(i)) sel.delete(i); else if (sel.size < 2) sel.add(i); AU.sfx('tap'); draw(); } }, 't' + sub[i]));
     const stack = (fn) => { const a = []; for (let i = 0; i < N; i++) a.push(h('div.sr-cell' + fn(i))); return a; };
-    const attn = h('div.sr-attn', { style: { gridTemplateColumns: 'repeat(' + N + ', 15px)' } });
+    const attn = h('div.sr-attn', { style: { gridTemplateColumns: 'repeat(' + N + ', auto)' } });
     for (let i = 0; i < N; i++) for (let c = 0; c < N; c++) attn.append(h('div.sr-cell' + (!sel.has(i) ? '.none' : c <= i ? '.vis' : '.msk')));
     sr.append(col('第 i 層<br>輸入', inp), col('Q', stack((i) => (sel.has(i) ? '.rc' : '.none'))), h('span.sr-op', '×'), col('K', stack((i) => (sel.has(i) ? '.rc' : ''))),
       h('span.sr-op', '→'), col('Attention 分數', [attn]), h('span.sr-op', '×'), col('V', stack((i) => (sel.has(i) ? '.rc' : ''))), h('span.sr-op', '→'), col('第 i+1 層<br>輸入', stack((i) => (sel.has(i) ? '.rc' : '.none'))));

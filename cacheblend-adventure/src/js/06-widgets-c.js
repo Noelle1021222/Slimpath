@@ -15,7 +15,7 @@ NB.R.selrc = (body, step, ctx) => {
     const inp = [];
     for (let i = 0; i < N; i++) inp.push(h('button.sr-cell' + (sel.has(i) ? '.rc' : ''), { 'aria-label': 't' + (i + 1), onclick: () => { if (stage > 0) return; if (sel.has(i)) sel.delete(i); else if (sel.size < 2) sel.add(i); AU.sfx('tap'); draw(); } }, 't' + sub[i]));
     const stack = (fn) => { const a = []; for (let i = 0; i < N; i++) a.push(h('div.sr-cell' + fn(i))); return a; };
-    const attn = h('div.sr-attn', { style: { gridTemplateColumns: 'repeat(' + N + ', 15px)' } });
+    const attn = h('div.sr-attn', { style: { gridTemplateColumns: 'repeat(' + N + ', auto)' } });
     for (let i = 0; i < N; i++) for (let c = 0; c < N; c++) attn.append(h('div.sr-cell' + (!sel.has(i) ? '.none' : c <= i ? '.vis' : '.msk')));
     sr.append(col('第 i 層<br>輸入', inp), col('Q', stack((i) => (sel.has(i) ? '.rc' : '.none'))), h('span.sr-op', '×'), col('K', stack((i) => (sel.has(i) ? '.rc' : ''))),
       h('span.sr-op', '→'), col('Attention 分數', [attn]), h('span.sr-op', '×'), col('V', stack((i) => (sel.has(i) ? '.rc' : ''))), h('span.sr-op', '→'), col('第 i+1 層<br>輸入', stack((i) => (sel.has(i) ? '.rc' : '.none'))));
