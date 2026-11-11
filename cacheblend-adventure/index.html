@@ -382,7 +382,7 @@ input[type="range"] { width: 100%; accent-color: var(--orange); height: 30px; ma
 .center { text-align: center; }
 
 /* ---------- Title ---------- */
-#title { position: absolute; inset: 0; z-index: 30; display: grid; place-items: center; padding: var(--gt) var(--gr) var(--gb) var(--gl); pointer-events: auto;
+#title { position: absolute; inset: 0; z-index: 25; display: grid; place-items: center; padding: var(--gt) var(--gr) var(--gb) var(--gl); pointer-events: auto;
   background: linear-gradient(180deg, rgba(24, 32, 63, .1) 0%, rgba(24, 32, 63, .55) 100%); }
 .title-box { text-align: center; display: grid; gap: 14px; justify-items: center; max-width: 720px; }
 .title-kicker { font-family: var(--font-mono); letter-spacing: .28em; font-size: 12px; color: var(--paper); opacity: .85; text-transform: uppercase; }
@@ -574,6 +574,8 @@ button.sr-cell { cursor: pointer; width: 38px; }
   #act-hud.side { left: var(--gl); transform: none; top: calc(var(--gt) + 64px); width: 380px; text-align: left; }
   #act-hud.side .row { justify-content: flex-start; }
 }
+/* a sheet opened from the title screen must sit above it, and the title steps aside meanwhile */
+#modal-root:not(:empty) ~ #title { visibility: hidden; }
 
 </style>
 <div id="app">
