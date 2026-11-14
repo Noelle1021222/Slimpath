@@ -140,6 +140,10 @@ export const JOY_KINDS = [
   { id: 'being', label: '存在的快樂', hint: '安靜坐一會兒，享受當下。' },
 ];
 
+// 給自己的小事: what I did for myself today, what I appreciate in myself, one small thing for tomorrow.
+export const SELF_CARE_FIELDS = ['didForMe', 'appreciate', 'smallThing'];
+export const emptySelfCare = () => Object.fromEntries(SELF_CARE_FIELDS.map((k) => [k, '']));
+
 export const emptyReflection = () => Object.fromEntries(REFLECTION_FIELDS.map((k) => [k, '']));
 export const emptyJoy = () => Object.fromEntries(JOY_KINDS.map((k) => [k.id, { felt: false, note: '' }]));
 
@@ -147,6 +151,12 @@ const str = (v) => (typeof v === 'string' ? v : '');
 const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
 
 /** Fill missing/partial reflection fields; anything that is not a string becomes ''. */
+/** Fill missing/partial 給自己的小事 fields; anything that is not a string becomes ''. */
+export function normalizeSelfCare(c) {
+  const src = isObj(c) ? c : {};
+  return Object.fromEntries(SELF_CARE_FIELDS.map((k) => [k, str(src[k])]));
+}
+
 export function normalizeReflection(r) {
   const src = isObj(r) ? r : {};
   return Object.fromEntries(REFLECTION_FIELDS.map((k) => [k, str(src[k])]));
@@ -194,6 +204,7 @@ export function emptyEntry() {
     bodyFat: '',
     tomorrow: '',
     reflection: emptyReflection(),
+    selfCare: emptySelfCare(),
     joy: emptyJoy(),
   };
 }
@@ -215,6 +226,7 @@ export function normalizeEntry(data) {
     };
   }
   out.reflection = normalizeReflection(data.reflection);
+  out.selfCare = normalizeSelfCare(data.selfCare);
   out.joy = normalizeJoy(data.joy);
   return out;
 }
