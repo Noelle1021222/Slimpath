@@ -5,6 +5,7 @@ import {
   normalizeEntry, emptyEntry, checklistScore, ADAPT_CHECKLIST, CHECKLIST,
   weekStart, weekDates, joyWeek, JOY_KINDS,
 } from '../public/js/program.js';
+import { emptySelfCare } from '../public/js/program.js';
 import { createAutosave } from '../public/js/autosave.js';
 
 test('new fields have full defaults', () => {
@@ -156,4 +157,14 @@ test('flush saves immediately and does nothing when there is nothing new', async
   assert.equal(calls, 1);
   await a.flush();
   assert.equal(calls, 1);
+});
+
+test('給自己的小事: defaults, old data and partial data', () => {
+  assert.deepEqual(emptyEntry().selfCare, { didForMe: '', appreciate: '', smallThing: '' });
+  assert.deepEqual(normalizeEntry({ weight: '70' }).selfCare, emptySelfCare());
+  const e = normalizeEntry({ selfCare: { didForMe: '玩了 15 分鐘健身環', smallThing: 7 }, tomorrow: '早睡' });
+  assert.deepEqual(e.selfCare, { didForMe: '玩了 15 分鐘健身環', appreciate: '', smallThing: '' });
+  assert.equal(e.tomorrow, '早睡');
+  e.selfCare.appreciate = '願意嘗試';
+  assert.equal(checklistScore(e, CHECKLIST), 0);
 });

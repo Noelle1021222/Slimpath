@@ -189,6 +189,27 @@ function reflectionMarkup(r) {
     </div>`;
 }
 
+// ---------- 給自己的小事 ----------
+const SELF_CARE_QUESTIONS = [
+  { id: 'didForMe', label: '今天我為自己做了什麼？', hint: '例如：玩了 15 分鐘健身環。' },
+  { id: 'appreciate', label: '今天我欣賞自己哪一點？', hint: '例如：今天的髮型很好看，或是遇到困難仍願意嘗試。' },
+  { id: 'smallThing', label: '明天我想為自己做的一件小事？', hint: '例如：穿一件喜歡的衣服上班。' },
+];
+
+function selfCareMarkup(c) {
+  return `
+    <div class="sheet soft-card selfcare" data-reveal>
+      <header class="soft-head">
+        <p class="eyebrow">For myself</p>
+        <h2 class="h2">給自己的小事</h2>
+      </header>
+      <p class="soft-note">想寫哪一題就寫哪一題，留白也沒關係。</p>
+      ${SELF_CARE_QUESTIONS.map((q) => `
+        <label class="soft-field" for="sc-${q.id}"><span class="soft-q">${q.label}</span></label>
+        <textarea id="sc-${q.id}" class="soft-text" rows="2" data-path="selfCare.${q.id}" placeholder="${q.hint}">${esc(c[q.id])}</textarea>`).join('')}
+    </div>`;
+}
+
 // ---------- 四種快樂 ----------
 function joyItemMarkup(kind, j) {
   const id = kind.id;
@@ -379,6 +400,7 @@ export async function renderDay(main, state, date) {
 
       <section class="block soft-blocks">
         ${reflectionMarkup(entry.reflection)}
+        ${selfCareMarkup(entry.selfCare)}
         ${joyMarkup(entry.joy)}
       </section>
     </div>
